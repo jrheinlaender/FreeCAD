@@ -279,7 +279,7 @@ class DraftTool:
         # print "committing"
         self.commitList.append((name,func))
 
-    def getStrings(self):
+    def getStrings(self,addrot=None):
         "returns a couple of useful strings fro building python commands"
 
         # current plane rotation
@@ -461,12 +461,25 @@ class Line(Creator):
             todo.delay(self.doc.removeObject,old)
         self.obj = None
         if (len(self.node) > 1):
-            # building command string
-            rot,sup,pts,fil = self.getStrings()
-            self.commit(translate("draft","Create DWire"),
-                        ['import Draft',
-                         'points='+pts,
-                         'Draft.makeWire(points,closed='+str(closed)+',face='+fil+',support='+sup+')'])
+            if (len(self.node) == 2) and Draft.getParam("UsePartPrimitives"):
+                # use Part primitive
+                p1 = self.node[0]
+                p2 = self.node[-1]
+                self.commit(translate("draft","Create Line"),
+                            ['line = FreeCAD.ActiveDocument.addObject("Part::Line","Line")',
+                             'line.X1 = '+str(p1.x),
+                             'line.Y1 = '+str(p1.y),
+                             'line.Z1 = '+str(p1.z),
+                             'line.X2 = '+str(p2.x),
+                             'line.Y2 = '+str(p2.y),
+                             'line.Z2 = '+str(p2.z)])
+            else:
+                # building command string
+                rot,sup,pts,fil = self.getStrings()
+                self.commit(translate("draft","Create DWire"),
+                            ['import Draft',
+                             'points='+pts,
+                             'Draft.makeWire(points,closed='+str(closed)+',face='+fil+',support='+sup+')'])
         Creator.finish(self)
         if self.ui:
             if self.ui.continueMode:
@@ -766,12 +779,30 @@ class Rectangle(Creator):
         try:
             # building command string
             rot,sup,pts,fil = self.getStrings()
-            self.commit(translate("draft","Create Rectangle"),
-                        ['import Draft',
-                         'pl=FreeCAD.Placement()',
-                         'pl.Rotation.Q='+rot,
-                         'pl.Base='+DraftVecUtils.toString(p1),
-                         'Draft.makeRectangle(length='+str(length)+',height='+str(height)+',placement=pl,face='+fil+',support='+sup+')'])
+            if Draft.getParam("UsePartPrimitives"):
+                # Use Part Primitive
+                base = p1
+                if length < 0:
+                    length = -length
+                    base = base.add(DraftVecUtils.neg(p1.sub(p4)))
+                if height < 0:
+                    height = -height
+                    base = base.add(DraftVecUtils.neg(p1.sub(p2)))
+                self.commit(translate("draft","Create Plane"),
+                            ['plane = FreeCAD.ActiveDocument.addObject("Part::Plane","Plane")',
+                             'plane.Length = '+str(length),
+                             'plane.Width = '+str(height),
+                             'pl = FreeCAD.Placement()',
+                             'pl.Rotation.Q='+rot,
+                             'pl.Base = '+DraftVecUtils.toString(base),
+                             'plane.Placement = pl'])
+            else:
+                self.commit(translate("draft","Create Rectangle"),
+                            ['import Draft',
+                             'pl = FreeCAD.Placement()',
+                             'pl.Rotation.Q = '+rot,
+                             'pl.Base = '+DraftVecUtils.toString(p1),
+                             'Draft.makeRectangle(length='+str(length)+',height='+str(height)+',placement=pl,face='+fil+',support='+sup+')'])
         except:
             print "Draft: error delaying commit"
         self.finish(cont=True)
@@ -1010,13 +1041,23 @@ class Arc(Creator):
         rot,sup,pts,fil = self.getStrings()
         if self.closedCircle:
             try:
-                # building command string
-                self.commit(translate("draft","Create Circle"),
-                            ['import Draft',
-                             'pl=FreeCAD.Placement()',
-                             'pl.Rotation.Q='+rot,
-                             'pl.Base='+DraftVecUtils.toString(self.center),
-                             'Draft.makeCircle(radius='+str(self.rad)+',placement=pl,face='+fil+',support='+sup+')'])
+                if Draft.getParam("UsePartPrimitives"):
+                    # use primitive
+                    self.commit(translate("draft","Create Circle"),
+                                ['circle = FreeCAD.ActiveDocument.addObject("Part::Circle","Circle")',
+                                 'circle.Radius = '+str(self.rad),
+                                 'pl = FreeCAD.Placement()',
+                                 'pl.Rotation.Q = '+rot,
+                                 'pl.Base = '+DraftVecUtils.toString(self.center),
+                                 'circle.Placement = pl'])
+                else:
+                    # building command string
+                    self.commit(translate("draft","Create Circle"),
+                                ['import Draft',
+                                 'pl=FreeCAD.Placement()',
+                                 'pl.Rotation.Q='+rot,
+                                 'pl.Base='+DraftVecUtils.toString(self.center),
+                                 'Draft.makeCircle(radius='+str(self.rad)+',placement=pl,face='+fil+',support='+sup+')'])
             except:
                 print "Draft: error delaying commit"
         else:
@@ -1024,13 +1065,25 @@ class Arc(Creator):
             end = math.degrees(self.firstangle+self.angle)
             if end < sta: sta,end = end,sta
             try:
-                # building command string
-                self.commit(translate("draft","Create Arc"),
-                            ['import Draft',
-                             'pl=FreeCAD.Placement()',
-                             'pl.Rotation.Q='+rot,
-                             'pl.Base='+DraftVecUtils.toString(self.center),
-                             'Draft.makeCircle(radius='+str(self.rad)+',placement=pl,face='+fil+',startangle='+str(sta)+',endangle='+str(end)+',support='+sup+')'])
+                if Draft.getParam("UsePartPrimitives"):
+                    # use primitive
+                    self.commit(translate("draft","Create Arc"),
+                                ['circle = FreeCAD.ActiveDocument.addObject("Part::Circle","Circle")',
+                                 'circle.Radius = '+str(self.rad),
+                                 'circle.Angle0 = '+str(sta),
+                                 'circle.Angle1 = '+str(end),
+                                 'pl = FreeCAD.Placement()',
+                                 'pl.Rotation.Q = '+rot,
+                                 'pl.Base = '+DraftVecUtils.toString(self.center),
+                                 'circle.Placement = pl'])
+                else:
+                    # building command string
+                    self.commit(translate("draft","Create Arc"),
+                                ['import Draft',
+                                 'pl=FreeCAD.Placement()',
+                                 'pl.Rotation.Q='+rot,
+                                 'pl.Base='+DraftVecUtils.toString(self.center),
+                                 'Draft.makeCircle(radius='+str(self.rad)+',placement=pl,face='+fil+',startangle='+str(sta)+',endangle='+str(end)+',support='+sup+')'])
             except:
                     print "Draft: error delaying commit"
         self.finish(cont=True)
@@ -1269,6 +1322,118 @@ class Polygon(Creator):
             else:
                 self.center = cir[-1].Center
         self.drawPolygon()
+        
+        
+class Ellipse(Creator):
+    "the Draft_Ellipse FreeCAD command definition"
+    
+    def GetResources(self):
+        return {'Pixmap'  : 'Draft_Ellipse',
+                'Accel' : "E, L",
+                'MenuText': QtCore.QT_TRANSLATE_NOOP("Draft_Ellipse", "Ellipse"),
+                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Draft_Ellipse", "Creates an ellipse. CTRL to snap")}
+
+    def Activated(self):
+        name = str(translate("draft","Ellipse"))
+        Creator.Activated(self,name)
+        if self.ui:
+            self.refpoint = None
+            self.ui.pointUi(name)
+            self.ui.extUi()
+            self.call = self.view.addEventCallback("SoEvent",self.action)
+            self.rect = rectangleTracker()
+            msg(translate("draft", "Pick first point:\n"))
+
+    def finish(self,closed=False,cont=False):
+        "terminates the operation and closes the poly if asked"
+        Creator.finish(self) 
+        if self.ui:
+            self.rect.off()
+            self.rect.finalize()
+        if self.ui:
+            if self.ui.continueMode:
+                self.Activated()
+
+    def createObject(self):
+        "creates the final object in the current doc"
+        p1 = self.node[0]
+        p3 = self.node[-1]
+        diagonal = p3.sub(p1)
+        halfdiag = DraftVecUtils.scale(diagonal,0.5)
+        center = p1.add(halfdiag)
+        p2 = p1.add(DraftVecUtils.project(diagonal, plane.v))
+        p4 = p1.add(DraftVecUtils.project(diagonal, plane.u))
+        r1 = (p4.sub(p1).Length)/2
+        r2 = (p2.sub(p1).Length)/2
+        try:
+            # building command string
+            rot,sup,pts,fil = self.getStrings()
+            if r2 > r1:
+                r1,r2 = r2,r1
+                m = FreeCAD.Matrix()
+                m.rotateZ(math.pi/2)
+                rot1 = FreeCAD.Rotation()
+                rot1.Q = eval(rot)
+                rot2 = FreeCAD.Placement(m)
+                rot2 = rot2.Rotation
+                rot = str((rot1.multiply(rot2)).Q)
+            if Draft.getParam("UsePartPrimitives"):
+                # Use Part Primitive
+                self.commit(translate("draft","Create Ellipse"),
+                            ['import Part',
+                             'ellipse = FreeCAD.ActiveDocument.addObject("Part::Ellipse","Ellipse")',
+                             'ellipse.MajorRadius = '+str(r1),
+                             'ellipse.MinorRadius = '+str(r2),
+                             'pl = FreeCAD.Placement()',
+                             'pl.Rotation.Q='+rot,
+                             'pl.Base = '+DraftVecUtils.toString(center),
+                             'ellipse.Placement = pl'])
+            else:
+                self.commit(translate("draft","Create Ellipse"),
+                            ['import Draft',
+                             'pl = FreeCAD.Placement()',
+                             'pl.Rotation.Q='+rot,
+                             'pl.Base = '+DraftVecUtils.toString(center),
+                             'Draft.makeEllipse('+str(r1)+','+str(r2)+',placement=pl)'])
+        except:
+            print "Draft: Error: Unable to create object."
+        self.finish(cont=True)
+
+    def action(self,arg):
+        "scene event handler"
+        if arg["Type"] == "SoKeyboardEvent":
+            if arg["Key"] == "ESCAPE":
+                self.finish()
+        elif arg["Type"] == "SoLocation2Event": #mouse movement detection
+            self.point,ctrlPoint,info = getPoint(self,arg,mobile=True)
+            self.rect.update(self.point)
+        elif arg["Type"] == "SoMouseButtonEvent":
+            if (arg["State"] == "DOWN") and (arg["Button"] == "BUTTON1"):
+                if (arg["Position"] == self.pos):
+                    self.finish()
+                else:
+                    if (not self.node) and (not self.support):
+                        self.support = getSupport(arg)
+                    if self.point:
+                        self.appendPoint(self.point)
+
+    def numericInput(self,numx,numy,numz):
+        "this function gets called by the toolbar when valid x, y, and z have been entered there"
+        self.point = Vector(numx,numy,numz)
+        self.appendPoint(self.point)
+
+    def appendPoint(self,point):
+        self.node.append(point)
+        if (len(self.node) > 1):
+            self.rect.update(point)
+            self.createObject()
+        else:
+            msg(translate("draft", "Pick opposite point:\n"))
+            self.ui.setRelative()
+            self.rect.setorigin(point)
+            self.rect.on()
+            if self.planetrack:
+                self.planetrack.set(point)
 
         
 class Text(Creator):
@@ -1556,7 +1721,8 @@ class Dimension(Creator):
                                         self.node = [v1,v2]
                                         self.link = [ob,i1,i2]
                                         self.edges.append(ed)
-                                        if isinstance(ed.Curve,Part.Circle):
+                                        import DraftGeomUtils
+                                        if DraftGeomUtils.geomType(ed) == "Circle":
                                             # snapped edge is an arc
                                             self.arcmode = "diameter"
                                             self.link = [ob,num]
@@ -2253,8 +2419,9 @@ class Trimex(Modifier):
             lc = self.obj.ViewObject.LineColor
             sc = (lc[0],lc[1],lc[2])
             sw = self.obj.ViewObject.LineWidth
+            import DraftGeomUtils
             for e in self.edges:
-                if isinstance(e.Curve,Part.Line):
+                if DraftGeomUtils(e) == "Line":
                     self.ghost.append(lineTracker(scolor=sc,swidth=sw))
                 else:
                     self.ghost.append(arcTracker(scolor=sc,swidth=sw))
@@ -2362,7 +2529,7 @@ class Trimex(Modifier):
                 point = pts[DraftGeomUtils.findClosest(point,pts)]
 
         # modifying active edge
-        if isinstance(edge.Curve,Part.Line):
+        if DraftGeomUtils.geomType(edge) == "Line":
             perp = DraftGeomUtils.vec(edge).cross(Vector(0,0,1))
             chord = v1.sub(point)
             proj = DraftVecUtils.project(chord,perp)
@@ -2409,7 +2576,7 @@ class Trimex(Modifier):
         for i in list:
             edge = self.edges[i]
             ghost = self.ghost[i]
-            if isinstance(edge.Curve,Part.Line):
+            if DraftGeomUtils.geomType(edge) == "Line":
                 ghost.p1(edge.Vertexes[0].Point)
                 ghost.p2(edge.Vertexes[-1].Point)
             else:
@@ -2817,8 +2984,8 @@ class Edit(Modifier):
             elif arg["Key"] == "c":
                 self.finish(closed=True)
         elif arg["Type"] == "SoLocation2Event": #mouse movement detection
+            self.point,ctrlPoint,info = getPoint(self,arg)
             if self.editing != None:
-                self.point,ctrlPoint,info = getPoint(self,arg)
                 self.trackers[self.editing].set(self.point)
                 self.update(self.trackers[self.editing].get())
         elif arg["Type"] == "SoMouseButtonEvent":
@@ -2833,8 +3000,9 @@ class Edit(Modifier):
                                     self.pos = arg["Position"]
                                     self.addPoint(self.point)
                             elif self.ui.delButton.isChecked():
-                                if 'EditNode' in sel.SubElementNames[0]:
-                                    self.delPoint(int(sel.SubElementNames[0][8:]))
+                                if sel.SubElementNames:
+                                    if 'EditNode' in sel.SubElementNames[0]:
+                                        self.delPoint(int(sel.SubElementNames[0][8:]))
                             elif 'EditNode' in sel.SubElementNames[0]:
                                 self.ui.pointUi()
                                 self.ui.isRelative.show()
@@ -3296,9 +3464,20 @@ class Point:
                 if len(self.stack) == 1:
                     self.view.removeEventCallbackPivy(coin.SoMouseButtonEvent.getClassTypeId(),self.callbackClick)
                     self.view.removeEventCallbackPivy(coin.SoLocation2Event.getClassTypeId(),self.callbackMove)
-                    FreeCAD.ActiveDocument.openTransaction("Create Point")
-                    Draft.makePoint((self.stack[0][0]),(self.stack[0][1]),self.stack[0][2])
-                    FreeCAD.ActiveDocument.commitTransaction()
+                    commitlist = []
+                    if Draft.getParam("UsePartPrimitives"):
+                        # using 
+                        commitlist.append((translate("draft","Create Point"),
+                                            ['point = FreeCAD.ActiveDocument.addObject("Part::Vertex","Point")',
+                                             'point.X = '+str(self.stack[0][0]),
+                                             'point.Y = '+str(self.stack[0][1]),
+                                             'point.Z = '+str(self.stack[0][2])]))
+                    else:
+                        # building command string
+                        commitlist.append((translate("draft","Create Point"),
+                                            ['import Draft',
+                                             'Draft.makePoint('+str(self.stack[0][0])+','+str(self.stack[0][1])+','+str(self.stack[0][2])+')']))
+                    todo.delayCommit(commitlist)
                     FreeCADGui.Snapper.off()
 
 class ToggleSnap():
@@ -3404,6 +3583,7 @@ FreeCADGui.addCommand('Draft_Dimension',Dimension())
 FreeCADGui.addCommand('Draft_Polygon',Polygon())
 FreeCADGui.addCommand('Draft_BSpline',BSpline())
 FreeCADGui.addCommand('Draft_Point',Point())
+FreeCADGui.addCommand('Draft_Ellipse',Ellipse())
 
 # modification commands
 FreeCADGui.addCommand('Draft_Move',Move())

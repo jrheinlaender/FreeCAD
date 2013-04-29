@@ -24,9 +24,16 @@ link_directories(${OCC_LIBRARY_DIR})
 
 set(Part_LIBS 
     ${OCC_LIBRARIES}
-    ${FREETYPE_LIBRARY}                    
+    ${OCC_DEBUG_LIBRARIES}
     FreeCADApp
 )
+
+if(FREECAD_USE_FREETYPE)
+    set(Part_LIBS 
+        ${Part_LIBS}
+        ${FREETYPE_LIBRARY}
+    )
+endif(FREECAD_USE_FREETYPE)
 
 generate_from_xml(ArcPy)
 generate_from_xml(ArcOfCirclePy)

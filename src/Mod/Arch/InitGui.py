@@ -78,7 +78,7 @@ class ArchWorkbench(Workbench):
         self.calctools = ["Arch_Check"]
 
         # draft tools
-        self.drafttools = ["Draft_Line","Draft_Wire","Draft_Circle","Draft_Arc",
+        self.drafttools = ["Draft_Line","Draft_Wire","Draft_Circle","Draft_Arc","Draft_Ellipse",
                         "Draft_Polygon","Draft_Rectangle", "Draft_Text",
                         "Draft_Dimension", "Draft_BSpline","Draft_Point"]
         self.draftmodtools = ["Draft_Move","Draft_Rotate","Draft_Offset",
@@ -129,6 +129,7 @@ class ArchWorkbench(Workbench):
 FreeCADGui.addWorkbench(ArchWorkbench)
 FreeCAD.addImportType("Industry Foundation Classes (*.ifc)","importIFC")
 FreeCAD.addExportType("Wavefront OBJ - Arch module (*.obj)","importOBJ")
+FreeCAD.addExportType("WebGL file (*.html)","importWebGL")
 # check for pycollada
 try:
     import collada

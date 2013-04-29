@@ -140,7 +140,8 @@ bool FemFace::isSameFace (FemFace &face)
     // the same element can not have the same face
     if(face.ElementNumber == ElementNumber)
         return false;
-	assert(face.Size == Size);
+	if(face.Size != Size)
+        return false;
 	// if the same face size just compare if the sorted nodes are the same
 	if( Nodes[0] == face.Nodes[0] &&
 	    Nodes[1] == face.Nodes[1] &&
@@ -544,14 +545,41 @@ void ViewProviderFEMMeshBuilder::createMesh(const App::Property* prop, SoCoordin
     int numHedr = info.NbPolyhedrons();
 
 
-    
+    bool ShowFaces = false;
 
-    std::vector<FemFace> facesHelper(numTria+numQuad+numPoly+numTetr*4+numHexa*6+numPyrd*5+numPris*6);
+    int numTries;
+    if(ShowFaces)
+        numTries = numTria+numQuad+numPoly+numTetr*4+numHexa*6+numPyrd*5+numPris*6;
+    else
+        numTries = numTetr*4+numHexa*6+numPyrd*5+numPris*6;
+        
+    std::vector<FemFace> facesHelper(numTries);
+
     Base::Console().Log("    %f: Start build up %i face helper\n",Base::TimeInfo::diffTimeF(Start,Base::TimeInfo()),facesHelper.size());
-    SMDS_VolumeIteratorPtr aVolIter = data->volumesIterator();
     Base::BoundBox3d BndBox;
 
-    for (int i=0;aVolIter->more();) {
+    int i=0;
+
+    if(false){
+        SMDS_FaceIteratorPtr aFaceIter = data->facesIterator();
+        for (;aFaceIter->more();) {
+            const SMDS_MeshFace* aFace = aFaceIter->next();
+
+            int num = aFace->NbNodes();
+            switch(num){
+                
+                case 4:// quad face
+                    BndBox.Add(facesHelper[i++].set(4,aFace,aFace->GetID(),0,aFace->GetNode(0),aFace->GetNode(1),aFace->GetNode(2),aFace->GetNode(3)));
+                    break;
+                    
+                //unknown case
+                default: assert(0);
+            }
+        }
+    }
+
+    SMDS_VolumeIteratorPtr aVolIter = data->volumesIterator();
+    for (;aVolIter->more();) {
         const SMDS_MeshVolume* aVol = aVolIter->next();
         
         int num = aVol->NbNodes();
@@ -737,7 +765,27 @@ void ViewProviderFEMMeshBuilder::createMesh(const App::Property* prop, SoCoordin
             switch( facesHelper[l].Element->NbNodes()){
                 case 4: // Tet 4
                     switch(facesHelper[l].FaceNo){
-                        case 1: {
+                        case 0: { // case for quad faces
+                            int nIdx0 = mapNodeIndex[facesHelper[l].Element->GetNode(0)];
+                            int nIdx1 = mapNodeIndex[facesHelper[l].Element->GetNode(1)];
+                            int nIdx2 = mapNodeIndex[facesHelper[l].Element->GetNode(2)];
+                            int nIdx3 = mapNodeIndex[facesHelper[l].Element->GetNode(3)];
+                            indices[index++] = nIdx0;
+                            indices[index++] = nIdx2;
+                            indices[index++] = nIdx1;
+                            indices[index++] = SO_END_FACE_INDEX;
+                            insEdgeVec(EdgeMap,nIdx0,nIdx1);
+                            insEdgeVec(EdgeMap,nIdx1,nIdx2);
+                            vFaceElementIdx[indexIdx++] = ElemFold(facesHelper[l].ElementNumber,0);
+                            indices[index++] = nIdx0;
+                            indices[index++] = nIdx3;
+                            indices[index++] = nIdx2;
+                            indices[index++] = SO_END_FACE_INDEX;
+                            insEdgeVec(EdgeMap,nIdx2,nIdx3);
+                            insEdgeVec(EdgeMap,nIdx3,nIdx0);
+                            vFaceElementIdx[indexIdx++] = ElemFold(facesHelper[l].ElementNumber,0);
+                            break;    }
+                        case 1: { // face 1 of Tet10
                             int nIdx0 = mapNodeIndex[facesHelper[l].Element->GetNode(0)];
                             int nIdx1 = mapNodeIndex[facesHelper[l].Element->GetNode(1)];
                             int nIdx2 = mapNodeIndex[facesHelper[l].Element->GetNode(2)];
