@@ -129,6 +129,7 @@ SbVec2s ViewProviderSketch::newCursorPos;
 struct EditData {
     EditData():
     sketchHandler(0),
+    editDatumDialog(false),
     DragPoint(-1),
     DragCurve(-1),
     DragConstraint(-1),
@@ -150,6 +151,7 @@ struct EditData {
 
     // pointer to the active handler for new sketch objects
     DrawSketchHandler *sketchHandler;
+    bool editDatumDialog;
 
     // dragged point
     int DragPoint;
@@ -287,6 +289,37 @@ bool ViewProviderSketch::keyPressed(bool pressed, int key)
             if (edit && edit->sketchHandler) {
                 if (!pressed)
                     edit->sketchHandler->quit();
+                return true;
+            }
+            if (edit && edit->editDatumDialog) {
+                edit->editDatumDialog = false;
+                return true;
+            }
+            if (edit && edit->DragConstraint >= 0) {
+                if (!pressed) {
+                    edit->DragConstraint = -1;
+                }
+                return true;
+            }
+            if (edit && edit->DragCurve >= 0) {
+                if (!pressed) {
+                    getSketchObject()->movePoint(edit->DragCurve, Sketcher::none, Base::Vector3d(0,0,0), true);
+                    edit->DragCurve = -1;
+                    resetPositionText();
+                    Mode = STATUS_NONE;
+                }
+                return true;
+            }
+            if (edit && edit->DragPoint >= 0) {
+                if (!pressed) {
+                    int GeoId;
+                    Sketcher::PointPos PosId;
+                    getSketchObject()->getGeoVertexIndex(edit->DragPoint, GeoId, PosId);
+                    getSketchObject()->movePoint(GeoId, PosId, Base::Vector3d(0,0,0), true);
+                    edit->DragPoint = -1;
+                    resetPositionText();
+                    Mode = STATUS_NONE;
+                }
                 return true;
             }
             return false;
@@ -798,6 +831,7 @@ void ViewProviderSketch::editDoubleClicked(void)
             EditDatumDialog * editDatumDialog = new EditDatumDialog(this, edit->PreselectConstraint);
             SoIdleSensor* sensor = new SoIdleSensor(EditDatumDialog::run, editDatumDialog);
             sensor->schedule();
+            edit->editDatumDialog = true; // avoid to double handle "ESC"
         }
     }
 }
