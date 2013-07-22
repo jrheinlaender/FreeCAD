@@ -2167,7 +2167,7 @@ def upgrade(objects,delete=False,force=None):
         elif wires and (not faces) and (not openwires):
         
             # we have a sketch: Extract a face
-            if (len(objects) == 1) and objects[0].isDerivedFrom("Sketcher::SketchObject") and (not curves):
+            if (len(objects) == 1) and objects[0].isDerivedFrom("Sketcher::SketchObject"):
                 result = makeSketchFace(objects[0])
                 if result: msg(translate("draft", "Found 1 closed sketch object: making a face from it\n"))
 
@@ -2574,7 +2574,7 @@ class _ViewProviderDimension(_ViewProviderDraft):
         obj.addProperty("App::PropertyColor","LineColor","Base","Line color")
         obj.addProperty("App::PropertyLength","ExtLines","Base","Ext lines")
         obj.addProperty("App::PropertyVector","TextPosition","Base","The position of the text. Leave (0,0,0) for automatic position")
-        obj.addProperty("App::PropertyString","Override","Base","Text override. Use 'dim' to insert the dimension length")
+        obj.addProperty("App::PropertyString","Override","Base","Text override. Use $dim to insert the dimension length")
         obj.FontSize=getParam("textheight")
         obj.FontName=getParam("textfont")
         obj.ExtLines=0.3
@@ -2735,7 +2735,7 @@ class _ViewProviderDimension(_ViewProviderDraft):
         dtext = "%."+str(dtext)+"f"
         dtext = (dtext % p3.sub(p2).Length)
         if text:
-            text = text.replace("dim",dtext)
+            text = text.replace("$dim",dtext)
         else:
             text = dtext
         if hasattr(self,"text"):
@@ -3249,9 +3249,6 @@ class _Wire(_DraftObject):
                 if fp.Base.Shape.isClosed():
                     shape = Part.Face(shape)
                 fp.Shape = shape
-                p = []
-                for v in shape.Vertexes: p.append(v.Point)
-                if fp.Points != p: fp.Points = p
         elif fp.Base and fp.Tool:
             if fp.Base.isDerivedFrom("Part::Feature") and fp.Tool.isDerivedFrom("Part::Feature"):
                 if (not fp.Base.Shape.isNull()) and (not fp.Tool.Shape.isNull()):
