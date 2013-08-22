@@ -79,26 +79,25 @@ App::DocumentObjectExecReturn *Groove::execute(void)
     if (angle > 360.0)
         return new App::DocumentObjectExecReturn("Angle of groove too large");
 
-    angle = Base::toRadians<double>(angle);
-    // Reverse angle if selected
-    if (Reversed.getValue() && !Midplane.getValue())
-        angle *= (-1.0);
+    angle = Base::toRadians<double>(angle);    
 
-    std::vector<TopoDS_Wire> wires;
+    // Get the sketch TopoShape
+    Part::Part2DObject* sketch;
     try {
-        wires = getSketchWires();
+        sketch = getVerifiedSketch();
     } catch (const Base::Exception& e) {
         return new App::DocumentObjectExecReturn(e.what());
     }
+    const Part::TopoShape& theSketch = sketch->Shape.getShape();
 
-    // if the Base property has a valid shape, fuse the prism into it
-    TopoDS_Shape base;
+    // Get the BaseFeature TopoShape (if any)
+    Part::TopoShape theBase;
     try {
-        base = getBaseShape();
+        theBase = getBaseTopoShape();
     } catch (const Base::Exception&) {
         try {
             // fall back to support (for legacy features)
-            base = getSupportShape();
+            theBase = getSupportTopoShape();
         } catch (const Base::Exception&) {
             return new App::DocumentObjectExecReturn("No sketch support and no base shape: Please tell me where to remove the material of the groove!");
         }
@@ -113,64 +112,31 @@ App::DocumentObjectExecReturn *Groove::execute(void)
     gp_Dir dir(v.x,v.y,v.z);
 
     try {
-        TopoDS_Shape sketchshape = makeFace(wires);
-        if (sketchshape.IsNull())
-            return new App::DocumentObjectExecReturn("Creating a face from sketch failed");
-
-        // Rotate the face by half the angle to get Groove symmetric to sketch plane
-        if (Midplane.getValue()) {
-            gp_Trsf mov;
-            mov.SetRotation(gp_Ax1(pnt, dir), Base::toRadians<double>(Angle.getValue()) * (-1.0) / 2.0);
-            TopLoc_Location loc(mov);
-            sketchshape.Move(loc);
-        }
+        Part::TopoShape theGroove = theSketch;
+        theGroove.makeFace();
 
         this->positionBySketch();
         TopLoc_Location invObjLoc = this->getLocation().Inverted();
         pnt.Transform(invObjLoc.Transformation());
         dir.Transform(invObjLoc.Transformation());
-        base.Move(invObjLoc);
-        sketchshape.Move(invObjLoc);
+        theBase.move(invObjLoc);
+        theGroove.move(invObjLoc);
 
-        // Check distance between sketchshape and axis - to avoid failures and crashes
-        if (checkLineCrossesFace(gp_Lin(pnt, dir), TopoDS::Face(sketchshape)))
-            return new App::DocumentObjectExecReturn("Revolve axis intersects the sketch");
+        theGroove.makeRevolution(gp_Ax1(pnt, dir), angle, Midplane.getValue(), Reversed.getValue());
 
-        // revolve the face to a solid
-        BRepPrimAPI_MakeRevol RevolMaker(sketchshape, gp_Ax1(pnt, dir), angle);
+        // set the subtractive shape property for later usage in e.g. pattern
+        this->SubShape.setValue(theGroove);
 
-        if (RevolMaker.IsDone()) {
-            TopoDS_Shape result = RevolMaker.Shape();
-            // set the subtractive shape property for later usage in e.g. pattern
-            result = refineShapeIfActive(result);
-            this->SubShape.setValue(result);
+        // Cut out of base
+        theGroove.makeCut(theBase, false);
 
-            // cut out groove to get one result object
-            BRepAlgoAPI_Cut mkCut(base, result);
-            // Let's check if the fusion has been successful
-            if (!mkCut.IsDone())
-                throw Base::Exception("Cut out of base feature failed");
-
-            // we have to get the solids (fuse sometimes creates compounds)
-            TopoDS_Shape solRes = this->getSolid(mkCut.Shape());
-            if (solRes.IsNull())
-                return new App::DocumentObjectExecReturn("Resulting shape is not a solid");
-
-            solRes = refineShapeIfActive(solRes);
-            this->Shape.setValue(solRes);
-        }
-        else
-            return new App::DocumentObjectExecReturn("Could not revolve the sketch!");
+        this->Shape.setValue(theGroove);
 
         return App::DocumentObject::StdReturn;
     }
     catch (Standard_Failure) {
         Handle_Standard_Failure e = Standard_Failure::Caught();
-        if (std::string(e->GetMessageString()) == "TopoDS::Face")
-            return new App::DocumentObjectExecReturn("Could not create face from sketch.\n"
-                "Intersecting sketch entities or multiple faces in a sketch are not allowed.");
-        else
-            return new App::DocumentObjectExecReturn(e->GetMessageString());
+        return new App::DocumentObjectExecReturn(e->GetMessageString());
     }
     catch (Base::Exception& e) {
         return new App::DocumentObjectExecReturn(e.what());

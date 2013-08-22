@@ -33,9 +33,14 @@
 class gp_Ax1;
 class gp_Ax2;
 class gp_Vec;
+class gp_Dir;
+class gp_Pln;
+class TopoDS_Face;
 
 namespace Part
 {
+class Geometry; // Note: #include "Geometry.h" messes up ImportIges.cpp!
+class Part2DObject;
 
 class PartExport ShapeSegment : public Data::Segment
 {
@@ -138,6 +143,21 @@ public:
     bool isValid() const;
     bool analyze(std::ostream&) const;
     bool isClosed() const;
+    /**
+      * Check for intersection between the two shapes. Only solids are guaranteed to work properly
+      * There are two modes:
+      * 1. Bounding box check only - quick but inaccurate
+      * 2. Bounding box check plus (if necessary) boolean operation - costly but accurate
+      * Return true if the shapes intersect, false if they don't
+      * The flag touch_is_intersection decides whether shapes touching at distance zero are regarded
+      * as intersecting or not
+      * 1. If set to true, a true check result means that a boolean fuse operation between the two shapes
+      *    will return a single solid
+      * 2. If set to false, a true check result means that a boolean common operation will return a
+      *    valid solid
+      * If there is any error in the boolean operations, the check always returns false
+      */
+    bool intersects(const TopoShape& other, const bool quick, const bool touch_is_intersection) const;
     //@}
 
     /** @name Boolean operation*/
@@ -196,6 +216,65 @@ public:
         float Accuracy, uint16_t flags=0) const;
     void setFaces(const std::vector<Base::Vector3d> &Points,
                   const std::vector<Facet> &faces, float Accuracy=1.0e-06);
+    //@}
+
+    /** @name Geometrical operations on TopoShape */
+    /**
+      * To make use of topological naming these methods must be used to manipulate the geometry
+      * contained inside a TopoShape. Using the set of methods above which take a TopoDS_Shape
+      * as an argument and return a TopoDS_Shape will NOT work with topological naming
+      */
+    //@{
+    /**
+      * Renew all relevant information about the Sketch in the TopoShape
+      * This method will set the root of all history in the TopoShape
+      * Throws an exception if the TopoShape contains anything except one or more wires
+      */
+    // Note: Since we don't want to move all the sketch creation code from Sketcher:: to here we
+    // need to pass in both the geometry and the shape.
+    // Note about naming: All objects in the shape are related to an entity in the geometry. Since all
+    // geometry entities have a unique ID, these will be the "anchor" of the topology.
+    void renewFromSketch(const Part::Part2DObject* sketch, const std::vector<Geometry*>& geometry);
+    /// Create a face from the TopoShape's wires. For the sake of efficiency we assume that the TopoShape contains nothing except one or more wires
+    void makeFace();
+
+    /// Move the shape
+    void move(const TopLoc_Location& m);
+
+    /// Build a prism from the shape. Throws an exception if the TopoShape contains anything except a single face
+    // Note: We use Standard_Real to test L for Precision::IsInfinite()
+    void makePrism(const gp_Dir& dir, const Standard_Real L, const Standard_Real L2,
+                   const bool midplane, const bool reversed);
+    void makePrism(const TopoShape& base, const TopoDS_Face &supportface,
+                   const gp_Dir &direction, const TopoDS_Shape &upToFace, const bool fuse = false);
+    /// Build a revolution from the shape. Throws an exception if the TopoShape contains anything except a single face
+    void makeRevolution(const gp_Ax1& axis, const Standard_Real angle, const bool midplane, const bool reversed);
+
+    /// Fuse this TopoShape with another TopoShape. Returns only one solid even if multiple disconnected solids are produced
+    void makeFuse(const TopoShape &other, const bool thisIsBase = true);
+    /// Cut another TopoShape out of this TopoShape.  Returns only one solid even if multiple disconnected solids are produced
+    void makeCut(const TopoShape& other, const bool thisIsBase = true);
+    /// Find common material of this TopoShape and another TopoShape. Returns only one solid even if multiple disconnected solids are produced
+    void makeCommon(const TopoShape &other);
+    /// Section this TopoShape with another TopoShape. Returns only one solid even if multiple disconnected solids are produced
+    void makeSection(const TopoShape &other);
+    /// Compound this TopoShape with another TopoShape (any kind of geometry can be compounded)
+    void makeCompound(const TopoShape &other);
+    void makeCompound(const std::vector<TopoShape> &others);
+
+    /// Chamfer the given edges on the TopoShape
+    void makeChamfer(const std::vector<std::string>& edges, const Standard_Real size);
+    /// Fillet the given edges on the TopoShape
+    void makeFillet(const std::vector<std::string>& edges, const Standard_Real radius);
+    /// Create draft on the given faces of the TopoShape
+    void makeDraft(const std::vector<std::string>& faces, const gp_Dir& pullDirection,
+                   const Standard_Real angle, const gp_Pln& neutralPlane);
+
+    /// Transform the TopoShape
+    void makeTransform(const gp_Trsf& tr);
+
+    /// Model refine (joins coplanar faces)
+    void refine();
     //@}
 
     TopoDS_Shape _Shape;

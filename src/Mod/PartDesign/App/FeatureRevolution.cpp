@@ -80,28 +80,26 @@ App::DocumentObjectExecReturn *Revolution::execute(void)
         return new App::DocumentObjectExecReturn("Angle of revolution too large");
 
     angle = Base::toRadians<double>(angle);
-    // Reverse angle if selected
-    if (Reversed.getValue() && !Midplane.getValue())
-        angle *= (-1.0);
 
-    std::vector<TopoDS_Wire> wires;
+    // Get the sketch TopoShape
+    Part::Part2DObject* sketch;
     try {
-        wires = getSketchWires();
+        sketch = getVerifiedSketch();
     } catch (const Base::Exception& e) {
         return new App::DocumentObjectExecReturn(e.what());
     }
+    const Part::TopoShape& theSketch = sketch->Shape.getShape();
 
-    // if the Base property has a valid shape, fuse the AddShape into it
-    TopoDS_Shape base;
+    // Get the BaseFeature TopoShape (if any)
+    Part::TopoShape theBase;
     try {
-        base = getBaseShape();
+        theBase = getBaseTopoShape();
     } catch (const Base::Exception&) {
-        // fall back to support (for legacy features)
         try {
-            base = getSupportShape();
+            // fall back to support (for legacy features)
+            theBase = getSupportTopoShape();
         } catch (const Base::Exception&) {
-            // ignore, because support isn't mandatory
-            base = TopoDS_Shape();
+            // ignore, because base isn't mandatory
         }
     }
 
@@ -115,62 +113,31 @@ App::DocumentObjectExecReturn *Revolution::execute(void)
     gp_Dir dir(v.x,v.y,v.z);
 
     try {
-        TopoDS_Shape sketchshape = makeFace(wires);
-        if (sketchshape.IsNull())
-            return new App::DocumentObjectExecReturn("Creating a face from sketch failed");
-
-        // Rotate the face by half the angle to get Revolution symmetric to sketch plane
-        if (Midplane.getValue()) {
-            gp_Trsf mov;
-            mov.SetRotation(gp_Ax1(pnt, dir), Base::toRadians<double>(Angle.getValue()) * (-1.0) / 2.0);
-            TopLoc_Location loc(mov);
-            sketchshape.Move(loc);
-        }
+        Part::TopoShape theRevolution = theSketch;
+        theRevolution.makeFace();
 
         this->positionBySketch();
         TopLoc_Location invObjLoc = this->getLocation().Inverted();
         pnt.Transform(invObjLoc.Transformation());
         dir.Transform(invObjLoc.Transformation());
-        base.Move(invObjLoc);
-        sketchshape.Move(invObjLoc);
+        theRevolution.move(invObjLoc);
+        theBase.move(invObjLoc);
 
-        // Check distance between sketchshape and axis - to avoid failures and crashes
-        if (checkLineCrossesFace(gp_Lin(pnt, dir), TopoDS::Face(sketchshape)))
-            return new App::DocumentObjectExecReturn("Revolve axis intersects the sketch");
+        theRevolution.makeRevolution(gp_Ax1(pnt, dir), angle, Midplane.getValue(), Reversed.getValue());
 
-        // revolve the face to a solid
-        BRepPrimAPI_MakeRevol RevolMaker(sketchshape, gp_Ax1(pnt, dir), angle);
+        // set the additive shape property for later usage in e.g. pattern
+        this->AddShape.setValue(theRevolution);
 
-        if (RevolMaker.IsDone()) {
-            TopoDS_Shape result = RevolMaker.Shape();
-            result = refineShapeIfActive(result);
-            // set the additive shape property for later usage in e.g. pattern
-            this->AddShape.setValue(result);            
+        // Fuse with base (the algorithm will simply ignore an empty theBase and change nothing)
+        theRevolution.makeFuse(theBase, false);
 
-            if (!base.IsNull()) {
-                // Let's call algorithm computing a fuse operation:
-                BRepAlgoAPI_Fuse mkFuse(base, result);
-                // Let's check if the fusion has been successful
-                if (!mkFuse.IsDone())
-                    throw Base::Exception("Fusion with base feature failed");
-                result = mkFuse.Shape();
-                result = refineShapeIfActive(result);
-            }
-
-            this->Shape.setValue(result);
-        }
-        else
-            return new App::DocumentObjectExecReturn("Could not revolve the sketch!");
+        this->Shape.setValue(theRevolution);
 
         return App::DocumentObject::StdReturn;
     }
     catch (Standard_Failure) {
         Handle_Standard_Failure e = Standard_Failure::Caught();
-        if (std::string(e->GetMessageString()) == "TopoDS::Face")
-            return new App::DocumentObjectExecReturn("Could not create face from sketch.\n"
-                "Intersecting sketch entities or multiple faces in a sketch are not allowed.");
-        else
-            return new App::DocumentObjectExecReturn(e->GetMessageString());
+        return new App::DocumentObjectExecReturn(e->GetMessageString());
     }
     catch (Base::Exception& e) {
         return new App::DocumentObjectExecReturn(e.what());

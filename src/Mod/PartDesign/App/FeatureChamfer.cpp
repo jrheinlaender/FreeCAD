@@ -62,12 +62,16 @@ App::DocumentObjectExecReturn *Chamfer::execute(void)
 {
     // NOTE: Normally the Base property and the BaseFeature property should point to the same object.
     // The only difference is that the Base property also stores the edges that are to be chamfered
-    Part::TopoShape TopShape;
-    try {
-        TopShape = getBaseShape();
-    } catch (Base::Exception& e) {
-        return new App::DocumentObjectExecReturn(e.what());
-    }
+    App::DocumentObject* link = BaseFeature.getValue();
+    if (!link)
+        link = Base.getValue(); // For legacy features
+    if (!link)
+        return new App::DocumentObjectExecReturn("No object linked");
+    if (!link->getTypeId().isDerivedFrom(Part::Feature::getClassTypeId()))
+        return new App::DocumentObjectExecReturn("Linked object is not a Part object");
+    Part::TopoShape theChamfer = static_cast<Part::Feature*>(link)->Shape.getShape();
+    if (theChamfer._Shape.IsNull())
+        return new App::DocumentObjectExecReturn("Cannot chamfer invalid shape");
 
     const std::vector<std::string>& SubVals = Base.getSubValuesStartsWith("Edge");
     if (SubVals.size() == 0)
@@ -76,36 +80,19 @@ App::DocumentObjectExecReturn *Chamfer::execute(void)
     double size = Size.getValue();
 
     this->positionByBaseFeature();
-    // create an untransformed copy of the basefeature shape
-    Part::TopoShape baseShape(TopShape);
-    baseShape.setTransform(Base::Matrix4D());
+    // untransform the basefeature shape
+    theChamfer.setTransform(Base::Matrix4D());
+
     try {
-        BRepFilletAPI_MakeChamfer mkChamfer(baseShape._Shape);
-
-        TopTools_IndexedMapOfShape mapOfEdges;
-        TopTools_IndexedDataMapOfShapeListOfShape mapEdgeFace;
-        TopExp::MapShapesAndAncestors(baseShape._Shape, TopAbs_EDGE, TopAbs_FACE, mapEdgeFace);
-        TopExp::MapShapes(baseShape._Shape, TopAbs_EDGE, mapOfEdges);
-
-        for (std::vector<std::string>::const_iterator it=SubVals.begin(); it != SubVals.end(); ++it) {
-            TopoDS_Edge edge = TopoDS::Edge(baseShape.getSubShape(it->c_str()));
-            const TopoDS_Face& face = TopoDS::Face(mapEdgeFace.FindFromKey(edge).First());
-            mkChamfer.Add(size, edge, face);
-        }
-
-        mkChamfer.Build();
-        if (!mkChamfer.IsDone())
-            return new App::DocumentObjectExecReturn("Failed to create chamfer");
-
-        TopoDS_Shape shape = mkChamfer.Shape();
-        if (shape.IsNull())
-            return new App::DocumentObjectExecReturn("Resulting shape is null");
-
-        this->Shape.setValue(shape);
+        theChamfer.makeChamfer(SubVals, size);
+        this->Shape.setValue(theChamfer);
         return App::DocumentObject::StdReturn;
     }
     catch (Standard_Failure) {
         Handle_Standard_Failure e = Standard_Failure::Caught();
         return new App::DocumentObjectExecReturn(e->GetMessageString());
+    }
+    catch (Base::Exception& e) {
+        return new App::DocumentObjectExecReturn(e.what());
     }
 }

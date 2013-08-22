@@ -1273,6 +1273,54 @@ bool TopoShape::isClosed() const
     return BRep_Tool::IsClosed(this->_Shape) ? true : false;
 }
 
+bool TopoShape::intersects(const TopoShape& other, const bool quick, const bool touch_is_intersection) const
+{
+    Bnd_Box first_bb, second_bb;
+    BRepBndLib::Add(_Shape, first_bb);
+    first_bb.SetGap(0);
+    BRepBndLib::Add(other._Shape, second_bb);
+    second_bb.SetGap(0);
+
+    // Note: This test fails if the objects are touching one another at zero distance
+    if (first_bb.IsOut(second_bb))
+        return false; // no intersection
+    if (quick)
+        return true; // assumed intersection
+
+    // Try harder
+    if (touch_is_intersection) {
+        // If both shapes fuse to a single solid, then they intersect
+        BRepAlgoAPI_Fuse mkFuse(_Shape, other._Shape);
+        if (!mkFuse.IsDone())
+            return false;
+        if (mkFuse.Shape().IsNull())
+            return false;
+
+        // Did we get one or two solids?
+        TopExp_Explorer xp;
+        xp.Init(mkFuse.Shape(),TopAbs_SOLID);
+        if (xp.More()) {
+            // At least one solid
+            xp.Next();
+            return (xp.More() == Standard_False);
+        } else {
+            return false;
+        }
+    } else {
+        // If both shapes have common material, then they intersect
+        BRepAlgoAPI_Common mkCommon(_Shape, other._Shape);
+        if (!mkCommon.IsDone())
+            return false;
+        if (mkCommon.Shape().IsNull())
+            return false;
+
+        // Did we get a solid?
+        TopExp_Explorer xp;
+        xp.Init(mkCommon.Shape(),TopAbs_SOLID);
+        return (xp.More() == Standard_True);
+    }
+}
+
 TopoDS_Shape TopoShape::cut(TopoDS_Shape shape) const
 {
     BRepAlgoAPI_Cut mkCut(this->_Shape, shape);

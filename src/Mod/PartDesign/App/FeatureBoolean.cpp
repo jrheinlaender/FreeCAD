@@ -27,11 +27,7 @@
 # include <BRepAlgoAPI_Cut.hxx>
 # include <BRepAlgoAPI_Common.hxx>
 # include <BRepAlgoAPI_Section.hxx>
-# include <gp_Trsf.hxx>
-# include <gp_Pnt.hxx>
-# include <gp_Dir.hxx>
-# include <gp_Vec.hxx>
-# include <gp_Ax1.hxx>
+# include <Standard_Failure.hxx>
 #endif
 
 #include "Body.h"
@@ -65,95 +61,50 @@ short Boolean::mustExecute() const
 
 App::DocumentObjectExecReturn *Boolean::execute(void)
 {
-    // Check the parameters
-    const Part::Feature* baseFeature;
-    try {
-        baseFeature = getBaseObject();
-    } catch (const Base::Exception&) {
-        return new App::DocumentObjectExecReturn("Cannot do boolean operation with invalid BaseFeature");
-    }
+    // Get the base shape to operate on
+    Part::TopoShape theBoolean = getBaseTopoShape();
 
     std::vector<App::DocumentObject*> bodies = Bodies.getValues();
     if (bodies.empty())
         return App::DocumentObject::StdReturn;
 
-    // Get the base shape to operate on
-    Part::TopoShape baseTopShape = baseFeature->Shape.getShape();
-    if (baseTopShape._Shape.IsNull())
-        return new App::DocumentObjectExecReturn("Cannot do boolean operation with invalid base shape");
+    // Remove the transformation of the base shape
+    theBoolean.setTransform(Base::Matrix4D());
 
-    // Position this feature by the base feature
-    this->Placement.setValue(baseFeature->Placement.getValue());
-    TopLoc_Location invObjLoc = this->getLocation().Inverted();
+    try {
+        // Position this feature by the first body
+        const Part::Feature* baseFeature = getBaseObject();
+        this->Placement.setValue(baseFeature->Placement.getValue());
 
-    // create an untransformed copy of the base shape
-    Part::TopoShape baseShape(baseTopShape);
-    baseShape.setTransform(Base::Matrix4D());
-    TopoDS_Shape result = baseShape._Shape;
+        // Get the operation type
+        std::string type = Type.getValueAsString();
 
-    // Get the operation type
-    std::string type = Type.getValueAsString();
+        for (std::vector<App::DocumentObject*>::const_iterator b = bodies.begin(); b != bodies.end(); b++)
+        {
+            // Extract the body toposhape
+            PartDesign::Body* body = static_cast<PartDesign::Body*>(*b);
+            const Part::TopoShape& other = body->Shape.getShape();
 
-    for (std::vector<App::DocumentObject*>::const_iterator b = bodies.begin(); b != bodies.end(); b++)
-    {
-        // Extract the body shape. Its important to get the actual feature that provides the last solid in the body
-        // so that the placement will be right
-        PartDesign::Body* body = static_cast<PartDesign::Body*>(*b);
-        Part::Feature* tipSolid = static_cast<Part::Feature*>(body->getPrevSolidFeature());
-        if (tipSolid == NULL)
-            continue;
-        TopoDS_Shape shape = tipSolid->Shape.getValue();
-
-        // Move the shape to the location of the base shape
-        Base::Placement pl = body->Placement.getValue();
-        // TODO: Why is Feature::getLocation() protected?
-        Base::Rotation rot(pl.getRotation());
-        Base::Vector3d axis;
-        double angle;
-        rot.getValue(axis, angle);
-        gp_Trsf trf;
-        trf.SetRotation(gp_Ax1(gp_Pnt(), gp_Dir(axis.x, axis.y, axis.z)), angle);
-        trf.SetTranslationPart(gp_Vec(pl.getPosition().x,pl.getPosition().y,pl.getPosition().z));
-        TopLoc_Location bLoc(trf);
-        shape.Move(invObjLoc.Multiplied(bLoc));
-
-        TopoDS_Shape boolOp;
-
-        if (type == "Fuse") {
-            BRepAlgoAPI_Fuse mkFuse(result, shape);
-            if (!mkFuse.IsDone())
-                return new App::DocumentObjectExecReturn("Fusion of bodies failed", *b);
-            // we have to get the solids (fuse sometimes creates compounds)
-            boolOp = this->getSolid(mkFuse.Shape());
-            // lets check if the result is a solid
-            if (boolOp.IsNull())
-                return new App::DocumentObjectExecReturn("Resulting shape is not a solid", *b);
-        } else if (type == "Cut") {
-            BRepAlgoAPI_Cut mkCut(result, shape);
-            if (!mkCut.IsDone())
-                return new App::DocumentObjectExecReturn("Cut out of first body failed", *b);
-            boolOp = mkCut.Shape();
-        } else if (type == "Common") {
-            BRepAlgoAPI_Common mkCommon(result, shape);
-            if (!mkCommon.IsDone())
-                return new App::DocumentObjectExecReturn("Common operation with first body failed", *b);
-            boolOp = mkCommon.Shape();
-        } else if (type == "Section") {
-            BRepAlgoAPI_Section mkSection(result, shape);
-            if (!mkSection.IsDone())
-                return new App::DocumentObjectExecReturn("Section out of first body failed", *b);
-            // we have to get the solids
-            boolOp = this->getSolid(mkSection.Shape());
-            // lets check if the result is a solid
-            if (boolOp.IsNull())
-                return new App::DocumentObjectExecReturn("Resulting shape is not a solid", *b);
+            if (type == "Fuse")
+                theBoolean.makeFuse(other);
+            else if (type == "Cut")
+                theBoolean.makeCut(other);
+            else if (type == "Common")
+                theBoolean.makeCommon(other);
+            else if (type == "Section")
+                theBoolean.makeSection(other);
         }
 
-        result = boolOp; // Use result of this operation for fuse/cut of next body
+        this->Shape.setValue(theBoolean);
+        return App::DocumentObject::StdReturn;
     }
-
-    this->Shape.setValue(result);
-    return App::DocumentObject::StdReturn;
+    catch (Standard_Failure) {
+        Handle_Standard_Failure e = Standard_Failure::Caught();
+        return new App::DocumentObjectExecReturn(e->GetMessageString());
+    }
+    catch (Base::Exception& e) {
+        return new App::DocumentObjectExecReturn(e.what());
+    }
 }
 
 }

@@ -57,12 +57,16 @@ short Fillet::mustExecute() const
 
 App::DocumentObjectExecReturn *Fillet::execute(void)
 {
-    Part::TopoShape TopShape;
-    try {
-        TopShape = getBaseShape();
-    } catch (Base::Exception& e) {
-        return new App::DocumentObjectExecReturn(e.what());
-    }
+    App::DocumentObject* link = BaseFeature.getValue();
+    if (!link)
+        link = Base.getValue(); // For legacy features
+    if (!link)
+        return new App::DocumentObjectExecReturn("No object linked");
+    if (!link->getTypeId().isDerivedFrom(Part::Feature::getClassTypeId()))
+        return new App::DocumentObjectExecReturn("Linked object is not a Part object");
+    Part::TopoShape theFillet = static_cast<Part::Feature*>(link)->Shape.getShape();
+    if (theFillet._Shape.IsNull())
+        return new App::DocumentObjectExecReturn("Cannot fillet invalid shape");
 
     const std::vector<std::string>& SubVals = Base.getSubValuesStartsWith("Edge");
     if (SubVals.size() == 0)
@@ -71,31 +75,19 @@ App::DocumentObjectExecReturn *Fillet::execute(void)
     double radius = Radius.getValue();
 
     this->positionByBaseFeature();
+    // untransform the basefeature shape
+    theFillet.setTransform(Base::Matrix4D());
 
-    // create an untransformed copy of the base shape
-    Part::TopoShape baseShape(TopShape);
-    baseShape.setTransform(Base::Matrix4D());
     try {
-        BRepFilletAPI_MakeFillet mkFillet(baseShape._Shape);
-
-        for (std::vector<std::string>::const_iterator it=SubVals.begin(); it != SubVals.end(); ++it) {
-            TopoDS_Edge edge = TopoDS::Edge(baseShape.getSubShape(it->c_str()));
-            mkFillet.Add(radius, edge);
-        }
-
-        mkFillet.Build();
-        if (!mkFillet.IsDone())
-            return new App::DocumentObjectExecReturn("Failed to create fillet");
-
-        TopoDS_Shape shape = mkFillet.Shape();
-        if (shape.IsNull())
-            return new App::DocumentObjectExecReturn("Resulting shape is null");
-
-        this->Shape.setValue(shape);
+        theFillet.makeFillet(SubVals, radius);
+        this->Shape.setValue(theFillet);
         return App::DocumentObject::StdReturn;
     }
     catch (Standard_Failure) {
         Handle_Standard_Failure e = Standard_Failure::Caught();
         return new App::DocumentObjectExecReturn(e->GetMessageString());
+    }
+    catch (Base::Exception& e) {
+        return new App::DocumentObjectExecReturn(e.what());
     }
 }

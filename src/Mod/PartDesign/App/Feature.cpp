@@ -62,19 +62,6 @@ short Feature::mustExecute() const
     return Part::Feature::mustExecute();
 }
 
-TopoDS_Shape Feature::getSolid(const TopoDS_Shape& shape)
-{
-    if (shape.IsNull())
-        Standard_Failure::Raise("Shape is null");
-    TopExp_Explorer xp;
-    xp.Init(shape,TopAbs_SOLID);
-    for (;xp.More(); xp.Next()) {
-        return xp.Current();
-    }
-
-    return TopoDS_Shape();
-}
-
 const gp_Pnt Feature::getPointFromFace(const TopoDS_Face& f)
 {
     if (!f.Infinite()) {
@@ -116,7 +103,7 @@ const TopoDS_Shape& Feature::getBaseShape() const {
     return result;
 }
 
-const Part::TopoShape Feature::getBaseTopoShape() const {
+const Part::TopoShape& Feature::getBaseTopoShape() const {
     const Part::Feature* BaseObject = getBaseObject();
 
     const Part::TopoShape& result = BaseObject->Shape.getShape();

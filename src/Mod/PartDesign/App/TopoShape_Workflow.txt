@@ -1,0 +1,71 @@
+Workflow of the PartDesign workbench using the TopoShape as the fundamental
+object containing geometry
+===========================================================================
+
+In order to enable topological naming through all geometrical operations in
+the PartDesign workbench, all such operations must be referred to the
+TopoShape.  This document lists and documents all steps required to
+correctly build up a TopoShape for any PartDesign feature.  Only the
+relevant code is listed!
+
+The starting point of any geometry in the PartDesign workbench is the
+Sketch:
+
+Sketcher::SketchObject::execute() {
+  // Creation of the TopoShape. It is filled with one or more TopoDS_Wire
+  Part::TopoShape theSketch = sketch.toShape();
+  
+  // (Re-)create the topological naming information which links Sketch
+  // objects with vertices and edges of the TopoDS_Wire
+  theSketch.renewFromSketch(this, getInternalGeometry());
+  // Note: The clean way to do the above two calls would be:
+  //   Part::TopoShape theSketch;
+  //   theSketch.makeSketch(getInternalGeometry());
+  // but that would mean transferring all the sketch creation code from
+  // Sketcher:: into Part::
+
+  // Set the Shape property of the SketchObject
+  Shape.setValue(theSketch);
+}
+
+How to build up a sketch-based feature:
+
+PartDesign::FeatureSketchBasedXYZ::execute() {
+  // The sketch TopoShape from which the feature will be built
+  const Part::TopoShape& theSketch = Sketch.getValue()->Shape.getShape();
+
+  // The base feature (if any) with which this feature should be fused
+  // The later functions will recognize an empty TopoShape and interpret it
+  // accordingly
+  Part::TopoShape theBase;
+  if (BaseFeature.getValue() != NULL)
+    theBase = BaseFeature.getValue()->Shape.getShape();
+
+  // Make theSketch be the ancestor of theFeature. This creates the
+  // naming information which links the Sketch wire(s) to the Feature
+  // geometry, and transfers the Sketch geometry (wires) into the Feature
+  Part::TopoShape theFeature = theSketch;
+
+  // Create a face from the Sketch wire(s)
+  theFeature.makeFace();
+
+  // Find the invObjLoc
+  this->positionBySketch();
+  TopLoc_Location invObjLoc = this->getLocation().Inverted();
+
+  // Move to invObjLoc
+  theFeature.move(invObjLoc);
+  theBase.move(invObjLoc);
+
+  // Create the geometry from the face. makePrism() is just one possibility
+  theFeature.makePrism(direction, length);
+  
+  // Extract the AddShape or SubShape before fusing with theBase
+  this->AddShape.setValue(theFeature);
+
+  // Fuse Feature with Base 
+  theFeature.makeFuse(theBase);
+
+  // Set the Shape property of the Feature
+  Shape.setValue(theFeature);
+}

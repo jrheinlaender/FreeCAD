@@ -91,12 +91,16 @@ App::DocumentObjectExecReturn *Draft::execute(void)
 {
     // Get parameters
     // Base shape
-    Part::TopoShape TopShape;
-    try {
-        TopShape = getBaseShape();
-    } catch (Base::Exception& e) {
-        return new App::DocumentObjectExecReturn(e.what());
-    }
+    App::DocumentObject* link = BaseFeature.getValue();
+    if (!link)
+        link = Base.getValue(); // For legacy features
+    if (!link)
+        return new App::DocumentObjectExecReturn("No object linked");
+    if (!link->getTypeId().isDerivedFrom(Part::Feature::getClassTypeId()))
+        return new App::DocumentObjectExecReturn("Linked object is not a Part object");
+    Part::TopoShape theDraft = static_cast<Part::Feature*>(link)->Shape.getShape();
+    if (theDraft._Shape.IsNull())
+        return new App::DocumentObjectExecReturn("Cannot draft invalid shape");
 
     // Faces where draft should be applied
     // Note: Cannot be const reference currently because of BRepOffsetAPI_DraftAngle::Remove() bug, see below
@@ -150,7 +154,7 @@ App::DocumentObjectExecReturn *Draft::execute(void)
     if (refPlane == NULL) {
         // Try to guess a neutral plane from the first selected face
         // Get edges of first selected face
-        TopoDS_Shape face = TopShape.getSubShape(SubVals[0].c_str());
+        TopoDS_Shape face = theDraft.getSubShape(SubVals[0].c_str());
         TopTools_IndexedMapOfShape mapOfEdges;
         TopExp::MapShapes(face, TopAbs_EDGE, mapOfEdges);
         bool found;
@@ -256,57 +260,20 @@ App::DocumentObjectExecReturn *Draft::execute(void)
         angle *= -1.0;
 
     this->positionByBaseFeature();
-    // create an untransformed copy of the base shape
-    Part::TopoShape baseShape(TopShape);
-    baseShape.setTransform(Base::Matrix4D());
+    // untransform the basefeature shape
+    theDraft.setTransform(Base::Matrix4D());
+
     try {
-        BRepOffsetAPI_DraftAngle mkDraft;
-        // Note:
-        // LocOpe_SplitDrafts can split a face with a wire and apply draft to both parts
-        //       Not clear though whether the face must have free boundaries
-        // LocOpe_DPrism can create a stand-alone draft prism. The sketch can only have a single
-        //       wire, though.
-        // BRepFeat_MakeDPrism requires a support for the operation but will probably support multiple
-        //       wires in the sketch
+        theDraft.makeDraft(SubVals, pullDirection, angle, neutralPlane);
 
-        bool success;
-
-        do {
-            success = true;
-            mkDraft.Init(baseShape._Shape);
-
-            for (std::vector<std::string>::iterator it=SubVals.begin(); it != SubVals.end(); ++it) {
-                TopoDS_Face face = TopoDS::Face(baseShape.getSubShape(it->c_str()));
-                // TODO: What is the flag for?
-                mkDraft.Add(face, pullDirection, angle, neutralPlane);
-                if (!mkDraft.AddDone()) {
-                    // Note: the function ProblematicShape returns the face on which the error occurred
-                    // Note: mkDraft.Remove() stumbles on a bug in Draft_Modification::Remove() and is
-                    //       therefore unusable. See https://sourceforge.net/apps/phpbb/free-cad/viewtopic.php?f=10&t=3209&start=10#p25341
-                    //       The only solution is to discard mkDraft and start over without the current face
-                    // mkDraft.Remove(face);
-                    Base::Console().Error("Adding face failed on %s. Omitted\n", it->c_str());
-                    success = false;
-                    SubVals.erase(it);
-                    break;
-                }
-            }
-        }
-        while (!success);
-
-        mkDraft.Build();
-        if (!mkDraft.IsDone())
-            return new App::DocumentObjectExecReturn("Failed to create draft");
-
-        TopoDS_Shape shape = mkDraft.Shape();
-        if (shape.IsNull())
-            return new App::DocumentObjectExecReturn("Resulting shape is null");
-
-        this->Shape.setValue(shape);
+        this->Shape.setValue(theDraft);
         return App::DocumentObject::StdReturn;
     }
     catch (Standard_Failure) {
         Handle_Standard_Failure e = Standard_Failure::Caught();
         return new App::DocumentObjectExecReturn(e->GetMessageString());
+    }
+    catch (Base::Exception& e) {
+        return new App::DocumentObjectExecReturn(e.what());
     }
 }

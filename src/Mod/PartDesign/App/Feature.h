@@ -62,12 +62,7 @@ protected:
     /// Returns the BaseFeature property's shape (if any)
     const TopoDS_Shape& getBaseShape() const;
     /// Returns the BaseFeature property's TopoShape (if any)
-    const Part::TopoShape getBaseTopoShape() const;
-
-    /**
-     * Get a solid of the given shape. If no solid is found an exception is raised.
-     */
-    static TopoDS_Shape getSolid(const TopoDS_Shape&);    
+    const Part::TopoShape& getBaseTopoShape() const;
 
     /// Grab any point from the given face
     static const gp_Pnt getPointFromFace(const TopoDS_Face& f);    

@@ -139,12 +139,15 @@ App::DocumentObjectExecReturn *SketchObject::execute(void)
     if (sketch.solve() != 0)
         return new App::DocumentObjectExecReturn("Solving the sketch failed",this);
 
+    Part::TopoShape theSketch = sketch.toShape();
+
     std::vector<Part::Geometry *> geomlist = sketch.extractGeometry();
     Geometry.setValues(geomlist);
     for (std::vector<Part::Geometry *>::iterator it=geomlist.begin(); it != geomlist.end(); ++it)
         if (*it) delete *it;
 
-    Shape.setValue(sketch.toShape());
+    theSketch.renewFromSketch(this, getInternalGeometry());
+    Shape.setValue(theSketch);
 
     return App::DocumentObject::StdReturn;
 }

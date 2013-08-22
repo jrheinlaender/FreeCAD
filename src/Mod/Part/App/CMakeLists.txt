@@ -243,6 +243,7 @@ SET(Part_SRCS
     ProgressIndicator.cpp
     ProgressIndicator.h
     TopoShape.cpp
+    TopoShapeGeometry.cpp
     TopoShape.h
     edgecluster.cpp
     edgecluster.h
