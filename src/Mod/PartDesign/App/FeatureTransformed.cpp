@@ -252,7 +252,7 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
         }
 
         if (v_transformedShapes.empty())
-            continue; // Skip the boolean operation and go on to next original
+            break; // Skip the boolean operation and go on to next original
 
         try {
             // Build a compound from all the valid transformed shapes
