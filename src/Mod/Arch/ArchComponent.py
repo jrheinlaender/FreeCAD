@@ -26,6 +26,7 @@ __author__ = "Yorik van Havre"
 __url__ = "http://free-cad.sourceforge.net"
 
 import FreeCAD,FreeCADGui,Draft
+from FreeCAD import Vector
 from PyQt4 import QtGui,QtCore
 from DraftTools import translate
 
@@ -308,8 +309,8 @@ class Component:
             n = f.normalAt(0,0)
             v1 = DraftVecUtils.scaleTo(n,width*1.1) # we extrude a little more to avoid face-on-face
             f.translate(v1)
-            v2 = DraftVecUtils.neg(v1)
-            v2 = DraftVecUtils.scale(v1,-2)
+            v2 = v1.negative()
+            v2 = Vector(v1).multiply(-2)
             f = f.extrude(v2)
             if plac:
                 f.Placement = plac
@@ -444,10 +445,15 @@ class ViewProviderComponent:
         return None
 
     def claimChildren(self):
-        c = [self.Object.Base]+self.Object.Additions+self.Object.Subtractions
-        if hasattr(self.Object,"Fixtures"):
-            c.extend(self.Object.Fixtures)
-        return c
+        if hasattr(self,"Object"):
+            c = [self.Object.Base]+self.Object.Additions+self.Object.Subtractions
+            if hasattr(self.Object,"Fixtures"):
+                c.extend(self.Object.Fixtures)
+            if hasattr(self.Object,"Tool"):
+                if self.Object.Tool:
+                    c.append(self.Object.Tool)
+            return c
+        return []
 
     def setEdit(self,vobj,mode):
         taskd = ComponentTaskPanel()

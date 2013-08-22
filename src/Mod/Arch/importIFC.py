@@ -123,7 +123,6 @@ def read(filename):
 
                 obj = IfcImport.Get()
                 if DEBUG: print "["+str(int((float(obj.id)/num_lines)*100))+"%] parsing ",obj.id,": ",obj.name," of type ",obj.type
-                meshdata = []
 
                 # retrieving name
                 n = getName(obj)
@@ -136,9 +135,7 @@ def read(filename):
                 else:
                     # build shape
                     shape = None
-                    if obj.type in ASMESH:
-                        shape = getMesh(obj)[0]
-                    elif useShapes:
+                    if useShapes:
                         shape = getShape(obj)
 
                     # walls
@@ -191,7 +188,7 @@ def read(filename):
                     
                 if not IfcImport.Next():
                     break
-        
+
         # processing non-geometry and relationships
         parents_temp = dict(ifcParents)
         import ArchCommands
@@ -245,7 +242,7 @@ def read(filename):
                         ArchCommands.addComponents(ifcObjects[id],parent)
                     else:
                         ArchCommands.removeComponents(ifcObjects[id],parent)
-            
+                        
         IfcImport.CleanUp()
         
     else:
@@ -288,7 +285,7 @@ def read(filename):
         for s in ifc.getEnt("IfcSite"):
             group(s,ifc,"Site")
 
-    if DEBUG: print "done parsing. Recomputing..."           
+    if DEBUG: print "done parsing. Recomputing..."        
     FreeCAD.ActiveDocument.recompute()
     t3 = time.time()
     if DEBUG: print "done processing IFC file in %s s" % ((t3-t1))
@@ -512,9 +509,15 @@ def getMesh(obj):
 
 def getShape(obj):
     "gets a shape from an IfcOpenShell object"
-    import StringIO,Part
+    #print "retrieving shape from obj ",obj.id
+    import Part
     sh=Part.Shape()
-    sh.importBrep(StringIO.StringIO(obj.mesh.brep_data))
+    try:
+        sh.importBrepFromString(obj.mesh.brep_data)
+        #sh = Part.makeBox(2,2,2)
+    except:
+        print "Error: malformed shape"
+        return None
     if not sh.Solids:
         # try to extract a solid shape
         if sh.Faces:
@@ -536,6 +539,8 @@ def getShape(obj):
                          0, 0, 0, 1)
     sh.Placement = FreeCAD.Placement(mat)
     # if DEBUG: print "getting Shape from ",obj 
+    #print "getting shape: ",sh,sh.Solids,sh.Volume,sh.isValid(),sh.isNull()
+    #for v in sh.Vertexes: print v.Point
     return sh
     
 # below is only used by the internal parser #########################################

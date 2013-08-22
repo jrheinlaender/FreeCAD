@@ -377,7 +377,7 @@ class SelectPlane(DraftTool):
             self.display('side')
             self.finish()
         elif arg == "currentView":
-            viewDirection = DraftVecUtils.neg(self.view.getViewDirection())
+            viewDirection = self.view.getViewDirection().negative()
             plane.alignToPointAndAxis(Vector(0,0,0), viewDirection, self.offset)
             self.display(viewDirection)
             self.finish()
@@ -775,10 +775,10 @@ class Rectangle(Creator):
                 base = p1
                 if length < 0:
                     length = -length
-                    base = base.add(DraftVecUtils.neg(p1.sub(p4)))
+                    base = base.add((p1.sub(p4)).negative())
                 if height < 0:
                     height = -height
-                    base = base.add(DraftVecUtils.neg(p1.sub(p2)))
+                    base = base.add((p1.sub(p2)).negative())
                 self.commit(translate("draft","Create Plane"),
                             ['plane = FreeCAD.ActiveDocument.addObject("Part::Plane","Plane")',
                              'plane.Length = '+str(length),
@@ -910,7 +910,7 @@ class Arc(Creator):
             if self.center and DraftVecUtils.dist(self.point,self.center) > 0:
                 viewdelta = DraftVecUtils.project(self.point.sub(self.center), plane.axis)
                 if not DraftVecUtils.isNull(viewdelta):
-                    self.point = self.point.add(DraftVecUtils.neg(viewdelta))
+                    self.point = self.point.add(viewdelta.negative())
             if (self.step == 0): # choose center
                 if hasMod(arg,MODALT):
                     if not self.altdown:
@@ -1197,7 +1197,7 @@ class Polygon(Creator):
             if self.center and DraftVecUtils.dist(self.point,self.center) > 0:
                 viewdelta = DraftVecUtils.project(self.point.sub(self.center), plane.axis)
                 if not DraftVecUtils.isNull(viewdelta):
-                    self.point = self.point.add(DraftVecUtils.neg(viewdelta))
+                    self.point = self.point.add(viewdelta.negative())
             if (self.step == 0): # choose center
                 if hasMod(arg,MODALT):
                     if not self.altdown:
@@ -1351,7 +1351,7 @@ class Ellipse(Creator):
         p1 = self.node[0]
         p3 = self.node[-1]
         diagonal = p3.sub(p1)
-        halfdiag = DraftVecUtils.scale(diagonal,0.5)
+        halfdiag = Vector(diagonal).multiply(0.5)
         center = p1.add(halfdiag)
         p2 = p1.add(DraftVecUtils.project(diagonal, plane.v))
         p4 = p1.add(DraftVecUtils.project(diagonal, plane.u))
@@ -1447,6 +1447,7 @@ class Text(Creator):
             self.ui.sourceCmd = self
             self.ui.pointUi(name)
             self.call = self.view.addEventCallback("SoEvent",self.action)
+            self.active = True
             self.ui.xValue.setFocus()
             self.ui.xValue.selectAll()
             msg(translate("draft", "Pick location point:\n"))
@@ -1466,7 +1467,7 @@ class Text(Creator):
         for l in self.text:
             if len(tx) > 1:
                 tx += ','
-            tx += '"'+str(l)+'"'
+            tx += '"'+str(unicode(l).encode("utf8"))+'"'
         tx += ']'
         self.commit(translate("draft","Create Text"),
                     ['import Draft',
@@ -1480,10 +1481,13 @@ class Text(Creator):
             if arg["Key"] == "ESCAPE":
                 self.finish()
         elif arg["Type"] == "SoLocation2Event": #mouse movement detection
-            self.point,ctrlPoint,info = getPoint(self,arg)
+            if self.active:
+                self.point,ctrlPoint,info = getPoint(self,arg)
         elif arg["Type"] == "SoMouseButtonEvent":
             if (arg["State"] == "DOWN") and (arg["Button"] == "BUTTON1"):
                 if self.point:
+                    self.active = False
+                    FreeCADGui.Snapper.off()
                     self.node.append(self.point)
                     self.ui.textUi()
                     self.ui.textValue.setFocus()
@@ -1655,7 +1659,7 @@ class Dimension(Creator):
                         rad = self.edges[0].Curve.Radius
                         baseray = self.point.sub(cen)
                         v2 = DraftVecUtils.scaleTo(baseray,rad)
-                        v1 = DraftVecUtils.neg(v2)
+                        v1 = v2.negative()
                         if shift:
                             self.node = [cen,cen.add(v2)]
                             self.arcmode = "radius"
@@ -1761,7 +1765,7 @@ class Dimension(Creator):
                         # for unlinked arc mode:
                         # if self.arcmode:
                         #        v = self.node[1].sub(self.node[0])
-                        #        v = DraftVecUtils.scale(v,0.5)
+                        #        v.multiply(0.5)
                         #        cen = self.node[0].add(v)
                         #        self.node = [self.node[0],self.node[1],cen]
                         self.createObject()
@@ -1800,6 +1804,7 @@ class ShapeString(Creator):
             self.text = ''
             self.ui.sourceCmd = self
             self.ui.pointUi(name)
+            self.active = True
             self.call = self.view.addEventCallback("SoEvent",self.action)
             self.ui.xValue.setFocus()
             self.ui.xValue.selectAll()
@@ -1847,11 +1852,14 @@ class ShapeString(Creator):
             if arg["Key"] == "ESCAPE":
                 self.finish()
         elif arg["Type"] == "SoLocation2Event": #mouse movement detection
-            self.point,ctrlPoint,info = getPoint(self,arg)
+            if self.active:
+                self.point,ctrlPoint,info = getPoint(self,arg)
         elif arg["Type"] == "SoMouseButtonEvent":
             if (arg["State"] == "DOWN") and (arg["Button"] == "BUTTON1"):
                 if self.point:
                     self.node.append(self.point)
+                    self.active = False
+                    FreeCADGui.Snapper.off()
                     self.ui.SSUi()
                 
     def numericInput(self,numx,numy,numz):
@@ -2143,7 +2151,7 @@ class Rotate(Modifier):
             if self.center and DraftVecUtils.dist(self.point,self.center):
                 viewdelta = DraftVecUtils.project(self.point.sub(self.center), plane.axis)
                 if not DraftVecUtils.isNull(viewdelta):
-                    self.point = self.point.add(DraftVecUtils.neg(viewdelta))
+                    self.point = self.point.add(viewdelta.negative())
             if self.extendedCopy:
                 if not hasMod(arg,MODALT):
                     self.step = 3
@@ -2322,7 +2330,7 @@ class Offset(Modifier):
             if dist:
                 self.ghost.on()
                 if self.mode == "Wire":
-                    d = DraftVecUtils.neg(dist[0])
+                    d = dist[0].negative()
                     v1 = DraftGeomUtils.getTangent(self.shape.Edges[0],self.point)
                     v2 = DraftGeomUtils.getTangent(self.shape.Edges[dist[1]],self.point)
                     a = -DraftVecUtils.angle(v1,v2)
@@ -2330,7 +2338,7 @@ class Offset(Modifier):
                     occmode = self.ui.occOffset.isChecked()
                     self.ghost.update(DraftGeomUtils.offsetWire(self.shape,self.dvec,occ=occmode),forceclosed=occmode)
                 elif self.mode == "BSpline":
-                    d = DraftVecUtils.neg(dist[0])
+                    d = dist[0].negative()
                     e = self.shape.Edges[0]
                     basetan = DraftGeomUtils.getTangent(e,self.point)
                     self.npts = []
@@ -2656,7 +2664,7 @@ class Trimex(Modifier):
             if real:
                 if self.force:
                     ray = self.newpoint.sub(v1)
-                    ray = DraftVecUtils.scale(ray,self.force/ray.Length)
+                    ray.multiply(self.force/ray.Length)
                     self.newpoint = Vector.add(v1,ray)
                 newedges.append(Part.Line(self.newpoint,v2).toShape())
         else:
@@ -2865,7 +2873,7 @@ class Scale(Modifier):
                     # calculate a correction factor depending on the scaling center
                     corr = Vector(self.node[0].x,self.node[0].y,self.node[0].z)
                     corr.scale(delta.x,delta.y,delta.z)
-                    corr = DraftVecUtils.neg(corr.sub(self.node[0]))
+                    corr = (corr.sub(self.node[0])).negative()
                     self.ghost.move(corr)
                     self.ghost.on()
             if self.extendedCopy:
@@ -3070,9 +3078,11 @@ class Edit(Modifier):
                         self.editpoints.append(self.obj.Shape.Vertexes[2].Point)
                         v = self.obj.Shape.Vertexes
                         self.bx = v[1].Point.sub(v[0].Point)
-                        if self.obj.Length < 0: self.bx = DraftVecUtils.neg(self.bx)
+                        if self.obj.Length < 0: 
+                            self.bx = self.bx.negative()
                         self.by = v[2].Point.sub(v[1].Point)
-                        if self.obj.Height < 0: self.by = DraftVecUtils.neg(self.by)
+                        if self.obj.Height < 0: 
+                            self.by = self.by.negative()
                     elif Draft.getType(self.obj) == "Polygon":
                         self.editpoints.append(self.obj.Placement.Base)
                         self.editpoints.append(self.obj.Shape.Vertexes[0].Point)
@@ -3589,7 +3599,7 @@ class Point:
         self.stack = []
         rot = self.view.getCameraNode().getField("orientation").getValue()
         upv = Vector(rot.multVec(coin.SbVec3f(0,1,0)).getValue())
-        plane.setup(DraftVecUtils.neg(self.view.getViewDirection()), Vector(0,0,0), upv)
+        plane.setup(self.view.getViewDirection().negative(), Vector(0,0,0), upv)
         self.point = None
         # adding 2 callback functions
         self.callbackClick = self.view.addEventCallbackPivy(coin.SoMouseButtonEvent.getClassTypeId(),self.click)

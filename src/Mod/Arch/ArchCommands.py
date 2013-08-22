@@ -67,25 +67,24 @@ def addComponents(objectsList,host):
     example to add windows to a wall, or to add walls to a cell or floor.'''
     if not isinstance(objectsList,list):
         objectsList = [objectsList]
-    tp = Draft.getType(host)
-    if tp in ["Cell"]:
-        c = host.Components
-        for o in objectsList:
-            if not o in c:
-                c.append(o)
-        host.Components = c
-    elif tp in ["Floor","Building","Site"]:
+    hostType = Draft.getType(host)
+    if hostType in ["Floor","Building","Site"]:
         c = host.Group
         for o in objectsList:
             if not o in c:
                 c.append(o)
         host.Group = c
-    elif tp in ["Wall","Structure","Window","Roof"]:
+    elif hostType in ["Wall","Structure","Window","Roof"]:
+        import DraftGeomUtils
         a = host.Additions
         if hasattr(host,"Axes"):
             x = host.Axes
         for o in objectsList:
-            if Draft.getType(o) == "Axis":
+            if DraftGeomUtils.isValidPath(o.Shape) and (hostType == "Structure"):
+                if o.Support == host:
+                    o.Support = None
+                host.Tool = o
+            elif Draft.getType(o) == "Axis":
                 if not o in x:
                     x.append(o) 
             elif not o in a:
@@ -94,7 +93,7 @@ def addComponents(objectsList,host):
         host.Additions = a
         if hasattr(host,"Axes"):
             host.Axes = x
-    elif tp in ["SectionPlane"]:
+    elif hostType in ["SectionPlane"]:
         a = host.Objects
         for o in objectsList:
             if not o in a:
@@ -117,6 +116,9 @@ def removeComponents(objectsList,host=None):
         objectsList = [objectsList]
     if host:
         if Draft.getType(host) in ["Wall","Structure"]:
+            if hasattr(host,"Tool"):
+                if objectsList[0] == host.Tool:
+                    host.Tool = None
             if hasattr(host,"Axes"):
                 a = host.Axes
                 for o in objectsList[:]:
@@ -150,7 +152,7 @@ def removeComponents(objectsList,host=None):
             if o.InList:
                h = o.InList[0]
                tp = Draft.getType(h)
-               if tp in ["Cell","Floor","Building","Site"]:
+               if tp in ["Floor","Building","Site"]:
                    c = h.Components
                    if o in c:
                        c.remove(o)
@@ -271,8 +273,8 @@ def makeFace(wires,method=2,cleanup=False):
             #print "makeFace: reversing",w
             w.reverse()
             # make sure that the exterior wires comes as first in the list
-            wires.insert(0, ext)
-            #print "makeFace: done sorting", wires
+        wires.insert(0, ext)
+        #print "makeFace: done sorting", wires
         if wires:
             return Part.Face(wires)
     else:
@@ -360,9 +362,9 @@ def getCutVolume(cutplane,shapes):
             wm1 = DraftVecUtils.project(dv,ax).Length
             wm = max(wm,wm1)
         vu = DraftVecUtils.scaleTo(u,um)
-        vui = DraftVecUtils.neg(vu)
+        vui = vu.negative()
         vv = DraftVecUtils.scaleTo(v,vm)
-        vvi = DraftVecUtils.neg(vv)
+        vvi = vv.negative()
         p1 = ce.add(vu.add(vvi))
         p2 = ce.add(vu.add(vv))
         p3 = ce.add(vui.add(vv))
@@ -371,7 +373,7 @@ def getCutVolume(cutplane,shapes):
         cutface = Part.Face(cutface)
         cutnormal = DraftVecUtils.scaleTo(ax,wm)
         cutvolume = cutface.extrude(cutnormal)
-        cutnormal = DraftVecUtils.neg(cutnormal)
+        cutnormal = cutnormal.negative()
         invcutvolume = cutface.extrude(cutnormal)
         return cutface,cutvolume,invcutvolume
 
@@ -457,7 +459,7 @@ def removeShape(objs,mark=True):
                     length = dims[1]
                     width = dims[2]
                     v1 = Vector(length/2,0,0)
-                    v2 = DraftVecUtils.neg(v1)
+                    v2 = v1.negative()
                     v1 = dims[0].multVec(v1)
                     v2 = dims[0].multVec(v2)
                     line = Draft.makeLine(v1,v2)
