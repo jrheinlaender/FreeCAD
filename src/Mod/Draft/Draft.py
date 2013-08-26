@@ -749,7 +749,9 @@ def makeText(stringslist,point=Vector(0,0,0),screen=False):
     typecheck([(point,Vector)], "makeText")
     if not isinstance(stringslist,list): stringslist = [stringslist]
     textbuffer = []
-    for l in stringslist: textbuffer.append(l.decode("utf8").encode('latin1'))
+    for l in stringslist: 
+        #textbuffer.append(l.decode("utf8").encode('latin1'))
+        textbuffer.append(str(l))
     obj=FreeCAD.ActiveDocument.addObject("App::Annotation","Text")
     obj.LabelText=textbuffer
     obj.Position=point
@@ -1532,9 +1534,14 @@ def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direct
         p = getProj(obj.Position)
         svg = '<text id="' + obj.Name + '" fill="'
         svg += getrgb(obj.ViewObject.TextColor)
-        svg += '" font-size="'
-        svg += str(fontsize)+'" '
-        svg += 'style="text-anchor:middle;text-align:center;'
+        svg += '" font-size="'+str(fontsize)
+        svg += '" style="'
+        if obj.ViewObject.Justification == "Left":
+            svg += 'text-anchor:start;text-align:left;'
+        elif obj.ViewObject.Justification == "Right":
+            svg += 'text-anchor:end;text-align:right;'
+        else:
+            svg += 'text-anchor:middle;text-align:center;'
         svg += 'font-family:'+obj.ViewObject.FontName+'" '
         svg += 'transform="'
         if obj.ViewObject.RotationAxis == 'Z':
@@ -1545,9 +1552,14 @@ def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direct
         #svg +='scale('+str(tmod/2000)+','+str(-tmod/2000)+')'
         svg += 'scale(1,-1) '
         svg += '">\n'
-        for l in obj.LabelText:
-            svg += '<tspan>'+l+'</tspan>\n'
+        for i in range(len(obj.LabelText)):
+            if i == 0:
+                svg += '<tspan>'
+            else:
+                svg += '<tspan x="0" dy="'+str(obj.ViewObject.LineSpacing/2)+'">'
+            svg += obj.LabelText[i]+'</tspan>\n'
         svg += '</text>\n'
+        #print svg
 
     elif getType(obj) == "Axis":
         "returns the SVG representation of an Arch Axis system"
