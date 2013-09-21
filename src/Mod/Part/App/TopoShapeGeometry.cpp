@@ -63,6 +63,7 @@
 
 #include <algorithm>
 
+#include "Part2DObject.h"
 #include "TopoShape.h"
 #include "Geometry.h"
 #include "modelRefine.h"
@@ -73,6 +74,19 @@ using namespace Part;
 #ifdef FC_DEBUG
 #include <Base/Console.h>
 #endif
+
+// All these are defined in TopoShapeNaming.cpp
+extern RefMap buildRefMapFromSketch(const TopoDS_Shape shape, const std::vector<Geometry*>& geometry);
+extern RefMap buildRefMap(const TopoDS_Shape& newShape, const TopoDS_Shape& oldShape);
+extern RefMap joinMap(const RefMap& oldMap, const RefMap& newMap);
+extern RefMap buildRefMap(BRepPrimAPI_MakePrism &mkPrism, const TopoDS_Shape& oldShape);
+extern RefMap buildRefMap(BRepPrimAPI_MakeRevol &mkRevol, const TopoDS_Shape& oldShape);
+extern RefMap buildRefMap(BRepFeat_MakePrism &mkPrism, const TopoDS_Shape& oldShape);
+extern TopoDS_Shape buildRefMap(BRepAlgoAPI_BooleanOperation &mkBool,
+                                const std::vector<TopoDS_Shape> oldShape,
+                                std::vector<RefMap>& result,
+                                const std::vector<TopInfoMap> oldTopInfos,
+                                TopInfoMap& newTopInfo);
 
 // Check that the shape contains at least or exactly one shape of type "entity" and nothing else
 void checkHasEntity(const TopoDS_Shape& shape, const TopAbs_ShapeEnum& entity, const bool exactlyOne) {
@@ -87,14 +101,26 @@ void checkHasEntity(const TopoDS_Shape& shape, const TopAbs_ShapeEnum& entity, c
         throw Base::Exception("TopoShape: Shape contains additional entities of a different type");
 }
 
+// (Re-)create the topological naming information which links Sketch objects with vertices and edges of the TopoDS_Wire
 void TopoShape::renewFromSketch(const Part::Part2DObject* sketch, const std::vector<Geometry*>& geometry) {
-    //Base::Console().Error("=== MAKING SKETCH ===\n");    
+    Base::Console().Error("=== MAKING SKETCH ===\n");
 
     // Check that the _Shape contains at least one wire and nothing else
     checkHasEntity(_Shape, TopAbs_WIRE, false);
 
+    // Clear the old history (if any)
+    History.clear();
+
+    ShapeMap hist;
+    hist.name = sketch->getNameInDocument();
+    hist.Map = buildRefMapFromSketch(_Shape, geometry);
+
+    History.push_back(hist);
+
+#ifdef FC_DEBUG
+    printHistory();
+#endif
     // Note: If necessary, old topological information can be copied from sketch.Shape.getValue()
-    // Note: sketch and geometry are required later for topological naming
 }
 
 // Validate a face and try to fix problems if there are any
@@ -281,7 +307,10 @@ TopoDS_Face createFace(std::list<TopoDS_Wire>& wires) {
 }
 
 void TopoShape::makeFace() {
-    //Base::Console().Error("=== MAKEFACE ===\n");
+    Base::Console().Error("=== MAKEFACE ===\n");
+
+    if (History.size() != 1)
+        throw Base::Exception("TopoShape: makeFace: Only possible for a single history");
 
     // Get the wires
     std::vector<TopoDS_Wire> wires;
@@ -290,8 +319,8 @@ void TopoShape::makeFace() {
     // The error almost happens when re-computing the shape but sometimes also for the
     // first time
     BRepBuilderAPI_Copy copy(_Shape);
-    _Shape = copy.Shape();
-    if (_Shape.IsNull())
+    TopoDS_Shape newShape = copy.Shape();
+    if (newShape.IsNull())
         throw Base::Exception("TopoShape: makeFace: Shape object is empty");
 
     TopExp_Explorer ex;
@@ -317,10 +346,23 @@ void TopoShape::makeFace() {
             if (!aFace.IsNull())
                 builder.Add(comp, aFace);
         }
-        _Shape = comp;
+        newShape = comp;
     } else {
         throw Base::Exception("TopoShape: makeFace: Could not build face from wires");
     }
+
+    if (History.size() != 1)
+        throw Base::Exception("TopoShape: makeFace: Only possible for a single history");
+
+    // TODO: Check that _Shape is a (compound of) faces and nothing else
+    // Note: We assume that TopInfo is empty and stays empty
+    RefMap newMap = buildRefMap(newShape, _Shape);
+    History.front().Map = joinMap(History.front().Map, newMap);
+    _Shape = newShape;
+
+#ifdef FC_DEBUG
+    printHistory();
+#endif
 }
 
 void TopoShape::move(const TopLoc_Location& m)
@@ -331,7 +373,10 @@ void TopoShape::move(const TopLoc_Location& m)
 void TopoShape::makePrism(const gp_Dir &dir, const Standard_Real L, const Standard_Real L2,
                           const bool midplane, const bool reversed)
 {
-    // Base::Console().Error("=== MAKEPRISM (Length) ===\n");
+    Base::Console().Error("=== MAKEPRISM (Length) ===\n");
+
+    if (History.size() != 1)
+        throw Base::Exception("TopoShape: makePrism: Only possible for a single history");
 
     // Check that _Shape is a single face
     checkHasEntity(_Shape, TopAbs_FACE, true);
@@ -367,13 +412,22 @@ void TopoShape::makePrism(const gp_Dir &dir, const Standard_Real L, const Standa
     if (PrismMaker.Shape().IsNull())
         throw Base::Exception("TopoShape: MakePrism: Resulting shape is empty");
 
+    // Note: We assume that TopInfo is empty and stays empty
+    RefMap newMap = buildRefMap(PrismMaker, _Shape);
+    History.front().Map = joinMap(History.front().Map, newMap);
     _Shape = PrismMaker.Shape();
+#ifdef FC_DEBUG
+    printHistory();
+#endif
 }
 
 void TopoShape::makePrism(const TopoShape &base, const TopoDS_Face& supportface,
                           const gp_Dir& direction, const TopoDS_Shape& upToFace, const bool fuse)
 {
-    //Base::Console().Error("=== MAKEPRISM (UpToFace) ===\n");
+    Base::Console().Error("=== MAKEPRISM (UpToFace) ===\n");
+
+    if (History.size() != 1)
+        throw Base::Exception("TopoShape: makePrism: Only possible for a single history");
 
     // Check that _Shape is a single face
     checkHasEntity(_Shape, TopAbs_FACE, true);
@@ -398,7 +452,16 @@ void TopoShape::makePrism(const TopoShape &base, const TopoDS_Face& supportface,
         throw Base::Exception("TopoShape: Up to face: Could not extrude the sketch!");
 
     // Note: The base TopoShape is not touched by the PrismMaker operation
+    // Note: We assume that TopInfo is empty and stays empty
+    RefMap newMap = buildRefMap(PrismMaker, _Shape);
+    History.front().Map = joinMap(History.front().Map, newMap);
+
+    // Note: The support TopoShape is not touched by the PrismMaker operation
     _Shape = PrismMaker.Shape();
+
+#ifdef FC_DEBUG
+    printHistory();
+#endif
 }
 
 const bool checkLineCrossesFace(const gp_Lin &line, const TopoDS_Face &face)
@@ -577,7 +640,16 @@ void TopoShape::makeRevolution(const gp_Ax1& axis, const Standard_Real angle, co
     if (RevolMaker.Shape().IsNull())
         throw Base::Exception("TopoShape: makeRevolution: Resulting shape is empty");
 
+    // Note: We assume that TopInfo is empty and stays empty
+    RefMap newMap = buildRefMap(RevolMaker, _Shape);
+    History.front().Map = joinMap(History.front().Map, newMap);
+
+    // Note: The support TopoShape is not touched by the PrismMaker operation
     _Shape = RevolMaker.Shape();
+
+#ifdef FC_DEBUG
+    printHistory();
+#endif
 }
 
 TopoDS_Shape getSolid(const TopoDS_Shape& shape)
@@ -598,7 +670,7 @@ TopoDS_Shape getSolid(const TopoDS_Shape& shape)
 }
 
 void TopoShape::makeFuse(const TopoShape& other, const bool thisIsBase ) {
-    //Base::Console().Error("=== MAKEFUSE ===\n");
+    Base::Console().Error("=== MAKEFUSE ===\n");
 
     // Ignore request to fuse with an empty TopoShape
     if (other._Shape.IsNull())
@@ -611,24 +683,40 @@ void TopoShape::makeFuse(const TopoShape& other, const bool thisIsBase ) {
 
     BRepAlgoAPI_Fuse mkFuse((thisIsBase ? _Shape : other._Shape), (thisIsBase ? other._Shape : _Shape));
     if (!mkFuse.IsDone())
-        throw Base::Exception("TopoShape: Fusion failed");
+        throw Base::Exception("TopoShape: Fusion failed");    
+    // Check if the result is a solid (fuse sometimes creates compounds)
+    if (getSolid(mkFuse.Shape()).IsNull())
+        throw Base::Exception("TopoShape: Fuse: Resulting shape is not a solid");
+    // FIXME: Here we need to drop extra solids and account for it in the History!
 
     // This is important, otherwise we may get weird circular edge segments split in arbitrary places!
-    // FIXME: Uncomment this in all four boolean operatios when Naming is implemented. Currently will invalidate
-    // old-style references by subshape string
-    //mkFuse.RefineEdges();
+    mkFuse.RefineEdges();
 
-    // Check if the result is a solid (fuse sometimes creates compounds)
-    TopoDS_Shape result = getSolid(mkFuse.Shape());
-    if (result.IsNull())
-        throw Base::Exception("TopoShape: Fuse: Resulting shape is not a solid");
+    std::vector<RefMap> result(2);
+    std::vector<TopoDS_Shape> oldShapes;
+    oldShapes.push_back(_Shape);
+    oldShapes.push_back(other._Shape);
+    std::vector<TopInfoMap> TopInfos;
+    TopInfos.push_back(TopInfo);
+    TopInfos.push_back(other.TopInfo);
+    TopoDS_Shape resultShape = buildRefMap(mkFuse, oldShapes, result, TopInfos, TopInfo);
 
-    _Shape = result;
+    for (std::vector<ShapeMap>::iterator h = History.begin(); h != History.end(); h++)
+        h->Map = joinMap(h->Map, result[0]);
+    for (std::vector<ShapeMap>::const_iterator h = other.History.begin(); h != other.History.end(); h++) {
+        ShapeMap resultHistory = *h;
+        resultHistory.Map = joinMap(resultHistory.Map, result[1]);
+        History.push_back(resultHistory);
+    }
+
+    _Shape = resultShape;
+#ifdef FC_DEBUG
+    printHistory();
+#endif
 }
 
 void TopoShape::makeCut(const TopoShape& other, const bool thisIsBase) {
-    //Base::Console().Error("=== MAKECUT ===\n");
-    // Note: When called from Pocket or Revolution, this is the SubShape and other is the Base
+    Base::Console().Error("=== MAKECUT ===\n");
 
     // Ignore request to cut with an empty TopoShape
     if (other._Shape.IsNull())
@@ -639,23 +727,45 @@ void TopoShape::makeCut(const TopoShape& other, const bool thisIsBase) {
     // Check that other._Shape has solids only
     checkHasEntity(other._Shape, TopAbs_SOLID, false);
 
-    BRepAlgoAPI_Cut mkCut((thisIsBase ? _Shape : other._Shape), (thisIsBase ? other._Shape : _Shape));
+    const TopoShape* base = thisIsBase ? this : &other;
+    const TopoShape* tool = thisIsBase ? &other : this;
+
+    BRepAlgoAPI_Cut mkCut(base->_Shape, tool->_Shape);
     if (!mkCut.IsDone())
         throw Base::Exception("TopoShape: Cut failed");
+    // Check if the result is a solid (cut might create a compound if a solid is split into several parts!)
+    if (getSolid(mkCut.Shape()).IsNull())
+        throw Base::Exception("TopoShape: Cut: Resulting shape is not a solid");
+    // FIXME: Here we need to drop extra solids and account for it in the History!
 
     // This is important for topological naming, otherwise we get weird circular edge segments split in arbitrary places!
-    //mkCut.RefineEdges();
+    mkCut.RefineEdges();
 
-    // Check if the result is a solid (cut might create a compound if a solid is split into several parts!)
-    TopoDS_Shape result = getSolid(mkCut.Shape());
-    if (result.IsNull())
-        throw Base::Exception("TopoShape: Cut: Resulting shape is not a solid");
+    std::vector<RefMap> result(2);
+    std::vector<TopoDS_Shape> oldShapes;
+    oldShapes.push_back(base->_Shape);
+    oldShapes.push_back(tool->_Shape);
+    std::vector<TopInfoMap> TopInfos;
+    TopInfos.push_back(base->TopInfo);
+    TopInfos.push_back(tool->TopInfo);
+    TopoDS_Shape resultShape = buildRefMap(mkCut, oldShapes, result, TopInfos, TopInfo);
 
-    _Shape = result;
+    for (std::vector<ShapeMap>::iterator h = History.begin(); h != History.end(); h++)
+        h->Map = joinMap(h->Map, thisIsBase ? result[0] : result[1]);
+    for (std::vector<ShapeMap>::const_iterator h = other.History.begin(); h != other.History.end(); h++) {
+        ShapeMap resultHistory = *h;
+        resultHistory.Map = joinMap(resultHistory.Map, thisIsBase ? result[1] : result[0]);
+        History.push_back(resultHistory);
+    }
+
+    _Shape = resultShape;
+#ifdef FC_DEBUG
+    printHistory();
+#endif
 }
 
 void TopoShape::makeCommon(const TopoShape& other) {
-    //Base::Console().Error("=== MAKECOMMON ===\n");
+    Base::Console().Error("=== MAKECOMMON ===\n");
 
     // Ignore request to common with an empty TopoShape
     if (other._Shape.IsNull())
@@ -669,20 +779,38 @@ void TopoShape::makeCommon(const TopoShape& other) {
     BRepAlgoAPI_Common mkCommon(_Shape, other._Shape);
     if (!mkCommon.IsDone())
         throw Base::Exception("TopoShape: Common operation failed");
+    if (getSolid(mkCommon.Shape()).IsNull())
+        throw Base::Exception("TopoShape: Common: Resulting shape is not a solid");
+    // FIXME: Here we need to drop extra solids and account for it in the History!
 
     // This is important, otherwise we may get weird circular edge segments split in arbitrary places!
-    //mkCommon.RefineEdges();
+    mkCommon.RefineEdges();
 
-    // Check if the result is a solid (fuse sometimes creates compounds)
-    TopoDS_Shape result = getSolid(mkCommon.Shape());
-    if (result.IsNull())
-        throw Base::Exception("TopoShape: Common: Resulting shape is not a solid");
+    std::vector<RefMap> result(2);
+    std::vector<TopoDS_Shape> oldShapes;
+    oldShapes.push_back(_Shape);
+    oldShapes.push_back(other._Shape);
+    std::vector<TopInfoMap> TopInfos;
+    TopInfos.push_back(TopInfo);
+    TopInfos.push_back(other.TopInfo);
+    TopoDS_Shape resultShape = buildRefMap(mkCommon, oldShapes, result, TopInfos, TopInfo);
 
-    _Shape = result;
+    for (std::vector<ShapeMap>::iterator h = History.begin(); h != History.end(); h++)
+        h->Map = joinMap(h->Map, result[0]);
+    for (std::vector<ShapeMap>::const_iterator h = other.History.begin(); h != other.History.end(); h++) {
+        ShapeMap resultHistory = *h;
+        resultHistory.Map = joinMap(resultHistory.Map, result[1]);
+        History.push_back(resultHistory);
+    }
+
+    _Shape = resultShape;
+#ifdef FC_DEBUG
+    printHistory();
+#endif
 }
 
 void TopoShape::makeSection(const TopoShape& other) {
-    //Base::Console().Error("=== MAKESECTION ===\n");
+    Base::Console().Error("=== MAKESECTION ===\n");
 
     // Ignore request to section with an empty TopoShape
     if (other._Shape.IsNull())
@@ -696,16 +824,34 @@ void TopoShape::makeSection(const TopoShape& other) {
     BRepAlgoAPI_Section mkSection(_Shape, other._Shape);
     if (!mkSection.IsDone())
         throw Base::Exception("TopoShape: Section operation failed");
+    if (getSolid(mkSection.Shape()).IsNull())
+        throw Base::Exception("TopoShape: Section: Resulting shape is not a solid");
+    // FIXME: Here we need to drop extra solids and account for it in the History!
 
     // This is important, otherwise we may get weird circular edge segments split in arbitrary places!
-    //mkSection.RefineEdges();
+    mkSection.RefineEdges();
 
-    // Check if the result is a solid (fuse sometimes creates compounds)
-    TopoDS_Shape result = getSolid(mkSection.Shape());
-    if (result.IsNull())
-        throw Base::Exception("TopoShape: Section: Resulting shape is not a solid");
+    std::vector<RefMap> result(2);
+    std::vector<TopoDS_Shape> oldShapes;
+    oldShapes.push_back(_Shape);
+    oldShapes.push_back(other._Shape);
+    std::vector<TopInfoMap> TopInfos;
+    TopInfos.push_back(TopInfo);
+    TopInfos.push_back(other.TopInfo);
+    TopoDS_Shape resultShape = buildRefMap(mkSection, oldShapes, result, TopInfos, TopInfo);
 
-    _Shape = result;
+    for (std::vector<ShapeMap>::iterator h = History.begin(); h != History.end(); h++)
+        h->Map = joinMap(h->Map, result[0]);
+    for (std::vector<ShapeMap>::const_iterator h = other.History.begin(); h != other.History.end(); h++) {
+        ShapeMap resultHistory = *h;
+        resultHistory.Map = joinMap(resultHistory.Map, result[1]);
+        History.push_back(resultHistory);
+    }
+
+    _Shape = resultShape;
+#ifdef FC_DEBUG
+    printHistory();
+#endif
 }
 
 void TopoShape::makeCompound(const TopoShape &other) {
@@ -719,6 +865,8 @@ void TopoShape::makeCompound(const TopoShape &other) {
     builder.Add(comp, other._Shape);
 
     _Shape = comp;
+
+    // FIXME: History creation
 }
 
 void TopoShape::makeCompound(const std::vector<TopoShape> &others) {
@@ -733,6 +881,8 @@ void TopoShape::makeCompound(const std::vector<TopoShape> &others) {
         builder.Add(comp, o->_Shape);
 
     _Shape = comp;
+
+    // FIXME: History creation
 }
 
 void TopoShape::makeChamfer(const std::vector<std::string>& edges, const Standard_Real size) {
@@ -762,6 +912,8 @@ void TopoShape::makeChamfer(const std::vector<std::string>& edges, const Standar
         throw Base::Exception("TopoShape: makeChamfer: Resulting shape is null");
 
     _Shape = mkChamfer.Shape();
+
+    // FIXME: History creation
 }
 
 void TopoShape::makeFillet(const std::vector<std::string>& edges, const Standard_Real radius) {
@@ -785,6 +937,8 @@ void TopoShape::makeFillet(const std::vector<std::string>& edges, const Standard
         throw Base::Exception("TopoShape: makeFillet: Resulting shape is null");
 
     _Shape = mkFillet.Shape();
+
+    // FIXME: History creation
 }
 
 void TopoShape::makeDraft(const std::vector<std::string> &faces, const gp_Dir &pullDirection,
@@ -837,6 +991,8 @@ void TopoShape::makeDraft(const std::vector<std::string> &faces, const gp_Dir &p
         throw Base::Exception("TopoShape: makeDraft: Resulting shape is null");
 
     _Shape =  mkDraft.Shape();
+
+    // FIXME: History creation
 }
 
 void TopoShape::makeTransform(const gp_Trsf &tr) {
@@ -857,14 +1013,25 @@ void TopoShape::makeTransform(const gp_Trsf &tr) {
         throw Base::Exception("TopoShape: makeTransform: Resulting shape is null");
 
     _Shape =  mkTrf.Shape();
+
+    // FIXME: History creation
 }
 
 void TopoShape::refine() {
-    // Base::Console().Error("=== REFINE ===\n");
+    Base::Console().Error("=== REFINE ===\n");
     BRepBuilderAPI_RefineModel mkRefine(_Shape);
 
     if (!mkRefine.IsDone())
         throw Base::Exception("TopoShape: Refine: Failed");
 
+    RefMap newMap = buildRefMap(mkRefine, _Shape);
+    for (std::vector<ShapeMap>::iterator h = History.begin(); h != History.end(); h++)
+        h->Map = joinMap(h->Map, newMap);
+    // FIXME: Handle TopInfo!
+
     _Shape = mkRefine.Shape();
+
+#ifdef FC_DEBUG
+    printHistory();
+#endif
 }
