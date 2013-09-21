@@ -172,6 +172,8 @@ void PropertyGeometryList::Restore(Base::XMLReader &reader)
         const char* TypeName = reader.getAttribute("type");
         Geometry *newG = (Geometry *)Base::Type::fromName(TypeName).createInstance();
         newG->Restore(reader);
+        if (newG->uid == 0)
+            newG->uid = i+1; // assign uid if it is unassigned (e.g. legacy files)
         values.push_back(newG);
         reader.readEndElement("Geometry");
     }

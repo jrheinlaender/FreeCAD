@@ -169,6 +169,9 @@ private:
 
     std::vector<int> VertexId2GeoId;
     std::vector<PointPos> VertexId2PosId;
+
+    /// Next free uid for geometry of this object
+    unsigned nextuid;
 };
 
 typedef App::FeaturePythonT<SketchObject> SketchObjectPython;

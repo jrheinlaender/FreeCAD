@@ -158,7 +158,7 @@ const char* gce_ErrorStatusText(gce_ErrorType et)
 TYPESYSTEM_SOURCE_ABSTRACT(Part::Geometry,Base::Persistence);
 
 Geometry::Geometry()
-  : Construction(false)
+    : Construction(false), uid(0)
 {
 }
 
@@ -175,7 +175,8 @@ unsigned int Geometry::getMemSize (void) const
 void         Geometry::Save       (Base::Writer &writer) const 
 {
     const char c = Construction?'1':'0';
-    writer.Stream() << writer.ind() << "<Construction value=\"" <<  c << "\"/>" << endl;
+    writer.Stream() << writer.ind() << "<Construction value=\"" <<  c << "\"/>" << endl
+                    << writer.ind() << "<UID value=\"" << uid << "\"/>" << endl;
 }
 
 void         Geometry::Restore    (Base::XMLReader &reader)    
@@ -184,6 +185,7 @@ void         Geometry::Restore    (Base::XMLReader &reader)
     reader.readElement("Construction");
     // get the value of my Attribute
     Construction = (int)reader.getAttributeAsInteger("value")==0?false:true;   
+    uid = (unsigned)reader.getAttributeAsUnsigned("value");
 }
 
 // -------------------------------------------------
@@ -218,6 +220,7 @@ Geometry *GeomPoint::clone(void) const
 {
     GeomPoint *newPoint = new GeomPoint(myPoint);
     newPoint->Construction = this->Construction;
+    newPoint->uid = this->uid;
     return newPoint;
 }
 
@@ -347,6 +350,7 @@ Geometry *GeomBezierCurve::clone(void) const
 {
     GeomBezierCurve *newCurve = new GeomBezierCurve(myCurve);
     newCurve->Construction = this->Construction;
+    newCurve->uid = this->uid;
     return newCurve;
 }
 
@@ -404,6 +408,7 @@ Geometry *GeomBSplineCurve::clone(void) const
 {
     GeomBSplineCurve *newCurve = new GeomBSplineCurve(myCurve);
     newCurve->Construction = this->Construction;
+    newCurve->uid = this->uid;
     return newCurve;
 }
 
@@ -493,6 +498,7 @@ Geometry *GeomCircle::clone(void) const
 {
     GeomCircle *newCirc = new GeomCircle(myCurve);
     newCirc->Construction = this->Construction;
+    newCirc->uid = this->uid;
     return newCirc;
 }
 
@@ -641,6 +647,7 @@ Geometry *GeomArcOfCircle::clone(void) const
     GeomArcOfCircle* copy = new GeomArcOfCircle();
     copy->setHandle(this->myCurve);
     copy->Construction = this->Construction;
+    copy->uid = this->uid;
     return copy;
 }
 
@@ -823,6 +830,7 @@ Geometry *GeomEllipse::clone(void) const
 {
     GeomEllipse *newEllipse = new GeomEllipse(myCurve);
     newEllipse->Construction = this->Construction;
+    newEllipse->uid = this->uid;
     return newEllipse;
 }
 
@@ -864,6 +872,7 @@ Geometry *GeomHyperbola::clone(void) const
 {
     GeomHyperbola *newHyp = new GeomHyperbola(myCurve);
     newHyp->Construction = this->Construction;
+    newHyp->uid = this->uid;
     return newHyp;
 }
 
@@ -905,6 +914,7 @@ Geometry *GeomParabola::clone(void) const
 {
     GeomParabola *newPar = new GeomParabola(myCurve);
     newPar->Construction = this->Construction;
+    newPar->uid = this->uid;
     return newPar;
 }
 
@@ -970,6 +980,7 @@ Geometry *GeomLine::clone(void) const
 {
     GeomLine *newLine = new GeomLine(myCurve);
     newLine->Construction = this->Construction;
+    newLine->uid = this->uid;
     return newLine;
 }
 
@@ -1058,6 +1069,7 @@ Geometry *GeomLineSegment::clone(void)const
     GeomLineSegment *tempCurve = new GeomLineSegment();
     tempCurve->myCurve = Handle_Geom_TrimmedCurve::DownCast(myCurve->Copy());
     tempCurve->Construction = this->Construction;
+    tempCurve->uid = this->uid;
     return tempCurve;
 }
 
@@ -1175,6 +1187,7 @@ Geometry *GeomOffsetCurve::clone(void) const
 {
     GeomOffsetCurve *newCurve = new GeomOffsetCurve(myCurve);
     newCurve->Construction = this->Construction;
+    newCurve->uid = this->uid;
     return newCurve;
 }
 
@@ -1229,6 +1242,7 @@ Geometry *GeomTrimmedCurve::clone(void) const
 {
     GeomTrimmedCurve *newCurve =  new GeomTrimmedCurve(myCurve);
     newCurve->Construction = this->Construction;
+    newCurve->uid = this->uid;
     return newCurve;
 }
 

@@ -92,6 +92,8 @@ SketchObject::SketchObject()
     ExternalGeo.push_back(HLine);
     ExternalGeo.push_back(VLine);
     rebuildVertexIndex();
+
+    nextuid = 1; // so if uid = 0 then we know that it has not been assigned yet
 }
 
 SketchObject::~SketchObject()
@@ -319,6 +321,7 @@ Base::Axis SketchObject::getAxis(int axId) const
 
 int SketchObject::addGeometry(const std::vector<Part::Geometry *> &geoList)
 {
+    // TODO: assign uids to the Part::Geometry objects
     return -1;
 }
 
@@ -328,6 +331,10 @@ int SketchObject::addGeometry(const Part::Geometry *geo)
 
     std::vector< Part::Geometry * > newVals(vals);
     Part::Geometry *geoNew = geo->clone();
+    if (geoNew->uid == 0) {
+        geoNew->uid = nextuid;
+        nextuid++;
+    }
     newVals.push_back(geoNew);
     Geometry.setValues(newVals);
     Constraints.acceptGeometry(getCompleteGeometry());

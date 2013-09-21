@@ -70,6 +70,12 @@ public:
     virtual Geometry *clone(void) const = 0;
     /// construction geometry (means no impact on a later built topo)
     bool Construction;
+    /**
+      * Unique ID for a geometry element, required for robust references to sketch entities
+      * This is unique only inside a particular SketchObject, and therefore the SketchObject
+      * class is responsible for assigning the ID
+      */
+    unsigned uid;
 
 protected:
     Geometry();
