@@ -23,7 +23,7 @@
 
 __title__="FreeCAD Draft Workbench - GUI part"
 __author__ = "Yorik van Havre <yorik@uncreated.net>"
-__url__ = ["http://free-cad.sourceforge.net"]
+__url__ = ["http://www.freecadweb.org"]
 
 '''
 This is the GUI part of the Draft module.
@@ -169,7 +169,8 @@ class DraftToolBar:
         self.sourceCmd = None
         self.cancel = None
         self.pointcallback = None
-        self.taskmode = Draft.getParam("UiMode")
+        self.taskmode = Draft.getParam("UiMode",1)
+        #print "taskmode: ",str(self.taskmode)
         self.paramcolor = Draft.getParam("color")>>8
         self.color = QtGui.QColor(self.paramcolor)
         self.facecolor = QtGui.QColor(204,204,204)
@@ -1138,7 +1139,10 @@ class DraftToolBar:
             self.displayPoint()
         elif txt.endsWith("z"):
             self.constrain("z")
-            self.displayPoint()    
+            self.displayPoint()
+        elif txt.endsWith("l"):
+            self.constrain("angle")
+            self.displayPoint()
         elif txt.endsWith("c"):
             if self.closeButton.isVisible():
                 self.closeLine()
@@ -1361,7 +1365,9 @@ class DraftToolBar:
             FreeCADGui.Snapper.showradius()
 
     def constrain(self,val):
-        if self.mask == val:
+        if val == "angle":
+            FreeCADGui.Snapper.setAngle()
+        elif self.mask == val:
             self.mask = None
             if hasattr(FreeCADGui,"Snapper"):
                 FreeCADGui.Snapper.mask = None

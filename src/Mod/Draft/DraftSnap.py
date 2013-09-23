@@ -23,7 +23,7 @@
 
 __title__="FreeCAD Draft Snap tools"
 __author__ = "Yorik van Havre"
-__url__ = "http://free-cad.sourceforge.net"
+__url__ = "http://www.freecadweb.org"
 
 
 import FreeCAD, FreeCADGui, math, Draft, DraftGui, DraftTrackers, DraftVecUtils
@@ -79,7 +79,7 @@ class Snapper:
         self.active = True
         self.forceGridOff = False
         # the trackers are stored in lists because there can be several views, each with its own set
-        self.trackers = [[],[],[],[],[],[],[]] # view, grid, snap, extline, radius, dim1, dim2
+        self.trackers = [[],[],[],[],[],[],[],[]] # view, grid, snap, extline, radius, dim1, dim2, trackLine
 
         self.polarAngles = [90,45]
         
@@ -185,9 +185,8 @@ class Snapper:
 
         # setup a track line if we got a last point
         if lastpoint:
-            if not self.trackLine:
-                self.trackLine = DraftTrackers.lineTracker()
-            self.trackLine.p1(lastpoint)
+            if self.trackLine:
+                self.trackLine.p1(lastpoint)
             
         # check if we snapped to something
         self.snapInfo = Draft.get3DView().getObjectInfo((screenpos[0],screenpos[1]))
@@ -695,18 +694,19 @@ class Snapper:
         
     def setArchDims(self,p1,p2):
         "show arch dimensions between 2 points"
-        if not self.dim1:
-            self.dim1 = DraftTrackers.archDimTracker(mode=2)
-        if not self.dim2:
-            self.dim1 = DraftTrackers.archDimTracker(mode=3)
-        self.dim1.p1(p1)
-        self.dim2.p1(p1)
-        self.dim1.p2(p2)
-        self.dim2.p2(p2)
-        if self.dim1.Distance:
-            self.dim1.on()
-        if self.dim2.Distance:
-            self.dim2.on()
+        if self.isEnabled("Dimensions"):
+            if not self.dim1:
+                self.dim1 = DraftTrackers.archDimTracker(mode=2)
+            if not self.dim2:
+                self.dim1 = DraftTrackers.archDimTracker(mode=3)
+            self.dim1.p1(p1)
+            self.dim2.p1(p1)
+            self.dim1.p2(p2)
+            self.dim2.p2(p2)
+            if self.dim1.Distance:
+                self.dim1.on()
+            if self.dim2.Distance:
+                self.dim2.on()
 
     def setCursor(self,mode=None):
         "setCursor(self,mode=None): sets or resets the cursor to the given mode or resets"
@@ -764,6 +764,14 @@ class Snapper:
             self.toolbar.hide()
         self.mask = None
         self.lastArchPoint = None
+        
+    def setAngle(self):
+        "keeps the current angle"
+        if isinstance(self.mask,FreeCAD.Vector):
+            self.mask = None
+        elif self.trackLine:
+            if self.trackLine.Visible:
+                self.mask = self.trackLine.p2().sub(self.trackLine.p1())
 
     def constrain(self,point,basepoint=None,axis=None):
         '''constrain(point,basepoint=None,axis=None: Returns a
@@ -809,8 +817,15 @@ class Snapper:
                 self.constraintAxis = FreeCAD.DraftWorkingPlane.u
             elif self.affinity == "y":
                 self.constraintAxis = FreeCAD.DraftWorkingPlane.v
-            else:
+            elif self.affinity == "z":
                 self.constraintAxis = FreeCAD.DraftWorkingPlane.axis
+            elif isinstance(self.affinity,FreeCAD.Vector):
+                self.constraintAxis = self.affinity
+            else:
+                self.constraintAxis = None
+                
+        if not self.constraintAxis:
+            return point
                 
         # calculating constrained point
         cdelta = DraftVecUtils.project(delta,self.constraintAxis)
@@ -944,11 +959,22 @@ class Snapper:
                 self.toolbar.addWidget(b)
                 self.toolbarButtons.append(b)
                 QtCore.QObject.connect(b,QtCore.SIGNAL("toggled(bool)"),self.saveSnapModes)
+        # adding dimensions button
+        self.dimbutton = QtGui.QPushButton(None)
+        self.dimbutton.setIcon(QtGui.QIcon(":/icons/Snap_Dimensions.svg"))
+        self.dimbutton.setIconSize(QtCore.QSize(16, 16))
+        self.dimbutton.setMaximumSize(QtCore.QSize(26,26))
+        self.dimbutton.setToolTip(c)
+        self.dimbutton.setObjectName("SnapButtonDimensions")
+        self.dimbutton.setCheckable(True)
+        self.dimbutton.setChecked(True)
+        self.toolbar.addWidget(self.dimbutton)
+        QtCore.QObject.connect(self.dimbutton,QtCore.SIGNAL("toggled(bool)"),self.saveSnapModes)
         # restoring states 
         t = Draft.getParam("snapModes")
         if t:
             c = 0
-            for b in [self.masterbutton]+self.toolbarButtons:
+            for b in [self.masterbutton]+self.toolbarButtons+[self.dimbutton]:
                 if len(t) > c:
                     b.setChecked(bool(int(t[c])))
                     c += 1
@@ -958,7 +984,7 @@ class Snapper:
     def saveSnapModes(self):
         "saves the snap modes for next sessions"
         t = ''
-        for b in [self.masterbutton]+self.toolbarButtons:
+        for b in [self.masterbutton]+self.toolbarButtons+[self.dimbutton]:
             t += str(int(b.isChecked()))
         Draft.setParam("snapModes",t)
 
@@ -988,7 +1014,7 @@ class Snapper:
 
     def isEnabled(self,but):
         "returns true if the given button is turned on"
-        for b in self.toolbarButtons:
+        for b in self.toolbarButtons+[self.dimbutton]:
             if str(b.objectName()) == "SnapButton" + but:
                 return (b.isEnabled() and b.isChecked())
         return False
@@ -1029,6 +1055,7 @@ class Snapper:
             self.radiusTracker = self.trackers[4][i]
             self.dim1 = self.trackers[5][i]
             self.dim2 = self.trackers[6][i]
+            self.trackLine = self.trackers[7][i]
         else:
             if Draft.getParam("grid"):
                 self.grid = DraftTrackers.gridTracker()
@@ -1039,6 +1066,7 @@ class Snapper:
             self.radiusTracker = DraftTrackers.radiusTracker()
             self.dim1 = DraftTrackers.archDimTracker(mode=2)
             self.dim2 = DraftTrackers.archDimTracker(mode=3)
+            self.trackLine = DraftTrackers.lineTracker()
             self.trackers[0].append(v)
             self.trackers[1].append(self.grid)
             self.trackers[2].append(self.tracker)
@@ -1046,6 +1074,7 @@ class Snapper:
             self.trackers[4].append(self.radiusTracker)
             self.trackers[5].append(self.dim1)
             self.trackers[6].append(self.dim2)
+            self.trackers[7].append(self.trackLine)
         if self.grid and (not self.forceGridOff):
             self.grid.set()
         
