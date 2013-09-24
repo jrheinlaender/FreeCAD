@@ -354,7 +354,6 @@ void TopoShape::makeFace() {
     if (History.size() != 1)
         throw Base::Exception("TopoShape: makeFace: Only possible for a single history");
 
-    // TODO: Check that _Shape is a (compound of) faces and nothing else
     // Note: We assume that TopInfo is empty and stays empty
     RefMap newMap = buildRefMap(newShape, _Shape);
     History.front().Map = joinMap(History.front().Map, newMap);
