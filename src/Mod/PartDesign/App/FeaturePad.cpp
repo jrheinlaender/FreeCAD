@@ -169,7 +169,7 @@ App::DocumentObjectExecReturn *Pad::execute(void)
                 getUpToFaceFromLinkSub(upToFace, UpToFace);
                 upToFace.Move(invObjLoc);
             }
-            getUpToFace(upToFace, theBase._Shape, supportface, thePad._Shape, method, dir);
+            getUpToFace(upToFace, theBase._Shape, supportface, thePad._Shape, method, dir, Offset.getValue());
 
             thePad.makePrism(theBase, supportface, dir, upToFace);
         } else {

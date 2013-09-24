@@ -28,6 +28,10 @@
 # include <BRepAlgoAPI_Common.hxx>
 # include <BRepAlgoAPI_Section.hxx>
 # include <Standard_Failure.hxx>
+# include <gp_Trsf.hxx>
+# include <gp_Pnt.hxx>
+# include <gp_Ax1.hxx>
+# include <gp_Vec.hxx>
 #endif
 
 #include "Body.h"
@@ -75,6 +79,7 @@ App::DocumentObjectExecReturn *Boolean::execute(void)
         // Position this feature by the first body
         const Part::Feature* baseFeature = getBaseObject();
         this->Placement.setValue(baseFeature->Placement.getValue());
+        TopLoc_Location invObjLoc = this->getLocation().Inverted();
 
         // Get the operation type
         std::string type = Type.getValueAsString();
@@ -83,7 +88,23 @@ App::DocumentObjectExecReturn *Boolean::execute(void)
         {
             // Extract the body toposhape
             PartDesign::Body* body = static_cast<PartDesign::Body*>(*b);
-            const Part::TopoShape& other = body->Shape.getShape();
+            Part::Feature* tipSolid = static_cast<Part::Feature*>(body->getPrevSolidFeature());
+            if (tipSolid == NULL)
+                continue;
+            Part::TopoShape other = tipSolid->Shape.getShape();
+
+            // Move the shape to the location of the base shape
+            Base::Placement pl = body->Placement.getValue();
+            // TODO: Why is Feature::getLocation() protected?
+            Base::Rotation rot(pl.getRotation());
+            Base::Vector3d axis;
+            double angle;
+            rot.getValue(axis, angle);
+            gp_Trsf trf;
+            trf.SetRotation(gp_Ax1(gp_Pnt(), gp_Dir(axis.x, axis.y, axis.z)), angle);
+            trf.SetTranslationPart(gp_Vec(pl.getPosition().x,pl.getPosition().y,pl.getPosition().z));
+            TopLoc_Location bLoc(trf);
+            other.move(invObjLoc.Multiplied(bLoc));
 
             if (type == "Fuse")
                 theBoolean.makeFuse(other);

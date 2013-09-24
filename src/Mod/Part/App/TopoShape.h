@@ -278,6 +278,10 @@ public:
     //@}
 
     TopoDS_Shape _Shape;
+
+private:
+    class Wire_Compare;
+
 };
 
 } //namespace Part

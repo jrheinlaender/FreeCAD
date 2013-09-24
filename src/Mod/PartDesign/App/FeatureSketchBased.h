@@ -67,8 +67,6 @@ public:
 
     /// Verifies the linked Sketch object
     Part::Part2DObject* getVerifiedSketch() const;
-    /// Returns the wires the sketch is composed of
-    //std::vector<TopoDS_Wire> getSketchWires() const;
     /// Returns the face of the sketch support (if any)
     const TopoDS_Face getSupportFace() const;    
     /// Returns the sketch support shape (if any)
@@ -83,10 +81,6 @@ public:
 
 protected:
     void onChanged(const App::Property* prop);
-    //TopoDS_Face validateFace(const TopoDS_Face&) const;
-    //TopoDS_Shape makeFace(const std::vector<TopoDS_Wire>&) const;
-    //TopoDS_Shape makeFace(std::list<TopoDS_Wire>&) const; // for internal use only
-    //bool isInside(const TopoDS_Wire&, const TopoDS_Wire&) const;
     bool isParallelPlane(const TopoDS_Shape&, const TopoDS_Shape&) const;
     bool isEqualGeometry(const TopoDS_Shape&, const TopoDS_Shape&) const;
     bool isQuasiEqual(const TopoDS_Shape&, const TopoDS_Shape&) const;
@@ -105,20 +99,7 @@ protected:
                             const std::string& method,
                             const gp_Dir& dir,
                             const double offset);
-    /**
-      * Generate a linear prism
-      * It will be a stand-alone solid created with BRepPrimAPI_MakePrism
-      */
-    /*
-    static void generatePrism(TopoDS_Shape& prism,
-                              const TopoDS_Shape& sketchshape,
-                              const std::string& method,
-                              const gp_Dir& direction,
-                              const double L,
-                              const double L2,
-                              const bool midplane,
-                              const bool reversed);
-*/
+
     /// Check whether the wire after projection on the face is inside the face
     static const bool checkWireInsideFace(const TopoDS_Wire& wire,
                                           const TopoDS_Face& face,
@@ -132,9 +113,6 @@ protected:
     /// get Axis from ReferenceAxis
     void getAxis(const App::DocumentObject* pcReferenceAxis, const std::vector<std::string>& subReferenceAxis,
                  Base::Vector3d& base, Base::Vector3d& dir);
-
-private:
-    class Wire_Compare;
 
 };
 

@@ -134,10 +134,6 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
         theBase.move(invObjLoc);
 
         if (method == "UpToFirst" || method == "UpToFace") {
-            if (base.IsNull())
-                return new App::DocumentObjectExecReturn("Pocket: Extruding up to a face is only possible if the sketch is located on a face");
-
-            // Note: This will return an unlimited planar face if support is a datum plane
             TopoDS_Face supportface = getSupportFace();
             supportface.Move(invObjLoc);
 
@@ -150,7 +146,7 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
                 getUpToFaceFromLinkSub(upToFace, UpToFace);
                 upToFace.Move(invObjLoc);
             }
-            getUpToFace(upToFace, theBase._Shape, supportface, thePocket._Shape, method, dir);
+            getUpToFace(upToFace, theBase._Shape, supportface, thePocket._Shape, method, dir, Offset.getValue());
 
             thePocket.makePrism(theBase, supportface, dir, upToFace, true);
 
