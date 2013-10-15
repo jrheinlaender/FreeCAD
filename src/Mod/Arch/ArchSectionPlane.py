@@ -53,10 +53,7 @@ def makeSectionView(section):
             break
     if not page:
         page = FreeCAD.ActiveDocument.addObject("Drawing::FeaturePage",str(translate("Arch","Page")))
-        template = Draft.getParam("template")
-        if not template:
-            template = FreeCAD.getResourceDir()+'Mod/Drawing/Templates/A3_Landscape.svg'
-        page.Template = template
+        page.Template = Draft.getParam("template",FreeCAD.getResourceDir()+'Mod/Drawing/Templates/A3_Landscape.svg')
         
     view = FreeCAD.ActiveDocument.addObject("Drawing::FeatureViewPython","View")
     page.addObject(view)
@@ -69,7 +66,7 @@ class _CommandSectionPlane:
     "the Arch SectionPlane command definition"
     def GetResources(self):
         return {'Pixmap'  : 'Arch_SectionPlane',
-                'Accel': "S, P",
+                'Accel': "S, E",
                 'MenuText': QtCore.QT_TRANSLATE_NOOP("Arch_SectionPlane","Section Plane"),
                 'ToolTip': QtCore.QT_TRANSLATE_NOOP("Arch_SectionPlane","Creates a section plane object, including the selected objects")}
 

@@ -131,7 +131,7 @@ class ComponentTaskPanel:
         # the categories are shown only if they are not empty.
         
         self.obj = None
-        self.attribs = ["Base","Additions","Subtractions","Objects","Components","Axes","Fixtures"]
+        self.attribs = ["Base","Additions","Subtractions","Objects","Components","Axes","Fixtures","Armatures"]
         self.form = QtGui.QWidget()
         self.form.setObjectName("TaskPanel")
         self.grid = QtGui.QGridLayout(self.form)
@@ -271,6 +271,8 @@ class ComponentTaskPanel:
         self.treeObjects.setText(0,QtGui.QApplication.translate("Arch", "Objects", None, QtGui.QApplication.UnicodeUTF8))
         self.treeAxes.setText(0,QtGui.QApplication.translate("Arch", "Axes", None, QtGui.QApplication.UnicodeUTF8))
         self.treeComponents.setText(0,QtGui.QApplication.translate("Arch", "Components", None, QtGui.QApplication.UnicodeUTF8))        
+        self.treeFixtures.setText(0,QtGui.QApplication.translate("Arch", "Fixtures", None, QtGui.QApplication.UnicodeUTF8))
+        self.treeArmatures.setText(0,QtGui.QApplication.translate("Arch", "Armatures", None, QtGui.QApplication.UnicodeUTF8))
         
 class Component:
     "The default Arch Component object"
@@ -281,8 +283,6 @@ class Component:
                         "Other shapes that are appended to this object")
         obj.addProperty("App::PropertyLinkList","Subtractions","Arch",
                         "Other shapes that are subtracted from this object")
-        obj.addProperty("App::PropertyLinkList","Fixtures","Arch",
-                        "Shapes or Meshes that are appended to this object without modifying its geometry")
         obj.Proxy = self
         self.Type = "Component"
         self.Subvolume = None
@@ -298,41 +298,22 @@ class Component:
             self.Type = state
             
     def onChanged(self,obj,prop):
-        if prop == "Placement":
-            # make fixtures move along with host
-            if hasattr(obj,"Fixtures"):
-                vo = obj.Shape.Placement.Base
-                vn = obj.Placement.Base
-                import DraftVecUtils
-                if not DraftVecUtils.equals(vo,vn):
-                    delta = vn.sub(vo)
-                    for o in obj.Fixtures:
-                        o.Placement.move(delta)
-
-    def getSubVolume(self,base,width,plac=None):
-        "returns a subvolume from a base object"
-        import Part,DraftVecUtils
+        pass
         
-        # finding biggest wire in the base shape
-        max_length = 0
-        f = None
-        for w in base.Shape.Wires:
-            if w.BoundBox.DiagonalLength > max_length:
-                max_length = w.BoundBox.DiagonalLength
-                f = w
-        if f:
-            f = Part.Face(f)
-            n = f.normalAt(0,0)
-            v1 = DraftVecUtils.scaleTo(n,width*1.1) # we extrude a little more to avoid face-on-face
-            f.translate(v1)
-            v2 = v1.negative()
-            v2 = Vector(v1).multiply(-2)
-            f = f.extrude(v2)
-            if plac:
-                f.Placement = plac
-            return f
-        return None
-
+    def getSiblings(self,obj):
+        "returns a list of objects with the same base as this object"
+        if not hasattr(obj,"Base"):
+            return []
+        if not obj.Base:
+            return []
+        siblings = []
+        for o in obj.Base.InList:
+            if hasattr(o,"Base"):
+                if o.Base:
+                    if o.Base.Name == obj.Base.Name:
+                        if o.Name != obj.Name:
+                            siblings.append(o)
+        return siblings
 
     def hideSubobjects(self,obj,prop):
         "Hides subobjects when a subobject lists change"
@@ -361,22 +342,10 @@ class Component:
                 base = base.fuse(add)
 
             elif (Draft.getType(o) == "Window") or (Draft.isClone(o,"Window")):
-                if base:
-                    # windows can be additions or subtractions, treated the same way
-                    if hasattr(self,"Width"):
-                        width = self.Width
-                    else:
-                        b = base.BoundBox
-                        width = max(b.XLength,b.YLength,b.ZLength)
-                    if Draft.isClone(o,"Window"):
-                        window = o.Objects[0]
-                    else:
-                        window = o
-                    if window.Base and width:
-                        f = self.getSubVolume(window.Base,width)
-                        if f:
-                            if base.Solids and f.Solids:
-                                base = base.cut(f)
+                f = o.Proxy.getSubVolume(o)
+                if f:
+                    if base.Solids and f.Solids:
+                        base = base.cut(f)
                         
             elif o.isDerivedFrom("Part::Feature"):
                 if o.Shape:
@@ -398,20 +367,10 @@ class Component:
             if base:
                 if (Draft.getType(o) == "Window") or (Draft.isClone(o,"Window")):
                         # windows can be additions or subtractions, treated the same way
-                        if hasattr(self,"Width"):
-                            width = self.Width
-                        else:
-                            b = base.BoundBox
-                            width = max(b.XLength,b.YLength,b.ZLength)
-                        if Draft.isClone(o,"Window"):
-                            window = o.Objects[0]
-                        else:
-                            window = o
-                        if window.Base and width:
-                            f = self.getSubVolume(window.Base,width)
-                            if f:
-                                if base.Solids and f.Solids:
-                                    base = base.cut(f)
+                        f = o.Proxy.getSubVolume(o)
+                        if f:
+                            if base.Solids and f.Solids:
+                                base = base.cut(f)
                             
                 elif o.isDerivedFrom("Part::Feature"):
                     if o.Shape:
@@ -471,6 +430,8 @@ class ViewProviderComponent:
             c = c + self.Object.Additions + self.Object.Subtractions
             if hasattr(self.Object,"Fixtures"):
                 c.extend(self.Object.Fixtures)
+            if hasattr(self.Object,"Armatures"):
+                c.extend(self.Object.Armatures)
             if hasattr(self.Object,"Tool"):
                 if self.Object.Tool:
                     c.append(self.Object.Tool)

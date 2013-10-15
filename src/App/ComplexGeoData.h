@@ -153,7 +153,6 @@ protected:
     {
         return getTransform() * Base::Vector3d(vec.x,vec.y,vec.z);
     }
-
     /// from local to inside
     inline Base::Vector3f transformToInside(const Base::Vector3d& vec) const
     {
@@ -162,7 +161,6 @@ protected:
         Base::Vector3d tmp = tmpM * vec;
         return Base::Vector3f((float)tmp.x,(float)tmp.y,(float)tmp.z);
     }
-
 };
 
 } //namespace App

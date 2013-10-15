@@ -24,6 +24,7 @@
 #include "PreCompiled.h"
 
 #ifndef _PreComp_
+# include <Standard_math.hxx>
 # include <Inventor/nodes/SoSeparator.h>
 # include <Inventor/nodes/SoTranslation.h>
 # include <Inventor/nodes/SoRotation.h>
@@ -118,9 +119,9 @@ void ViewProviderFemConstraintBearing::updateData(const App::Property* prop)
         pShapeSep->removeAllChildren();
 
         // This should always point outside of the cylinder
-        Base::Vector3f normal = pcConstraint->NormalDirection.getValue();        
-        Base::Vector3f base = pcConstraint->BasePoint.getValue();
-        float radius = pcConstraint->Radius.getValue();
+        Base::Vector3d normal = pcConstraint->NormalDirection.getValue();        
+        Base::Vector3d base = pcConstraint->BasePoint.getValue();
+        double radius = pcConstraint->Radius.getValue();
         base = base + radius * normal;
 
         SbVec3f b(base.x, base.y, base.z);
@@ -132,9 +133,9 @@ void ViewProviderFemConstraintBearing::updateData(const App::Property* prop)
     } else if (strcmp(prop->getName(),"AxialFree") == 0) {
         if (pShapeSep->getNumChildren() > 0) {
             // Change the symbol
-            Base::Vector3f normal = pcConstraint->NormalDirection.getValue();
-            Base::Vector3f base = pcConstraint->BasePoint.getValue();
-            float radius = pcConstraint->Radius.getValue();
+            Base::Vector3d normal = pcConstraint->NormalDirection.getValue();
+            Base::Vector3d base = pcConstraint->BasePoint.getValue();
+            double radius = pcConstraint->Radius.getValue();
             base = base + radius * normal;
 
             SbVec3f b(base.x, base.y, base.z);

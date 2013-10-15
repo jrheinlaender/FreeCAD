@@ -24,13 +24,12 @@
 #include "PreCompiled.h"
 
 #ifndef _PreComp_
+# include <Standard_math.hxx>
 # include <Inventor/nodes/SoSeparator.h>
-
 # include <Inventor/nodes/SoTranslation.h>
 # include <Inventor/nodes/SoRotation.h>
 # include <Inventor/nodes/SoMultipleCopy.h>
 # include <Precision.hxx>
-
 #endif
 
 #include "ViewProviderFemConstraintFixed.h"
@@ -131,16 +130,16 @@ void ViewProviderFemConstraintFixed::updateData(const App::Property* prop)
         // Note: Points and Normals are always updated together
         pShapeSep->removeAllChildren();
 
-        const std::vector<Base::Vector3f>& points = pcConstraint->Points.getValues();
-        const std::vector<Base::Vector3f>& normals = pcConstraint->Normals.getValues();
-        std::vector<Base::Vector3f>::const_iterator n = normals.begin();
+        const std::vector<Base::Vector3d>& points = pcConstraint->Points.getValues();
+        const std::vector<Base::Vector3d>& normals = pcConstraint->Normals.getValues();
+        std::vector<Base::Vector3d>::const_iterator n = normals.begin();
         /*
         SoMultipleCopy* cp = static_cast<SoMultipleCopy*>(pShapeSep->getChild(0));
         cp->matrix.setNum(points.size());
         int idx = 0;
         */
 
-        for (std::vector<Base::Vector3f>::const_iterator p = points.begin(); p != points.end(); p++) {
+        for (std::vector<Base::Vector3d>::const_iterator p = points.begin(); p != points.end(); p++) {
             SbVec3f base(p->x, p->y, p->z);
             SbVec3f dir(n->x, n->y, n->z);
             SbRotation rot(SbVec3f(0,-1,0), dir);

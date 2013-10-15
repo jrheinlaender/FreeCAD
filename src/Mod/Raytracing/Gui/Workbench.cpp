@@ -67,8 +67,10 @@ Gui::MenuItem* Workbench::setupMenuBar() const
     ray->setCommand("&Raytracing");
     *ray
         << utilities
-        << "Raytracing_NewPovrayProject" 
+        << "Raytracing_NewPovrayProject"
+        << "Raytracing_NewLuxProject" 
         << "Raytracing_NewPartSegment" 
+        << "Raytracing_ResetCamera"
         << "Raytracing_ExportProject"
         << "Raytracing_Render"; 
 
@@ -81,8 +83,10 @@ Gui::ToolBarItem* Workbench::setupToolBars() const
     Gui::ToolBarItem* ray = new Gui::ToolBarItem(root);
     ray->setCommand("Raytracing tools");
     *ray
-        << "Raytracing_NewPovrayProject" 
+        << "Raytracing_NewPovrayProject"
+        << "Raytracing_NewLuxProject" 
         << "Raytracing_NewPartSegment" 
+        << "Raytracing_ResetCamera"
         << "Raytracing_ExportProject"
         << "Raytracing_Render";
     return root;

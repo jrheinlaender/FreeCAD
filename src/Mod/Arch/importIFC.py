@@ -219,12 +219,16 @@ def read(filename):
                     parent = None
                 elif parent_ifcobj.type == "IfcBuildingStorey":
                     parent = Arch.makeFloor(name=n)
+                    parent.Label = n
                 elif parent_ifcobj.type == "IfcBuilding":
                     parent = Arch.makeBuilding(name=n)
+                    parent.Label = n
                 elif parent_ifcobj.type == "IfcSite":
                     parent = Arch.makeSite(name=n)
+                    parent.Label = n
                 elif parent_ifcobj.type == "IfcWindow":
                     parent = Arch.makeWindow(name=n)
+                    parent.Label = n
                 else:
                     if DEBUG: print "Fixme: skipping unhandled parent: ", parent_ifcobj.id, " ", parent_ifcobj.type
                     parent = None
@@ -460,8 +464,9 @@ def makeSpace(entity,shape=None,name="Space"):
                 body = FreeCAD.ActiveDocument.addObject("Part::Feature",name+"_body")
                 body.Shape = shape
                 space.Base = body
+                body.ViewObject.hide()
                 if DEBUG: print "made space object  ",entity,":",space
-                return site
+                return space
     except:
         return None
 

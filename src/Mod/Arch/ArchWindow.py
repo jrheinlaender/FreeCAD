@@ -26,11 +26,12 @@ from FreeCAD import Vector
 from PyQt4 import QtCore,QtGui
 from DraftTools import translate
 
-__title__="FreeCAD Wall"
+__title__="FreeCAD Window"
 __author__ = "Yorik van Havre"
 __url__ = "http://www.freecadweb.org"
 
 WindowPartTypes = ["Frame","Solid panel","Glass panel"]
+AllowedHosts = ["Wall","Structure"]
 
 def makeWindow(baseobj=None,width=None,name=str(translate("Arch","Window"))):
     '''makeWindow(obj,[name]): creates a window based on the
@@ -81,27 +82,33 @@ class _CommandWindow:
         sel = FreeCADGui.Selection.getSelection()
         if sel:
             obj = sel[0]
-            if Draft.getType(obj) == "Wall":
+            if Draft.getType(obj) in AllowedHosts:
                 FreeCADGui.activateWorkbench("SketcherWorkbench")
                 FreeCADGui.runCommand("Sketcher_NewSketch")
                 FreeCAD.ArchObserver = ArchComponent.ArchSelectionObserver(obj,FreeCAD.ActiveDocument.Objects[-1],hide=False,nextCommand="Arch_Window")
                 FreeCADGui.Selection.addObserver(FreeCAD.ArchObserver)
             else:
                 FreeCADGui.Control.closeDialog()
-                FreeCAD.ActiveDocument.openTransaction(str(translate("Arch","Create Window")))
-                FreeCADGui.doCommand("import Arch")
-                FreeCADGui.doCommand("Arch.makeWindow(FreeCAD.ActiveDocument."+obj.Name+")")
+                host = None
                 if hasattr(obj,"Support"):
                     if obj.Support:
                         if isinstance(obj.Support,tuple):
-                            s = obj.Support[0]
+                            host = obj.Support[0]
                         else:
-                            s = obj.Support
-                        w = FreeCAD.ActiveDocument.Objects[-1] # last created object
-                        FreeCADGui.doCommand("Arch.removeComponents(FreeCAD.ActiveDocument."+w.Name+",host=FreeCAD.ActiveDocument."+s.Name+")")
+                            host = obj.Support
+                        obj.Support = None # remove 
                 elif Draft.isClone(obj,"Window"):
                     if obj.Objects[0].Inlist:
-                        FreeCADGui.doCommand("Arch.removeComponents(FreeCAD.ActiveDocument."+obj.Name+",host=FreeCAD.ActiveDocument."+obj.Objects[0].Inlist[0].Name+")")
+                        host = obj.Objects[0].Inlist[0]
+
+                FreeCAD.ActiveDocument.openTransaction(str(translate("Arch","Create Window")))
+                FreeCADGui.doCommand("import Arch")
+                FreeCADGui.doCommand("win = Arch.makeWindow(FreeCAD.ActiveDocument."+obj.Name+")")
+                if host:
+                    FreeCADGui.doCommand("Arch.removeComponents(win,host=FreeCAD.ActiveDocument."+host.Name+")")
+                    siblings = host.Proxy.getSiblings(host)
+                    for sibling in siblings:
+                        FreeCADGui.doCommand("Arch.removeComponents(win,host=FreeCAD.ActiveDocument."+sibling.Name+")")
                 FreeCAD.ActiveDocument.commitTransaction()
                 FreeCAD.ActiveDocument.recompute()
         else:
@@ -117,19 +124,23 @@ class _Window(ArchComponent.Component):
         ArchComponent.Component.__init__(self,obj)
         obj.addProperty("App::PropertyStringList","WindowParts","Arch",
                         str(translate("Arch","the components of this window")))
+        obj.addProperty("App::PropertyDistance","HoleDepth","Arch",
+                        str(translate("Arch","The depth of the hole that this window makes in its host object. Keep 0 for automatic.")))
+        obj.addProperty("Part::PropertyPartShape","Subvolume","Arch",
+                        str(translate("Arch","an optional volume to be subtracted from hosts of this window")))
         self.Type = "Window"
         obj.Proxy = self
-        
-    def execute(self,obj):
-        self.createGeometry(obj)
-        
+
     def onChanged(self,obj,prop):
-        print prop
         self.hideSubobjects(obj,prop)
         if prop in ["Base","WindowParts"]:
-            self.createGeometry(obj)
+            self.execute(obj)
+        elif prop == "HoleDepth":
+            for o in obj.InList:
+                if Draft.getType(o) in AllowedHosts:
+                    o.Proxy.execute(o)
 
-    def createGeometry(self,obj):
+    def execute(self,obj):
         import Part, DraftGeomUtils
         pl = obj.Placement
         base = None
@@ -183,6 +194,66 @@ class _Window(ArchComponent.Component):
         if base:
             if not base.isNull():
                 obj.Shape = base
+
+
+    def getSubVolume(self,obj,plac=None):
+        "returns a subvolume for cutting in a base object"
+        
+        # check if we have a custom subvolume
+        if hasattr(obj,"Subvolume"):
+            if obj.Subvolume:
+                if not obj.Subvolume.isNull():
+                    return obj.Subvolume
+
+        # getting extrusion depth
+        base = None
+        if obj.Base:
+            base = obj.Base
+        width = 0
+        if hasattr(obj,"HoleDepth"):
+            if obj.HoleDepth:
+                width = obj.HoleDepth
+        if not width:
+            if base:
+                b = base.Shape.BoundBox
+                width = max(b.XLength,b.YLength,b.ZLength)
+        if not width:
+            if Draft.isClone(obj,"Window"):
+                orig = obj.Objects[0]
+                if orig.Base:
+                    base = orig.Base
+                if hasattr(orig,"HoleDepth"):
+                    if orig.HoleDepth:
+                        width = orig.HoleDepth
+                if not width:
+                    if base:
+                        b = base.Shape.BoundBox
+                        width = max(b.XLength,b.YLength,b.ZLength)
+        if not width:
+            width = 1.1112 # some weird value to have little chance to overlap with an existing face 
+        if not base:
+            return None
+            
+        # finding biggest wire in the base shape
+        max_length = 0
+        f = None
+        for w in base.Shape.Wires:
+            if w.BoundBox.DiagonalLength > max_length:
+                max_length = w.BoundBox.DiagonalLength
+                f = w
+        if f:
+            import Part
+            f = Part.Face(f)
+            n = f.normalAt(0,0)
+            v1 = DraftVecUtils.scaleTo(n,width)
+            f.translate(v1)
+            v2 = v1.negative()
+            v2 = Vector(v1).multiply(-2)
+            f = f.extrude(v2)
+            if plac:
+                f.Placement = plac
+            return f
+        return None
 
 class _ViewProviderWindow(ArchComponent.ViewProviderComponent):
     "A View Provider for the Window object"
@@ -524,8 +595,7 @@ class _ArchWindowTaskPanel:
     
     def accept(self):
         FreeCAD.ActiveDocument.recompute()
-        if self.obj:
-            self.obj.ViewObject.finishEditing()
+        FreeCADGui.ActiveDocument.resetEdit()
         return True
                     
     def retranslateUi(self, TaskPanel):

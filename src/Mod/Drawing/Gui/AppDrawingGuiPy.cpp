@@ -112,8 +112,8 @@ exporter(PyObject *self, PyObject *args)
         return NULL;
 
     PY_TRY {
-        Py::List list(object);
-        for (Py::List::iterator it = list.begin(); it != list.end(); ++it) {
+        Py::Sequence list(object);
+        for (Py::Sequence::iterator it = list.begin(); it != list.end(); ++it) {
             PyObject* item = (*it).ptr();
             if (PyObject_TypeCheck(item, &(App::DocumentObjectPy::Type))) {
                 App::DocumentObject* obj = static_cast<App::DocumentObjectPy*>(item)->getDocumentObjectPtr();
@@ -159,7 +159,7 @@ exporter(PyObject *self, PyObject *args)
                                 }
                                 TopoDS_Shape shape = static_cast<Part::Feature*>(link)->Shape.getShape()._Shape;
                                 if (!shape.IsNull()) {
-                                    Base::Vector3f dir = view->Direction.getValue();
+                                    Base::Vector3d dir = view->Direction.getValue();
                                     bool hidden = view->ShowHiddenLines.getValue();
                                     bool smooth = view->ShowSmoothLines.getValue();
                                     Drawing::ProjectionAlgos::ExtractionType type = Drawing::ProjectionAlgos::Plain;

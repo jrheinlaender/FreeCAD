@@ -34,6 +34,9 @@ __url__ = "http://www.freecadweb.org"
 QtCore.QT_TRANSLATE_NOOP("Arch","Wood")
 QtCore.QT_TRANSLATE_NOOP("Arch","Steel")
 
+# Possible roles
+Roles = ["Beam","Column","Slab","Wall","Containment wall","Roof","Foundation"]
+
 # Presets in the form: Class, Name, Width, Height, [Web thickness, Flange thickness]
 Presets = [None,
 
@@ -295,6 +298,8 @@ def makeStructure(baseobj=None,length=0,width=0,height=0,name=str(translate("Arc
         obj.Height = height
     if length:
         obj.Length = length
+    if height > length:
+        obj.Role = "Column"
     obj.ViewObject.ShapeColor = ArchCommands.getDefaultColor("Structure")
     return obj
 
@@ -310,13 +315,13 @@ def makeStructuralSystem(objects,axes):
         FreeCAD.ActiveDocument.recompute()
     return result
     
-def makeProfile(W=46,H=80,tw=3.8,tf=5.2):
+def makeProfile(W=46,H=80,tw=3.8,tf=5.2,name="Profile"):
     '''makeProfile(W,H,tw,tf): returns a shape with one face describing 
     the profile of a steel beam (IPE, IPN, HE, etc...) based on the following
     dimensions: W = total width, H = total height, tw = web thickness
     tw = flange thickness (see http://en.wikipedia.org/wiki/I-beam for
     reference)'''
-    obj = FreeCAD.ActiveDocument.addObject("Part::Part2DObjectPython","Profile")
+    obj = FreeCAD.ActiveDocument.addObject("Part::Part2DObjectPython",name)
     _Profile(obj)
     obj.Width = W
     obj.Height = H
@@ -324,6 +329,7 @@ def makeProfile(W=46,H=80,tw=3.8,tf=5.2):
     obj.FlangeThickness = tf
     Draft._ViewProviderDraft(obj.ViewObject)
     return obj
+
 
 class _CommandStructure:
     "the Arch Structure command definition"
@@ -346,32 +352,34 @@ class _CommandStructure:
         self.continueCmd = False
         sel = FreeCADGui.Selection.getSelection()
         if sel:
-            # direct creation
-            FreeCAD.ActiveDocument.openTransaction(str(translate("Arch","Create Structure")))
-            FreeCADGui.doCommand("import Arch")
-            # if selection contains structs and axes, make a system
-            st = Draft.getObjectsOfType(sel,"Structure")
-            ax = Draft.getObjectsOfType(sel,"Axis")
-            if st and ax:
-                FreeCADGui.doCommand("Arch.makeStructuralSystem(" + ArchCommands.getStringList(st) + "," + ArchCommands.getStringList(ax) + ")")
-            else:
-                # else, do normal structs
-                for obj in sel:
-                    FreeCADGui.doCommand("Arch.makeStructure(FreeCAD.ActiveDocument." + obj.Name + ")")
-            FreeCAD.ActiveDocument.commitTransaction()
-            FreeCAD.ActiveDocument.recompute()
-        else:
-            # interactive mode
-            if hasattr(FreeCAD,"DraftWorkingPlane"):
-                FreeCAD.DraftWorkingPlane.setup()
-            import DraftTrackers
-            self.points = []
-            self.tracker = DraftTrackers.boxTracker()
-            self.tracker.width(self.Width)
-            self.tracker.height(self.Height)
-            self.tracker.length(self.Length)
-            self.tracker.on()
-            FreeCADGui.Snapper.getPoint(callback=self.getPoint,movecallback=self.update,extradlg=self.taskbox())
+            if Draft.getType(sel[0]) != "Structure":
+                # direct creation
+                FreeCAD.ActiveDocument.openTransaction(str(translate("Arch","Create Structure")))
+                FreeCADGui.doCommand("import Arch")
+                # if selection contains structs and axes, make a system
+                st = Draft.getObjectsOfType(sel,"Structure")
+                ax = Draft.getObjectsOfType(sel,"Axis")
+                if st and ax:
+                    FreeCADGui.doCommand("Arch.makeStructuralSystem(" + ArchCommands.getStringList(st) + "," + ArchCommands.getStringList(ax) + ")")
+                else:
+                    # else, do normal structs
+                    for obj in sel:
+                        FreeCADGui.doCommand("Arch.makeStructure(FreeCAD.ActiveDocument." + obj.Name + ")")
+                FreeCAD.ActiveDocument.commitTransaction()
+                FreeCAD.ActiveDocument.recompute()
+                return
+
+        # interactive mode
+        if hasattr(FreeCAD,"DraftWorkingPlane"):
+            FreeCAD.DraftWorkingPlane.setup()
+        import DraftTrackers
+        self.points = []
+        self.tracker = DraftTrackers.boxTracker()
+        self.tracker.width(self.Width)
+        self.tracker.height(self.Height)
+        self.tracker.length(self.Length)
+        self.tracker.on()
+        FreeCADGui.Snapper.getPoint(callback=self.getPoint,movecallback=self.update,extradlg=self.taskbox())
             
     def getPoint(self,point=None,obj=None):
         "this function is called by the snapper when it has a 3D point"
@@ -400,6 +408,7 @@ class _CommandStructure:
 
     def taskbox(self):
         "sets up a taskbox widget"
+        d = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Units").GetInt("Decimals",2)
         w = QtGui.QWidget()
         w.setWindowTitle(str(translate("Arch","Structure options")))
         lay0 = QtGui.QVBoxLayout(w)
@@ -422,7 +431,7 @@ class _CommandStructure:
         label1 = QtGui.QLabel(str(translate("Arch","Length")))
         lay1.addWidget(label1)
         self.vLength = QtGui.QDoubleSpinBox()
-        self.vLength.setDecimals(2)
+        self.vLength.setDecimals(d)
         self.vLength.setMaximum(99999.99)
         self.vLength.setValue(self.Length)
         lay1.addWidget(self.vLength)
@@ -433,7 +442,7 @@ class _CommandStructure:
         label2 = QtGui.QLabel(str(translate("Arch","Width")))
         lay2.addWidget(label2)
         self.vWidth = QtGui.QDoubleSpinBox()
-        self.vWidth.setDecimals(2)
+        self.vWidth.setDecimals(d)
         self.vWidth.setMaximum(99999.99)
         self.vWidth.setValue(self.Width)
         lay2.addWidget(self.vWidth)
@@ -444,7 +453,7 @@ class _CommandStructure:
         label3 = QtGui.QLabel(str(translate("Arch","Height")))
         lay3.addWidget(label3)
         self.vHeight = QtGui.QDoubleSpinBox()
-        self.vHeight.setDecimals(2)
+        self.vHeight.setDecimals(d)
         self.vHeight.setMaximum(99999.99)
         self.vHeight.setValue(self.Height)
         lay3.addWidget(self.vHeight)
@@ -519,14 +528,19 @@ class _Structure(ArchComponent.Component):
                         str(translate("Arch","The height or extrusion depth of this element. Keep 0 for automatic")))
         obj.addProperty("App::PropertyLinkList","Axes","Arch",
                         str(translate("Arch","Axes systems this structure is built on")))
+        obj.addProperty("App::PropertyLinkList","Armatures","Arch",
+                        str(translate("Arch","Armatures contained in this element")))
         obj.addProperty("App::PropertyVector","Normal","Arch",
                         str(translate("Arch","The normal extrusion direction of this object (keep (0,0,0) for automatic normal)")))
         obj.addProperty("App::PropertyIntegerList","Exclude","Arch",
                         str(translate("Arch","The element numbers to exclude when this structure is based on axes")))
+        obj.addProperty("App::PropertyEnumeration","Role","Arch",
+                        str(translate("Arch","The role of this structural element")))
         self.Type = "Structure"
         obj.Length = 1
         obj.Width = 1
         obj.Height = 1
+        obj.Role = Roles
         
     def execute(self,obj):
         self.createGeometry(obj)
@@ -674,10 +688,10 @@ class _Profile(Draft._DraftObject):
     "A parametric beam profile object"
     
     def __init__(self,obj):
-        obj.addProperty("App::PropertyDistance","Width","Base","Width of the beam").Width = 10
-        obj.addProperty("App::PropertyDistance","Height","Base","Height of the beam").Height = 30
-        obj.addProperty("App::PropertyDistance","WebThickness","Base","Thickness of the webs").WebThickness = 3
-        obj.addProperty("App::PropertyDistance","FlangeThickness","Base","Thickness of the flange").FlangeThickness = 2
+        obj.addProperty("App::PropertyDistance","Width","Draft","Width of the beam").Width = 10
+        obj.addProperty("App::PropertyDistance","Height","Draft","Height of the beam").Height = 30
+        obj.addProperty("App::PropertyDistance","WebThickness","Draft","Thickness of the webs").WebThickness = 3
+        obj.addProperty("App::PropertyDistance","FlangeThickness","Draft","Thickness of the flange").FlangeThickness = 2
         Draft._DraftObject.__init__(self,obj,"Profile")
         
     def execute(self,obj):

@@ -114,14 +114,16 @@ class snapTracker(Tracker):
         Tracker.__init__(self,children=[node])
 
     def setMarker(self,style):
-        if (style == "point"):
-            self.marker.markerIndex = coin.SoMarkerSet.CIRCLE_FILLED_9_9
-        elif (style == "dot"):
-            self.marker.markerIndex = coin.SoMarkerSet.CIRCLE_FILLED_9_9
-        elif (style == "square"):
+        if (style == "square"):
             self.marker.markerIndex = coin.SoMarkerSet.DIAMOND_FILLED_9_9
         elif (style == "circle"):
             self.marker.markerIndex = coin.SoMarkerSet.CIRCLE_LINE_9_9
+        elif (style == "quad"):
+            self.marker.markerIndex = coin.SoMarkerSet.SQUARE_FILLED_9_9
+        elif (style == "empty"):
+            self.marker.markerIndex = coin.SoMarkerSet.SQUARE_LINE_9_9
+        else:
+            self.marker.markerIndex = coin.SoMarkerSet.CIRCLE_FILLED_9_9
 
     def setCoords(self,point):
         self.coords.point.setValue((point.x,point.y,point.z))
@@ -519,7 +521,7 @@ class PlaneTracker(Tracker):
         # getting screen distance
         p1 = Draft.get3DView().getPoint((100,100))
         p2 = Draft.get3DView().getPoint((110,100))
-        bl = (p2.sub(p1)).Length * (Draft.getParam("snapRange")/2)
+        bl = (p2.sub(p1)).Length * (Draft.getParam("snapRange",5)/2)
         pick = coin.SoPickStyle()
         pick.style.setValue(coin.SoPickStyle.UNPICKABLE)
         self.trans = coin.SoTransform()
@@ -592,9 +594,9 @@ class gridTracker(Tracker):
     "A grid tracker"
     def __init__(self):
         # self.space = 1
-        self.space = Draft.getParam("gridSpacing")
+        self.space = Draft.getParam("gridSpacing",1)
         # self.mainlines = 10
-        self.mainlines = Draft.getParam("gridEvery")
+        self.mainlines = Draft.getParam("gridEvery",10)
         self.numlines = 100
         col = [0.2,0.2,0.3]
 
@@ -821,7 +823,7 @@ class archDimTracker(Tracker):
         else:
             self.Distance = (p2.sub(p1)).Length 
         if not text:
-            text = Draft.getParam("dimPrecision")
+            text = Draft.getParam("dimPrecision",2)
             text = "%."+str(text)+"f"
             text = (text % self.Distance)
         self.dimnode.string.setValue(text)

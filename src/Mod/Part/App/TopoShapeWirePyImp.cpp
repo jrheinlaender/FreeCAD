@@ -99,10 +99,10 @@ int TopoShapeWirePy::PyInit(PyObject* args, PyObject* /*kwd*/)
     }
 
     PyErr_Clear();
-    if (PyArg_ParseTuple(args, "O!", &(PyList_Type), &pcObj)) {
+    if (PyArg_ParseTuple(args, "O", &pcObj)) {
         BRepBuilderAPI_MakeWire mkWire;
-        Py::List list(pcObj);
-        for (Py::List::iterator it = list.begin(); it != list.end(); ++it) {
+        Py::Sequence list(pcObj);
+        for (Py::Sequence::iterator it = list.begin(); it != list.end(); ++it) {
             PyObject* item = (*it).ptr();
             if (PyObject_TypeCheck(item, &(Part::TopoShapePy::Type))) {
                 const TopoDS_Shape& sh = static_cast<Part::TopoShapePy*>(item)->getTopoShapePtr()->_Shape;
@@ -209,8 +209,8 @@ PyObject* TopoShapeWirePy::fixWire(PyObject *args)
 
 PyObject* TopoShapeWirePy::makeOffset(PyObject *args)
 {
-    float dist;
-    if (!PyArg_ParseTuple(args, "f",&dist))
+    double dist;
+    if (!PyArg_ParseTuple(args, "d",&dist))
         return 0;
     const TopoDS_Wire& w = TopoDS::Wire(getTopoShapePtr()->_Shape);
 
@@ -244,18 +244,19 @@ PyObject* TopoShapeWirePy::makePipeShell(PyObject *args)
     PyObject *obj;
     int make_solid = 0;
     int is_Frenet = 0;
+    int transition = 0;
 
-    if (PyArg_ParseTuple(args, "O!|ii", &(PyList_Type), &obj, &make_solid, &is_Frenet)) {
+    if (PyArg_ParseTuple(args, "O|iii", &obj, &make_solid, &is_Frenet, &transition)) {
         try {
             TopTools_ListOfShape sections;
-            Py::List list(obj);
-            for (Py::List::iterator it = list.begin(); it != list.end(); ++it) {
+            Py::Sequence list(obj);
+            for (Py::Sequence::iterator it = list.begin(); it != list.end(); ++it) {
                 if (PyObject_TypeCheck((*it).ptr(), &(Part::TopoShapePy::Type))) {
                     const TopoDS_Shape& shape = static_cast<TopoShapePy*>((*it).ptr())->getTopoShapePtr()->_Shape;
                     sections.Append(shape);
                 }
             }
-            TopoDS_Shape shape = this->getTopoShapePtr()->makePipeShell(sections, make_solid, is_Frenet);
+            TopoDS_Shape shape = this->getTopoShapePtr()->makePipeShell(sections, make_solid, is_Frenet, transition);
             return new TopoShapePy(new TopoShape(shape));
         }
         catch (Standard_Failure) {

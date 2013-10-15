@@ -247,8 +247,8 @@ int TopoShapeFacePy::PyInit(PyObject* args, PyObject* /*kwd*/)
 
 PyObject* TopoShapeFacePy::makeOffset(PyObject *args)
 {
-    float dist;
-    if (!PyArg_ParseTuple(args, "f",&dist))
+    double dist;
+    if (!PyArg_ParseTuple(args, "d",&dist))
         return 0;
     const TopoDS_Face& f = TopoDS::Face(getTopoShapePtr()->_Shape);
 

@@ -46,7 +46,7 @@ FreeCADGui.updateLocale()
 # sets the default working plane
 plane = WorkingPlane.plane()
 FreeCAD.DraftWorkingPlane = plane
-defaultWP = Draft.getParam("defaultWP")
+defaultWP = Draft.getParam("defaultWP",1)
 if defaultWP == 1: plane.alignToPointAndAxis(Vector(0,0,0), Vector(0,0,1), 0)
 elif defaultWP == 2: plane.alignToPointAndAxis(Vector(0,0,0), Vector(0,1,0), 0)
 elif defaultWP == 3: plane.alignToPointAndAxis(Vector(0,0,0), Vector(1,0,0), 0)
@@ -56,23 +56,9 @@ lastObj = [0,0]
 
 # set modifier keys
 MODS = ["shift","ctrl","alt"]
-MODCONSTRAIN = MODS[Draft.getParam("modconstrain")]
-MODSNAP = MODS[Draft.getParam("modsnap")]
-MODALT = MODS[Draft.getParam("modalt")]
-
-# sets defaults on first load
-
-if not FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod").HasGroup("Draft"):
-    p = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/Draft")
-    p.SetBool("copymode",1)
-    p.SetBool("alwaysSnap",1)
-    p.SetBool("showSnapBar",1)
-    p.SetUnsigned("constructioncolor",746455039)
-    p.SetFloat("textheight",0.2)
-    p.SetInt("precision",4)
-    p.SetInt("gridEvery",10)
-    p.SetFloat("gridSpacing",1.0)
-    p.SetInt("UiMode",1)
+MODCONSTRAIN = MODS[Draft.getParam("modconstrain",0)]
+MODSNAP = MODS[Draft.getParam("modsnap",1)]
+MODALT = MODS[Draft.getParam("modalt",2)]
 
 #---------------------------------------------------------------------------
 # General functions
@@ -241,7 +227,7 @@ class DraftTool:
         self.ui.setTitle(name)
         self.featureName = name
         self.planetrack = None
-        if Draft.getParam("showPlaneTracker"):
+        if Draft.getParam("showPlaneTracker",False):
             self.planetrack = PlaneTracker()
 		
     def finish(self):
@@ -450,7 +436,7 @@ class Line(Creator):
             todo.delay(self.doc.removeObject,old)
         self.obj = None
         if (len(self.node) > 1):
-            if (len(self.node) == 2) and Draft.getParam("UsePartPrimitives"):
+            if (len(self.node) == 2) and Draft.getParam("UsePartPrimitives",False):
                 # use Part primitive
                 p1 = self.node[0]
                 p2 = self.node[-1]
@@ -648,7 +634,7 @@ class BSpline(Line):
         "terminates the operation and closes the poly if asked"
         if self.ui:
 			self.bsplinetrack.finalize()
-        if not Draft.getParam("UiMode"):
+        if not Draft.getParam("UiMode",1):
             FreeCADGui.Control.closeDialog()
         if (len(self.node) > 1):
             old = self.obj.Name
@@ -770,7 +756,7 @@ class Rectangle(Creator):
         try:
             # building command string
             rot,sup,pts,fil = self.getStrings()
-            if Draft.getParam("UsePartPrimitives"):
+            if Draft.getParam("UsePartPrimitives",False):
                 # Use Part Primitive
                 base = p1
                 if length < 0:
@@ -1033,7 +1019,7 @@ class Arc(Creator):
         rot,sup,pts,fil = self.getStrings()
         if self.closedCircle:
             try:
-                if Draft.getParam("UsePartPrimitives"):
+                if Draft.getParam("UsePartPrimitives",False):
                     # use primitive
                     self.commit(translate("draft","Create Circle"),
                                 ['circle = FreeCAD.ActiveDocument.addObject("Part::Circle","Circle")',
@@ -1057,7 +1043,7 @@ class Arc(Creator):
             end = math.degrees(self.firstangle+self.angle)
             if end < sta: sta,end = end,sta
             try:
-                if Draft.getParam("UsePartPrimitives"):
+                if Draft.getParam("UsePartPrimitives",False):
                     # use primitive
                     self.commit(translate("draft","Create Arc"),
                                 ['circle = FreeCAD.ActiveDocument.addObject("Part::Circle","Circle")',
@@ -1369,7 +1355,7 @@ class Ellipse(Creator):
                 rot2 = FreeCAD.Placement(m)
                 rot2 = rot2.Rotation
                 rot = str((rot1.multiply(rot2)).Q)
-            if Draft.getParam("UsePartPrimitives"):
+            if Draft.getParam("UsePartPrimitives",False):
                 # Use Part Primitive
                 self.commit(translate("draft","Create Ellipse"),
                             ['import Part',
@@ -2506,6 +2492,8 @@ class Trimex(Modifier):
         self.obj = Draft.getSelection()[0]
         self.ui.trimUi()
         self.linetrack = lineTracker()
+        
+        import DraftGeomUtils
 
         if not "Shape" in self.obj.PropertiesList: return
         if "Placement" in self.obj.PropertiesList:
@@ -2542,7 +2530,6 @@ class Trimex(Modifier):
             lc = self.obj.ViewObject.LineColor
             sc = (lc[0],lc[1],lc[2])
             sw = self.obj.ViewObject.LineWidth
-            import DraftGeomUtils
             for e in self.edges:
                 if DraftGeomUtils.geomType(e) == "Line":
                     self.ghost.append(lineTracker(scolor=sc,swidth=sw))
@@ -2615,6 +2602,8 @@ class Trimex(Modifier):
         reverse = False
         for g in self.ghost: g.off()
         if real: newedges = []
+        
+        import DraftGeomUtils
         
         # finding the active point
         vlist = []
@@ -2990,9 +2979,7 @@ class Drawing(Modifier):
 
     def createDefaultPage(self):
         "created a default page"
-        template = Draft.getParam("template")
-        if not template:
-            template = FreeCAD.getResourceDir()+'Mod/Drawing/Templates/A3_Landscape.svg'
+        template = Draft.getParam("template",FreeCAD.getResourceDir()+'Mod/Drawing/Templates/A3_Landscape.svg')
         page = self.doc.addObject('Drawing::FeaturePage','Page')
         page.ViewObject.HintOffsetX = 200
         page.ViewObject.HintOffsetY = 100
@@ -3032,6 +3019,8 @@ class Edit(Modifier):
 
     def __init__(self):
         self.running = False
+        self.trackers = []
+        self.obj = None
 
     def GetResources(self):
         return {'Pixmap'  : 'Draft_Edit',
@@ -3057,73 +3046,73 @@ class Edit(Modifier):
     def proceed(self):
         if self.call: 
             self.view.removeEventCallback("SoEvent",self.call)
-            self.ui.editUi()
-            if self.doc:
-                self.obj = Draft.getSelection()
-                if self.obj:
-                    self.obj = self.obj[0]
-                    # store selectable state of the object
-                    if hasattr(self.obj.ViewObject,"Selectable"):
-                        self.selectstate = self.obj.ViewObject.Selectable
-                        self.obj.ViewObject.Selectable = False
-                    if Draft.getType(self.obj) in ["Wire","BSpline"]:
-                        self.ui.setEditButtons(True)
-                    else:
-                        self.ui.setEditButtons(False)
-                    self.editing = None
-                    self.editpoints = []
-                    self.pl = None
-                    if "Placement" in self.obj.PropertiesList:
-                        self.pl = self.obj.Placement
-                        self.invpl = self.pl.inverse()
-                    if Draft.getType(self.obj) in ["Wire","BSpline"]:
-                        for p in self.obj.Points:
-                            if self.pl: p = self.pl.multVec(p)
-                            self.editpoints.append(p)
-                    elif Draft.getType(self.obj) == "Circle":
-                        self.editpoints.append(self.obj.Placement.Base)
-                        if self.obj.FirstAngle == self.obj.LastAngle:
-                            self.editpoints.append(self.obj.Shape.Vertexes[0].Point)
-                    elif Draft.getType(self.obj) == "Rectangle":
-                        self.editpoints.append(self.obj.Placement.Base)
-                        self.editpoints.append(self.obj.Shape.Vertexes[2].Point)
-                        v = self.obj.Shape.Vertexes
-                        self.bx = v[1].Point.sub(v[0].Point)
-                        if self.obj.Length < 0: 
-                            self.bx = self.bx.negative()
-                        self.by = v[2].Point.sub(v[1].Point)
-                        if self.obj.Height < 0: 
-                            self.by = self.by.negative()
-                    elif Draft.getType(self.obj) == "Polygon":
-                        self.editpoints.append(self.obj.Placement.Base)
-                        self.editpoints.append(self.obj.Shape.Vertexes[0].Point)
-                    elif Draft.getType(self.obj) == "Dimension":
-                        p = self.obj.ViewObject.Proxy.textpos.translation.getValue()
-                        self.editpoints.append(self.obj.Start)
-                        self.editpoints.append(self.obj.End)
-                        self.editpoints.append(self.obj.Dimline)
-                        self.editpoints.append(Vector(p[0],p[1],p[2]))
-                    self.trackers = []
-                    if self.editpoints:
-                        for ep in range(len(self.editpoints)):
-                            self.trackers.append(editTracker(self.editpoints[ep],self.obj.Name,
-                                                             ep,self.obj.ViewObject.LineColor))
-                        self.call = self.view.addEventCallback("SoEvent",self.action)
-                        self.running = True
-                        plane.save()
-                        if "Shape" in self.obj.PropertiesList:
-                            plane.alignToFace(self.obj.Shape)
-                        if self.planetrack:
-                            self.planetrack.set(self.editpoints[0])
-                    else:
-                        msg(translate("draft", "This object type is not editable\n"),'warning')
-                        self.finish()
+        self.ui.editUi()
+        if self.doc:
+            self.obj = Draft.getSelection()
+            if self.obj:
+                self.obj = self.obj[0]
+                # store selectable state of the object
+                if hasattr(self.obj.ViewObject,"Selectable"):
+                    self.selectstate = self.obj.ViewObject.Selectable
+                    self.obj.ViewObject.Selectable = False
+                if Draft.getType(self.obj) in ["Wire","BSpline"]:
+                    self.ui.setEditButtons(True)
                 else:
+                    self.ui.setEditButtons(False)
+                self.editing = None
+                self.editpoints = []
+                self.pl = None
+                if "Placement" in self.obj.PropertiesList:
+                    self.pl = self.obj.Placement
+                    self.invpl = self.pl.inverse()
+                if Draft.getType(self.obj) in ["Wire","BSpline"]:
+                    for p in self.obj.Points:
+                        if self.pl: p = self.pl.multVec(p)
+                        self.editpoints.append(p)
+                elif Draft.getType(self.obj) == "Circle":
+                    self.editpoints.append(self.obj.Placement.Base)
+                    if self.obj.FirstAngle == self.obj.LastAngle:
+                        self.editpoints.append(self.obj.Shape.Vertexes[0].Point)
+                elif Draft.getType(self.obj) == "Rectangle":
+                    self.editpoints.append(self.obj.Placement.Base)
+                    self.editpoints.append(self.obj.Shape.Vertexes[2].Point)
+                    v = self.obj.Shape.Vertexes
+                    self.bx = v[1].Point.sub(v[0].Point)
+                    if self.obj.Length < 0: 
+                        self.bx = self.bx.negative()
+                    self.by = v[2].Point.sub(v[1].Point)
+                    if self.obj.Height < 0: 
+                        self.by = self.by.negative()
+                elif Draft.getType(self.obj) == "Polygon":
+                    self.editpoints.append(self.obj.Placement.Base)
+                    self.editpoints.append(self.obj.Shape.Vertexes[0].Point)
+                elif Draft.getType(self.obj) == "Dimension":
+                    p = self.obj.ViewObject.Proxy.textpos.translation.getValue()
+                    self.editpoints.append(self.obj.Start)
+                    self.editpoints.append(self.obj.End)
+                    self.editpoints.append(self.obj.Dimline)
+                    self.editpoints.append(Vector(p[0],p[1],p[2]))
+                self.trackers = []
+                if self.editpoints:
+                    for ep in range(len(self.editpoints)):
+                        self.trackers.append(editTracker(self.editpoints[ep],self.obj.Name,
+                                                         ep,self.obj.ViewObject.LineColor))
+                    self.call = self.view.addEventCallback("SoEvent",self.action)
+                    self.running = True
+                    plane.save()
+                    if "Shape" in self.obj.PropertiesList:
+                        plane.alignToFace(self.obj.Shape)
+                    if self.planetrack:
+                        self.planetrack.set(self.editpoints[0])
+                else:
+                    msg(translate("draft", "This object type is not editable\n"),'warning')
                     self.finish()
+            else:
+                self.finish()
 
     def finish(self,closed=False):
         "terminates the operation"
-        if closed:
+        if self.obj and closed:
             if "Closed" in self.obj.PropertiesList:
                 if not self.obj.Closed:
                     self.obj.Closed = True
@@ -3131,8 +3120,9 @@ class Edit(Modifier):
             if self.trackers:
                 for t in self.trackers:
                     t.finalize()
-        if hasattr(self.obj.ViewObject,"Selectable"):
-            self.obj.ViewObject.Selectable = self.selectstate
+        if self.obj:
+            if hasattr(self.obj.ViewObject,"Selectable"):
+                self.obj.ViewObject.Selectable = self.selectstate
         Modifier.finish(self)
         plane.restore()
         self.running = False
@@ -3656,7 +3646,7 @@ class Point:
                     self.view.removeEventCallbackPivy(coin.SoMouseButtonEvent.getClassTypeId(),self.callbackClick)
                     self.view.removeEventCallbackPivy(coin.SoLocation2Event.getClassTypeId(),self.callbackMove)
                     commitlist = []
-                    if Draft.getParam("UsePartPrimitives"):
+                    if Draft.getParam("UsePartPrimitives",False):
                         # using 
                         commitlist.append((translate("draft","Create Point"),
                                             ['point = FreeCAD.ActiveDocument.addObject("Part::Vertex","Point")',
@@ -3750,7 +3740,40 @@ class Heal():
         else:
             Draft.heal()
         FreeCAD.ActiveDocument.commitTransaction()
-        
+
+
+class Draft_Facebinder(Creator):
+    "The Draft Facebinder command definition"
+
+    def GetResources(self):
+        return {'Pixmap'  : 'Draft_Facebinder',
+                'Accel' : "F,F",
+                'MenuText': QtCore.QT_TRANSLATE_NOOP("Draft_Facebinder", "Facebinder"),
+                'ToolTip' : QtCore.QT_TRANSLATE_NOOP("Draft_Facebinder", "Creates a facebinder object from selected face(s)")}
+
+    def Activated(self):
+        Creator.Activated(self)
+        if not Draft.getSelection():
+            if self.ui:
+                self.ui.selectUi()
+                msg(translate("draft", "Select face(s) on existing object(s)\n"))
+                self.call = self.view.addEventCallback("SoEvent",selectObject)
+        else:
+            self.proceed()
+
+    def proceed(self):
+        if self.call: 
+            self.view.removeEventCallback("SoEvent",self.call)
+        if FreeCADGui.Selection.getSelection():
+            FreeCAD.ActiveDocument.openTransaction("Facebinder")
+            FreeCADGui.doCommand("import Draft, FreeCADGui")
+            FreeCADGui.doCommand("s = FreeCADGui.Selection.getSelectionEx()")
+            FreeCADGui.doCommand("Draft.makeFacebinder(s)")
+            FreeCAD.ActiveDocument.commitTransaction()
+            FreeCAD.ActiveDocument.recompute()
+        self.finish()
+
+
 #---------------------------------------------------------------------------
 # Snap tools
 #---------------------------------------------------------------------------
@@ -3926,6 +3949,7 @@ FreeCADGui.addCommand('Draft_BSpline',BSpline())
 FreeCADGui.addCommand('Draft_Point',Point())
 FreeCADGui.addCommand('Draft_Ellipse',Ellipse())
 FreeCADGui.addCommand('Draft_ShapeString',ShapeString())
+FreeCADGui.addCommand('Draft_Facebinder',Draft_Facebinder())
 
 # modification commands
 FreeCADGui.addCommand('Draft_Move',Move())
