@@ -29,6 +29,7 @@
 # include <BRep_Builder.hxx>
 # include <BRepAdaptor_Surface.hxx>
 # include <BRepBndLib.hxx>
+# include <BRepPrimAPI_MakePrism.hxx>
 # include <BRepFeat_MakePrism.hxx>
 # include <BRepBuilderAPI_MakeFace.hxx>
 # include <Geom_Plane.hxx>
@@ -39,8 +40,6 @@
 # include <TopoDS_Solid.hxx>
 # include <TopExp_Explorer.hxx>
 # include <BRepAlgoAPI_Cut.hxx>
-# include <BRepPrimAPI_MakeHalfSpace.hxx>
-# include <BRepAlgoAPI_Common.hxx>
 #endif
 
 #include <Base/Exception.h>
@@ -178,12 +177,19 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
             TopoDS_Shape result = refineShapeIfActive(mkCut.Shape());
             this->SubShape.setValue(result);
             this->Shape.setValue(prism);
-        } else {
-            TopoDS_Shape prism;
-            generatePrism(prism, sketchshape, method, dir, L, 0.0,
-                          Midplane.getValue(), Reversed.getValue());
+
+            buildMaps(&PrismMaker, sketchshape, base);
+        } else {                        
+            TopoDS_Shape from;
+            gp_Vec v;
+            generatePrism(sketchshape, method, dir, L, 0.0, Midplane.getValue(), Reversed.getValue(), from, v);
+            BRepPrimAPI_MakePrism mkPrism(from, v, 0,1); // finite prism
+            if (!mkPrism.IsDone())
+                throw Base::Exception("Pocket: Could not extrude the sketch!");
+            TopoDS_Shape prism = mkPrism.Shape();
             if (prism.IsNull())
                 return new App::DocumentObjectExecReturn("Pocket: Resulting shape is empty");
+            buildMaps(&mkPrism, sketchshape);
 
             // set the subtractive shape property for later usage in e.g. pattern
             prism = refineShapeIfActive(prism);
@@ -193,15 +199,18 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
             BRepAlgoAPI_Cut mkCut(base, prism);
             if (!mkCut.IsDone())
                 return new App::DocumentObjectExecReturn("Pocket: Cut out of base feature failed");
+            buildMaps(&mkCut, prism, base, true);
             TopoDS_Shape result = mkCut.Shape();
             // we have to get the solids (fuse sometimes creates compounds)
             TopoDS_Shape solRes = this->getSolid(result);
             if (solRes.IsNull())
                 return new App::DocumentObjectExecReturn("Pocket: Resulting shape is not a solid");
             solRes = refineShapeIfActive(solRes);
-            remapSupportShape(solRes);
             this->Shape.setValue(solRes);
         }
+
+        // Update properties which reference this feature
+        remapProperties(sketch, getBaseObject());
 
         return App::DocumentObject::StdReturn;
     }

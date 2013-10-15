@@ -134,30 +134,35 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
     typedef std::map<App::DocumentObject*,  trsf_it> rej_it_map;
     rej_it_map nointersect_trsfms;
     rej_it_map overlapping_trsfms;
+    std::vector<const Part::Feature*> oldFeatures;
+    oldFeatures.push_back(supportFeature);
 
     // NOTE: It would be possible to build a compound from all original addShapes/subShapes and then
     // transform the compounds as a whole. But we choose to apply the transformations to each
     // Original separately. This way it is easier to discover what feature causes a fuse/cut
     // to fail. The downside is that performance suffers when there are many originals. But it seems
     // safe to assume that in most cases there are few originals and many transformations
-    for (std::vector<App::DocumentObject*>::const_iterator o = originals.begin(); o != originals.end(); o++)
+    for (unsigned o_idx = 0; o_idx < originals.size(); ++o_idx)
     {
         // Extract the original shape and determine whether to cut or to fuse
         TopoDS_Shape shape;
         bool fuse;
+        App::DocumentObject* original = originals[o_idx];
 
-        if ((*o)->getTypeId().isDerivedFrom(PartDesign::Additive::getClassTypeId())) {
-            PartDesign::Additive* addFeature = static_cast<PartDesign::Additive*>(*o);
+        if (original->getTypeId().isDerivedFrom(PartDesign::Additive::getClassTypeId())) {
+            PartDesign::Additive* addFeature = static_cast<PartDesign::Additive*>(original);
             shape = addFeature->AddShape.getShape()._Shape;
             if (shape.IsNull())
                 return new App::DocumentObjectExecReturn("Shape of additive feature is empty");
             fuse = true;
-        } else if ((*o)->getTypeId().isDerivedFrom(PartDesign::Subtractive::getClassTypeId())) {
-            PartDesign::Subtractive* subFeature = static_cast<PartDesign::Subtractive*>(*o);
+            oldFeatures.push_back(addFeature);
+        } else if (original->getTypeId().isDerivedFrom(PartDesign::Subtractive::getClassTypeId())) {
+            PartDesign::Subtractive* subFeature = static_cast<PartDesign::Subtractive*>(original);
             shape = subFeature->SubShape.getShape()._Shape;
             if (shape.IsNull())
                 return new App::DocumentObjectExecReturn("Shape of subtractive feature is empty");
             fuse = false;
+            oldFeatures.push_back(subFeature);
         } else {
             return new App::DocumentObjectExecReturn("Only additive and subtractive features can be transformed");
         }
@@ -179,13 +184,13 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
 
             BRepBuilderAPI_Transform mkTrf(shape, *t, false); // No need to copy, now
             if (!mkTrf.IsDone())
-                return new App::DocumentObjectExecReturn("Transformation failed", (*o));
+                return new App::DocumentObjectExecReturn("Transformation failed", original);
 
             // Check for intersection with support
             try {
                 if (!Part::checkIntersection(support, mkTrf.Shape(), false, true)) {
                     Base::Console().Warning("Transformed shape does not intersect support %s: Removed\n", supportFeature->getNameInDocument());
-                    nointersect_trsfms[*o].insert(t);
+                    nointersect_trsfms[original].insert(t);
                 } else {
                     v_transformations.push_back(t);
                     v_transformedShapes.push_back(mkTrf.Shape());
@@ -213,7 +218,7 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
                 if (Part::checkIntersection(shape, v_transformedShapes.front(), false, false)) {
                     // For single transformations, if one overlaps, all overlap, as long as we have uniform increments
                     for (trsf_it_vec::const_iterator v = v_transformations.begin(); v != v_transformations.end(); v++)
-                        overlapping_trsfms[*o].insert(*v);
+                        overlapping_trsfms[original].insert(*v);
                     v_transformedShapes.clear();
                 }
         } else {
@@ -232,15 +237,15 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
                 // Check intersection with the original
                 if (Part::checkIntersection(shape, *s1, false, false)) {
                     rejected_iterators.insert(s1);
-                    overlapping_trsfms[*o].insert(*t1);
+                    overlapping_trsfms[original].insert(*t1);
                 }
                 // Check intersection with other transformations
                 for (; s2 != v_transformedShapes.end(); s2++, t2++)
                     if (Part::checkIntersection(*s1, *s2, false, false)) {
                         rejected_iterators.insert(s1);
                         rejected_iterators.insert(s2);
-                        overlapping_trsfms[*o].insert(*t1);
-                        overlapping_trsfms[*o].insert(*t2);
+                        overlapping_trsfms[original].insert(*t1);
+                        overlapping_trsfms[original].insert(*t2);
                     }
                 s1++;
                 s2 = s1;
@@ -252,7 +257,7 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
             // Check intersection of last transformation with the original
             if (Part::checkIntersection(shape, *s1, false, false)) {
                 rejected_iterators.insert(s1);
-                overlapping_trsfms[*o].insert(*t1);
+                overlapping_trsfms[original].insert(*t1);
             }
 
             for (shape_it_set::reverse_iterator it = rejected_iterators.rbegin();
@@ -272,27 +277,36 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
 
         // Fuse/Cut the compounded transformed shapes with the support
         TopoDS_Shape result;
+        bool concatenate = (o_idx != 0);
+        std::vector<TopoDS_Shape> oldShapes;
+        for (unsigned i = 0; i < o_idx+1; ++i)
+            oldShapes.push_back(support);
+        oldShapes.push_back(transformedShapes);
 
         if (fuse) {
             BRepAlgoAPI_Fuse mkFuse(support, transformedShapes);
             if (!mkFuse.IsDone())
-                return new App::DocumentObjectExecReturn("Fusion with support failed", *o);
+                return new App::DocumentObjectExecReturn("Fusion with support failed", original);
+            buildMaps(&mkFuse, oldShapes, concatenate);
             // we have to get the solids (fuse sometimes creates compounds)
             result = this->getSolid(mkFuse.Shape());
             // lets check if the result is a solid
             if (result.IsNull())
-                return new App::DocumentObjectExecReturn("Resulting shape is not a solid", *o);
+                return new App::DocumentObjectExecReturn("Resulting shape is not a solid", original);
             result = refineShapeIfActive(result);
         } else {
             BRepAlgoAPI_Cut mkCut(support, transformedShapes);
             if (!mkCut.IsDone())
-                return new App::DocumentObjectExecReturn("Cut out of support failed", *o);
+                return new App::DocumentObjectExecReturn("Cut out of support failed", original);
+            buildMaps(&mkCut, oldShapes, concatenate);
             result = mkCut.Shape();
             result = refineShapeIfActive(result);
         }
 
         support = result; // Use result of this operation for fuse/cut of next original
     }
+
+    remapProperties(oldFeatures);
 
     if (!overlapping_trsfms.empty())
         // Concentrate on overlapping shapes since they are more serious

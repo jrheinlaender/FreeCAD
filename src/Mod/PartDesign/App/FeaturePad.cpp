@@ -26,6 +26,7 @@
 # include <BRep_Builder.hxx>
 # include <BRep_Tool.hxx>
 # include <BRepBndLib.hxx>
+# include <BRepPrimAPI_MakePrism.hxx>
 # include <BRepFeat_MakePrism.hxx>
 # include <BRepBuilderAPI_MakeFace.hxx>
 # include <Handle_Geom_Surface.hxx>
@@ -36,8 +37,6 @@
 # include <TopExp_Explorer.hxx>
 # include <BRepAlgoAPI_Fuse.hxx>
 # include <Precision.hxx>
-# include <BRepPrimAPI_MakeHalfSpace.hxx>
-# include <BRepAlgoAPI_Common.hxx>
 # include <BRepAdaptor_Surface.hxx>
 # include <gp_Pln.hxx>
 # include <GeomAPI_ProjectPointOnSurf.hxx>
@@ -198,7 +197,14 @@ App::DocumentObjectExecReturn *Pad::execute(void)
                 dir = gp_Dir(gp_Vec(basePoint, prjP));
                 dir.Transform(invObjLoc.Transformation());
 
-                generatePrism(prism, sketchshape, "Length", dir, length, 0.0, false, false);
+                TopoDS_Shape from;
+                gp_Vec v;
+                generatePrism(sketchshape, "Length", dir, length, 0.0, false, false, from, v);
+                BRepPrimAPI_MakePrism mkPrism(from, v, 0,1); // finite prism
+                if (!mkPrism.IsDone())
+                    throw Base::Exception("Pad: Could not extrude the sketch!");
+                prism = mkPrism.Shape();
+                buildMaps(&mkPrism, sketchshape);
             } else {
                 // A support object is always required and we need to use BRepFeat_MakePrism
                 // Problem: For Pocket/UpToFirst (or an equivalent Pocket/UpToFace) the resulting shape is invalid
@@ -219,10 +225,18 @@ App::DocumentObjectExecReturn *Pad::execute(void)
                 if (!PrismMaker.IsDone())
                     return new App::DocumentObjectExecReturn("Pad: Up to face: Could not extrude the sketch!");
                 prism = PrismMaker.Shape();
+                buildMaps(&PrismMaker, sketchshape, base);
             }
         } else {
-            generatePrism(prism, sketchshape, method, dir, L, L2,
-                          Midplane.getValue(), Reversed.getValue());
+            TopoDS_Shape from;
+            gp_Vec v;
+            generatePrism(sketchshape, method, dir, L, L2, Midplane.getValue(), Reversed.getValue(), from, v);
+            BRepPrimAPI_MakePrism mkPrism(from, v, 0,1); // finite prism
+            if (!mkPrism.IsDone())
+                throw Base::Exception("Pad: Could not extrude the sketch!");
+
+            buildMaps(&mkPrism, sketchshape);
+            prism = mkPrism.Shape();
         }
 
         if (prism.IsNull())
@@ -245,8 +259,16 @@ App::DocumentObjectExecReturn *Pad::execute(void)
             if (solRes.IsNull())
                 return new App::DocumentObjectExecReturn("Pad: Resulting shape is not a solid");
             solRes = refineShapeIfActive(solRes);
+
+            // Update properties which reference this feature
+            buildMaps(&mkFuse, prism, base, true);
+            remapProperties(sketch, getBaseObject());
+
             this->Shape.setValue(solRes);
         } else {
+            // Update properties which reference this feature
+            remapProperties(sketch);
+
             this->Shape.setValue(prism);
         }
 

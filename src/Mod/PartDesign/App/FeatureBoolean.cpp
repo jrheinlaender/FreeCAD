@@ -94,15 +94,19 @@ App::DocumentObjectExecReturn *Boolean::execute(void)
     // Get the operation type
     std::string type = Type.getValueAsString();
 
-    for (std::vector<App::DocumentObject*>::const_iterator b = bodies.begin(); b != bodies.end(); b++)
+    std::vector<const Part::Feature*> oldFeatures;
+    oldFeatures.push_back(baseFeature);
+
+    for (unsigned b_idx = 0; b_idx < bodies.size(); ++b_idx)
     {
         // Extract the body shape. Its important to get the actual feature that provides the last solid in the body
         // so that the placement will be right
-        PartDesign::Body* body = static_cast<PartDesign::Body*>(*b);
+        PartDesign::Body* body = static_cast<PartDesign::Body*>(bodies[b_idx]);
         Part::Feature* tipSolid = static_cast<Part::Feature*>(body->getPrevSolidFeature());
         if (tipSolid == NULL)
             continue;
         TopoDS_Shape shape = tipSolid->Shape.getValue();
+        oldFeatures.push_back(tipSolid);
 
         // Move the shape to the location of the base shape
         Base::Placement pl = body->Placement.getValue();
@@ -117,40 +121,54 @@ App::DocumentObjectExecReturn *Boolean::execute(void)
         TopLoc_Location bLoc(trf);
         shape.Move(invObjLoc.Multiplied(bLoc));
 
+        // Prepare the list of old shapes for mapping to the new shape
+        bool concatenate = (b_idx != 0);
+        std::vector<TopoDS_Shape> oldShapes;
+        for (unsigned i = 0; i < b_idx+1; ++i)
+            oldShapes.push_back(result);
+        oldShapes.push_back(shape);
+
         TopoDS_Shape boolOp;
 
         if (type == "Fuse") {
             BRepAlgoAPI_Fuse mkFuse(result, shape);
             if (!mkFuse.IsDone())
-                return new App::DocumentObjectExecReturn("Fusion of bodies failed", *b);
+                return new App::DocumentObjectExecReturn("Fusion of bodies failed", body);
             // we have to get the solids (fuse sometimes creates compounds)
             boolOp = this->getSolid(mkFuse.Shape());
             // lets check if the result is a solid
             if (boolOp.IsNull())
-                return new App::DocumentObjectExecReturn("Resulting shape is not a solid", *b);
+                return new App::DocumentObjectExecReturn("Resulting shape is not a solid", body);
+            buildMaps(&mkFuse, oldShapes, concatenate);
         } else if (type == "Cut") {
             BRepAlgoAPI_Cut mkCut(result, shape);
             if (!mkCut.IsDone())
-                return new App::DocumentObjectExecReturn("Cut out of first body failed", *b);
-            boolOp = mkCut.Shape();
+                return new App::DocumentObjectExecReturn("Cut out of first body failed", body);
+            boolOp = mkCut.Shape();            
+            buildMaps(&mkCut, oldShapes, concatenate);
         } else if (type == "Common") {
             BRepAlgoAPI_Common mkCommon(result, shape);
             if (!mkCommon.IsDone())
-                return new App::DocumentObjectExecReturn("Common operation with first body failed", *b);
+                return new App::DocumentObjectExecReturn("Common operation with first body failed", body);
             boolOp = mkCommon.Shape();
+            buildMaps(&mkCommon, oldShapes, concatenate);
         } else if (type == "Section") {
             BRepAlgoAPI_Section mkSection(result, shape);
             if (!mkSection.IsDone())
-                return new App::DocumentObjectExecReturn("Section out of first body failed", *b);
+                return new App::DocumentObjectExecReturn("Section out of first body failed", body);
             // we have to get the solids
             boolOp = this->getSolid(mkSection.Shape());
             // lets check if the result is a solid
             if (boolOp.IsNull())
-                return new App::DocumentObjectExecReturn("Resulting shape is not a solid", *b);
+                return new App::DocumentObjectExecReturn("Resulting shape is not a solid", body);
+            buildMaps(&mkSection, oldShapes, concatenate);
         }
 
         result = boolOp; // Use result of this operation for fuse/cut of next body
     }
+
+    // Update properties which reference this feature
+    remapProperties(oldFeatures);
 
     this->Shape.setValue(result);
     return App::DocumentObject::StdReturn;

@@ -144,7 +144,12 @@ App::DocumentObjectExecReturn *SketchObject::execute(void)
     for (std::vector<Part::Geometry *>::iterator it=geomlist.begin(); it != geomlist.end(); ++it)
         if (*it) delete *it;
 
+    TopoDS_Shape oldShape = Shape.getValue();
     Shape.setValue(sketch.toShape());
+    // Note: This can only handle sketch elements that remain geometrically unchanged, e.g. if you delete one
+    // side of a square and replace it with an arc then only the three other sides will be remapped.
+    // Anything more sophisticated must be handled by the Sketcher itself.
+    remapProperties(oldShape, Shape.getValue());
 
     return App::DocumentObject::StdReturn;
 }

@@ -141,6 +141,8 @@ App::DocumentObjectExecReturn *Groove::execute(void)
 
         if (RevolMaker.IsDone()) {
             TopoDS_Shape result = RevolMaker.Shape();
+            buildMaps(&RevolMaker, sketchshape);
+
             // set the subtractive shape property for later usage in e.g. pattern
             result = refineShapeIfActive(result);
             this->SubShape.setValue(result);
@@ -150,6 +152,10 @@ App::DocumentObjectExecReturn *Groove::execute(void)
             // Let's check if the fusion has been successful
             if (!mkCut.IsDone())
                 throw Base::Exception("Cut out of base feature failed");
+
+            // Update properties which reference this feature
+            buildMaps(&mkCut, result, base, true);
+            remapProperties(getVerifiedSketch(), getBaseObject());
 
             // we have to get the solids (fuse sometimes creates compounds)
             TopoDS_Shape solRes = this->getSolid(mkCut.Shape());

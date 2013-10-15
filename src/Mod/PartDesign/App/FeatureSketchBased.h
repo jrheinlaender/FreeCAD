@@ -107,14 +107,15 @@ protected:
       * Generate a linear prism
       * It will be a stand-alone solid created with BRepPrimAPI_MakePrism
       */
-    static void generatePrism(TopoDS_Shape& prism,
-                              const TopoDS_Shape& sketchshape,
-                              const std::string& method,
-                              const gp_Dir& direction,
+    static void generatePrism(const TopoDS_Shape &sketchshape,
+                              const std::string &method,
+                              const gp_Dir &dir,
                               const double L,
                               const double L2,
                               const bool midplane,
-                              const bool reversed);
+                              const bool reversed,
+                              TopoDS_Shape& from,
+                              gp_Vec& v);
 
     /// Check whether the wire after projection on the face is inside the face
     static const bool checkWireInsideFace(const TopoDS_Wire& wire,

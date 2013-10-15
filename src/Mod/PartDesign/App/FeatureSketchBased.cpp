@@ -577,14 +577,15 @@ void SketchBased::getUpToFace(TopoDS_Face& upToFace,
     }
 }
 
-void SketchBased::generatePrism(TopoDS_Shape& prism,
-                                const TopoDS_Shape& sketchshape,
+void SketchBased::generatePrism(const TopoDS_Shape& sketchshape,
                                 const std::string& method,
                                 const gp_Dir& dir,
                                 const double L,
                                 const double L2,
                                 const bool midplane,
-                                const bool reversed)
+                                const bool reversed,
+                                TopoDS_Shape& from,
+                                gp_Vec& v)
 {
     if (method == "Length" || method == "TwoLengths" || method == "ThroughAll") {
         double Ltotal = L;
@@ -602,7 +603,7 @@ void SketchBased::generatePrism(TopoDS_Shape& prism,
         } else if (midplane)
             Loffset = -Ltotal/2;
 
-        TopoDS_Shape from = sketchshape;
+        from = sketchshape;
         if (method == "TwoLengths" || midplane) {
             gp_Trsf mov;
             mov.SetTranslation(Loffset * gp_Vec(dir));
@@ -611,12 +612,7 @@ void SketchBased::generatePrism(TopoDS_Shape& prism,
         } else if (reversed)
             Ltotal *= -1.0;
 
-        // Its better not to use BRepFeat_MakePrism here even if we have a support because the
-        // resulting shape creates problems with Pocket
-        BRepPrimAPI_MakePrism PrismMaker(from, Ltotal*gp_Vec(dir), 0,1); // finite prism
-        if (!PrismMaker.IsDone())
-            throw Base::Exception("SketchBased: Length: Could not extrude the sketch!");
-        prism = PrismMaker.Shape();
+        v = Ltotal*gp_Vec(dir);
     } else {
         throw Base::Exception("SketchBased: Internal error: Unknown method for generatePrism()");
     }

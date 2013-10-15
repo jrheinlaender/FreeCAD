@@ -342,19 +342,40 @@ void switchToDocument(const App::Document* doc)
     }
 }
 
+/// Touch all features in the document and trigger a complete recompute so that the naming information can be created
+void buildNaming(const App::Document* doc)
+{
+    // Note: The only way to avoid this is to store the naming information in the Part file
+    if (doc == NULL) return;
+    std::vector<App::DocumentObject*> features = doc->getObjects();
+
+    for (std::vector<App::DocumentObject*>::const_iterator f =  features.begin(); f != features.end(); ++f)
+        (*f)->touch();
+
+    Gui::Command::doCommand(Gui::Command::Gui,"App.activeDocument().recompute()");
+
+    for (std::vector<App::DocumentObject*>::const_iterator f =  features.begin(); f != features.end(); ++f)
+        (*f)->touch();
+
+    Gui::Command::doCommand(Gui::Command::Gui,"App.activeDocument().recompute()");
+}
+
 void Workbench::slotActiveDocument(const Gui::Document& Doc)
 {
     switchToDocument(Doc.getDocument());
+    buildNaming(Doc.getDocument());
 }
 
 void Workbench::slotNewDocument(const App::Document& Doc)
 {
     switchToDocument(&Doc);
+    buildNaming(&Doc);
 }
 
 void Workbench::slotFinishRestoreDocument(const App::Document& Doc)
 {    
     switchToDocument(&Doc);
+    buildNaming(&Doc);
 }
 
 void Workbench::slotDeleteDocument(const App::Document&)
@@ -570,6 +591,7 @@ void Workbench::activated()
     // make the previously used active Body active again
     PartDesignGui::ActivePartObject = NULL;
     switchToDocument(App::GetApplication().getActiveDocument());
+    buildNaming(App::GetApplication().getActiveDocument());
 
     addTaskWatcher(Watcher);
     Gui::Control().showTaskView();

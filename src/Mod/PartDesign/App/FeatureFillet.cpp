@@ -91,6 +91,13 @@ App::DocumentObjectExecReturn *Fillet::execute(void)
         if (shape.IsNull())
             return new App::DocumentObjectExecReturn("Resulting shape is null");
 
+        // Update properties which reference this feature
+        const PartDesign::Feature* feat = static_cast<const PartDesign::Feature*>(getBaseObject());
+        if (feat != NULL) {
+            buildMaps(&mkFillet, baseShape._Shape);
+            remapProperties(feat);
+        }
+
         this->Shape.setValue(shape);
         return App::DocumentObject::StdReturn;
     }
