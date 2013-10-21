@@ -2127,15 +2127,17 @@ def upgrade(objects,delete=False,force=None):
         result = False
         for o in objectslist:
             for w in o.Shape.Wires:
-                if w.isClosed() and DraftGeomUtils.isPlanar(w):
+                try:
                     f = Part.Face(w)
-                    if f:
-                        newobj = FreeCAD.ActiveDocument.addObject("Part::Feature","Face")
-                        newobj.Shape = f
-                        addList.append(newobj)
-                        result = True
-                        if not o in deleteList:
-                            deleteList.append(o)
+                except:
+                    pass
+                else:
+                    newobj = FreeCAD.ActiveDocument.addObject("Part::Feature","Face")
+                    newobj.Shape = f
+                    addList.append(newobj)
+                    result = True
+                    if not o in deleteList:
+                        deleteList.append(o)
         return result
 
     def makeWires(objectslist):
@@ -2287,7 +2289,7 @@ def upgrade(objects,delete=False,force=None):
             
         # no result has been obtained
         if not result:
-            msg(translate("draft", "Unable to upgrade these objects\n"))
+            msg(translate("draft", "Unable to upgrade these objects.\n"))
             
     if delete:
         names = []
@@ -3689,6 +3691,18 @@ class _Shape2DView(_DraftObject):
                         comp.Placement = opl.inverse()
                         if comp:
                             obj.Shape = comp
+                    
+            elif obj.Base.isDerivedFrom("App::DocumentObjectGroup"):
+                shapes = []
+                for o in obj.Base.Group:
+                    if o.isDerivedFrom("Part::Feature"):
+                        if o.Shape:
+                            if not o.Shape.isNull():
+                                shapes.append(o.Shape)
+                if shapes:
+                    import Part
+                    comp = Part.makeCompound(shapes)
+                    obj.Shape = self.getProjected(obj,comp,obj.Projection)
                             
             elif obj.Base.isDerivedFrom("Part::Feature"):
                 if not DraftVecUtils.isNull(obj.Projection):

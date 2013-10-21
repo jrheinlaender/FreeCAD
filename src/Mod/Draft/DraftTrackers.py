@@ -315,17 +315,20 @@ class bsplineTracker(Tracker):
             #fp=open("spline.iv","w")
             #fp.write(buf)
             #fp.close()
-            ivin = coin.SoInput()
-            ivin.setBuffer(buf)
-            ivob = coin.SoDB.readAll(ivin)
-            # In case reading from buffer failed
-            if ivob and ivob.getNumChildren() > 1:
-                self.bspline = ivob.getChild(1).getChild(0)
-                self.bspline.removeChild(self.bspline.getChild(0))
-                self.bspline.removeChild(self.bspline.getChild(0))
-                self.sep.addChild(self.bspline)
+            try:
+                ivin = coin.SoInput()
+                ivin.setBuffer(buf)
+                ivob = coin.SoDB.readAll(ivin)
+            except:
+                print "Error retrieving coin node"
             else:
-                FreeCAD.Console.PrintWarning("bsplineTracker.recompute() failed to read-in Inventor string\n")
+                if ivob and ivob.getNumChildren() > 1:
+                    self.bspline = ivob.getChild(1).getChild(0)
+                    self.bspline.removeChild(self.bspline.getChild(0))
+                    self.bspline.removeChild(self.bspline.getChild(0))
+                    self.sep.addChild(self.bspline)
+                else:
+                    FreeCAD.Console.PrintWarning("bsplineTracker.recompute() failed to read-in Inventor string\n")
 
 class arcTracker(Tracker):
     "An arc tracker"
@@ -388,7 +391,7 @@ class arcTracker(Tracker):
         self.recompute()
 
     def recompute(self):
-        import Part
+        import Part,re
         if self.circle: self.sep.removeChild(self.circle)
         self.circle = None
         if self.endangle < self.startangle:
@@ -396,17 +399,36 @@ class arcTracker(Tracker):
         else:
             c = Part.makeCircle(1,Vector(0,0,0),FreeCAD.DraftWorkingPlane.axis,self.startangle,self.endangle)
         buf=c.writeInventor(2,0.01)
-        ivin = coin.SoInput()
-        ivin.setBuffer(buf)
-        ivob = coin.SoDB.readAll(ivin)
-        # In case reading from buffer failed
-        if ivob and ivob.getNumChildren() > 1:
-            self.circle = ivob.getChild(1).getChild(0)
-            self.circle.removeChild(self.circle.getChild(0))
-            self.circle.removeChild(self.circle.getChild(0))
+        try:
+            ivin = coin.SoInput()
+            ivin.setBuffer(buf)
+            ivob = coin.SoDB.readAll(ivin)
+        except:
+            # workaround for pivy SoInput.setBuffer() bug
+            buf = buf.replace("\n","")
+            pts = re.findall("point \[(.*?)\]",buf)[0]
+            pts = pts.split(",")
+            pc = []
+            for p in pts:
+                v = p.strip().split()
+                pc.append([float(v[0]),float(v[1]),float(v[2])])
+            coords = coin.SoCoordinate3()
+            coords.point.setValues(0,len(pc),pc)
+            line = coin.SoLineSet()
+            line.numVertices.setValue(-1)
+            self.circle = coin.SoSeparator()
+            self.circle.addChild(coords)
+            self.circle.addChild(line)
             self.sep.addChild(self.circle)
         else:
-            FreeCAD.Console.PrintWarning("arcTracker.recompute() failed to read-in Inventor string\n")
+            if ivob and ivob.getNumChildren() > 1:
+                self.circle = ivob.getChild(1).getChild(0)
+                self.circle.removeChild(self.circle.getChild(0))
+                self.circle.removeChild(self.circle.getChild(0))
+                self.sep.addChild(self.circle)
+            else:
+                FreeCAD.Console.PrintWarning("arcTracker.recompute() failed to read-in Inventor string\n")
+            
 
 class ghostTracker(Tracker):
     '''A Ghost tracker, that allows to copy whole object representations.
@@ -478,7 +500,7 @@ class ghostTracker(Tracker):
             sep.addChild(coinobj.getChildren()[1])
             # sep.addChild(coinobj)
         except:
-            pass
+            print "Error retrieving coin node"
         return sep
 
 class editTracker(Tracker):
@@ -744,10 +766,14 @@ class boxTracker(Tracker):
         right = lvec.cross(normal)
         self.cube.width.setValue(lvec.Length)
         p = WorkingPlane.getPlacementFromPoints([bp,bp.add(lvec),bp.add(right)])
-        self.trans.rotation.setValue(p.Rotation.Q)
+        if p:
+            self.trans.rotation.setValue(p.Rotation.Q)
         bp = bp.add(lvec.multiply(0.5))
         bp = bp.add(DraftVecUtils.scaleTo(normal,self.cube.depth.getValue()/2))
         self.pos(bp)
+        
+    def setRotation(self,rot):
+        self.trans.rotation.setValue(rot.Q)
 
     def pos(self,p):
         self.trans.translation.setValue(DraftVecUtils.tup(p))
