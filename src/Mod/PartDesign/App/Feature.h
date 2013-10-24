@@ -64,6 +64,9 @@ protected:
     /// Returns the BaseFeature property's TopoShape (if any)
     const Part::TopoShape getBaseTopoShape() const;
 
+    /// Unite coplanar and concentric faces
+    TopoDS_Shape refineShapeIfActive(const TopoDS_Shape&);
+
     /**
      * Get a solid of the given shape. If no solid is found an exception is raised.
      */

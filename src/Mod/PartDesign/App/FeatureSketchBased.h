@@ -88,8 +88,7 @@ protected:
     bool isParallelPlane(const TopoDS_Shape&, const TopoDS_Shape&) const;
     bool isEqualGeometry(const TopoDS_Shape&, const TopoDS_Shape&) const;
     bool isQuasiEqual(const TopoDS_Shape&, const TopoDS_Shape&) const;
-    void remapSupportShape(const TopoDS_Shape&);
-    TopoDS_Shape refineShapeIfActive(const TopoDS_Shape&) const;
+    void remapSupportShape(const TopoDS_Shape&);    
 
     /// Extract a face from a given LinkSub
     static void getUpToFaceFromLinkSub(TopoDS_Face& upToFace,

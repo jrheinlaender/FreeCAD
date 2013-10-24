@@ -139,7 +139,7 @@ App::DocumentObjectExecReturn *Boolean::execute(void)
             // lets check if the result is a solid
             if (boolOp.IsNull())
                 return new App::DocumentObjectExecReturn("Resulting shape is not a solid", body);
-            buildMaps(&mkFuse, oldShapes, concatenate);
+            buildMaps(&mkFuse, oldShapes, concatenate);            
         } else if (type == "Cut") {
             BRepAlgoAPI_Cut mkCut(result, shape);
             if (!mkCut.IsDone())
@@ -166,6 +166,8 @@ App::DocumentObjectExecReturn *Boolean::execute(void)
 
         result = boolOp; // Use result of this operation for fuse/cut of next body
     }
+
+    result = refineShapeIfActive(result);
 
     // Update properties which reference this feature
     remapProperties(oldFeatures);

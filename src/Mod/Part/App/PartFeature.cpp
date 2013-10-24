@@ -60,6 +60,7 @@
 #include <Base/Rotation.h>
 #include <App/FeaturePythonPyImp.h>
 
+#include "modelRefine.h"
 #include "PartFeature.h"
 #include "PartFeaturePy.h"
 
@@ -582,6 +583,8 @@ ShapeRef findRef(const std::map<TopAbs_ShapeEnum, TopTools_IndexedMapOfShape*> M
 // AddShape and SubShape properties of Additive and Subtractive features are not included in the mapping at all
 // When they are used in FeatureTransformed, the compounding of the transformed shapes is not handled, so only the
 // path for the first transformed shape will be handled
+// Deleted shapes are not included in the map. For a better algorithm, we could include them and use the
+// information to query the user for a replacement reference
 std::map<ShapeRef, std::vector<ShapeRef> > mapCurOldToCurNew(BRepBuilderAPI_MakeShape* mkShape,
                                                              const TopoDS_Shape& oldShape)
 {
@@ -659,9 +662,58 @@ std::map<ShapeRef, std::vector<ShapeRef> > mapCurOldToCurNew(BRepBuilderAPI_Make
     return result;
 }
 
+// Specialization for ModelRefine because it can't be derived from BRepBuilderAPI_MakeShape
+// Otherwise code is identical except that unnecessary parts are omitted
+// NOTE: We could simplify the code for the PartDesign Features by including the ModelRefining here
+// after every call to buildMaps(). This would have a performance penalty for booleans and transformations
+// with multiple features, though
+std::map<ShapeRef, std::vector<ShapeRef> > mapCurOldToCurNew(Part::BRepBuilderAPI_RefineModel* mkShape,
+                                                             const TopoDS_Shape& oldShape)
+{
+    std::map<ShapeRef, std::vector<ShapeRef> > result;
+    std::map<TopAbs_ShapeEnum, TopTools_IndexedMapOfShape*> newM = extractSubShapes(mkShape->Shape());
+    std::map<TopAbs_ShapeEnum, TopTools_IndexedMapOfShape*> oldM = extractSubShapes(oldShape);
+
+    for (int t = 0; t < numShapeTypes; ++t) {
+        ShapeRef oldRef(shapeTypes[t]);
+
+        for (int i=1; i<=oldM.at(shapeTypes[t])->Extent(); ++i) {
+            oldRef.index = i-1; // adjust indices to start at zero
+            TopoDS_Shape oldSh = oldRef.toShape(oldM);
+            bool found = false;
+
+            // Find all new shapes that are a modification of the old shape (e.g. a face was resized)
+            for (TopTools_ListIteratorOfListOfShape it(mkShape->Modified(oldSh)); it.More(); it.Next()) {
+                // Note: One oldSh can result in several modified shapes, e.g. if an entity was split into segments
+                // We don't handle this case and simply take the first one
+                ShapeRef newRef = findRef(newM, it.Value());
+                if (!newRef.isEmpty()) {
+                    result[oldRef].push_back(newRef);
+                    found = true;
+                    break;
+                }
+            }
+
+            // This case is actually the most frequent one as all shapes that have not been
+            // touched by the mkShape operation are handled here
+            if (!found) {
+                if (mkShape->IsDeleted(oldSh))
+                    continue;
+                ShapeRef newRef = findRef(newM, oldSh);
+                if (!newRef.isEmpty())
+                    result[oldRef].push_back(newRef);
+            }
+        }
+    }
+
+    clearSubShapes(oldM);
+    clearSubShapes(newM);
+    return result;
+}
+
 void Feature::buildMaps(BRepBuilderAPI_MakeShape* builder, const std::vector<TopoDS_Shape>& oldShapes, const bool concatenate)
 {
-    // Initialize curOldToCurNew on first call
+    // Initialize curOldToCurNew on first call to execute()
     if (curOldToCurNew.empty())
         for (unsigned idx = 0; idx < oldShapes.size(); ++idx)
             curOldToCurNew.push_back(RefMultiMap());
@@ -676,12 +728,21 @@ void Feature::buildMaps(BRepBuilderAPI_MakeShape* builder, const std::vector<Top
                     prevNewToPrevOld[idx][*r] = m->first;
         }
 
-        // Clean and rebuild curOldToCurNew
+        // Clean curOldToCurNew
         for (unsigned idx = 0; idx < oldShapes.size(); ++idx)
             curOldToCurNew[idx].clear();
+    } else {
+        // This happens for mixed operations, e.g. Pad, for the first call of execute()
+        // Path one is from sketchshape to prism (BRepPrimAPI_MakePrism) to final shape (BRepAlgoAPI_Fuse)
+        // Path two is from base shape to final shape (BRepAlgoAPI_Fuse)
+        // So for the BRepAlgoAPI_Fuse operation an existing path is concatenated and also a new path is added
+        for (unsigned idx = prevNewToPrevOld.size(); idx < oldShapes.size(); ++idx)
+            prevNewToPrevOld.push_back(RefMap());
     }
 
     // Build the maps
+    // Note: In case of concatenation and multiple paths, quite often most of the oldShapes are identical
+    // We could catch this case and save some computing time
     std::vector<RefMultiMap> cotcn;
     for (unsigned idx = 0; idx < oldShapes.size(); ++idx)
         cotcn.push_back(mapCurOldToCurNew(builder, oldShapes[idx]));
@@ -693,9 +754,7 @@ void Feature::buildMaps(BRepBuilderAPI_MakeShape* builder, const std::vector<Top
 
         for (unsigned idx = 0; idx < oldShapes.size(); ++idx) {
             if (old_cotcn.size() <= idx) {
-                // This happens for mixed operations, e.g. Pad:
-                // Path one is from sketchshape to prism (BRepPrimAPI_MakePrism) to final shape (BRepAlgoAPI_Fuse)
-                // Path two is from base shape to final shape (BRepAlgoAPI_Fuse)
+                // This happens in mixed operations, see above
                 curOldToCurNew.push_back(cotcn[idx]);
                 continue;
             }
@@ -717,10 +776,55 @@ void Feature::buildMaps(BRepBuilderAPI_MakeShape* builder, const std::vector<Top
     }
 }
 
+// Code is identical with above, except that concatenate is always true
+void Feature::buildMaps(Part::BRepBuilderAPI_RefineModel* builder, const std::vector<TopoDS_Shape>& oldShapes)
+{
+    // Initialize curOldToCurNew on first call
+    if (curOldToCurNew.empty())
+        for (unsigned idx = 0; idx < oldShapes.size(); ++idx)
+            curOldToCurNew.push_back(RefMultiMap());
+
+    // Build the maps
+    // Note: In case of concatenation and multiple paths, quite often most of the oldShapes are identical
+    // We could catch this case and save some computing time
+    std::vector<RefMultiMap> cotcn;
+    for (unsigned idx = 0; idx < oldShapes.size(); ++idx)
+        cotcn.push_back(mapCurOldToCurNew(builder, oldShapes[idx]));
+
+    // Concatenate
+    std::vector<RefMultiMap> old_cotcn;
+    old_cotcn.swap(curOldToCurNew);
+
+    for (unsigned idx = 0; idx < oldShapes.size(); ++idx) {
+        curOldToCurNew.push_back(RefMultiMap());
+
+        for (RefMultiMap::const_iterator first_mm = old_cotcn[idx].begin(); first_mm != old_cotcn[idx].end(); ++first_mm) {
+            for (RefVec::const_iterator first_it = first_mm->second.begin(); first_it != first_mm->second.end(); ++first_it) {
+                RefMultiMap::const_iterator second_mm = cotcn[idx].find(*first_it);
+                if (second_mm != cotcn[idx].end()) {
+                    for (RefVec::const_iterator r = second_mm->second.begin(); r != second_mm->second.end(); ++r)
+                        curOldToCurNew[idx][first_mm->first].push_back(*r);
+                }
+            }
+        }
+    }
+}
+
 void Feature::buildMaps(BRepBuilderAPI_MakeShape* mkShape, const TopoDS_Shape& oldShape)
 {
     std::vector<TopoDS_Shape> oldShapes;
+    oldShapes.push_back(oldShape);    
+    buildMaps(mkShape, oldShapes);
+}
+
+void Feature::buildMaps(Part::BRepBuilderAPI_RefineModel* mkShape, const TopoDS_Shape& oldShape)
+{
+    std::vector<TopoDS_Shape> oldShapes;
     oldShapes.push_back(oldShape);
+    // Fill up the oldShapes (convenience for ModelRefine case)
+    if (curOldToCurNew.size() > 1)
+        for (unsigned i = 1; i < curOldToCurNew.size(); ++i)
+            oldShapes.push_back(oldShape);
     buildMaps(mkShape, oldShapes);
 }
 
@@ -760,8 +864,6 @@ void Feature::remapProperties(const std::vector<const Part::Feature*>& oldFeatur
                     curNew = curNew_it->second[refidx];
                     multi_idx[curOld] = refidx+1; // Remember that we have already used this shape
                 }
-                if (curNew.isEmpty())
-                    int x = 1;
                 prevToCurrent[m->first] = curNew;
                 //Base::Console().Error("%s ==> %s\n", m->first.toSubName().c_str(), curNew.toSubName().c_str());
             }
@@ -834,8 +936,8 @@ const ShapeRef Feature::convertPrevToCur(const ShapeRef& ref) const
 {
     RefMap::const_iterator r = prevToCurrent.find(ref);
     if ((r != prevToCurrent.end() && (ref.type == r->second.type))) {
-        if (r->second.isEmpty())
-            int x = int(ref.type);
+        if ((ref < r->second) || (r->second < ref))
+            Base::Console().Error("%s: %s has changed to %s\n", this->getNameInDocument(), ref.toSubName().c_str(), r->second.toSubName().c_str());
         return r->second;
     } else
         return ref;

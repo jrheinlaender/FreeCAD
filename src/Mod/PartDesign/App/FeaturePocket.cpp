@@ -167,6 +167,7 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
             if (!PrismMaker.IsDone())
                 return new App::DocumentObjectExecReturn("Pocket: Up to face: Could not extrude the sketch!");
             TopoDS_Shape prism = PrismMaker.Shape();
+            buildMaps(&PrismMaker, sketchshape, base);
             prism = refineShapeIfActive(prism);
 
             // And the really expensive way to get the SubShape...
@@ -174,11 +175,9 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
             if (!mkCut.IsDone())
                 return new App::DocumentObjectExecReturn("Pocket: Up to face: Could not get SubShape!");
             // FIXME: In some cases this affects the Shape property: It is set to the same shape as the SubShape!!!!
-            TopoDS_Shape result = refineShapeIfActive(mkCut.Shape());
-            this->SubShape.setValue(result);
+            // Note: We can't refine the SubShape without wrecking the naming
+            this->SubShape.setValue(mkCut.Shape());
             this->Shape.setValue(prism);
-
-            buildMaps(&PrismMaker, sketchshape, base);
         } else {                        
             TopoDS_Shape from;
             gp_Vec v;
@@ -201,11 +200,11 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
                 return new App::DocumentObjectExecReturn("Pocket: Cut out of base feature failed");
             buildMaps(&mkCut, prism, base, true);
             TopoDS_Shape result = mkCut.Shape();
+            result = refineShapeIfActive(result);
             // we have to get the solids (fuse sometimes creates compounds)
             TopoDS_Shape solRes = this->getSolid(result);
             if (solRes.IsNull())
                 return new App::DocumentObjectExecReturn("Pocket: Resulting shape is not a solid");
-            solRes = refineShapeIfActive(solRes);
             this->Shape.setValue(solRes);
         }
 

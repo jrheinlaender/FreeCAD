@@ -35,11 +35,14 @@
 
 
 #include <Base/Exception.h>
+#include <Base/Parameter.h>
 #include "App/Document.h"
 #include "App/Plane.h"
+#include <App/Application.h>
 #include "Body.h"
 #include "Feature.h"
 #include "Mod/Part/App/DatumFeature.h"
+#include <Mod/Part/App/modelRefine.h>
 
 #include <Base/Console.h>
 
@@ -124,6 +127,22 @@ const Part::TopoShape Feature::getBaseTopoShape() const {
         throw Base::Exception("Base feature's TopoShape is invalid");
 
     return result;
+}
+
+TopoDS_Shape Feature::refineShapeIfActive(const TopoDS_Shape& oldShape)
+{
+    Base::Reference<ParameterGrp> hGrp = App::GetApplication().GetUserParameter()
+        .GetGroup("BaseApp")->GetGroup("Preferences")->GetGroup("Mod/PartDesign");
+    if (hGrp->GetBool("RefineModel", false)) {
+        Part::BRepBuilderAPI_RefineModel mkRefine(oldShape);
+
+        buildMaps(&mkRefine, oldShape);
+
+        TopoDS_Shape resShape = mkRefine.Shape();
+        return resShape;
+    }
+
+    return oldShape;
 }
 
 bool Feature::isDatum(const App::DocumentObject* feature)

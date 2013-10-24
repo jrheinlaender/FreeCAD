@@ -144,7 +144,6 @@ App::DocumentObjectExecReturn *Groove::execute(void)
             buildMaps(&RevolMaker, sketchshape);
 
             // set the subtractive shape property for later usage in e.g. pattern
-            result = refineShapeIfActive(result);
             this->SubShape.setValue(result);
 
             // cut out groove to get one result object
@@ -155,14 +154,15 @@ App::DocumentObjectExecReturn *Groove::execute(void)
 
             // Update properties which reference this feature
             buildMaps(&mkCut, result, base, true);
+            TopoDS_Shape solRes = mkCut.Shape();
+            solRes = refineShapeIfActive(solRes);
             remapProperties(getVerifiedSketch(), getBaseObject());
 
             // we have to get the solids (fuse sometimes creates compounds)
-            TopoDS_Shape solRes = this->getSolid(mkCut.Shape());
+            solRes = this->getSolid(solRes);
             if (solRes.IsNull())
                 return new App::DocumentObjectExecReturn("Resulting shape is not a solid");
 
-            solRes = refineShapeIfActive(solRes);
             this->Shape.setValue(solRes);
         }
         else

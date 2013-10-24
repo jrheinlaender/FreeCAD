@@ -226,6 +226,7 @@ App::DocumentObjectExecReturn *Pad::execute(void)
                     return new App::DocumentObjectExecReturn("Pad: Up to face: Could not extrude the sketch!");
                 prism = PrismMaker.Shape();
                 buildMaps(&PrismMaker, sketchshape, base);
+                prism = refineShapeIfActive(prism);
             }
         } else {
             TopoDS_Shape from;
@@ -242,8 +243,7 @@ App::DocumentObjectExecReturn *Pad::execute(void)
         if (prism.IsNull())
             return new App::DocumentObjectExecReturn("Pad: Resulting shape is empty");
 
-        // set the additive shape property for later usage in e.g. pattern
-        prism = refineShapeIfActive(prism);
+        // set the additive shape property for later usage in e.g. pattern        
         this->AddShape.setValue(prism);
 
         if (!base.IsNull()) {
@@ -252,17 +252,18 @@ App::DocumentObjectExecReturn *Pad::execute(void)
             // Let's check if the fusion has been successful
             if (!mkFuse.IsDone())
                 return new App::DocumentObjectExecReturn("Pad: Fusion with base feature failed");
-            TopoDS_Shape result = mkFuse.Shape();
+            TopoDS_Shape result = mkFuse.Shape();                       
+
+            // Update properties which reference this feature
+            buildMaps(&mkFuse, prism, base, true);
+            result = refineShapeIfActive(result);
+            remapProperties(sketch, getBaseObject());
+
             // we have to get the solids (fuse sometimes creates compounds)
             TopoDS_Shape solRes = this->getSolid(result);
             // lets check if the result is a solid
             if (solRes.IsNull())
                 return new App::DocumentObjectExecReturn("Pad: Resulting shape is not a solid");
-            solRes = refineShapeIfActive(solRes);
-
-            // Update properties which reference this feature
-            buildMaps(&mkFuse, prism, base, true);
-            remapProperties(sketch, getBaseObject());
 
             this->Shape.setValue(solRes);
         } else {
