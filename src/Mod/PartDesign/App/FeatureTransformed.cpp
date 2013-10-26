@@ -163,7 +163,7 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
         // Transform the add/subshape and collect the resulting shapes for overlap testing
         typedef std::vector<std::vector<gp_Trsf>::const_iterator> trsf_it_vec;
         trsf_it_vec v_transformations;
-        std::vector<TopoDS_Shape> v_transformedShapes;
+        std::vector<Part::TopoShape> v_transformedShapes;
 
         std::vector<gp_Trsf>::const_iterator t = transformations.begin();
         t++; // Skip first transformation, which is always the identity transformation
@@ -210,7 +210,7 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
         } else {
             // For MultiTransform, just checking the first transformed shape is not sufficient - any two
             // features might overlap, even if the original and the first shape don't overlap!
-            typedef std::set<std::vector<TopoDS_Shape>::iterator> shape_it_set;
+            typedef std::set<std::vector<Part::TopoShape>::iterator> shape_it_set;
             shape_it_set rejected_iterators;
 
             std::vector<Part::TopoShape>::iterator s1 = v_transformedShapes.begin();
@@ -285,6 +285,8 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
             for (trsf_it::const_iterator it2 = it->second.begin(); it2 != it->second.end(); it2++)
                 rejected[it->first].push_back(**it2);
 
+    if (checkRefineActive())
+        theTransformed.refine();
     this->Shape.setValue(theTransformed);
 
     if (!overlapping_trsfms.empty())
@@ -294,19 +296,6 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
         // in this code
     else
         return App::DocumentObject::StdReturn;
-}
-
-TopoDS_Shape Transformed::refineShapeIfActive(const TopoDS_Shape& oldShape) const
-{
-    Base::Reference<ParameterGrp> hGrp = App::GetApplication().GetUserParameter()
-        .GetGroup("BaseApp")->GetGroup("Preferences")->GetGroup("Mod/PartDesign");
-    if (hGrp->GetBool("RefineModel", false)) {
-        Part::BRepBuilderAPI_RefineModel mkRefine(oldShape);
-        TopoDS_Shape resShape = mkRefine.Shape();
-        return resShape;
-    }
-
-    return oldShape;
 }
 
 }

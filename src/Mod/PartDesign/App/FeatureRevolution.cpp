@@ -126,10 +126,14 @@ App::DocumentObjectExecReturn *Revolution::execute(void)
         theRevolution.makeRevolution(gp_Ax1(pnt, dir), angle, Midplane.getValue(), Reversed.getValue());
 
         // set the additive shape property for later usage in e.g. pattern
+        if (checkRefineActive())
+            theRevolution.refine();
         this->AddShape.setValue(theRevolution);
 
         // Fuse with base (the algorithm will simply ignore an empty theBase and change nothing)
         theRevolution.makeFuse(theBase, false);
+        if (checkRefineActive())
+            theRevolution.refine();
 
         this->Shape.setValue(theRevolution);
 

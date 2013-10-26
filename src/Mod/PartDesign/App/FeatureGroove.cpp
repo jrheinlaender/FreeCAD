@@ -125,10 +125,14 @@ App::DocumentObjectExecReturn *Groove::execute(void)
         theGroove.makeRevolution(gp_Ax1(pnt, dir), angle, Midplane.getValue(), Reversed.getValue());
 
         // set the subtractive shape property for later usage in e.g. pattern
+        if (checkRefineActive())
+            theGroove.refine();
         this->SubShape.setValue(theGroove);
 
         // Cut out of base
         theGroove.makeCut(theBase, false);
+        if (checkRefineActive())
+            theGroove.refine();
 
         this->Shape.setValue(theGroove);
 

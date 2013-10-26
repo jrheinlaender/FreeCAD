@@ -155,12 +155,16 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
             //        Probably there are too many identical shapes for the boolean operation to work properly
             Part::TopoShape theSub = theBase;
             theSub.makeCut(thePocket);
+            if (checkRefineActive())
+                theSub.refine();
 
             this->SubShape.setValue(theSub);
         } else {
             thePocket.makePrism(dir, L, 0.0, Midplane.getValue(), Reversed.getValue());
 
             // set the subtractive shape property for later usage in e.g. pattern
+            if (checkRefineActive())
+                thePocket.refine();
             this->SubShape.setValue(thePocket);
 
             // Cut out of base
@@ -169,6 +173,8 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
             remapSupportShape(thePocket._Shape);
         }
 
+        if (checkRefineActive())
+            thePocket.refine();
         this->Shape.setValue(thePocket);
 
         return App::DocumentObject::StdReturn;

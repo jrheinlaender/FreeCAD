@@ -265,6 +265,8 @@ App::DocumentObjectExecReturn *Draft::execute(void)
 
     try {
         theDraft.makeDraft(SubVals, pullDirection, angle, neutralPlane);
+        if (checkRefineActive())
+            theDraft.refine();
 
         this->Shape.setValue(theDraft);
         return App::DocumentObject::StdReturn;

@@ -80,6 +80,8 @@ App::DocumentObjectExecReturn *Fillet::execute(void)
 
     try {
         theFillet.makeFillet(SubVals, radius);
+        if (checkRefineActive())
+            theFillet.refine();
         this->Shape.setValue(theFillet);
         return App::DocumentObject::StdReturn;
     }

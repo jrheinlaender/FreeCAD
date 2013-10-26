@@ -177,10 +177,14 @@ App::DocumentObjectExecReturn *Pad::execute(void)
         }
 
         // set the additive shape property for later usage in e.g. pattern
+        if (checkRefineActive())
+            thePad.refine();
         this->AddShape.setValue(thePad);
 
         // Fuse with base (the algorithm will simply ignore an empty theBase and change nothing)
         thePad.makeFuse(theBase, false);
+        if (checkRefineActive())
+            thePad.refine();
 
         this->Shape.setValue(thePad);
 
