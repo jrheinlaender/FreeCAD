@@ -35,6 +35,8 @@
 
 
 #include <Base/Exception.h>
+#include <Base/Parameter.h>
+#include <App/Application.h>
 #include "App/Document.h"
 #include "App/Plane.h"
 #include "Body.h"
@@ -138,6 +140,13 @@ TopoDS_Shape Feature::makeShapeFromPlane(const App::DocumentObject* obj)
         throw Base::Exception("Feature: Could not create shape from base plane");
 
     return builder.Shape();
+}
+
+const bool Feature::checkRefineActive() const
+{
+    Base::Reference<ParameterGrp> hGrp = App::GetApplication().GetUserParameter()
+        .GetGroup("BaseApp")->GetGroup("Preferences")->GetGroup("Mod/PartDesign");
+    return hGrp->GetBool("RefineModel", false);
 }
 
 }

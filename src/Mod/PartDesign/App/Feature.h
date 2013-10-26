@@ -64,6 +64,9 @@ protected:
     /// Returns the BaseFeature property's TopoShape (if any)
     const Part::TopoShape& getBaseTopoShape() const;
 
+    /// Refine the TopoShape if the user has selected this option
+    const bool checkRefineActive() const;
+
     /// Grab any point from the given face
     static const gp_Pnt getPointFromFace(const TopoDS_Face& f);    
     /// Make a shape from a base plane (convenience method)
