@@ -175,7 +175,7 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
             try {
                 if (!theTransformed.intersects(theInstance, false, true)) {
                     Base::Console().Warning("Transformed shape does not intersect support %s: Removed\n", (*o)->getNameInDocument());
-                    nointersect_trsfms.insert(t);
+                    nointersect_trsfms[*o].insert(t);
                 } else {
                     v_transformations.push_back(t);
                     v_transformedShapes.push_back(theInstance);
