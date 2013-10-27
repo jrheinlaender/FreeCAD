@@ -228,44 +228,6 @@ public:
     }
 };
 
-// Sort a vector of wires so that disjunct wires are separated and outer and inner wires are ordered
-std::list< std::list<TopoDS_Wire> > sortWires(const std::vector<TopoDS_Wire>& w) {
-    std::list< std::list<TopoDS_Wire> > result;
-
-    if (w.empty())
-        return result;
-
-    //FIXME: Need a safe method to sort wire that the outermost one comes last
-    // Currently it's done with the diagonal lengths of the bounding boxes
-    std::vector<TopoDS_Wire> wires = w;
-    std::sort(wires.begin(), wires.end(), Wire_Compare());
-    std::list<TopoDS_Wire> wire_list;
-    wire_list.insert(wire_list.begin(), wires.rbegin(), wires.rend());
-
-    // separate the wires into several independent faces
-    while (!wire_list.empty()) {
-        std::list<TopoDS_Wire> sep_list;
-        TopoDS_Wire wire = wire_list.front();
-        wire_list.pop_front();
-        sep_list.push_back(wire);
-
-        std::list<TopoDS_Wire>::iterator it = wire_list.begin();
-        while (it != wire_list.end()) {
-            if (isInside(wire, *it)) {
-                sep_list.push_back(*it);
-                it = wire_list.erase(it);
-            }
-            else {
-                ++it;
-            }
-        }
-
-        result.push_back(sep_list);
-    }
-
-    return result;
-}
-
 // Make a face from a list of wires
 TopoDS_Face createFace(std::list<TopoDS_Wire>& wires) {
     try {
@@ -313,7 +275,7 @@ void TopoShape::makeFace() {
         throw Base::Exception("TopoShape: makeFace: Only possible for a single history");
 
     // Get the wires
-    std::vector<TopoDS_Wire> wires;
+    std::vector<TopoDS_Wire> w;
     // this is a workaround for an obscure OCC bug which leads to empty tessellations
     // for some faces. Making an explicit copy of the linked shape seems to fix it.
     // The error almost happens when re-computing the shape but sometimes also for the
@@ -324,24 +286,70 @@ void TopoShape::makeFace() {
         throw Base::Exception("TopoShape: makeFace: Shape object is empty");
 
     TopExp_Explorer ex;
-    for (ex.Init(_Shape, TopAbs_WIRE); ex.More(); ex.Next())
-        wires.push_back(TopoDS::Wire(ex.Current()));
+    for (ex.Init(newShape, TopAbs_WIRE); ex.More(); ex.Next())
+        w.push_back(TopoDS::Wire(ex.Current()));
 
-    if (wires.empty()) // there can be several wires
+    if (w.empty()) // there can be several wires
         throw Base::Exception("TopoShape: makeFace: Shape object is not a wire");
 
-    // Sort the wires
-    std::list< std::list<TopoDS_Wire> > wire_list = sortWires(wires);
+    // Sort the wires so that disjunct wires are separated and outer and inner wires are ordered
+    std::list< std::list<TopoDS_Wire> > sorted_wires;
+
+    ///FIXME: Need a safe method to sort wire that the outermost one comes last
+    // Currently it's done with the diagonal lengths of the bounding boxes
+#if 1
+    std::vector<TopoDS_Wire> wires = w;
+    std::sort(wires.begin(), wires.end(), TopoShape::Wire_Compare());
+    std::list<TopoDS_Wire> wire_list;
+    wire_list.insert(wire_list.begin(), wires.rbegin(), wires.rend());
+#else
+    //bug #0001133: try alternative sort algorithm
+    std::list<TopoDS_Wire> unsorted_wire_list;
+    unsorted_wire_list.insert(unsorted_wire_list.begin(), w.begin(), w.end());
+    std::list<TopoDS_Wire> wire_list;
+    Wire_Compare wc;
+    while (!unsorted_wire_list.empty()) {
+        std::list<TopoDS_Wire>::iterator w_ref = unsorted_wire_list.begin();
+        std::list<TopoDS_Wire>::iterator w_it = unsorted_wire_list.begin();
+        for (++w_it; w_it != unsorted_wire_list.end(); ++w_it) {
+            if (wc(*w_ref, *w_it))
+                w_ref = w_it;
+        }
+        wire_list.push_back(*w_ref);
+        unsorted_wire_list.erase(w_ref);
+    }
+#endif
+
+    // separate the wires into several independent faces
+        while (!wire_list.empty()) {
+            std::list<TopoDS_Wire> sep_list;
+            TopoDS_Wire wire = wire_list.front();
+            wire_list.pop_front();
+            sep_list.push_back(wire);
+
+            std::list<TopoDS_Wire>::iterator it = wire_list.begin();
+            while (it != wire_list.end()) {
+                if (isInside(wire, *it)) {
+                    sep_list.push_back(*it);
+                    it = wire_list.erase(it);
+                }
+                else {
+                    ++it;
+                }
+            }
+
+            sorted_wires.push_back(sep_list);
+        }
 
     // Make face(s) from the wires
-    if (wire_list.size() == 1) {
-        std::list<TopoDS_Wire>& wires = wire_list.front();
-        _Shape = createFace(wires);
-    } else if (wire_list.size() > 1) {
+    if (sorted_wires.size() == 1) {
+        std::list<TopoDS_Wire>& wires = sorted_wires.front();
+        newShape = createFace(wires);
+    } else if (sorted_wires.size() > 1) {
         TopoDS_Compound comp;
         BRep_Builder builder;
         builder.MakeCompound(comp);
-        for (std::list< std::list<TopoDS_Wire> >::iterator it = wire_list.begin(); it != wire_list.end(); ++it) {
+        for (std::list< std::list<TopoDS_Wire> >::iterator it = sorted_wires.begin(); it != sorted_wires.end(); ++it) {
             TopoDS_Shape aFace = createFace(*it);
             if (!aFace.IsNull())
                 builder.Add(comp, aFace);

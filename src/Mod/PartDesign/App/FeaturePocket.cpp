@@ -134,10 +134,6 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
         theBase.move(invObjLoc);
 
         if (method == "UpToFirst" || method == "UpToFace") {
-            if (base.IsNull())
-                return new App::DocumentObjectExecReturn("Pocket: Extruding up to a face is only possible if the sketch is located on a face");
-
-        if (method == "UpToFirst" || method == "UpToFace") {
             TopoDS_Face supportface = getSupportFace();
             supportface.Move(invObjLoc);
 
