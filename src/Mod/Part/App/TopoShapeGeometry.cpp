@@ -82,6 +82,7 @@ extern RefMap joinMap(const RefMap& oldMap, const RefMap& newMap);
 extern RefMap buildRefMap(BRepPrimAPI_MakePrism &mkPrism, const TopoDS_Shape& oldShape);
 extern RefMap buildRefMap(BRepPrimAPI_MakeRevol &mkRevol, const TopoDS_Shape& oldShape);
 extern RefMap buildRefMap(BRepFeat_MakePrism &mkPrism, const TopoDS_Shape& oldShape);
+extern RefMap buildRefMap(BRepBuilderAPI_RefineModel &mkShape, const TopoDS_Shape& oldShape);
 extern TopoDS_Shape buildRefMap(BRepAlgoAPI_BooleanOperation &mkBool,
                                 const std::vector<TopoDS_Shape> oldShape,
                                 std::vector<RefMap>& result,

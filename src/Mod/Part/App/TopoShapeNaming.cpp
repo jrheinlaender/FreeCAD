@@ -589,6 +589,76 @@ RefMap buildGenericRefMap(BRepBuilderAPI_MakeShape& mkShape,
     return result;
 }
 
+/// Specialization for ModelRefine since it cannot be derived from BRepBuilderAPI_MakeShape
+RefMap buildGenericRefMap(BRepBuilderAPI_RefineModel& mkShape,
+                          std::vector<TopTools_IndexedMapOfShape*> newM,
+                          std::vector<TopTools_IndexedMapOfShape*> oldM,
+                          RefVec* splitShapes = NULL)
+{
+    RefMap result;
+
+    // Look at all objects in the old shape and try to find the related object in the new shape
+    for (int t = 0; t < numShapeTypes; t++) {
+        Base::Console().Error("Investigating %s in old shape\n", shapeTypeToString[shapeTypes[t]].c_str());
+        ShapeRef refOld(shapeTypes[t]);
+
+        for (int i=1; i<=oldM[t]->Extent(); i++) {
+            Base::Console().Error("   Investigating subshape %u of %u\n", i, oldM[t]->Extent());
+            refOld.index = i-1; // adjust indices to start at zero
+            TopoDS_Shape oldShape = findShape(oldM, refOld);
+
+            TopTools_ListIteratorOfListOfShape it;
+            ShapeRef refNew;
+            bool found = false;
+
+            // Find all new objects that are a modification of the old object (e.g. a face was resized)
+            // Note: If there is more than one object this is taken to mean that the old object has
+            // been split into two or more parts. We save the origin of the split shapes so that
+            // ambiguities can be resolved by the calling method
+            const TopTools_ListOfShape& mod(mkShape.Modified(oldShape));
+            if (mod.Extent() > 1) {
+                Base::Console().Error("         Recording origin of split shapes %s\n", refOld.toString().c_str());
+                splitShapes->push_back(refOld);
+            }
+
+            for (it.Initialize(mod); it.More(); it.Next()) {
+                found = true;
+                TopAbs_ShapeEnum type = it.Value().ShapeType();
+
+                // find object in newM corresponding to Modified() object
+                refNew = findRef(newM, it.Value());
+                Base::Console().Error("      Found modified object: %s\n", refNew.toString().c_str());
+                if (!refNew.isEmpty())
+                    result[refOld].push_back(refNew);
+            }
+
+            // Note: There are no generated shapes in this class
+
+            // Find all old objects that don't exist any more (e.g. a face was completely cut away)
+            if (!found) {
+                // Nothing was found yet
+                if (mkShape.IsDeleted(oldShape)) {
+                    Base::Console().Error("      Found deleted object\n");
+                } else {
+                    // This branch is actually the most likely one as all shapes that have not been
+                    // touched by the mkShape operation fall into this category
+                    // Search all shapes of the same type in the new shape
+                    // We don't go here if something was already found as Generated() or Modified()
+                    // to avoid duplicates occuring e.g. with boolean operations
+                    refNew = findRef(newM, oldShape);
+                    if (!refNew.isEmpty()) {
+                        Base::Console().Error("      Found same object: %s\n", refNew.toString().c_str());
+                        result[refOld].push_back(refNew);
+                    } else {
+                        Base::Console().Error("      Found nothing for object, marked as deleted\n");
+                    }
+                }
+            }
+        }
+    }
+
+    return result;
+}
 
 /**
   * Join two maps.
@@ -709,6 +779,23 @@ RefMap buildRefMapFromSketch(const TopoDS_Shape shape, const std::vector<Geometr
   * It should be removed once the implementation is complete
   */
 RefMap buildRefMap(BRepBuilderAPI_MakeShape &mkShape, const TopoDS_Shape& oldShape)
+{
+    // Extract all subshapes from old and new shape
+    std::vector<TopTools_IndexedMapOfShape*> newM, oldM;
+    newM = extractSubShapes(mkShape.Shape());
+    oldM = extractSubShapes(oldShape);
+
+    // Build general history for all BRepBuilderAPI_MakeShape classes
+    RefMap result = buildGenericRefMap(mkShape, newM, oldM);
+
+    clearSubShapes(newM);
+    clearSubShapes(oldM);
+
+    return result;
+}
+
+/// Specialization for ModelRefine since it cannot be derived from BRepBuilderAPI_MakeShape
+RefMap buildRefMap(BRepBuilderAPI_RefineModel &mkShape, const TopoDS_Shape& oldShape)
 {
     // Extract all subshapes from old and new shape
     std::vector<TopTools_IndexedMapOfShape*> newM, oldM;
