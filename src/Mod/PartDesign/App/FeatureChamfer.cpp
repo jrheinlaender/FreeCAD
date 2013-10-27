@@ -85,8 +85,6 @@ App::DocumentObjectExecReturn *Chamfer::execute(void)
 
     try {
         theChamfer.makeChamfer(SubVals, size);
-        if (checkRefineActive())
-            theChamfer.refine();
         this->Shape.setValue(theChamfer);
         return App::DocumentObject::StdReturn;
     }

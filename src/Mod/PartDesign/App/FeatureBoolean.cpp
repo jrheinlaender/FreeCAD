@@ -95,9 +95,6 @@ App::DocumentObjectExecReturn *Boolean::execute(void)
                 theBoolean.makeSection(other);
         }
 
-        if (checkRefineActive())
-            theBoolean.refine();
-
         this->Shape.setValue(theBoolean);
         return App::DocumentObject::StdReturn;
     }

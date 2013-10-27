@@ -285,8 +285,6 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
             for (trsf_it::const_iterator it2 = it->second.begin(); it2 != it->second.end(); it2++)
                 rejected[it->first].push_back(**it2);
 
-    if (checkRefineActive())
-        theTransformed.refine();
     this->Shape.setValue(theTransformed);
 
     if (!overlapping_trsfms.empty())
