@@ -999,17 +999,49 @@ const TopAbs_Orientation getTwinOrientation(const ShapeRef& ref1, const ShapeRef
     TopAbs_Orientation o1, o2;
     TopoDS_Shape shape1 = findShape(refineM, ref1);
     TopoDS_Shape shape2 = findShape(refineM, ref2);
-    RefSet::const_iterator adj1 = Shapes.at(ref1).adjShapes.begin();
-    RefSet::const_iterator adj2 = Shapes.at(ref2).adjShapes.begin();
+    RefSet adjShapes1 = Shapes.at(ref1).adjShapes;
+    RefSet adjShapes2 = Shapes.at(ref2).adjShapes;
 
-    while (adj1 != Shapes.at(ref1).adjShapes.end()) {
-        o1 = findSameShape(findShape(refineM, *adj1), shape1).Orientation();
-        o2 = findSameShape(findShape(refineM, *adj2), shape2).Orientation();
+    // For vertices, the adjShapes can be either two edges, or an edge and a face, or two edges and a face
+    // So we need to make sure the right shape types are paired off against one another
+    RefVec v_ref1;
+    RefVec v_ref2;
+    if (ref1.type == ShapeRef::Vertex) {
+        bool facepair = false;
+        for (RefSet::const_iterator adj1 = adjShapes1.begin(); adj1 != adjShapes1.end(); ++adj1) {
+            if (adj1->type == ShapeRef::Edge) {
+                v_ref1.push_back(*adj1);
+            } else {
+                v_ref1.insert(v_ref1.begin(), *adj1);
+            }
+        }
+        for (RefSet::const_iterator adj2 = adjShapes2.begin(); adj2 != adjShapes2.end(); ++adj2) {
+            if (adj2->type == ShapeRef::Edge) {
+                v_ref2.push_back(*adj2);
+            } else {
+                if (v_ref1.front().type == ShapeRef::Face) {
+                    v_ref2.insert(v_ref2.begin(), *adj2);
+                    facepair = true;
+                } // Otherwise we don't need this face since it has no match in adjShapes1
+            }
+        }
+        if (!facepair && (v_ref1.front().type == ShapeRef::Face))
+            v_ref1.erase(v_ref1.begin());
+    } else {
+        v_ref1.insert(v_ref1.begin(), adjShapes1.begin(), adjShapes1.end());
+        v_ref2.insert(v_ref2.begin(), adjShapes2.begin(), adjShapes2.end());
+    }
+
+    RefVec::const_iterator vadj1 = v_ref1.begin();
+    RefVec::const_iterator vadj2 = v_ref2.begin();
+    while ((vadj1 != v_ref1.end())) {
+        o1 = findSameShape(findShape(refineM, *vadj1), shape1).Orientation();
+        o2 = findSameShape(findShape(refineM, *vadj2), shape2).Orientation();
         if (o1 != o2)
             break;
-        Base::Console().Error("      Orientation is identical on %s and %s\n", adj1->toString().c_str(), adj2->toString().c_str());
-        adj1++;
-        adj2++;
+        Base::Console().Error("      Orientation is identical on %s and %s\n", vadj1->toString().c_str(), vadj2->toString().c_str());
+        vadj1++;
+        vadj2++;
     }
 
     if (o1 != o2) {
