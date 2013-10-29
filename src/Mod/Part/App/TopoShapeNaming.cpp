@@ -348,6 +348,7 @@ void clearSubShapes(std::vector<TopTools_IndexedMapOfShape*> map)
 {
     for (int t = 0; t < numShapeTypes; t++)
         delete map[t];
+    map.clear();
 }
 
 /// find the shape in the map
