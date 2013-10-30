@@ -185,6 +185,8 @@ const Part::TopoShape& SketchBased::getSupportTopoShape() const {
     Part::Feature* SupportObject = NULL;
     if (SupportLink && SupportLink->getTypeId().isDerivedFrom(Part::Feature::getClassTypeId()))
         SupportObject = static_cast<Part::Feature*>(SupportLink);
+    if (SupportLink && isDatum(SupportLink))
+        throw Base::Exception("Datum feature can not be used as support solid for merging");
 
     if (SupportObject == NULL)
         throw Base::Exception("No support in Sketch!");
