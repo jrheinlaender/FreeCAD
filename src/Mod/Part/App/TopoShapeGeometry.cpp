@@ -455,11 +455,23 @@ void TopoShape::makePrism(const TopoShape &base, const TopoDS_Face& supportface,
 
     if (!PrismMaker.IsDone())
         throw Base::Exception("TopoShape: Up to face: Could not extrude the sketch!");
+    if (PrismMaker.Shape().IsNull())
+        throw Base::Exception("TopoShape: Up to face: Null shape when extruding the sketch!");
+    ex.Init(PrismMaker.Shape(), TopAbs_SOLID);
+    if (!ex.More())
+        throw Base::Exception("TopoShape: Up to face: No solid was generated, check extrusion direction");
 
     // Note: The base TopoShape is not touched by the PrismMaker operation
     // Note: We assume that TopInfo is empty and stays empty
-    RefMap newMap = buildRefMap(PrismMaker, _Shape);
-    History.front().Map = joinMap(History.front().Map, newMap);
+    // Map from sketch shape to feature
+    RefMap sketchMap = buildRefMap(PrismMaker, _Shape);
+    History.front().Map = joinMap(History.front().Map, sketchMap);
+    RefMap baseMap = buildRefMap(PrismMaker, base._Shape);
+    for (std::vector<ShapeMap>::const_iterator h = base.History.begin(); h != base.History.end(); h++) {
+        ShapeMap resultHistory = *h;
+        resultHistory.Map = joinMap(resultHistory.Map, baseMap);
+        History.push_back(resultHistory);
+    }
 
     // Note: The support TopoShape is not touched by the PrismMaker operation
     _Shape = PrismMaker.Shape();

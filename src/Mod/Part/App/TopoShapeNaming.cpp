@@ -534,14 +534,13 @@ RefMap buildGenericRefMap(BRepBuilderAPI_MakeShape& mkShape,
             // been split into two or more parts. We save the origin of the split shapes so that
             // ambiguities can be resolved by the calling method
             const TopTools_ListOfShape& mod(mkShape.Modified(oldShape));
-            if (mod.Extent() > 1) {
+            if ((mod.Extent() > 1) && (splitShapes != NULL)) {
                 Base::Console().Error("         Recording origin of split shapes %s\n", refOld.toString().c_str());
                 splitShapes->push_back(refOld);
             }
 
             for (it.Initialize(mod); it.More(); it.Next()) {
                 found = true;
-                TopAbs_ShapeEnum type = it.Value().ShapeType();
 
                 // find object in newM corresponding to Modified() object
                 refNew = findRef(newM, it.Value());
@@ -553,7 +552,6 @@ RefMap buildGenericRefMap(BRepBuilderAPI_MakeShape& mkShape,
             // Find all new objects that were generated from an old object (e.g. a face generated from an edge)
             for (it.Initialize(mkShape.Generated(oldShape)); it.More(); it.Next()) {
                 found = true;
-                TopAbs_ShapeEnum type = it.Value().ShapeType();
 
                 // The shape might not be found e.g. for the case of FACE -> SOLID
                 // But the found = true remains valid anyway to avoid duplicate references!
@@ -567,9 +565,13 @@ RefMap buildGenericRefMap(BRepBuilderAPI_MakeShape& mkShape,
             // Find all old objects that don't exist any more (e.g. a face was completely cut away)
             if (!found) {
                 // Nothing was found yet
-                if (mkShape.IsDeleted(oldShape)) {
-                    Base::Console().Error("      Found deleted object\n");
-                } else {
+                // Note: BRepFilletAPI_MakeFillet.IsDeleted() claims far too many shapes as deleted, so we
+                // can't use IsDeleted() here to avoid unnecessary findRef() calls
+                // Note: BRepFeat_MakePrism throws an exception when IsDeleted is called with a vertex
+                // of the face used to extrude the prism
+//                if (mkShape.IsDeleted(oldShape)) {
+//                    Base::Console().Error("      Found deleted object\n");
+//                } else {
                     // This branch is actually the most likely one as all shapes that have not been
                     // touched by the mkShape operation fall into this category
                     // Search all shapes of the same type in the new shape
@@ -582,7 +584,7 @@ RefMap buildGenericRefMap(BRepBuilderAPI_MakeShape& mkShape,
                     } else {
                         Base::Console().Error("      Found nothing for object, marked as deleted\n");
                     }
-                }
+//                }
             }
         }
     }
@@ -617,14 +619,13 @@ RefMap buildGenericRefMap(BRepBuilderAPI_RefineModel& mkShape,
             // been split into two or more parts. We save the origin of the split shapes so that
             // ambiguities can be resolved by the calling method
             const TopTools_ListOfShape& mod(mkShape.Modified(oldShape));
-            if (mod.Extent() > 1) {
+            if ((mod.Extent() > 1) && (splitShapes != NULL)) {
                 Base::Console().Error("         Recording origin of split shapes %s\n", refOld.toString().c_str());
                 splitShapes->push_back(refOld);
             }
 
             for (it.Initialize(mod); it.More(); it.Next()) {
                 found = true;
-                TopAbs_ShapeEnum type = it.Value().ShapeType();
 
                 // find object in newM corresponding to Modified() object
                 refNew = findRef(newM, it.Value());
@@ -914,9 +915,10 @@ RefMap buildRefMap(BRepFeat_MakePrism &mkPrism, const TopoDS_Shape& oldShape)
     std::vector<TopTools_IndexedMapOfShape*> newM, oldM;
     newM = extractSubShapes(mkPrism.Shape());
     oldM = extractSubShapes(oldShape);
+    RefVec splitOrigins;
 
-    // Build general history for all BRepBuilderAPI_MakeShape classes
-    RefMap result = buildGenericRefMap(mkPrism, newM, oldM);
+    // Build general history for all BRepBuilderAPI_MakeShape classes    
+    RefMap result = buildGenericRefMap(mkPrism, newM, oldM, &splitOrigins);
 
     clearSubShapes(newM);
     clearSubShapes(oldM);
@@ -924,7 +926,7 @@ RefMap buildRefMap(BRepFeat_MakePrism &mkPrism, const TopoDS_Shape& oldShape)
     return result;
 
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // TODO: are there NewEdges() and TgtEdges() ? What about Curves() ? FirstShape()? LastShape()?
+    // TODO: are there NewEdges() and TgtEdges() ? What about Curves() ? FirstShape()? LastShape()? splitOrigins?
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
