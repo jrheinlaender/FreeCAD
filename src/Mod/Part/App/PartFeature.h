@@ -140,9 +140,6 @@ protected:
     void buildMaps(BRepBuilderAPI_MakeShape* builder,
                    const std::vector<TopoDS_Shape>& oldShapes,
                    const bool concatenate = false);
-    /// Specialization for BRepBuilderAPI_RefineModel because it can't be derived from BRepBuilderAPI_MakeShape
-    void buildMaps(Part::BRepBuilderAPI_RefineModel* builder,
-                   const std::vector<TopoDS_Shape>& oldShapes);
     /// Shortcut for a single makeShape operation, e.g. filleting
     void buildMaps(BRepBuilderAPI_MakeShape* mkShape, const TopoDS_Shape& oldShape);
     void buildMaps(Part::BRepBuilderAPI_RefineModel* mkShape, const TopoDS_Shape& oldShape);
