@@ -101,7 +101,8 @@
 #include <Gui/Control.h>
 
 #include "ViewProviderExt.h"
-#include "SoBrepShape.h"
+#include "SoBrepPointSet.h"
+#include "SoBrepEdgeSet.h"
 #include "SoBrepFaceSet.h"
 #include "TaskFaceColors.h"
 
@@ -149,7 +150,6 @@ ViewProviderPartExt::ViewProviderPartExt()
     ADD_PROPERTY(PointSize,(lwidth));
     ADD_PROPERTY(Deviation,(0.5f));
     Deviation.setConstraints(&tessRange);
-    ADD_PROPERTY(ControlPoints,(false));
     ADD_PROPERTY(Lighting,(1));
     Lighting.setEnums(LightingEnums);
     ADD_PROPERTY(DrawStyle,((long int)0));

@@ -22,6 +22,7 @@
 
 #include "PreCompiled.h"
 #ifndef _PreComp_
+# include <sstream>
 #endif
 
 #include <cmath>
@@ -36,6 +37,13 @@
 # pragma warning(disable : 4065)
 # pragma warning( disable : 4273 )
 # pragma warning(disable : 4335) // disable MAC file format warning on VC
+#endif
+
+#ifndef  DOUBLE_MAX
+# define DOUBLE_MAX 1.7976931348623157E+308    /* max decimal value of a "double"*/
+#endif
+#ifndef  DOUBLE_MIN
+# define DOUBLE_MIN 2.2250738585072014E-308    /* min decimal value of a "double"*/
 #endif
 
 using namespace Base;
@@ -113,18 +121,41 @@ double Quantity::getUserPrefered(QString &unitString)const
 	return Base::UnitsApi::schemaPrefUnit(_Unit,unitString).getValue() * _Value;
 }
 
+std::string Quantity::getUserString(void)const
+{
+    std::stringstream sstream;
+    sstream << _Value << _Unit.getString();
+    //TODO: implementing 
+    return sstream.str();
+}
+
+/// true if it has a number without a unit
+bool Quantity::isDimensionless(void)const
+{
+    return _Value != DOUBLE_MIN && _Unit.isEmpty();
+}
+// true if it has a number and a valid unit
+bool Quantity::isQuantity(void)const
+{
+    return _Value != DOUBLE_MIN && !_Unit.isEmpty();
+}
+// true if it has a number with or without a unit
+bool Quantity::isValid(void)const
+{
+    return _Value != DOUBLE_MIN ;
+}
+
+void Quantity::setInvalid(void)
+{
+    _Value = DOUBLE_MIN ;
+}
+
 // === Parser & Scanner stuff ===============================================
 
 // include the Scanner and the Parser for the Quantitys
 
 Quantity QuantResult;
 
-#ifndef  DOUBLE_MAX
-# define DOUBLE_MAX 1.7976931348623157E+308    /* max decimal value of a "double"*/
-#endif
-#ifndef  DOUBLE_MIN
-# define DOUBLE_MIN 2.2250738585072014E-308    /* min decimal value of a "double"*/
-#endif
 
 
 // error func
@@ -167,7 +198,7 @@ Quantity Quantity::parse(const char* buffer)
     // free the scan buffer
     QuantityParser::yy_delete_buffer (my_string_buffer);
 
-    if (QuantResult == Quantity(DOUBLE_MIN))
-        throw Base::Exception("Unknown error in Quantity expression");
+    //if (QuantResult == Quantity(DOUBLE_MIN))
+    //    throw Base::Exception("Unknown error in Quantity expression");
     return QuantResult;
 }

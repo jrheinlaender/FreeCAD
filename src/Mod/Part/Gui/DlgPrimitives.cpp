@@ -259,6 +259,7 @@ DlgPrimitives::DlgPrimitives(QWidget* parent)
     ui.edgeY2->setMinimum(INT_MIN);
     ui.edgeZ2->setMaximum(INT_MAX);
     ui.edgeZ2->setMinimum(INT_MIN);
+    // RegularPolygon
 }
 
 /*  
@@ -505,6 +506,7 @@ void DlgPrimitives::createPrimitive(const QString& placement)
                 "App.ActiveDocument.%1.Radius=%4\n"
                 "App.ActiveDocument.%1.Angle=%5\n"
                 "App.ActiveDocument.%1.LocalCoord=%6\n"
+                "App.ActiveDocument.%1.Style=1\n"
                 "App.ActiveDocument.%1.Placement=%7\n")
                 .arg(name)
                 .arg(ui.helixPitch->value(),0,'f',2)
@@ -514,7 +516,21 @@ void DlgPrimitives::createPrimitive(const QString& placement)
                 .arg(ui.helixLocalCS->currentIndex())
                 .arg(placement);
         }
-        else if (ui.comboBox1->currentIndex() == 10) {  // circle
+        else if (ui.comboBox1->currentIndex() == 10) {  // spiral
+            name = QString::fromAscii(doc->getUniqueObjectName("Spiral").c_str());
+            cmd = QString::fromAscii(
+                "App.ActiveDocument.addObject(\"Part::Spiral\",\"%1\")\n"
+                "App.ActiveDocument.%1.Growth=%2\n"
+                "App.ActiveDocument.%1.Rotations=%3\n"
+                "App.ActiveDocument.%1.Radius=%4\n"
+                "App.ActiveDocument.%1.Placement=%5\n")
+                .arg(name)
+                .arg(ui.spiralGrowth->value(),0,'f',2)
+                .arg(ui.spiralRotation->value(),0,'f',2)
+                .arg(ui.spiralRadius->value(),0,'f',2)
+                .arg(placement);
+        }
+        else if (ui.comboBox1->currentIndex() == 11) {  // circle
             name = QString::fromAscii(doc->getUniqueObjectName("Circle").c_str());
             cmd = QString::fromAscii(
                 "App.ActiveDocument.addObject(\"Part::Circle\",\"%1\")\n"
@@ -528,7 +544,7 @@ void DlgPrimitives::createPrimitive(const QString& placement)
                 .arg(ui.circleAngle1->value(),0,'f',2)
                 .arg(placement);
         }
-        else if (ui.comboBox1->currentIndex() == 11) {  // ellipse
+        else if (ui.comboBox1->currentIndex() == 12) {  // ellipse
             name = QString::fromAscii(doc->getUniqueObjectName("Ellipse").c_str());
             cmd = QString::fromAscii(
                 "App.ActiveDocument.addObject(\"Part::Ellipse\",\"%1\")\n"
@@ -544,7 +560,7 @@ void DlgPrimitives::createPrimitive(const QString& placement)
                 .arg(ui.ellipseAngle1->value(),0,'f',2)
                 .arg(placement);
         }
-        else if (ui.comboBox1->currentIndex() == 12) {  // vertex
+        else if (ui.comboBox1->currentIndex() == 13) {  // vertex
             name = QString::fromAscii(doc->getUniqueObjectName("Vertex").c_str());
             cmd = QString::fromAscii(
                 "App.ActiveDocument.addObject(\"Part::Vertex\",\"%1\")\n"
@@ -558,7 +574,7 @@ void DlgPrimitives::createPrimitive(const QString& placement)
                 .arg(ui.vertexZ->value(),0,'f',2)
                 .arg(placement);
         }
-        else if (ui.comboBox1->currentIndex() == 13) {  // line
+        else if (ui.comboBox1->currentIndex() == 14) {  // line
             name = QString::fromAscii(doc->getUniqueObjectName("Line").c_str());
             cmd = QString::fromAscii(
                 "App.ActiveDocument.addObject(\"Part::Line\",\"%1\")\n"
@@ -576,6 +592,18 @@ void DlgPrimitives::createPrimitive(const QString& placement)
                 .arg(ui.edgeX2->value(),0,'f',2)
                 .arg(ui.edgeY2->value(),0,'f',2)
                 .arg(ui.edgeZ2->value(),0,'f',2)
+                .arg(placement);
+        }
+        else if (ui.comboBox1->currentIndex() == 15) {  // RegularPolygon
+            name = QString::fromAscii(doc->getUniqueObjectName("RegularPolygon").c_str());
+            cmd = QString::fromAscii(
+                "App.ActiveDocument.addObject(\"Part::RegularPolygon\",\"%1\")\n"
+                "App.ActiveDocument.%1.NumberOfSides=%2\n"
+                "App.ActiveDocument.%1.Radius=%3\n"
+                "App.ActiveDocument.%1.Placement=%4\n")
+                .arg(name)
+                .arg(ui.regularPolygonNumberOfSides->value())
+                .arg(ui.regularPolygonRadius->value(),0,'f',2)
                 .arg(placement);
         }
 
