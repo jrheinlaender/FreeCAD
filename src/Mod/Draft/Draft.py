@@ -102,9 +102,10 @@ def typecheck (args_and_types, name="?"):
 def getParamType(param):
     if param in ["dimsymbol","dimPrecision","dimorientation","precision","defaultWP",
                  "snapRange","gridEvery","linewidth","UiMode","modconstrain","modsnap",
-                 "modalt","HatchPatternResolution","snapStyle","dimstyle"]:
+                 "maxSnapEdges","modalt","HatchPatternResolution","snapStyle",
+                 "dimstyle"]:
         return "int"
-    elif param in ["constructiongroupname","textfont","patternFile","template","maxSnapEdges",
+    elif param in ["constructiongroupname","textfont","patternFile","template",
                    "snapModes","FontFile"]:
         return "string"
     elif param in ["textheight","tolerance","gridSpacing","arrowsize","extlines","dimspacing"]:
@@ -301,27 +302,37 @@ def shapify(obj):
     FreeCAD.ActiveDocument.recompute()
     return newobj
 
-def getGroupContents(objectslist,walls=False):
-    '''getGroupContents(objectlist): if any object of the given list
-    is a group, its content is appened to the list, which is returned'''
+def getGroupContents(objectslist,walls=False,addgroups=False):
+    '''getGroupContents(objectlist,[walls,addgroups]): if any object of the given list
+    is a group, its content is appened to the list, which is returned. If walls is True,
+    walls are also scanned for included windows. If addgroups is true, the group itself
+    is also included in the list.'''
     newlist = []
     if not isinstance(objectslist,list):
         objectslist = [objectslist]
     for obj in objectslist:
         if obj.isDerivedFrom("App::DocumentObjectGroup"):
             if obj.isDerivedFrom("Drawing::FeaturePage"):
-                # skip if the grou is a page
+                # skip if the group is a page
                 newlist.append(obj)
             else:
-                newlist.extend(getGroupContents(obj.Group))
+                if addgroups:
+                    newlist.append(obj)
+                newlist.extend(getGroupContents(obj.Group,walls,addgroups))
         else:
+            #print "adding ",obj.Name
             newlist.append(obj)
             if walls:
                 if getType(obj) == "Wall":
                     for o in obj.OutList:
                         if (getType(o) == "Window") or isClone(o,"Window"):
                             newlist.append(o)
-    return newlist
+    # cleaning possible duplicates
+    cleanlist = []
+    for obj in newlist:
+        if not obj in cleanlist:
+            cleanlist.append(obj)
+    return cleanlist
 
 def removeHidden(objectslist):
     """removeHidden(objectslist): removes hidden objects from the list"""
@@ -429,6 +440,12 @@ def getSelection():
         return FreeCADGui.Selection.getSelection()
     return None
 
+def getSelectionEx():
+    "getSelectionEx(): returns the current FreeCAD selection (with subobjects)"
+    if gui:
+        return FreeCADGui.Selection.getSelectionEx()
+    return None
+
 def select(objs=None):
     "select(object): deselects everything and selects only the passed object or list"
     if gui:
@@ -484,18 +501,20 @@ def loadTexture(filename,size=None):
         from pivy import coin
         from PyQt4 import QtGui,QtSvg
         try:
-            if size and (".svg" in filename.lower()):
-                # this is a pattern, not a texture
-                if isinstance(size,int):
-                    size = (size,size)
-                svgr = QtSvg.QSvgRenderer(filename)
-                p = QtGui.QImage(size[0],size[1],QtGui.QImage.Format_ARGB32)
-                pa = QtGui.QPainter()
-                pa.begin(p)
-                svgr.render(pa)
-                pa.end()
-            else:   
-                p = QtGui.QImage(filename)
+            p = QtGui.QImage(filename)
+            # buggy - TODO: allow to use resolutions
+            #if size and (".svg" in filename.lower()):
+            #    # this is a pattern, not a texture
+            #    if isinstance(size,int):
+            #        size = (size,size)
+            #    svgr = QtSvg.QSvgRenderer(filename)
+            #    p = QtGui.QImage(size[0],size[1],QtGui.QImage.Format_ARGB32)
+            #    pa = QtGui.QPainter()
+            #    pa.begin(p)
+            #    svgr.render(pa)
+            #    pa.end()
+            #else:   
+            #    p = QtGui.QImage(filename)
             size = coin.SbVec2s(p.width(), p.height())
             buffersize = p.numBytes()
             numcomponents = int (buffersize / ( size[0] * size[1] ))
@@ -948,11 +967,37 @@ def makeArray(baseobject,arg1,arg2,arg3,arg4=None,name="Array"):
         obj.Angle = arg2
         obj.NumberPolar = arg3
     if gui:
-        _ViewProviderDraftPart(obj.ViewObject)  
+        _ViewProviderDraftArray(obj.ViewObject)  
         baseobject.ViewObject.hide()
         select(obj)
     return obj
-    
+ 
+def makePathArray(baseobject,pathobject,count,xlate=None,align=False,pathobjsubs=[]):
+    '''makePathArray(docobj,path,count,xlate,align,pathobjsubs): distribute 
+    count copies of a document baseobject along a pathobject or subobjects of a 
+    pathobject. Optionally translates each copy by FreeCAD.Vector xlate direction 
+    and distance to adjust for difference in shape centre vs shape reference point.
+    Optionally aligns baseobject to tangent/normal/binormal of path.'''
+    obj = FreeCAD.ActiveDocument.addObject("Part::FeaturePython","PathArray")
+    _PathArray(obj)
+    obj.Base = baseobject
+    obj.PathObj = pathobject
+    if pathobjsubs:
+        sl = []
+        for sub in pathobjsubs:
+            sl.append((obj.PathObj,sub))
+        obj.PathSubs = list(sl) 
+    if count > 1:
+        obj.Count = count
+    if xlate:
+        obj.Xlate = xlate
+    obj.Align = align
+    if gui:
+        _ViewProviderDraftArray(obj.ViewObject)  
+        baseobject.ViewObject.hide()
+        select(obj)
+    return obj
+
 def makeEllipse(majradius,minradius,placement=None,face=True,support=None):
     '''makeEllipse(majradius,minradius,[placement],[face],[support]): makes
     an ellipse with the given major and minor radius, and optionally
@@ -4126,6 +4171,169 @@ class _Array(_DraftObject):
             base.append(nshape)
         return Part.makeCompound(base)
 
+class _PathArray(_DraftObject):
+    "The Draft Path Array object"
+
+    def __init__(self,obj):
+        _DraftObject.__init__(self,obj,"PathArray")
+        obj.addProperty("App::PropertyLink","Base","Draft",
+                        "The base object that must be duplicated")
+        obj.addProperty("App::PropertyLink","PathObj","Draft",
+                        "The path object along which to distribute objects")
+        obj.addProperty("App::PropertyLinkSubList","PathSubs","Draft",
+                        "Selected subobjects (edges) of PathObj")                        
+        obj.addProperty("App::PropertyInteger","Count","Draft",
+                        "Number of copies")
+        obj.addProperty("App::PropertyVector","Xlate","Draft",
+                        "Optional translation vector")
+        obj.addProperty("App::PropertyBool","Align","Draft","Orientation of Base along path")
+        obj.Count = 2
+        obj.PathSubs = []
+        obj.Xlate = FreeCAD.Vector(0,0,0)
+        obj.Align = False
+
+    def execute(self,obj):
+        self.createGeometry(obj)
+ 
+    def onChanged(self,obj,prop):
+        if prop in ["Count","Xlate","Align"]:
+            self.createGeometry(obj)
+            
+    def createGeometry(self,obj):
+        import FreeCAD
+        import Part
+        import DraftGeomUtils
+        if obj.Base and obj.PathObj:
+            pl = obj.Placement
+            if obj.PathSubs:
+                w = self.getWireFromSubs(obj)
+            elif (hasattr(obj.PathObj.Shape,'Wires') and obj.PathObj.Shape.Wires):
+                w = obj.PathObj.Shape.Wires[0]
+            elif obj.PathObj.Shape.Edges:
+                w = Part.Wire(obj.PathObj.Shape.Edges)
+            else:
+                FreeCAD.Console.PrintLog ("_PathArray.createGeometry: path " + obj.PathObj.Name + " has no edges\n")
+                return
+            obj.Shape = self.pathArray(obj.Base.Shape,w,obj.Count,obj.Xlate,obj.Align) 
+            if not DraftGeomUtils.isNull(pl):
+                obj.Placement = pl
+                
+    def getWireFromSubs(self,obj):
+        '''Make a wire from PathObj subelements'''
+        import Part
+        sl = []
+        for sub in obj.PathSubs:
+            e = sub[0].Shape.getElement(sub[1])
+            sl.append(e)
+        return Part.Wire(sl)
+                                   
+    def getParameterFromV0(self, edge, offset):
+        '''return parameter at distance offset from edge.Vertexes[0]'''
+        '''sb method in Part.TopoShapeEdge???'''
+        lpt = edge.valueAt(edge.getParameterByLength(0))
+        vpt = edge.Vertexes[0].Point
+        if not DraftVecUtils.equals(vpt,lpt):
+            # this edge is flipped
+            length = edge.Length - offset
+        else:
+            # this edge is right way around
+            length = offset
+        return(edge.getParameterByLength(length))
+        
+    def orientShape(self,shape,edge,offset,RefPt,xlate,align):
+        '''Orient shape to edge tangent at offset.'''
+        import Part
+        import DraftGeomUtils
+        import math
+        z = FreeCAD.Vector(0,0,1)                                    # unit +Z  Probably defined elsewhere?
+        y = FreeCAD.Vector(0,1,0)                                    # unit +Y
+        x = FreeCAD.Vector(1,0,0)                                    # unit +X
+        nullv = FreeCAD.Vector(0,0,0)
+        ns = shape.copy()
+        ns.translate(RefPt+xlate)
+        if not align:
+            return ns
+            
+        # get local coord system - tangent, normal, binormal, if possible
+        t = edge.tangentAt(self.getParameterFromV0(edge,offset))
+        t.normalize()
+        try:
+            n = edge.normalAt(self.getParameterFromV0(edge,offset))
+            n.normalize()
+            b = (t.cross(n)) 
+            b.normalize()
+        except:                                                      # no normal defined here
+            n = nullv
+            b = nullv 
+            FreeCAD.Console.PrintLog ("Draft PathArray.orientShape - Shape not oriented (no normal).\n")
+        lnodes = z.cross(b)
+        if lnodes != nullv:
+            lnodes.normalize()                                       # Can't normalize null vector.                                       
+                                                                     # pathological cases:
+        if n == nullv:                                               # 1) edge has inf. normals (ie line segment)
+            psi = math.degrees(DraftVecUtils.angle(x,t,z))           #    align shape to tangent
+            theta = 0.0
+            phi = 0.0
+        elif b == z:                                                 # 2) binormal is same as z
+            psi = math.degrees(DraftVecUtils.angle(x,t,z))           #    align shape to tangent 
+            theta = 0.0
+            phi = 0.0
+            FreeCAD.Console.PrintLog ("Draft PathArray.orientShape - Aligned to tangent only (no line of nodes).\n")
+        else:                                                        # regular case                                
+            psi = math.degrees(DraftVecUtils.angle(lnodes,t,z))
+            theta = abs(math.degrees(DraftVecUtils.angle(z,b,x)))    # 0<=theta<=pi
+            phi = math.degrees(DraftVecUtils.angle(x,lnodes,z))
+        ns.rotate(RefPt,z,psi)
+        ns.rotate(RefPt,x,theta)
+        ns.rotate(RefPt,z,phi)
+        return ns
+                
+    def pathArray(self,shape,pathwire,count,xlate,align):
+        '''Distribute shapes along a path.'''
+        import Part
+        import DraftGeomUtils
+        closedpath = DraftGeomUtils.isReallyClosed(pathwire)
+        path = DraftGeomUtils.sortEdges(pathwire.Edges) 
+        ends = []
+        cdist = 0
+        for e in path:                                                 # find cumulative edge end distance
+            cdist += e.Length
+            ends.append(cdist)
+        base = []
+        pt = path[0].Vertexes[0].Point                                 # place the start shape
+        ns = self.orientShape(shape,path[0],0,pt,xlate,align)
+        base.append(ns)
+        if not(closedpath):                                            # closed path doesn't need shape on last vertex
+            pt = path[-1].Vertexes[-1].Point                           # place the end shape
+            ns = self.orientShape(shape,path[-1],path[-1].Length,pt,xlate,align)
+            base.append(ns)
+        if count < 3:
+            return(Part.makeCompound(base))                            
+
+        # place the middle shapes 
+        if closedpath:                        
+            stop = count                          
+        else:
+            stop = count - 1                        
+        step = cdist/stop   
+        remain = 0
+        travel = step
+        for i in range(1,stop):                            
+            # which edge in path should contain this shape?
+            iend = len(ends) - 1                                       # avoids problems with float math travel > ends[-1]
+            for j in range(0,len(ends)):  
+                if travel <= ends[j]:                      
+                    iend = j
+                    break
+            # place shape at proper spot on proper edge
+            remains = ends[iend] - travel
+            offset = path[iend].Length - remains           
+            pt = path[iend].valueAt(self.getParameterFromV0(path[iend],offset))
+            ns = self.orientShape(shape,path[iend],offset,pt,xlate,align)
+            base.append(ns)
+            travel += step
+        return(Part.makeCompound(base))      
+
 class _Point(_DraftObject):
     "The Draft Point object"
     def __init__(self, obj,x,y,z):
@@ -4204,13 +4412,22 @@ class _Clone(_DraftObject):
             obj.Placement = pl
 
 class _ViewProviderClone(_ViewProviderDraftAlt):
-    "a view provider that displays a Part icon instead of a Draft icon"
+    "a view provider that displays a Clone icon instead of a Draft icon"
     
     def __init__(self,vobj):
         _ViewProviderDraftAlt.__init__(self,vobj)
 
     def getIcon(self):
         return ":/icons/Draft_Clone.svg"
+        
+class _ViewProviderDraftArray(_ViewProviderDraft):
+    "a view provider that displays a Array icon instead of a Draft icon"
+    
+    def __init__(self,vobj):
+        _ViewProviderDraft.__init__(self,vobj)
+
+    def getIcon(self):
+        return ":/icons/Draft_Array.svg"
         
 class _ShapeString(_DraftObject):
     "The ShapeString object"

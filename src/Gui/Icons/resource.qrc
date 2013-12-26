@@ -27,6 +27,13 @@
         <file>ClassBrowser/type_class.png</file>
         <file>ClassBrowser/type_enum.png</file>
         <file>ClassBrowser/type_module.png</file>
+        <file>ClassBrowser/const_member.svg</file>
+        <file>ClassBrowser/member.svg</file>
+        <file>ClassBrowser/method.svg</file>
+        <file>ClassBrowser/property.svg</file>
+        <file>ClassBrowser/type_class.svg</file>
+        <file>ClassBrowser/type_enum.svg</file>
+        <file>ClassBrowser/type_module.svg</file>
         <file>Std_ViewScreenShot.svg</file>
         <file>breakpoint.svg</file>
         <file>debug-marker.svg</file>
@@ -83,6 +90,8 @@
         <file>Tree_Annotation.svg</file>
         <file>Tree_Dimension.svg</file>
         <file>Tree_Python.svg</file>
+        <file>Part_Measure_Clear_All.svg</file>
+        <file>Part_Measure_Toggle_All.svg</file>
         <file>spaceball_button.svg</file>
         <file>SpNav-PanLR.svg</file>
         <file>SpNav-PanUD.svg</file>

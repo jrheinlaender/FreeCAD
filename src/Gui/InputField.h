@@ -51,6 +51,7 @@ class GuiExport InputField : public QLineEdit
   Q_PROPERTY(double singleStep READ singleStep WRITE setSingleStep )
   Q_PROPERTY(double maximum READ maximum WRITE setMaximum )
   Q_PROPERTY(double minimum READ minimum WRITE setMinimum )
+  Q_PROPERTY(int historySize READ historySize WRITE setHistorySize )
 
 
 public:
@@ -59,6 +60,8 @@ public:
 
   /// sets the field with a quantity
   void setValue(const Base::Quantity&);
+  /// get the actual value
+  Base::Quantity getQuantity(void)const{return this->actQuantity;}
   /** sets the Unit this field working with. 
   *   After seting the Unit the field will only acceppt
   *   user input with this unit type. Or if the user input 
@@ -79,6 +82,13 @@ public:
   double minimum(void)const;
   /// set the value of the minimum property 
   void setMinimum(double);
+  /// get the value of the minimum property
+  int historySize(void)const;
+  /// set the value of the minimum property 
+  void setHistorySize(int);
+
+  /// set the number portion selected (use after setValue()) 
+  void selectNumber(void);
 
   /** @name history and default management */
   //@{
@@ -86,10 +96,14 @@ public:
   QByteArray paramGrpPath () const;
   /// set the param group path where the widget write and read the dafault values
   void  setParamGrpPath  ( const QByteArray& name );
-  /// push a new value to the history
-  void pushToHistory(std::string value);
+  /// push a new value to the history, if no string given the actual text of the input field is used. 
+  void pushToHistory(const QString &valueq = QString());
   /// get the history of the field, newest first
-  std::vector<std::string> getHistory(void);
+  std::vector<QString> getHistory(void);
+  /// push a new value to the history, if no string given the actual text of the input field is used. 
+  void pushToSavedValues(const QString &valueq = QString());
+  /// get the history of the field, newest first
+  std::vector<QString> getSavedValues(void);
   //@}
 
 
@@ -115,6 +129,7 @@ Q_SIGNALS:
 protected Q_SLOTS:
     void newInput(const QString & text);
 
+    void wheelEvent ( QWheelEvent * event ) ;
 protected:
     virtual void 	contextMenuEvent ( QContextMenuEvent * event );
 
@@ -128,6 +143,14 @@ private:
 
   Base::Quantity actQuantity;
   Base::Unit     actUnit;
+  double         actUnitValue;
+  QString        actUnitStr;
+
+  double Maximum;
+  double Minimum;
+  double StepSize;
+  int HistorySize;
+  int SaveSize;
 };
 
 

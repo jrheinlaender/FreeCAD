@@ -73,7 +73,7 @@ class ArchWorkbench(Workbench):
                      "Arch_Floor","Arch_Building","Arch_Site",
                      "Arch_Window","Arch_Roof","Arch_Axis",
                      "Arch_SectionPlane","Arch_Space","Arch_Stairs",
-                     "Arch_Add","Arch_Remove"]
+                     "Arch_Frame","Arch_Add","Arch_Remove"]
         self.meshtools = ["Arch_SplitMesh","Arch_MeshToShape",
                      "Arch_SelectNonSolidMeshes","Arch_RemoveShape",
                      "Arch_CloseHoles","Arch_MergeWalls"]
@@ -87,7 +87,7 @@ class ArchWorkbench(Workbench):
         self.draftmodtools = ["Draft_Move","Draft_Rotate","Draft_Offset",
                         "Draft_Trimex", "Draft_Upgrade", "Draft_Downgrade", "Draft_Scale",
                         "Draft_Drawing","Draft_Shape2DView","Draft_Draft2Sketch","Draft_Array",
-                        "Draft_Clone"]
+                        "Draft_PathArray","Draft_Clone"]
         self.extramodtools = ["Draft_WireToBSpline","Draft_AddPoint","Draft_DelPoint"]
         self.draftcontexttools = ["Draft_ApplyStyle","Draft_ToggleDisplayMode","Draft_AddToGroup",
                             "Draft_SelectGroup","Draft_SelectPlane",
@@ -146,6 +146,7 @@ FreeCADGui.addWorkbench(ArchWorkbench)
 
 # add import/export types
 FreeCAD.addImportType("Industry Foundation Classes (*.ifc)","importIFC")
+FreeCAD.addExportType("Industry Foundation Classes (*.ifc)","importIFC")
 FreeCAD.addExportType("Wavefront OBJ - Arch module (*.obj)","importOBJ")
 FreeCAD.addExportType("WebGL file (*.html)","importWebGL")
 FreeCAD.addImportType("Collada (*.dae)","importDAE")

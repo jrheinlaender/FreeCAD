@@ -48,7 +48,9 @@ DlgUnitsCalculator::DlgUnitsCalculator( QWidget* parent, Qt::WFlags fl )
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     connect(this->ValueInput, SIGNAL(valueChanged(Base::Quantity)), this, SLOT(valueChanged(Base::Quantity)));
+    connect(this->ValueInput, SIGNAL(returnPressed () ), this, SLOT(returnPressed()));
     connect(this->UnitInput, SIGNAL(valueChanged(Base::Quantity)), this, SLOT(unitValueChanged(Base::Quantity)));
+    connect(this->UnitInput, SIGNAL(returnPressed()), this, SLOT(returnPressed()));
 
     connect(this->pushButton_Help, SIGNAL(clicked()), this, SLOT(help()));
     connect(this->pushButton_Close, SIGNAL(clicked()), this, SLOT(accept()));
@@ -57,6 +59,7 @@ DlgUnitsCalculator::DlgUnitsCalculator( QWidget* parent, Qt::WFlags fl )
     connect(this->ValueInput, SIGNAL(parseError(QString)), this, SLOT(parseError(QString)));
     connect(this->UnitInput, SIGNAL(parseError(QString)), this, SLOT(parseError(QString)));
 
+    this->ValueInput->setParamGrpPath(QByteArray("User parameter:BaseApp/History/UnitsCalculator"));
     actUnit.setInvalid();
 }
 
@@ -102,7 +105,7 @@ void DlgUnitsCalculator::valueChanged(const Base::Quantity& quant)
         }
     }else{
         //this->ValueOutput->setValue(quant);
-        this->ValueOutput->setText(QString::fromAscii(quant.getUserString().c_str()));
+        this->ValueOutput->setText(quant.getUserString());
         QPalette palette;
         palette.setColor(QPalette::Base,QColor(200,255,200));
         this->ValueOutput->setPalette(palette);
@@ -131,6 +134,11 @@ void DlgUnitsCalculator::help(void)
     //TODO: call help page Std_UnitsCalculator
 }
 
+void DlgUnitsCalculator::returnPressed(void)
+{
+    this->textEdit->append(this->ValueInput->text() + QString::fromAscii(" = ") + this->ValueOutput->text());
+    this->ValueInput->pushToHistory();
+}
 
 
 

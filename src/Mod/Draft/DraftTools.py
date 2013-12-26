@@ -1270,9 +1270,9 @@ class Polygon(Creator):
                          'pl=FreeCAD.Placement()',
                          'pl.Rotation.Q=' + rot,
                          'pl.Base=' + DraftVecUtils.toString(self.center),
-                         'pol = FreeCAD.ActiveDocument.addObject("Part::RegularPolygon","Polygon")',
-                         'pol.NumberOfSides = ' + str(self.ui.numFaces.value()),
-                         'pol.Radius = ' + str(self.rad),
+                         'pol = FreeCAD.ActiveDocument.addObject("Part::RegularPolygon","RegularPolygon")',
+                         'pol.Polygon = ' + str(self.ui.numFaces.value()),
+                         'pol.Circumradius = ' + str(self.rad),
                          'pol.Placement = pl',
                          'FreeCAD.ActiveDocument.recompute()'])
         else:
@@ -1816,6 +1816,7 @@ class ShapeString(Creator):
             self.ui.pointUi(name)
             self.active = True
             self.call = self.view.addEventCallback("SoEvent",self.action)
+            self.ssBase = None
             self.ui.xValue.setFocus()
             self.ui.xValue.selectAll()
             msg(translate("draft", "Pick ShapeString location point:\n"))
@@ -1846,14 +1847,12 @@ class ShapeString(Creator):
                         ['import Draft',
                          'ss=Draft.makeShapeString(String='+String+',FontFile='+FFile+',Size='+Size+',Tracking='+Tracking+')',
                          'plm=FreeCAD.Placement()',
-                         'plm.Base='+DraftVecUtils.toString(self.point),
+                         'plm.Base='+DraftVecUtils.toString(self.ssBase),
                          'plm.Rotation.Q='+qr,
                          'ss.Placement=plm',
                          'ss.Support='+sup])
         except Exception as e:
             msg("Draft_ShapeString: error delaying commit", "error")
-            #print type(e)
-            #print e.args
         self.finish()
 
     def action(self,arg):
@@ -1863,11 +1862,11 @@ class ShapeString(Creator):
                 self.finish()
         elif arg["Type"] == "SoLocation2Event": #mouse movement detection
             if self.active:
-                self.point,ctrlPoint,info = getPoint(self,arg)
+                self.point,ctrlPoint,info = getPoint(self,arg,noTracker=True)
         elif arg["Type"] == "SoMouseButtonEvent":
             if (arg["State"] == "DOWN") and (arg["Button"] == "BUTTON1"):
-                if self.point:
-                    self.node.append(self.point)
+                if not self.ssBase:
+                    self.ssBase = self.point
                     self.active = False
                     FreeCADGui.Snapper.off()
                     self.ui.SSUi()
@@ -1875,8 +1874,7 @@ class ShapeString(Creator):
     def numericInput(self,numx,numy,numz):
         '''this function gets called by the toolbar when valid
         x, y, and z have been entered there'''
-        self.point = Vector(numx,numy,numz)
-        self.node.append(self.point)
+        self.ssBase = Vector(numx,numy,numz)
         self.ui.SSUi()                   #move on to next step in parameter entry
         
     def numericSSize(self,ssize): 
@@ -3631,6 +3629,40 @@ class Array(Modifier):
             FreeCAD.ActiveDocument.commitTransaction()
         self.finish()
 
+class PathArray(Modifier):
+    "The PathArray FreeCAD command definition"
+    
+    def GetResources(self):
+        return {'Pixmap'  : 'Draft_PathArray',
+                'MenuText': QtCore.QT_TRANSLATE_NOOP("Draft_PathArray", "PathArray"),
+                'ToolTip': QtCore.QT_TRANSLATE_NOOP("Draft_PathArray", "Creates copies of a selected object along a selected path.")}
+
+    def Activated(self):
+        Modifier.Activated(self)
+        if not Draft.getSelectionEx():
+            if self.ui:
+                self.ui.selectUi()
+                msg(translate("draft", "Please select base and path objects\n"))
+#                print "Please select base and path objects"
+                self.call = self.view.addEventCallback("SoEvent",selectObject)
+        else:
+            self.proceed()
+
+    def proceed(self):
+        if self.call: 
+            self.view.removeEventCallback("SoEvent",self.call)
+        sel = Draft.getSelectionEx()
+        if sel:
+            base = sel[0].Object
+            path = sel[1].Object
+            pathsubs = list(sel[1].SubElementNames)
+            defXlate = FreeCAD.Vector(0,0,0)
+            defCount = 4
+            defAlign = False
+            FreeCAD.ActiveDocument.openTransaction("PathArray")
+            Draft.makePathArray(base,path,defCount,defXlate,defAlign,pathsubs)
+            FreeCAD.ActiveDocument.commitTransaction()
+        self.finish()
 
 class Point:
     "this class will create a vertex after the user clicks a point on the screen"
@@ -4007,6 +4039,7 @@ FreeCADGui.addCommand('Draft_WireToBSpline',WireToBSpline())
 FreeCADGui.addCommand('Draft_Draft2Sketch',Draft2Sketch())
 FreeCADGui.addCommand('Draft_Array',Array())
 FreeCADGui.addCommand('Draft_Clone',Draft_Clone())
+FreeCADGui.addCommand('Draft_PathArray',PathArray())
 FreeCADGui.addCommand('Draft_Heal',Heal())
 
 # context commands

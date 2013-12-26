@@ -2424,9 +2424,9 @@ Restart:
                     if ((Constr->Type == DistanceX || Constr->Type == DistanceY) &&
                         Constr->FirstPos != Sketcher::none && Constr->Second == Constraint::GeoUndef)
                         // display negative sign for absolute coordinates
-                        asciiText->string = SbString().sprintf("%.2f",Constr->Value);
+                        asciiText->string = SbString(Base::Quantity(Constr->Value,Base::Unit::Length).getUserString().toUtf8().constData());
                     else // hide negative sign
-                        asciiText->string = SbString().sprintf("%.2f",std::abs(Constr->Value));
+                        asciiText->string = SbString(Base::Quantity(std::abs(Constr->Value),Base::Unit::Length).getUserString().toUtf8().constData());
 
                     if (Constr->Type == Distance)
                         asciiText->datumtype = SoDatumLabel::DISTANCE;
@@ -2642,7 +2642,7 @@ Restart:
                         break;
 
                     SoDatumLabel *asciiText = dynamic_cast<SoDatumLabel *>(sep->getChild(0));
-                    asciiText->string    = SbString().sprintf("%.2f",Base::toDegrees<double>(std::abs(Constr->Value)));
+                    asciiText->string    = SbString(Base::Quantity(Base::toDegrees<double>(std::abs(Constr->Value)),Base::Unit::Angle).getUserString().toUtf8().constData());
                     asciiText->datumtype = SoDatumLabel::ANGLE;
                     asciiText->param1    = Constr->LabelDistance;
                     asciiText->param2    = startangle;
@@ -2689,7 +2689,8 @@ Restart:
                     SbVec3f p2(pnt2.x,pnt2.y,zConstr);
 
                     SoDatumLabel *asciiText = dynamic_cast<SoDatumLabel *>(sep->getChild(0));
-                    asciiText->string       = SbString().sprintf("%.2f",Constr->Value);
+                    asciiText->string = SbString(Base::Quantity(Constr->Value,Base::Unit::Length).getUserString().toUtf8().constData());
+
                     asciiText->datumtype    = SoDatumLabel::RADIUS;
                     asciiText->param1       = Constr->LabelDistance;
                     asciiText->param2       = Constr->LabelPosition;
@@ -2763,6 +2764,8 @@ void ViewProviderSketch::rebuildConstraintsVisual(void)
                 text->norm.setValue(norm);
                 text->string = "";
                 text->textColor = ConstrDimColor;
+                text->size.setValue(17);
+                text->useAntialiasing = false;
                 SoAnnotation *anno = new SoAnnotation();
                 anno->renderCaching = SoSeparator::OFF;
                 anno->addChild(text);
@@ -3166,7 +3169,7 @@ void ViewProviderSketch::createEditInventorNodes(void)
     Coordsep->renderCaching = SoSeparator::OFF;
 
     SoFont *font = new SoFont();
-    font->size = 15.0;
+    font->size = 10.0;
     Coordsep->addChild(font);
 
     edit->textPos = new SoTranslation();

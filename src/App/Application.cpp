@@ -73,6 +73,8 @@
 #include <Base/Sequencer.h>
 #include <Base/Tools.h>
 #include <Base/UnitsApi.h>
+#include <Base/QuantityPy.h>
+#include <Base/UnitPy.h>
 
 #include "GeoFeature.h"
 #include "FeatureTest.h"
@@ -233,6 +235,9 @@ Application::Application(ParameterManager * /*pcSysParamMngr*/,
     //insert Units module
     PyObject* pUnitsModule = Py_InitModule3("Units", Base::UnitsApi::Methods,
           "The Unit API");
+    Base::Interpreter().addType(&Base::QuantityPy  ::Type,pUnitsModule,"Quantity");
+    Base::Interpreter().addType(&Base::UnitPy      ::Type,pUnitsModule,"Unit");
+
     Py_INCREF(pUnitsModule);
     PyModule_AddObject(pAppModule, "Units", pUnitsModule);
 
@@ -1127,9 +1132,6 @@ void Application::initConfig(int argc, char ** argv)
                           mConfig["BuildRevision"].c_str());
 
     LoadParameters();
-
-    // set the default units
-    UnitsApi::setDefaults();
 
     // capture python variables
     SaveEnv("PYTHONPATH");

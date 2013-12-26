@@ -283,7 +283,7 @@ CmdMeshImport::CmdMeshImport()
     sToolTipText  = QT_TR_NOOP("Imports a mesh from file");
     sWhatsThis    = "Mesh_Import";
     sStatusTip    = QT_TR_NOOP("Imports a mesh from file");
-    sPixmap       = "import_mesh";
+    sPixmap       = "Mesh_Import_Mesh";
 }
 
 void CmdMeshImport::activated(int iMsg)
@@ -335,7 +335,7 @@ CmdMeshExport::CmdMeshExport()
     sToolTipText  = QT_TR_NOOP("Exports a mesh to file");
     sWhatsThis    = "Mesh_Export";
     sStatusTip    = QT_TR_NOOP("Exports a mesh to file");
-    sPixmap       = "export_mesh";
+    sPixmap       = "Mesh_Export_Mesh";
 }
 
 void CmdMeshExport::activated(int iMsg)
@@ -356,6 +356,7 @@ void CmdMeshExport::activated(int iMsg)
     ext << qMakePair<QString, QByteArray>(QObject::tr("Alias Mesh (*.obj)"), "OBJ");
     ext << qMakePair<QString, QByteArray>(QObject::tr("Object File Format (*.off)"), "OFF");
     ext << qMakePair<QString, QByteArray>(QObject::tr("Inventor V2.1 ascii (*.iv)"), "IV");
+    ext << qMakePair<QString, QByteArray>(QObject::tr("X3D Extensible 3D(*.x3d)"), "X3D");
     ext << qMakePair<QString, QByteArray>(QObject::tr("Standford Polygon (*.ply)"), "PLY");
     ext << qMakePair<QString, QByteArray>(QObject::tr("VRML V2.0 (*.wrl *.vrml)"), "VRML");
     ext << qMakePair<QString, QByteArray>(QObject::tr("Compressed VRML 2.0 (*.wrz)"), "WRZ");
@@ -380,10 +381,11 @@ void CmdMeshExport::activated(int iMsg)
         }
 
         //openCommand("Export Mesh");
-        doCommand(Doc,"FreeCAD.ActiveDocument.getObject(\"%s\").Mesh.write(\"%s\",\"%s\")",
+        doCommand(Doc,"FreeCAD.ActiveDocument.getObject(\"%s\").Mesh.write(\"%s\",\"%s\",\"%s\")",
                  docObj->getNameInDocument(),
                  (const char*)fn.toUtf8(),
-                 (const char*)extension);
+                 (const char*)extension,
+                 docObj->Label.getValue());
         //commitCommand();
     }
 }
@@ -447,6 +449,33 @@ bool CmdMeshFromGeometry::isActive(void)
     return getSelection().countObjectsOfType(App::GeoFeature::getClassTypeId()) >= 1;
 }
 
+//===========================================================================
+// Mesh_FromPart
+//===========================================================================
+DEF_STD_CMD_A(CmdMeshFromPartShape);
+
+CmdMeshFromPartShape::CmdMeshFromPartShape()
+  : Command("Mesh_FromPartShape")
+{
+    sAppModule    = "Mesh";
+    sGroup        = QT_TR_NOOP("Mesh");
+    sMenuText     = QT_TR_NOOP("Create mesh from shape...");
+    sToolTipText  = QT_TR_NOOP("Tessellate shape");
+    sWhatsThis    = sToolTipText;
+    sStatusTip    = sToolTipText;
+    sPixmap       = "Mesh_Mesh_from_Shape.svg";
+}
+
+void CmdMeshFromPartShape::activated(int iMsg)
+{
+    doCommand(Doc,"import MeshPartGui, FreeCADGui\nFreeCADGui.runCommand('MeshPart_Mesher')\n");
+}
+
+bool CmdMeshFromPartShape::isActive(void)
+{
+    return (hasActiveDocument() && !Gui::Control().activeDialog());
+}
+
 //--------------------------------------------------------------------------------------
 
 DEF_STD_CMD_A(CmdMeshVertexCurvature);
@@ -460,7 +489,7 @@ CmdMeshVertexCurvature::CmdMeshVertexCurvature()
     sToolTipText  = QT_TR_NOOP("Calculates the curvature of the vertices of a mesh");
     sWhatsThis    = "Mesh_VertexCurvature";
     sStatusTip    = QT_TR_NOOP("Calculates the curvature of the vertices of a mesh");
-    sPixmap       = "curv_info";
+    sPixmap       = "Mesh_Curvature_Plot";
 }
 
 void CmdMeshVertexCurvature::activated(int iMsg)
@@ -1091,6 +1120,7 @@ CmdMeshRemoveComponents::CmdMeshRemoveComponents()
     sToolTipText  = QT_TR_NOOP("Remove topologic independent components from the mesh");
     sWhatsThis    = "Mesh_RemoveComponents";
     sStatusTip    = QT_TR_NOOP("Remove topologic independent components from the mesh");
+    sPixmap       = "Mesh_Remove_Components";
 }
 
 void CmdMeshRemoveComponents::activated(int iMsg)
@@ -1276,6 +1306,7 @@ CmdMeshHarmonizeNormals::CmdMeshHarmonizeNormals()
     sToolTipText  = QT_TR_NOOP("Harmonizes the normals of the mesh");
     sWhatsThis    = "Mesh_HarmonizeNormals";
     sStatusTip    = QT_TR_NOOP("Harmonizes the normals of the mesh");
+    sPixmap       = "Mesh_Harmonize_Normals";
 }
 
 void CmdMeshHarmonizeNormals::activated(int iMsg)
@@ -1309,6 +1340,7 @@ CmdMeshFlipNormals::CmdMeshFlipNormals()
     sToolTipText  = QT_TR_NOOP("Flips the normals of the mesh");
     sWhatsThis    = "Mesh_FlipNormals";
     sStatusTip    = QT_TR_NOOP("Flips the normals of the mesh");
+    sPixmap       = "Mesh_Flip_Normals";
 }
 
 void CmdMeshFlipNormals::activated(int iMsg)
@@ -1381,7 +1413,7 @@ CmdMeshBuildRegularSolid::CmdMeshBuildRegularSolid()
     sToolTipText  = QT_TR_NOOP("Builds a regular solid");
     sWhatsThis    = "Mesh_BuildRegularSolid";
     sStatusTip    = QT_TR_NOOP("Builds a regular solid");
-    sPixmap       = "solid_mesh";
+    sPixmap       = "Mesh_Regular_Solid";
 }
 
 void CmdMeshBuildRegularSolid::activated(int iMsg)
@@ -1541,5 +1573,6 @@ void CreateMeshCommands(void)
     rcCmdMgr.addCommand(new CmdMeshFillInteractiveHole());
     rcCmdMgr.addCommand(new CmdMeshRemoveCompByHand());
     rcCmdMgr.addCommand(new CmdMeshFromGeometry());
+    rcCmdMgr.addCommand(new CmdMeshFromPartShape());
     rcCmdMgr.addCommand(new CmdMeshSegmentation());
 }
