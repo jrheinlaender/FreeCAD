@@ -421,8 +421,8 @@ bool FaceTypedCylinder::isEqual(const TopoDS_Face &faceOne, const TopoDS_Face &f
 
     if (cylinderOne.Radius() != cylinderTwo.Radius())
         return false;
-    if (!(cylinderOne.Axis().Location().IsEqual(cylinderTwo.Axis().Location(), Precision::Confusion()) &&
-          cylinderOne.Axis().Direction().IsParallel(cylinderTwo.Axis().Direction(), Precision::Confusion())))
+    if (!cylinderOne.Axis().IsCoaxial(cylinderTwo.Axis(), Precision::Confusion(), Precision::Confusion()) &&
+        !cylinderOne.Axis().IsCoaxial(cylinderTwo.Axis().Reversed(), Precision::Confusion(), Precision::Confusion()))
         return false;
 
     return true;
