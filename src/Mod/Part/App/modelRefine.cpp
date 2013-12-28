@@ -30,6 +30,7 @@
 #include <Geom_CylindricalSurface.hxx>
 #include <gp_Pln.hxx>
 #include <gp_Cylinder.hxx>
+#include <gp_Pnt.hxx>
 #include <TopoDS_Shape.hxx>
 #include <TopoDS_Compound.hxx>
 #include <TopoDS.hxx>
@@ -420,7 +421,8 @@ bool FaceTypedCylinder::isEqual(const TopoDS_Face &faceOne, const TopoDS_Face &f
 
     if (cylinderOne.Radius() != cylinderTwo.Radius())
         return false;
-    if (!cylinderOne.Axis().IsCoaxial(cylinderTwo.Axis(), Precision::Confusion(), Precision::Confusion()))
+    if (!(cylinderOne.Axis().Location().IsEqual(cylinderTwo.Axis().Location(), Precision::Confusion()) &&
+          cylinderOne.Axis().Direction().IsParallel(cylinderTwo.Axis().Direction(), Precision::Confusion())))
         return false;
 
     return true;
