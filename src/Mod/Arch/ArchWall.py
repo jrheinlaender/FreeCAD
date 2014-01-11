@@ -23,14 +23,14 @@
 
 import FreeCAD,FreeCADGui,Draft,ArchComponent,DraftVecUtils,ArchCommands,math
 from FreeCAD import Vector
-from PyQt4 import QtCore
+from PySide import QtCore, QtGui
 from DraftTools import translate
 
 __title__="FreeCAD Wall"
 __author__ = "Yorik van Havre"
 __url__ = "http://www.freecadweb.org"
 
-def makeWall(baseobj=None,length=None,width=None,height=None,align="Center",face=None,name=str(translate("Arch","Wall"))):
+def makeWall(baseobj=None,length=None,width=None,height=None,align="Center",face=None,name=translate("Arch","Wall")):
     '''makeWall([obj],[length],[width],[height],[align],[face],[name]): creates a wall based on the
     given object, which can be a sketch, a draft object, a face or a solid, or no object at
     all, then you must provide length, width and height. Align can be "Center","Left" or "Right", 
@@ -141,10 +141,6 @@ class _CommandWall:
                 'ToolTip': QtCore.QT_TRANSLATE_NOOP("Arch_Wall","Creates a wall object from scratch or from a selected object (wire, face or solid)")}
         
     def Activated(self):
-
-        global QtGui, QtCore
-        from PyQt4 import QtGui, QtCore
-
         self.Align = "Center"
         self.Length = None
         self.continueCmd = False
@@ -160,7 +156,7 @@ class _CommandWall:
             # automatic mode
             import Draft
             if Draft.getType(sel[0].Object) != "Wall":
-                FreeCAD.ActiveDocument.openTransaction(str(translate("Arch","Create Wall")))
+                FreeCAD.ActiveDocument.openTransaction(translate("Arch","Create Wall"))
                 FreeCADGui.doCommand('import Arch')
                 for selobj in sel:
                     if Draft.getType(selobj.Object) == "Space":
@@ -204,7 +200,7 @@ class _CommandWall:
             import Part
             l = Part.Line(self.points[0],self.points[1])
             self.tracker.finalize()
-            FreeCAD.ActiveDocument.openTransaction(str(translate("Arch","Create Wall")))
+            FreeCAD.ActiveDocument.openTransaction(translate("Arch","Create Wall"))
             FreeCADGui.doCommand('import Arch')
             FreeCADGui.doCommand('import Part')
             FreeCADGui.doCommand('trace=Part.Line(FreeCAD.'+str(l.StartPoint)+',FreeCAD.'+str(l.EndPoint)+')')
@@ -234,7 +230,7 @@ class _CommandWall:
                 self.Activated()
 
     def addDefault(self,l):
-        FreeCADGui.doCommand('base=FreeCAD.ActiveDocument.addObject("Sketcher::SketchObject","'+str(translate('Arch','WallTrace'))+'")')
+        FreeCADGui.doCommand('base=FreeCAD.ActiveDocument.addObject("Sketcher::SketchObject","'+translate('Arch','WallTrace')+'")')
         FreeCADGui.doCommand('base.addGeometry(trace)')
         FreeCADGui.doCommand('Arch.makeWall(base,width='+str(self.Width)+',height='+str(self.Height)+',align="'+str(self.Align)+'")')
 
@@ -259,12 +255,12 @@ class _CommandWall:
         "sets up a taskbox widget"
         d = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Units").GetInt("Decimals",2)
         w = QtGui.QWidget()
-        w.setWindowTitle(str(translate("Arch","Wall options")))
+        w.setWindowTitle(translate("Arch","Wall options").decode("utf8"))
         lay0 = QtGui.QVBoxLayout(w)
         
         lay5 = QtGui.QHBoxLayout()
         lay0.addLayout(lay5)
-        label5 = QtGui.QLabel(str(translate("Arch","Length")))
+        label5 = QtGui.QLabel(translate("Arch","Length").decode("utf8"))
         lay5.addWidget(label5)
         self.Length = QtGui.QDoubleSpinBox()
         self.Length.setDecimals(d)
@@ -273,7 +269,7 @@ class _CommandWall:
         
         lay1 = QtGui.QHBoxLayout()
         lay0.addLayout(lay1)
-        label1 = QtGui.QLabel(str(translate("Arch","Width")))
+        label1 = QtGui.QLabel(translate("Arch","Width").decode("utf8"))
         lay1.addWidget(label1)
         value1 = QtGui.QDoubleSpinBox()
         value1.setDecimals(d)
@@ -282,7 +278,7 @@ class _CommandWall:
         
         lay2 = QtGui.QHBoxLayout()
         lay0.addLayout(lay2)
-        label2 = QtGui.QLabel(str(translate("Arch","Height")))
+        label2 = QtGui.QLabel(translate("Arch","Height").decode("utf8"))
         lay2.addWidget(label2)
         value2 = QtGui.QDoubleSpinBox()
         value2.setDecimals(d)
@@ -291,7 +287,7 @@ class _CommandWall:
         
         lay3 = QtGui.QHBoxLayout()
         lay0.addLayout(lay3)
-        label3 = QtGui.QLabel(str(translate("Arch","Alignment")))
+        label3 = QtGui.QLabel(translate("Arch","Alignment").decode("utf8"))
         lay3.addWidget(label3)
         value3 = QtGui.QComboBox()
         items = ["Center","Left","Right"]
@@ -299,7 +295,7 @@ class _CommandWall:
         value3.setCurrentIndex(items.index(self.Align))
         lay3.addWidget(value3)
         
-        value4 = QtGui.QCheckBox(str(translate("Arch","Continue")))
+        value4 = QtGui.QCheckBox(translate("Arch","Continue").decode("utf8"))
         lay0.addWidget(value4)
         QtCore.QObject.connect(value1,QtCore.SIGNAL("valueChanged(double)"),self.setWidth)
         QtCore.QObject.connect(value2,QtCore.SIGNAL("valueChanged(double)"),self.setHeight)

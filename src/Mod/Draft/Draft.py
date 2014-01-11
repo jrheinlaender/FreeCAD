@@ -35,7 +35,7 @@ General description:
     The Draft module is a FreeCAD module for drawing/editing 2D entities.
     The aim is to give FreeCAD basic 2D-CAD capabilities (similar
     to Autocad and other similar software). This modules is made to be run
-    inside FreeCAD and needs the PyQt4 and pivy modules available.
+    inside FreeCAD and needs the PySide and pivy modules available.
 
 User manual:
 
@@ -459,7 +459,7 @@ def select(objs=None):
 def loadSvgPatterns():
     "loads the default Draft SVG patterns and custom patters if available"
     import importSVG
-    from PyQt4 import QtCore
+    from PySide import QtCore
     FreeCAD.svgpatterns = {}
     # getting default patterns
     patfiles = QtCore.QDir(":/patterns").entryList()
@@ -480,7 +480,7 @@ def loadSvgPatterns():
                 p = importSVG.getContents(altpat+os.sep+f,'pattern')
                 if p:
                     for k in p:
-                        p[k] = [p[k],fn]
+                        p[k] = [p[k],altpat+os.sep+f]
                     FreeCAD.svgpatterns.update(p)
                     
 def svgpatterns():
@@ -499,7 +499,7 @@ def loadTexture(filename,size=None):
     it will be scaled to match the given size."""
     if gui:
         from pivy import coin
-        from PyQt4 import QtGui,QtSvg
+        from PySide import QtGui,QtSvg
         try:
             p = QtGui.QImage(filename)
             # buggy - TODO: allow to use resolutions
@@ -1995,7 +1995,9 @@ def makeSketch(objectslist,autoconstraints=False,addTo=None,delete=False,name="S
     return nobj
 
 def makePoint(X=0, Y=0, Z=0,color=None,name = "Point", point_size= 5):
-    ''' make a point (at coordinates x,y,z ,color(r,g,b),point_size)
+    ''' makePoint(x,y,z ,[color(r,g,b),point_size]) or
+        makePoint(Vector,color(r,g,b),point_size]) -
+        creates a Point in the current document.
         example usage: 
         p1 = makePoint()
         p1.ViewObject.Visibility= False # make it invisible
@@ -2006,6 +2008,10 @@ def makePoint(X=0, Y=0, Z=0,color=None,name = "Point", point_size= 5):
         p1.ViewObject.PointColor =(0.0,0.0,1.0) #change the color-make sure values are floats
     '''
     obj=FreeCAD.ActiveDocument.addObject("Part::FeaturePython",name)
+    if isinstance(X,FreeCAD.Vector):
+        Z = X.z
+        Y = X.y
+        X = X.x
     _Point(obj,X,Y,Z)
     obj.X = X
     obj.Y = Y
@@ -2691,7 +2697,7 @@ class _ViewProviderDraft:
                         "Draft","Defines a hatch pattern")
         vobj.addProperty("App::PropertyFloat","PatternSize",
                         "Draft","Sets the size of the pattern")
-        vobj.Pattern = [str(translate("draft","None"))]+svgpatterns().keys()
+        vobj.Pattern = [translate("draft","None")]+svgpatterns().keys()
         vobj.PatternSize = 1
 
     def __getstate__(self):
@@ -2722,7 +2728,7 @@ class _ViewProviderDraft:
             if hasattr(self.Object,"Shape"):
                 if self.Object.Shape.Faces:
                     from pivy import coin
-                    from PyQt4 import QtCore
+                    from PySide import QtCore
                     path = None
                     if hasattr(vobj,"TextureImage"):
                         if vobj.TextureImage:
@@ -2742,7 +2748,7 @@ class _ViewProviderDraft:
                             self.texcoords = None
                         if i.exists():
                             size = None
-                            if ":/patterns" in path:
+                            if ".SVG" in path.upper():
                                 size = getParam("HatchPatternResolution",128)
                                 if not size:
                                     size = 128

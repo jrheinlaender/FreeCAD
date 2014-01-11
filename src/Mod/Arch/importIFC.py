@@ -89,7 +89,7 @@ def getIfcOpenShell():
         global IfcImport
         import IfcImport
     except:
-        FreeCAD.Console.PrintMessage(str(translate("Arch","Couldn't locate IfcOpenShell\n")))
+        FreeCAD.Console.PrintMessage(translate("Arch","Couldn't locate IfcOpenShell\n"))
         return False
     else:
         return True
@@ -170,7 +170,10 @@ def read(filename):
                             objparentid = int(str(getAttr(r,"RelatingBuildingElement")).split("=")[0].strip("#"))
                     
             else:
-                obj = IfcImport.Get()
+                if hasattr(IfcImport, 'GetBrepData'):
+                    obj = IfcImport.GetBrepData()  
+                else: 
+                    obj = IfcImport.Get()
                 objid = obj.id
                 idx = objid
                 objname = obj.name
@@ -244,13 +247,18 @@ def read(filename):
                     
                 else:
                     # treat as meshes
-                    if DEBUG: print "Warning: Object without shape: ",objid, " ", objtype 
-                    me,pl = getMesh(obj)
-                    nobj = FreeCAD.ActiveDocument.addObject("Mesh::Feature",n)
-                    nobj.Label = n
-                    nobj.Mesh = me
-                    nobj.Placement = pl
-                
+                    if DEBUG: print "Warning: Object without shape: ",objid, " ", objtype
+                    if hasattr(obj,"mesh"):
+                        if not hasattr(obj.mesh, 'verts'):
+                            obj = IfcImport.Get() # Get triangulated rep of same product
+                        me,pl = getMesh(obj)
+                        nobj = FreeCAD.ActiveDocument.addObject("Mesh::Feature",n)
+                        nobj.Label = n
+                        nobj.Mesh = me
+                        nobj.Placement = pl
+                    else:
+                        if DEBUG: print "Error: Skipping object without mesh: ",objid, " ", objtype
+                    
                 # registering object number and parent
                 if objparentid > 0:
                     ifcParents[objid] = [objparentid,not (objtype in subtractiveTypes)]
@@ -341,13 +349,13 @@ def read(filename):
     else:
         # use only the internal python parser
         
-        FreeCAD.Console.PrintWarning(str(translate("Arch","IfcOpenShell not found or disabled, falling back on internal parser.\n")))
+        FreeCAD.Console.PrintWarning(translate("Arch","IfcOpenShell not found or disabled, falling back on internal parser.\n"))
         schema=getSchema()
         if schema:
             if DEBUG: print "opening",filename,"..."
             ifc = ifcReader.IfcDocument(filename,schema=schema,debug=DEBUG)
         else:
-            FreeCAD.Console.PrintWarning(str(translate("Arch","IFC Schema not found, IFC import disabled.\n")))
+            FreeCAD.Console.PrintWarning(translate("Arch","IFC Schema not found, IFC import disabled.\n"))
             return None
         t2 = time.time()
         if DEBUG: print "Successfully loaded",ifc,"in %s s" % ((t2-t1))
@@ -753,7 +761,7 @@ def decode(name):
         try:
             decodedName = (name.decode("latin1"))
         except UnicodeDecodeError:
-            FreeCAD.Console.PrintError(str(translate("Arch", "Error: Couldn't determine character encoding\n")))
+            FreeCAD.Console.PrintError(translate("Arch", "Error: Couldn't determine character encoding\n"))
             decodedName = name
     return decodedName
 
@@ -955,7 +963,12 @@ def export(exportList,filename):
                 elif obj.Role == "Foundation":
                     role = "IfcFooting"
             if gdata:
-                ifc.addStructure( role, ifc.addExtrudedPolyline(gdata[0],gdata[1]), storey=parent, name=name )
+                if FreeCAD.Vector(gdata[1]).getAngle(FreeCAD.Vector(0,0,1)) < .01:
+                    # Workaround for non-Z extrusions, apparently not supported by ifc++ TODO: fix this
+                    ifc.addStructure( role, ifc.addExtrudedPolyline(gdata[0],gdata[1]), storey=parent, name=name )
+                else:
+                    fdata = Arch.getBrepFacesData(obj,scaling)
+                    ifc.addStructure( role, [ifc.addFacetedBrep(f) for f in fdata], storey=parent, name=name )
             elif fdata:
                 ifc.addStructure( role, [ifc.addFacetedBrep(f) for f in fdata], storey=parent, name=name )
                 

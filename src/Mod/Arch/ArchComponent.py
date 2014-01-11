@@ -27,7 +27,7 @@ __url__ = "http://www.freecadweb.org"
 
 import FreeCAD,FreeCADGui,Draft
 from FreeCAD import Vector
-from PyQt4 import QtGui,QtCore
+from PySide import QtGui,QtCore
 from DraftTools import translate
 
 def addToComponent(compobject,addobject,mod=None):
@@ -490,7 +490,7 @@ class ArchSelectionObserver:
             del FreeCAD.ArchObserver
         elif object == self.watched.Name:
             if not element:
-                FreeCAD.Console.PrintMessage(str(translate("Arch","closing Sketch edit")))
+                FreeCAD.Console.PrintMessage(translate("Arch","closing Sketch edit"))
                 if self.hide:
                     if self.origin:
                         self.origin.ViewObject.Transparency = 0

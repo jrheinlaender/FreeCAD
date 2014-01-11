@@ -33,20 +33,9 @@ Report to Draft.py for info
 import FreeCAD, FreeCADGui, os, Draft, sys
 
 try:
-    from PyQt4 import QtCore,QtGui,QtSvg
+    from PySide import QtCore,QtGui,QtSvg
 except:
-    FreeCAD.Console.PrintMessage("Error: Python-qt4 package must be installed on your system to use the Draft module.")
-
-def getMainWindow():
-    "returns the main window"
-    # using QtGui.qApp.activeWindow() isn't very reliable because if another
-    # widget than the mainwindow is active (e.g. a dialog) the wrong widget is
-    # returned
-    toplevel = QtGui.qApp.topLevelWidgets()
-    for i in toplevel:
-        if i.metaObject().className() == "Gui::MainWindow":
-            return i
-    raise Exception("No main window found")
+    FreeCAD.Console.PrintMessage("Error: Python-pyside package must be installed on your system to use the Draft module.")
 
 class todo:
     ''' static todo class, delays execution of functions.  Use todo.delay
@@ -117,7 +106,7 @@ def translate(context,text):
 class DraftDockWidget(QtGui.QWidget):
     "custom Widget that emits a resized() signal when resized"
     def __init__(self,parent = None):
-        QtGui.QDockWidget.__init__(self,parent)
+        QtGui.QWidget.__init__(self,parent)
     def resizeEvent(self,event):
         self.emit(QtCore.SIGNAL("resized()"))
     def changeEvent(self, event):
@@ -200,8 +189,8 @@ class DraftToolBar:
             self.baseWidget = DraftDockWidget()
             self.draftWidget.setObjectName("draftToolbar")
             self.draftWidget.setTitleBarWidget(self.baseWidget)
-            self.draftWidget.setWindowTitle(translate("draft", "draft Command Bar"))
-            self.mw = getMainWindow()
+            self.draftWidget.setWindowTitle(translate("draft", "Draft Command Bar"))
+            self.mw = FreeCADGui.getMainWindow()
             self.mw.addDockWidget(QtCore.Qt.TopDockWidgetArea,self.draftWidget)
             self.draftWidget.setVisible(False)
             self.draftWidget.toggleViewAction().setVisible(False)                               
@@ -1015,7 +1004,7 @@ class DraftToolBar:
             if (self.labelSString.isVisible()):
                 if self.SStringValue.text():
 #                    print "debug: D_G DraftToolBar.validateSString type(SStringValue.text): "  str(type(self.SStringValue.text))
-                    self.sourceCmd.validSString(str(self.SStringValue.text().toUtf8()))    # QString to QByteArray to PyString
+                    self.sourceCmd.validSString(str(self.SStringValue.text()))    # QString to QByteArray to PyString
                 else:
                     FreeCAD.Console.PrintMessage(translate("draft", "Please enter a text string."))                     
               
@@ -1314,7 +1303,7 @@ class DraftToolBar:
         self.groupmenu = QtGui.QMenu()
         for i in mlist:
             self.groupmenu.addAction(i)
-        pos = getMainWindow().cursor().pos()
+        pos = FreeCADGui.getMainWindow().cursor().pos()
         self.groupmenu.popup(pos)
         QtCore.QObject.connect(self.groupmenu,QtCore.SIGNAL("triggered(QAction *)"),self.popupTriggered)
 
