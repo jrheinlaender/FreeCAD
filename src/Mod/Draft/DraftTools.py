@@ -531,9 +531,10 @@ class Line(Creator):
         else:
             currentshape = self.obj.Shape.copy()
             last = self.node[len(self.node)-2]
-            newseg = Part.Line(last,point).toShape()
-            newshape=currentshape.fuse(newseg)
-            self.obj.Shape = newshape
+            if not DraftVecUtils.equals(last,point):
+                newseg = Part.Line(last,point).toShape()
+                newshape=currentshape.fuse(newseg)
+                self.obj.Shape = newshape
             msg(translate("draft", "Pick next point, or (F)inish or (C)lose:\n"))
 
     def wipe(self):
@@ -3095,6 +3096,7 @@ class Edit(Modifier):
                 self.editing = None
                 self.editpoints = []
                 self.pl = None
+                FreeCADGui.Snapper.setSelectMode(True)
                 if "Placement" in self.obj.PropertiesList:
                     self.pl = self.obj.Placement
                     self.invpl = self.pl.inverse()
@@ -3145,6 +3147,7 @@ class Edit(Modifier):
 
     def finish(self,closed=False):
         "terminates the operation"
+        FreeCADGui.Snapper.setSelectMode(False)
         if self.obj and closed:
             if "Closed" in self.obj.PropertiesList:
                 if not self.obj.Closed:
@@ -3175,36 +3178,39 @@ class Edit(Modifier):
             self.point,ctrlPoint,info = getPoint(self,arg)
             if self.editing != None:
                 self.trackers[self.editing].set(self.point)
-                self.update(self.trackers[self.editing].get())
+                # commented out the following line to disable updating
+                # the object during edit, otherwise it confuses the snapper
+                #self.update(self.trackers[self.editing].get())
         elif arg["Type"] == "SoMouseButtonEvent":
             if (arg["State"] == "DOWN") and (arg["Button"] == "BUTTON1"):
                 self.ui.redraw()
                 if self.editing == None:
-                    sel = FreeCADGui.Selection.getSelectionEx()
-                    if sel:
-                        sel = sel[0]
-                        if sel.ObjectName == self.obj.Name:
+                    p = FreeCADGui.ActiveDocument.ActiveView.getCursorPos()
+                    info = FreeCADGui.ActiveDocument.ActiveView.getObjectInfo(p)
+                    if info:
+                        if info["Object"] == self.obj.Name:
                             if self.ui.addButton.isChecked():
                                 if self.point:
                                     self.pos = arg["Position"]
                                     self.addPoint(self.point)
                             elif self.ui.delButton.isChecked():
-                                if sel.SubElementNames:
-                                    if 'EditNode' in sel.SubElementNames[0]:
-                                        self.delPoint(int(sel.SubElementNames[0][8:]))
-                            elif 'EditNode' in sel.SubElementNames[0]:
+                                if 'EditNode' in info["Component"]:
+                                    self.delPoint(int(info["Component"][8:]))
+                            elif 'EditNode' in info["Component"]:
                                 self.ui.pointUi()
                                 self.ui.isRelative.show()
-                                self.editing = int(sel.SubElementNames[0][8:])
+                                self.editing = int(info["Component"][8:])
                                 self.trackers[self.editing].off()
                                 if hasattr(self.obj.ViewObject,"Selectable"):
                                     self.obj.ViewObject.Selectable = False
                                 if "Points" in self.obj.PropertiesList:
                                     self.node.append(self.obj.Points[self.editing])
+                                FreeCADGui.Snapper.setSelectMode(False)
                 else:
                     self.trackers[self.editing].on()
                     if hasattr(self.obj.ViewObject,"Selectable"):
                         self.obj.ViewObject.Selectable = True
+                    FreeCADGui.Snapper.setSelectMode(True)
                     self.numericInput(self.trackers[self.editing].get())
 
     def update(self,v):
@@ -3284,6 +3290,7 @@ class Edit(Modifier):
         self.doc.openTransaction("Edit "+self.obj.Name)
         self.update(v)
         self.doc.commitTransaction()
+        self.doc.recompute()
         self.editing = None
         self.ui.editUi()
         self.node = []

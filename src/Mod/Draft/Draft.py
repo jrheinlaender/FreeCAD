@@ -1531,9 +1531,34 @@ def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direct
                     svg += 'A ' + str(r) + ' ' + str(r) + ' '
                     svg += '0 ' + str(int(flag_large_arc)) + ' ' + str(int(flag_sweep)) + ' '
                     svg += str(v.x) + ' ' + str(v.y) + ' '
-                else:
+                elif DraftGeomUtils.geomType(e) == "Line":
                     v = getProj(e.Vertexes[-1].Point)
                     svg += 'L '+ str(v.x) +' '+ str(v.y) + ' '
+                else:
+                    bspline=e.Curve.toBSpline()
+                    if bspline.Degree > 3 or bspline.isRational():
+                        try:
+                            bspline=bspline.approximateBSpline(0.05,20, 3,'C0')
+                        except RuntimeError:
+                            print "Debug: unable to approximate bspline"
+                    if bspline.Degree <= 3 and not bspline.isRational():
+                        for bezierseg in bspline.toBezier():
+                            if bezierseg.Degree>3: #should not happen
+                                raise AssertionError
+                            elif bezierseg.Degree==1:
+                                svg +='L '
+                            elif bezierseg.Degree==2:
+                                svg +='Q '
+                            elif bezierseg.Degree==3:
+                                svg +='C '
+                            for pole in bezierseg.getPoles()[1:]:
+                                v = getProj(pole)
+                                svg += str(v.x) +' '+ str(v.y) + ' '
+                    else: 
+                        print "Debug: one edge (hash ",e.hashCode(),") has been discretized with parameter 0.1" 
+                        for linepoint in bspline.discretize(0.1)[1:]:
+                            v = getProj(linepoint)
+                            svg += 'L '+ str(v.x) +' '+ str(v.y) + ' '
             if fill != 'none': svg += 'Z '
         svg += '" '
         svg += 'stroke="' + stroke + '" '
@@ -1839,7 +1864,11 @@ def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direct
                     if (DraftGeomUtils.findEdge(e,wiredEdges) == None):
                         svg += getPath([e])
         else:
-            svg = getCircle(obj.Shape.Edges[0])
+            # closed circle or spline
+            if isinstance(obj.Shape.Edges[0].Curve,Part.Circle):
+                svg = getCircle(obj.Shape.Edges[0])
+            else:
+                svg = getPath(obj.Shape.Edges)
     return svg
     
 def getrgb(color,testbw=True):
@@ -2833,6 +2862,8 @@ class _Dimension(_DraftObject):
                         "Endpoint of dimension")
         obj.addProperty("App::PropertyVector","Normal","Draft",
                         "the normal direction of this dimension")
+        obj.addProperty("App::PropertyVector","Direction","Draft",
+                        "the normal direction of this dimension")
         obj.addProperty("App::PropertyVector","Dimline","Draft",
                         "Point through which the dimension line passes")
         obj.addProperty("App::PropertyLink","Support","Draft",
@@ -2881,6 +2912,7 @@ class _ViewProviderDimension(_ViewProviderDraft):
     "A View Provider for the Draft Dimension object"
     def __init__(self, obj):
         obj.addProperty("App::PropertyLength","FontSize","Draft","Font size")
+        obj.addProperty("App::PropertyInteger","Decimals","Draft","The number of decimals to show")
         obj.addProperty("App::PropertyLength","ArrowSize","Draft","Arrow size")
         obj.addProperty("App::PropertyLength","TextSpacing","Draft","The spacing between the text and the dimension line")
         obj.addProperty("App::PropertyEnumeration","ArrowType","Draft","Arrow type")
@@ -2898,6 +2930,7 @@ class _ViewProviderDimension(_ViewProviderDraft):
         obj.ArrowType = arrowtypes
         obj.ArrowType = arrowtypes[getParam("dimsymbol",0)]
         obj.ExtLines = getParam("extlines",0.3)
+        obj.Decimals = getParam("dimPrecision",2)
         _ViewProviderDraft.__init__(self,obj)
 
     def attach(self, vobj):
@@ -2953,7 +2986,7 @@ class _ViewProviderDimension(_ViewProviderDraft):
             
     def updateData(self, obj, prop):
         "called when the base object is changed"
-        if prop in ["Start","End","Dimline"]:
+        if prop in ["Start","End","Dimline","Direction"]:
             
             if obj.Start == obj.End:
                 return
@@ -2967,19 +3000,31 @@ class _ViewProviderDimension(_ViewProviderDraft):
             # calculate the 4 points
             self.p1 = obj.Start
             self.p4 = obj.End
-            base = Part.Line(self.p1,self.p4).toShape()
-            proj = DraftGeomUtils.findDistance(obj.Dimline,base)
-            if proj:
-                self.p2 = self.p1.add(proj.negative())
-                self.p3 = self.p4.add(proj.negative())
-                dmax = obj.ViewObject.ExtLines
-                if dmax and (proj.Length > dmax):
-                    self.p1 = self.p2.add(DraftVecUtils.scaleTo(proj,dmax))
-                    self.p4 = self.p3.add(DraftVecUtils.scaleTo(proj,dmax))
-            else:
-                self.p2 = self.p1
-                self.p3 = self.p4
-                proj = (self.p3.sub(self.p2)).cross(Vector(0,0,1))
+            base = None
+            if hasattr(obj,"Direction"):
+                if not DraftVecUtils.isNull(obj.Direction):
+                    v2 = self.p1.sub(obj.Dimline)
+                    v3 = self.p4.sub(obj.Dimline)
+                    v2 = DraftVecUtils.project(v2,obj.Direction)
+                    v3 = DraftVecUtils.project(v3,obj.Direction)
+                    self.p2 = obj.Dimline.add(v2)
+                    self.p3 = obj.Dimline.add(v3)
+                    base = Part.Line(self.p2,self.p3).toShape()
+                    proj = DraftGeomUtils.findDistance(self.p1,base)
+            if not base:
+                base = Part.Line(self.p1,self.p4).toShape()
+                proj = DraftGeomUtils.findDistance(obj.Dimline,base)
+                if proj:
+                    self.p2 = self.p1.add(proj.negative())
+                    self.p3 = self.p4.add(proj.negative())
+                    dmax = obj.ViewObject.ExtLines
+                    if dmax and (proj.Length > dmax):
+                        self.p1 = self.p2.add(DraftVecUtils.scaleTo(proj,dmax))
+                        self.p4 = self.p3.add(DraftVecUtils.scaleTo(proj,dmax))
+                else:
+                    self.p2 = self.p1
+                    self.p3 = self.p4
+                    proj = (self.p3.sub(self.p2)).cross(Vector(0,0,1))
 
             # calculate the arrows positions
             self.trans1.translation.setValue((self.p2.x,self.p2.y,self.p2.z))
@@ -3029,7 +3074,10 @@ class _ViewProviderDimension(_ViewProviderDraft):
             
             # set text value
             l = self.p3.sub(self.p2).Length
-            fstring = "%." + str(getParam("dimPrecision",2)) + "f"
+            if hasattr(obj.ViewObject,"Decimals"):
+                fstring = "%." + str(obj.ViewObject.Decimals) + "f"
+            else:
+                fstring = "%." + str(getParam("dimPrecision",2)) + "f"
             self.string = (fstring % l)
             if obj.ViewObject.Override:
                 self.string = unicode(obj.ViewObject.Override).encode("latin1").replace("$dim",self.string)
@@ -3065,7 +3113,7 @@ class _ViewProviderDimension(_ViewProviderDraft):
     def onChanged(self, vobj, prop):
         "called when a view property has changed"
         
-        if prop in ["ExtLines","TextSpacing","DisplayMode","Override","FlipArrows"]:
+        if prop in ["ExtLines","TextSpacing","DisplayMode","Override","FlipArrows","Decimals"]:
             self.updateData(vobj.Object,"Start")
         elif prop == "FontSize":
             if hasattr(self,"font"):
@@ -3208,6 +3256,7 @@ class _ViewProviderAngularDimension(_ViewProviderDraft):
     "A View Provider for the Draft Angular Dimension object"
     def __init__(self, obj):
         obj.addProperty("App::PropertyLength","FontSize","Draft","Font size")
+        obj.addProperty("App::PropertyInteger","Decimals","Draft","The number of decimals to show")
         obj.addProperty("App::PropertyString","FontName","Draft","Font name")
         obj.addProperty("App::PropertyLength","ArrowSize","Draft","Arrow size")
         obj.addProperty("App::PropertyLength","TextSpacing","Draft","The spacing between the text and the dimension line")
@@ -3224,6 +3273,7 @@ class _ViewProviderAngularDimension(_ViewProviderDraft):
         obj.ArrowType = arrowtypes
         obj.ArrowType = arrowtypes[getParam("dimsymbol",0)]
         obj.Override = ''
+        obj.Decimals = getParam("dimPrecision",2)
         _ViewProviderDraft.__init__(self,obj)
 
     def attach(self, vobj):
@@ -3302,7 +3352,10 @@ class _ViewProviderAngularDimension(_ViewProviderDraft):
                 a = obj.LastAngle - obj.FirstAngle
             else:
                 a = (360 - obj.FirstAngle) + obj.LastAngle
-            fstring = "%." + str(getParam("dimPrecision",2)) + "f"
+            if hasattr(obj.ViewObject,"Decimals"):
+                fstring = "%." + str(obj.ViewObject.Decimals) + "f"
+            else:
+                fstring = "%." + str(getParam("dimPrecision",2)) + "f"
             self.string = (fstring % a)
             self.string += " d"
             if obj.ViewObject.Override:

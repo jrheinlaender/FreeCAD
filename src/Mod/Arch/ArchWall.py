@@ -147,7 +147,8 @@ class _CommandWall:
         p = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/Arch")
         self.Width = p.GetFloat("WallWidth",200)
         self.Height = p.GetFloat("WallHeight",3000)
-        self.JOIN_WALLS = p.GetBool("joinWallSketches")
+        self.JOIN_WALLS_SKETCHES = p.GetBool("joinWallSketches",False)
+        self.AUTOJOIN = p.GetBool("autoJoinWalls",True)
         sel = FreeCADGui.Selection.getSelectionEx()
         done = False
         self.existing = []
@@ -208,7 +209,7 @@ class _CommandWall:
                 # no existing wall snapped, just add a default wall
                 self.addDefault(l)
             else:
-                if self.JOIN_WALLS:
+                if self.JOIN_WALLS_SKETCHES:
                     # join existing subwalls first if possible, then add the new one
                     w = joinWalls(self.existing)
                     if w:
@@ -217,13 +218,15 @@ class _CommandWall:
                         else:
                             # if not possible, add new wall as addition to the existing one
                             self.addDefault(l)
-                            FreeCADGui.doCommand('Arch.addComponents(FreeCAD.ActiveDocument.'+FreeCAD.ActiveDocument.Objects[-1].Name+',FreeCAD.ActiveDocument.'+w.Name+')')
+                            if self.AUTOJOIN:
+                                FreeCADGui.doCommand('Arch.addComponents(FreeCAD.ActiveDocument.'+FreeCAD.ActiveDocument.Objects[-1].Name+',FreeCAD.ActiveDocument.'+w.Name+')')
                     else:
                         self.addDefault(l)
                 else:
                     # add new wall as addition to the first existing one
                     self.addDefault(l)
-                    FreeCADGui.doCommand('Arch.addComponents(FreeCAD.ActiveDocument.'+FreeCAD.ActiveDocument.Objects[-1].Name+',FreeCAD.ActiveDocument.'+self.existing[0].Name+')')
+                    if self.AUTOJOIN:
+                        FreeCADGui.doCommand('Arch.addComponents(FreeCAD.ActiveDocument.'+FreeCAD.ActiveDocument.Objects[-1].Name+',FreeCAD.ActiveDocument.'+self.existing[0].Name+')')
             FreeCAD.ActiveDocument.commitTransaction()
             FreeCAD.ActiveDocument.recompute()
             if self.continueCmd:
@@ -507,16 +510,16 @@ class _Wall(ArchComponent.Component):
         if hasattr(obj,"Width"):
             if obj.Width:
                 width = obj.Width
-        height = normal = None
+        height = 1
         if hasattr(obj,"Height"):
             if obj.Height:
                 height = obj.Height
             else:
                 for p in obj.InList:
                     if Draft.getType(p) == "Floor":
-                        height = p.Height
-        if not height: 
-            height = 1
+                        if p.Height:
+                            height = p.Height
+        normal = None
         if hasattr(obj,"Normal"):
             if obj.Normal == Vector(0,0,0):
                 normal = Vector(0,0,1)

@@ -188,9 +188,11 @@ if(FREECAD_LIBPACK_USE)
         include(cMake/UseLibPack9x.cmake)
         set(SWIG_EXECUTABLE ${FREECAD_LIBPACK_DIR}/tools/swigwin-2.0.11/swig.exe CACHE STRING "Swig" FORCE)
         set(FREECAD_USE_EXTERNAL_PIVY ON CACHE BOOL "Switch off local pivy" FORCE)
+        set(FREECAD_LIBPACK_PYSIDEUIC_REL   "${FREECAD_LIBPACK_DIR}/pyside-tools/Lib/site-packages")
         file(GLOB FREECAD_LIBPACK_PIVY_COIN "${FREECAD_LIBPACK_DIR}/pivy/*.*")
         file(GLOB FREECAD_LIBPACK_PIVY_SOQT "${FREECAD_LIBPACK_DIR}/pivy/gui/*.*")
         file(GLOB FREECAD_LIBPACK_PYSIDE    "${FREECAD_LIBPACK_DIR}/pyside/lib/site-packages/PySide/*.py*")
+        file(GLOB_RECURSE FREECAD_LIBPACK_PYSIDEUIC RELATIVE "${FREECAD_LIBPACK_PYSIDEUIC_REL}" "${FREECAD_LIBPACK_PYSIDEUIC_REL}/pysideuic/*.py")
         file(GLOB FREECAD_LIBPACK_PYTHON    "${FREECAD_LIBPACK_DIR}/bin/*.py*")
     ELSEIF(FREECAD_LIBPACK_CHECKCUSTOM)
         set(FREECAD_LIBPACK_VERSION "Custom" CACHE STRING "Displays if the libpack has been found" FORCE)
@@ -457,16 +459,11 @@ else(FREECAD_LIBPACK_USE)
 
 # -------------------------------- Shiboken/PySide ------------------------
 
+        # set(PYTHON_SUFFIX -python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR})
         SET(PYTHON_SUFFIX -python2.7) # for shiboken
         SET(PYTHON_BASENAME -python2.7) # for PySide
-        find_package(Shiboken QUIET)
-        IF(SHIBOKEN_INCLUDE_DIR)
-            message("-- Shiboken has been found.")
-        ENDIF(SHIBOKEN_INCLUDE_DIR)
-        find_package(PySide QUIET)
-        IF(PYSIDE_INCLUDE_DIR)
-            message("-- PySide has been found.")
-        ENDIF(PYSIDE_INCLUDE_DIR)
+        find_package(Shiboken REQUIRED)
+        find_package(PySide REQUIRED)
 
 # ------------------------------ Matplotlib ------------------------------
 
