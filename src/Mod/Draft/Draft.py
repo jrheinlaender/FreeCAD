@@ -81,7 +81,7 @@ if FreeCAD.GuiUp:
     import FreeCADGui, WorkingPlane
     gui = True
 else:
-    print "FreeCAD Gui not present. Draft module will have some features disabled."
+    #print "FreeCAD Gui not present. Draft module will have some features disabled."
     gui = False
     
 arrowtypes = ["Dot","Circle","Arrow"]
@@ -1259,6 +1259,14 @@ def scale(objectslist,delta=Vector(1,1,1),center=Vector(0,0,0),copy=False,legacy
             elif getType(obj) == "Wire":
                 p = []
                 for v in sh.Vertexes: p.append(v.Point)
+                print p
+                newobj.Points = p
+            elif getType(obj) == "BSpline":
+                p = []
+                for p1 in obj.Points:
+                    p2 = p1.sub(center)
+                    p2.scale(delta.x,delta.y,delta.z)
+                    p.append(p2)
                 newobj.Points = p
             elif (obj.isDerivedFrom("Part::Feature")):
                 newobj.Shape = sh
@@ -3009,11 +3017,19 @@ class _ViewProviderDimension(_ViewProviderDraft):
                     v3 = DraftVecUtils.project(v3,obj.Direction)
                     self.p2 = obj.Dimline.add(v2)
                     self.p3 = obj.Dimline.add(v3)
-                    base = Part.Line(self.p2,self.p3).toShape()
-                    proj = DraftGeomUtils.findDistance(self.p1,base)
+                    if DraftVecUtils.equals(self.p2,self.p3):
+                        base = None
+                        proj = None
+                    else:
+                        base = Part.Line(self.p2,self.p3).toShape()
+                        proj = DraftGeomUtils.findDistance(self.p1,base)
             if not base:
-                base = Part.Line(self.p1,self.p4).toShape()
-                proj = DraftGeomUtils.findDistance(obj.Dimline,base)
+                if DraftVecUtils.equals(self.p1,self.p4):
+                    base = None
+                    proj = None
+                else:
+                    base = Part.Line(self.p1,self.p4).toShape()
+                    proj = DraftGeomUtils.findDistance(obj.Dimline,base)
                 if proj:
                     self.p2 = self.p1.add(proj.negative())
                     self.p3 = self.p4.add(proj.negative())
