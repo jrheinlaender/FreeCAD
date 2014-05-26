@@ -472,7 +472,9 @@ bool wireEncirclesAxis(const TopoDS_Wire& wire, const Handle(Geom_CylindricalSur
         gp_Pnt segFirst, segLast;
         gp_Vec segTangent;
         adapt.D1(fp, segFirst, segTangent);
-        segLast = adapt.Value(lp);
+        //segLast = adapt.Value(lp);
+        segFirst = BRep_Tool::Pnt(TopExp::FirstVertex(segment, false));
+        segLast  = BRep_Tool::Pnt(TopExp::LastVertex(segment, false));
 
         double length = 0.0;
 
