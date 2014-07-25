@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="ja" sourcelanguage="en">
   <context>
     <name>TestGui::UnitTest</name>
     <message>
@@ -41,7 +41,7 @@
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>閉じる (&amp;C)</translation>
+      <translation>閉じる(&amp;C)</translation>
     </message>
     <message>
       <source>Alt+C</source>
@@ -49,7 +49,7 @@
     </message>
     <message>
       <source>Idle</source>
-      <translation>Idle</translation>
+      <translation>待機中</translation>
     </message>
     <message>
       <source>Progress</source>
@@ -81,7 +81,7 @@
     </message>
     <message>
       <source>Select test name:</source>
-      <translation>Select test name:</translation>
+      <translation>テスト名を選択:</translation>
     </message>
   </context>
   <context>
@@ -106,9 +106,9 @@ FreeCAD UnitTest is part of FreeCAD and supports writing Unit Tests for own modu
       <source>Enter the name of a callable object which, when called, will return a TestCase.Click 'start', and the test thus produced will be run.
 
 Double click on an error in the tree view to see more information about it,including the stack trace.</source>
-      <translation>Enter the name of a callable object which, when called, will return a TestCase.Click 'start', and the test thus produced will be run.
+      <translation>呼び出し時にTestCase.Click 'start'を返す呼び出し可能なオブジェクトの名前を入力してください。入力するとそれに従って作成されたテストが実行されます。
 
-Double click on an error in the tree view to see more information about it,including the stack trace.</translation>
+ツリービューのエラーをダブルクリックするとスタックトレースを含むより詳細な情報が確認できます。</translation>
     </message>
   </context>
 </TS>

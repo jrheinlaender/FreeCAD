@@ -50,20 +50,7 @@ fc_target_copy_resource(Points
     ${CMAKE_BINARY_DIR}/Mod/Points
     Init.py)
 
-if(MSVC)
-    set_target_properties(Points PROPERTIES SUFFIX ".pyd")
-    set_target_properties(Points PROPERTIES DEBUG_OUTPUT_NAME "Points_d")
-    set_target_properties(Points PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/Points)
-    set_target_properties(Points PROPERTIES PREFIX "../")
-elseif(MINGW)
-    set_target_properties(Points PROPERTIES SUFFIX ".pyd")
-    set_target_properties(Points PROPERTIES DEBUG_OUTPUT_NAME "Points_d")
-    set_target_properties(Points PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/Points)
-    set_target_properties(Points PROPERTIES PREFIX "")
-else(MSVC)
-    set_target_properties(Points PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/Points)
-    set_target_properties(Points PROPERTIES PREFIX "")
-    set_target_properties(Points PROPERTIES INSTALL_RPATH ${INSTALL_RPATH})
-endif(MSVC)
+SET_BIN_DIR(Points Points /Mod/Points)
+SET_PYTHON_PREFIX_SUFFIX(Points)
 
-INSTALL(TARGETS Points DESTINATION lib)
+INSTALL(TARGETS Points DESTINATION ${CMAKE_INSTALL_LIBDIR})

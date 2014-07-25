@@ -326,45 +326,59 @@ show(PyObject *self, PyObject *args)
 static PyObject * makeWireString(PyObject *self, PyObject *args)
 {
     PyObject *intext;
-    const char* dir;                      
+    const char* dir;
     const char* fontfile;
-    float height;
-    int track = 0;
+    const char* fontspec;
+    bool useFontSpec = false;
+    double height;
+    double track = 0;
 
     Py_UNICODE *unichars;
     Py_ssize_t pysize;
    
     PyObject *CharList;
    
-    if (!PyArg_ParseTuple(args, "Ossf|i", &intext, 
-                                          &dir,
-                                          &fontfile,
-                                          &height,
-                                          &track))  {
-        Base::Console().Message("** makeWireString bad args.\n");                                           
-        return NULL;
-    }
-
+    if (PyArg_ParseTuple(args, "Ossd|d", &intext,                               // compatibility with old version
+                                         &dir,
+                                         &fontfile,
+                                         &height,
+                                         &track))  {
+            useFontSpec = false; }
+    else { 
+        PyErr_Clear();
+        if (PyArg_ParseTuple(args, "Osd|d", &intext, 
+                                            &fontspec,
+                                            &height,
+                                            &track))  {
+            useFontSpec = true; }
+        else {
+            Base::Console().Message("** makeWireString bad args.\n");
+            return NULL; }
+    }            
+ 
     if (PyString_Check(intext)) {
         PyObject *p = Base::PyAsUnicodeObject(PyString_AsString(intext));    
         if (!p) {
             Base::Console().Message("** makeWireString can't convert PyString.\n");
             return NULL;
         }
-        pysize = PyUnicode_GetSize(p);    
+        pysize = PyUnicode_GetSize(p);
         unichars = PyUnicode_AS_UNICODE(p);
     }
-    else if (PyUnicode_Check(intext)) {        
-        pysize = PyUnicode_GetSize(intext);   
+    else if (PyUnicode_Check(intext)) {
+        pysize = PyUnicode_GetSize(intext);
         unichars = PyUnicode_AS_UNICODE(intext);
     }
     else {
-        Base::Console().Message("** makeWireString bad text parameter.\n");                                           
+        Base::Console().Message("** makeWireString bad text parameter.\n");
         return NULL;
     }
 
-    try {        
-        CharList = FT2FC(unichars,pysize,dir,fontfile,height,track);         // get list of wire chars
+    try {
+        if (useFontSpec) {
+            CharList = FT2FC(unichars,pysize,fontspec,height,track); }
+        else {
+            CharList = FT2FC(unichars,pysize,dir,fontfile,height,track); }
     }
     catch (Standard_DomainError) {                                      // Standard_DomainError is OCC error.
         PyErr_SetString(PyExc_Exception, "makeWireString failed - Standard_DomainError");
@@ -423,29 +437,51 @@ static PyObject * makeFilledFace(PyObject *self, PyObject *args)
 {
     // http://opencascade.blogspot.com/2010/03/surface-modeling-part6.html
     // TODO: GeomPlate_BuildPlateSurface
+    // TODO: GeomPlate_MakeApprox
+    // TODO: BRepFeat_SplitShape
     PyObject *obj;
-    if (!PyArg_ParseTuple(args, "O", &obj))
+    PyObject *surf=0;
+    if (!PyArg_ParseTuple(args, "O|O!", &obj, &TopoShapeFacePy::Type, &surf))
         return NULL;
 
     PY_TRY {
+        // See also BRepOffsetAPI_MakeFilling
         BRepFill_Filling builder;
-        
         try {
+            if (surf) {
+                const TopoDS_Shape& face = static_cast<TopoShapeFacePy*>(surf)->
+                    getTopoShapePtr()->_Shape;
+                if (!face.IsNull() && face.ShapeType() == TopAbs_FACE) {
+                    builder.LoadInitSurface(TopoDS::Face(face));
+                }
+            }
             Py::Sequence list(obj);
-            int countEdges = 0;
+            int numConstraints = 0;
             for (Py::Sequence::iterator it = list.begin(); it != list.end(); ++it) {
-                if (PyObject_TypeCheck((*it).ptr(), &(Part::TopoShapeEdgePy::Type))) {
-                    const TopoDS_Shape& sh = static_cast<TopoShapeEdgePy*>((*it).ptr())->
+                if (PyObject_TypeCheck((*it).ptr(), &(Part::TopoShapePy::Type))) {
+                    const TopoDS_Shape& sh = static_cast<TopoShapePy*>((*it).ptr())->
                         getTopoShapePtr()->_Shape;
                     if (!sh.IsNull()) {
-                        builder.Add(TopoDS::Edge(sh), GeomAbs_C0);
-                        countEdges++;
+                        if (sh.ShapeType() == TopAbs_EDGE) {
+                            builder.Add(TopoDS::Edge(sh), GeomAbs_C0);
+                            numConstraints++;
+                        }
+                        else if (sh.ShapeType() == TopAbs_FACE) {
+                            builder.Add(TopoDS::Face(sh), GeomAbs_C0);
+                            numConstraints++;
+                        }
+                        else if (sh.ShapeType() == TopAbs_VERTEX) {
+                            const TopoDS_Vertex& v = TopoDS::Vertex(sh);
+                            gp_Pnt pnt = BRep_Tool::Pnt(v);
+                            builder.Add(pnt);
+                            numConstraints++;
+                        }
                     }
                 }
             }
 
-            if (countEdges == 0) {
-                PyErr_SetString(PyExc_Exception, "Failed to created face with no edges");
+            if (numConstraints == 0) {
+                PyErr_SetString(PyExc_Exception, "Failed to created face with no constraints");
                 return 0;
             }
 
@@ -844,12 +880,19 @@ static PyObject * makeTorus(PyObject *self, PyObject *args)
 static PyObject * makeHelix(PyObject *self, PyObject *args)
 {
     double pitch, height, radius, angle=-1.0;
-    if (!PyArg_ParseTuple(args, "ddd|d", &pitch, &height, &radius, &angle))
+    PyObject *pleft=Py_False;
+    PyObject *pvertHeight=Py_False;
+    if (!PyArg_ParseTuple(args, "ddd|dO!O!", &pitch, &height, &radius, &angle,
+                                             &(PyBool_Type), &pleft,
+                                             &(PyBool_Type), &pvertHeight))
         return 0;
 
     try {
         TopoShape helix;
-        TopoDS_Shape wire = helix.makeHelix(pitch, height, radius, angle);
+        Standard_Boolean anIsLeft = PyObject_IsTrue(pleft) ? Standard_True : Standard_False;
+        Standard_Boolean anIsVertHeight = PyObject_IsTrue(pvertHeight) ? Standard_True : Standard_False;
+        TopoDS_Shape wire = helix.makeHelix(pitch, height, radius, angle,
+                                            anIsLeft, anIsVertHeight);
         return new TopoShapeWirePy(new TopoShape(wire));
     }
     catch (Standard_Failure) {
@@ -979,7 +1022,8 @@ static PyObject * makeLine(PyObject *self, PyObject *args)
 static PyObject * makePolygon(PyObject *self, PyObject *args)
 {
     PyObject *pcObj;
-    if (!PyArg_ParseTuple(args, "O", &pcObj))     // convert args: Python->C
+    PyObject *pclosed=Py_False;
+    if (!PyArg_ParseTuple(args, "O|O!", &pcObj, &(PyBool_Type), &pclosed))     // convert args: Python->C
         return NULL;                             // NULL triggers exception
 
     PY_TRY {
@@ -1004,6 +1048,13 @@ static PyObject * makePolygon(PyObject *self, PyObject *args)
 
             if (!mkPoly.IsDone())
                 Standard_Failure::Raise("Cannot create polygon because less than two vertices are given");
+
+            // if the polygon should be closed
+            if (PyObject_IsTrue(pclosed)) {
+                if (!mkPoly.FirstVertex().IsSame(mkPoly.LastVertex())) {
+                    mkPoly.Add(mkPoly.FirstVertex());
+                }
+            }
 
             return new TopoShapeWirePy(new TopoShape(mkPoly.Wire()));
         }
@@ -1267,14 +1318,19 @@ static PyObject * makeLoft(PyObject *self, PyObject *args)
     PyObject *pcObj;
     PyObject *psolid=Py_False;
     PyObject *pruled=Py_False;
-    if (!PyArg_ParseTuple(args, "O|O!O!", &pcObj,
+    PyObject *pclosed=Py_False;
+    if (!PyArg_ParseTuple(args, "O|O!O!O!", &pcObj,
                                           &(PyBool_Type), &psolid,
-                                          &(PyBool_Type), &pruled))
+                                          &(PyBool_Type), &pruled,
+                                          &(PyBool_Type), &pclosed)) {
+        Base::Console().Message("Part.makeLoft Parameter Error\n");
         return NULL;
+    }
 
     try {
         TopTools_ListOfShape profiles;
         Py::Sequence list(pcObj);
+
         for (Py::Sequence::iterator it = list.begin(); it != list.end(); ++it) {
             if (PyObject_TypeCheck((*it).ptr(), &(Part::TopoShapePy::Type))) {
                 const TopoDS_Shape& sh = static_cast<TopoShapePy*>((*it).ptr())->
@@ -1286,11 +1342,13 @@ static PyObject * makeLoft(PyObject *self, PyObject *args)
         TopoShape myShape;
         Standard_Boolean anIsSolid = PyObject_IsTrue(psolid) ? Standard_True : Standard_False;
         Standard_Boolean anIsRuled = PyObject_IsTrue(pruled) ? Standard_True : Standard_False;
-        TopoDS_Shape aResult = myShape.makeLoft(profiles, anIsSolid, anIsRuled);
+        Standard_Boolean anIsClosed = PyObject_IsTrue(pclosed) ? Standard_True : Standard_False;
+        TopoDS_Shape aResult = myShape.makeLoft(profiles, anIsSolid, anIsRuled,anIsClosed);
         return new TopoShapePy(new TopoShape(aResult));
     }
     catch (Standard_Failure) {
         Handle_Standard_Failure e = Standard_Failure::Caught();
+        Base::Console().Message("debug: Part.makeLoft catching 'Standard_Failure' msg: '%s'\n", e->GetMessageString());
         PyErr_SetString(PyExc_Exception, e->GetMessageString());
         return 0;
     }

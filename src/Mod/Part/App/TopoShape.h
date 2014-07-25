@@ -119,6 +119,7 @@ public:
     //@{
     void read(const char *FileName);
     void write(const char *FileName) const;
+    void dump(std::ostream& out) const;
     void importIges(const char *FileName);
     void importStep(const char *FileName);
     void importBrep(const char *FileName);
@@ -126,8 +127,8 @@ public:
     void exportIges(const char *FileName) const;
     void exportStep(const char *FileName) const;
     void exportBrep(const char *FileName) const;
-    void exportBrep(std::ostream&);
-    void exportStl (const char *FileName) const;
+    void exportBrep(std::ostream&) const;
+    void exportStl (const char *FileName, double deflection) const;
     void exportFaceSet(double, double, std::ostream&) const;
     void exportLineSet(std::ostream&) const;
     //@}
@@ -157,7 +158,7 @@ public:
     TopoDS_Shape makePipeShell(const TopTools_ListOfShape& profiles, const Standard_Boolean make_solid,
         const Standard_Boolean isFrenet = Standard_False, int transition=0) const;
     TopoDS_Shape makePrism(const gp_Vec&) const;
-    TopoDS_Shape revolve(const gp_Ax1&, double d) const;
+    TopoDS_Shape revolve(const gp_Ax1&, double d, Standard_Boolean isSolid=Standard_False) const;
     TopoDS_Shape makeSweep(const TopoDS_Shape& profile, double, int) const;
     TopoDS_Shape makeTube(double radius, double tol, int cont, int maxdeg, int maxsegm) const;
     TopoDS_Shape makeHelix(Standard_Real pitch, Standard_Real height,
@@ -169,7 +170,7 @@ public:
     TopoDS_Shape makeThread(Standard_Real pitch, Standard_Real depth,
         Standard_Real height, Standard_Real radius) const;
     TopoDS_Shape makeLoft(const TopTools_ListOfShape& profiles, Standard_Boolean isSolid,
-        Standard_Boolean isRuled) const;
+        Standard_Boolean isRuled, Standard_Boolean isClosed = Standard_False) const;
     TopoDS_Shape makeOffsetShape(double offset, double tol,
         bool intersection = false, bool selfInter = false,
         short offsetMode = 0, short join = 0, bool fill = false) const;

@@ -30,6 +30,7 @@
 #include <string>
 #include <list>
 #include <vector>
+#include <boost/dynamic_bitset.hpp>
 #include <boost/filesystem/path.hpp>
 
 #include <Base/Uuid.h>
@@ -372,7 +373,7 @@ public:
     
     /** Sets the property 
      */
-    void setValue(void){};
+    void setValue(void){}
     void setValue(const std::string& key,const std::string& value);
     void setValues(const std::map<std::string,std::string>&);
     
@@ -524,7 +525,7 @@ public:
      */
     void setValue(double);
 
-    void setValue (void){};
+    void setValue (void){}
     
     /// index operator
     double operator[] (const int idx) const {return _lValueList.operator[] (idx);} 
@@ -744,6 +745,44 @@ public:
     
 private:
     bool _lValue;
+};
+
+/** Bool list properties
+ * 
+ */
+class AppExport PropertyBoolList : public PropertyLists
+{
+    TYPESYSTEM_HEADER();
+
+public:
+    PropertyBoolList();
+    ~PropertyBoolList();
+
+    virtual void setSize(int newSize);
+    virtual int getSize(void) const;
+
+    /** Sets the property 
+     */
+    void setValue(bool);
+
+    /// index operator
+    void  set1Value (const int idx, bool value);
+    void setValues (const boost::dynamic_bitset<>& values);
+
+    const boost::dynamic_bitset<> &getValues(void) const{return _lValueList;}
+
+    virtual PyObject *getPyObject(void);
+    virtual void setPyObject(PyObject *);
+    
+    virtual void Save (Base::Writer &writer) const;
+    virtual void Restore(Base::XMLReader &reader);
+    
+    virtual Property *Copy(void) const;
+    virtual void Paste(const Property &from);
+    virtual unsigned int getMemSize (void) const;
+
+private:
+    boost::dynamic_bitset<> _lValueList;
 };
 
 

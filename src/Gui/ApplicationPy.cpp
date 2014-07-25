@@ -29,6 +29,8 @@
 # include <QPrinter>
 #endif
 
+#include <xercesc/util/XMLString.hpp>
+#include <xercesc/util/TranscodingException.hpp>
 
 #include "Application.h"
 #include "BitmapFactory.h"
@@ -269,7 +271,7 @@ PyObject* Application::sOpen(PyObject * /*self*/, PyObject *args,PyObject * /*kw
         else if (ext == QLatin1String("py") || ext == QLatin1String("fcmacro") ||
                  ext == QLatin1String("fcscript")) {
             PythonEditor* editor = new PythonEditor();
-            editor->setWindowIcon(Gui::BitmapFactory().pixmap("python_small"));
+            editor->setWindowIcon(Gui::BitmapFactory().pixmap("applications-python"));
             PythonEditorView* edit = new PythonEditorView(editor, getMainWindow());
             edit->open(fileName);
             edit->resize(400, 300);
@@ -329,7 +331,7 @@ PyObject* Application::sInsert(PyObject * /*self*/, PyObject *args,PyObject * /*
         else if (ext == QLatin1String("py") || ext == QLatin1String("fcmacro") ||
                  ext == QLatin1String("fcscript")) {
             PythonEditor* editor = new PythonEditor();
-            editor->setWindowIcon(Gui::BitmapFactory().pixmap("python_small"));
+            editor->setWindowIcon(Gui::BitmapFactory().pixmap("applications-python"));
             PythonEditorView* edit = new PythonEditorView(editor, getMainWindow());
             edit->open(fileName);
             edit->resize(400, 300);
@@ -405,12 +407,15 @@ PyObject* Application::sExport(PyObject * /*self*/, PyObject *args,PyObject * /*
 PyObject* Application::sSendActiveView(PyObject * /*self*/, PyObject *args,PyObject * /*kwd*/)
 {
     char *psCommandStr;
-    if (!PyArg_ParseTuple(args, "s",&psCommandStr))     // convert args: Python->C 
+    PyObject *suppress=Py_False;
+    if (!PyArg_ParseTuple(args, "s|O!",&psCommandStr,&PyBool_Type,&suppress))     // convert args: Python->C 
         return NULL;                                      // NULL triggers exception 
 
     const char* ppReturn=0;
-    if (!Instance->sendMsgToActiveView(psCommandStr,&ppReturn))
-        Base::Console().Warning("Unknown view command: %s\n",psCommandStr);
+    if (!Instance->sendMsgToActiveView(psCommandStr,&ppReturn)) {
+        if (!PyObject_IsTrue(suppress))
+            Base::Console().Warning("Unknown view command: %s\n",psCommandStr);
+    }
 
     // Print the return value to the output
     if (ppReturn) {
@@ -524,6 +529,17 @@ PyObject* Application::sActivateWorkbenchHandler(PyObject * /*self*/, PyObject *
     }
     catch (const Base::Exception& e) {
         PyErr_SetString(PyExc_Exception, e.what());
+        return 0;
+    }
+    catch (const XERCES_CPP_NAMESPACE_QUALIFIER TranscodingException& e) {
+        std::stringstream err;
+        char *pMsg = XERCES_CPP_NAMESPACE_QUALIFIER XMLString::transcode(e.getMessage());
+        err << "Transcoding exception raised in activateWorkbench.\n"
+            << "Check if your user configuration file is valid.\n"
+            << "  Exception message:"
+            << pMsg;
+        XERCES_CPP_NAMESPACE_QUALIFIER XMLString::release(&pMsg);
+        PyErr_SetString(PyExc_RuntimeError, "Transcoding exception in Xerces-c: ");
         return 0;
     }
     catch (...) {
@@ -785,7 +801,17 @@ PyObject* Application::sAddCommand(PyObject * /*self*/, PyObject *args,PyObject 
 
     Application::Instance->commandManager().addCommand(new PythonCommand(pName,pcCmdObj,source.c_str()));
 #else
-    Application::Instance->commandManager().addCommand(new PythonCommand(pName,pcCmdObj,pSource));
+    try {
+		Application::Instance->commandManager().addCommand(new PythonCommand(pName,pcCmdObj,pSource));
+    }
+    catch (const Base::Exception& e) {
+        PyErr_SetString(PyExc_Exception, e.what());
+        return 0;
+    }
+    catch (...) {
+        PyErr_SetString(PyExc_Exception, "Unknown C++ exception raised in Application::sAddCommand()");
+        return 0;
+    }
 #endif
     Py_INCREF(Py_None);
     return Py_None;

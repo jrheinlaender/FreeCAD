@@ -350,6 +350,14 @@ Application::Application(bool GUIenabled)
             throw Base::Exception("Invalid system settings");
         }
 #endif
+#if 0 // QuantitySpinBox and InputField try to handle the group separator now
+        // http://forum.freecadweb.org/viewtopic.php?f=10&t=6910
+        // A workaround is to disable the group separator for double-to-string conversion, i.e.
+        // setting the flag 'OmitGroupSeparator'.
+        QLocale loc = QLocale::system();
+        loc.setNumberOptions(QLocale::OmitGroupSeparator);
+        QLocale::setDefault(loc);
+#endif
 
         // setting up Python binding
         Base::PyGILStateLocker lock;
@@ -1091,45 +1099,47 @@ QPixmap Application::workbenchIcon(const QString& wb) const
         // get its Icon member if possible
         try {
             Py::Object handler(pcWorkbench);
-            Py::Object member = handler.getAttr(std::string("Icon"));
-            Py::String data(member);
-            std::string content = data.as_std_string();
+            if (handler.hasAttr(std::string("Icon"))) {
+                Py::Object member = handler.getAttr(std::string("Icon"));
+                Py::String data(member);
+                std::string content = data.as_std_string();
 
-            // test if in XPM format
-            QByteArray ary;
-            int strlen = (int)content.size();
-            ary.resize(strlen);
-            for (int j=0; j<strlen; j++)
-                ary[j]=content[j];
-            if (ary.indexOf("/* XPM */") > 0) {
-                // Make sure to remove crap around the XPM data
-                QList<QByteArray> lines = ary.split('\n');
-                QByteArray buffer;
-                buffer.reserve(ary.size()+lines.size());
-                for (QList<QByteArray>::iterator it = lines.begin(); it != lines.end(); ++it) {
-                    QByteArray trim = it->trimmed();
-                    if (!trim.isEmpty()) {
-                        buffer.append(trim);
-                        buffer.append('\n');
+                // test if in XPM format
+                QByteArray ary;
+                int strlen = (int)content.size();
+                ary.resize(strlen);
+                for (int j=0; j<strlen; j++)
+                    ary[j]=content[j];
+                if (ary.indexOf("/* XPM */") > 0) {
+                    // Make sure to remove crap around the XPM data
+                    QList<QByteArray> lines = ary.split('\n');
+                    QByteArray buffer;
+                    buffer.reserve(ary.size()+lines.size());
+                    for (QList<QByteArray>::iterator it = lines.begin(); it != lines.end(); ++it) {
+                        QByteArray trim = it->trimmed();
+                        if (!trim.isEmpty()) {
+                            buffer.append(trim);
+                            buffer.append('\n');
+                        }
+                    }
+                    icon.loadFromData(buffer, "XPM");
+                }
+                else {
+                    // is it a file name...
+                    QString file = QString::fromUtf8(content.c_str());
+                    icon.load(file);
+                    if (icon.isNull()) {
+                        // ... or the name of another icon?
+                        icon = BitmapFactory().pixmap(file.toUtf8());
                     }
                 }
-                icon.loadFromData(buffer, "XPM");
-            }
-            else {
-                // is it a file name...
-                QString file = QString::fromUtf8(content.c_str());
-                icon.load(file);
-                if (icon.isNull()) {
-                    // ... or the name of another icon?
-                    icon = BitmapFactory().pixmap(file.toUtf8());
+
+                if (!icon.isNull()) {
+                    BitmapFactory().addPixmapToCache(iconName.c_str(), icon);
                 }
-            }
 
-            if (!icon.isNull()) {
-                BitmapFactory().addPixmapToCache(iconName.c_str(), icon);
+                return icon;
             }
-
-            return icon;
         }
         catch (Py::Exception& e) {
             e.clear();
@@ -1699,6 +1709,7 @@ void Application::runApplication(void)
 
     // running the GUI init script
     try {
+        Base::Console().Log("Run Gui init script\n");
         Base::Interpreter().runString(Base::ScriptFactory().ProduceScript("FreeCADGuiInit"));
     }
     catch (const Base::Exception& e) {

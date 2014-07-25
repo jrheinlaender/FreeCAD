@@ -98,6 +98,22 @@ public:
         DisallowZooming=32,/**< switch of the zooming. */
     };
     //@}
+    
+    /** @name Anti-Aliasing modes of the rendered 3D scene
+      * Here you can switch between different methods for anti aliasing wich provide quite different results
+      * at different runtime impact. 
+      * - Smoothing enables openGL line and vertex smoothing which is basicly deprecadet
+      * - MSAA is hardeware multi sampling (with 2, 4 or 8 passes), a quite commom and efficient AA technique
+      */
+    //@{
+    enum AntiAliasing {
+        None,
+        Smoothing,
+        MSAA2x,
+        MSAA4x,
+        MSAA8x
+    };
+    //@}
 
     View3DInventorViewer (QWidget *parent, const char *name=NULL, SbBool embed=true, 
                           Type type= SoQtViewer::BROWSER, SbBool build=true);
@@ -230,6 +246,8 @@ public:
     SbVec3f getViewDirection() const;
     /** Returns the up direction */
     SbVec3f getUpDirection() const;
+    /** Returns the orientation of the camera. */
+    SbRotation getCameraOrientation() const; 
     /** Returns the 3d point on the focal plane to the given 2d point. */
     SbVec3f getPointOnScreen(const SbVec2s&) const;
     /** Returns the near plane represented by its normal and base point. */
@@ -261,6 +279,15 @@ public:
     void eraseAllDimensions();
     void addDimension3d(SoNode *node);
     void addDimensionDelta(SoNode *node);
+    //@}
+    
+    /** @name Anti-Aliasing Control
+     * the anti-aliasing mode is controled by parameters through view3dinventor.
+     * don't call them directly. Instead set the parameter View/AntiAliasing.
+     */
+    //@{
+    void setAntiAliasingMode(AntiAliasing mode);
+    AntiAliasing getAntiAliasingMode() const;
     //@}
 
     /**

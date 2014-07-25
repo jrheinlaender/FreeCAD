@@ -10,6 +10,7 @@ endif(FREECAD_BUILD_FEM_NETGEN)
 
 
 include_directories(
+    ${CMAKE_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_BINARY_DIR}/src
     ${CMAKE_CURRENT_BINARY_DIR}
@@ -155,21 +156,7 @@ fc_target_copy_resource(Fem
     ${FemScripts_SRCS}
     )
 
-	
-if(MSVC)
-    set_target_properties(Fem PROPERTIES SUFFIX ".pyd")
-    set_target_properties(Fem PROPERTIES DEBUG_OUTPUT_NAME "Fem_d")
-    set_target_properties(Fem PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/Fem)
-    set_target_properties(Fem PROPERTIES PREFIX "../")
-elseif(MINGW)
-    set_target_properties(Fem PROPERTIES SUFFIX ".pyd")
-    set_target_properties(Fem PROPERTIES DEBUG_OUTPUT_NAME "Fem_d")
-    set_target_properties(Fem PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/Fem)
-    set_target_properties(Fem PROPERTIES PREFIX "")
-else(MSVC)
-    set_target_properties(Fem PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/Fem)
-    set_target_properties(Fem PROPERTIES PREFIX "")
-    set_target_properties(Fem PROPERTIES INSTALL_RPATH ${INSTALL_RPATH})
-endif(MSVC)
+SET_BIN_DIR(Fem Fem /Mod/Fem)
+SET_PYTHON_PREFIX_SUFFIX(Fem)
 
-INSTALL(TARGETS Fem DESTINATION lib)
+INSTALL(TARGETS Fem DESTINATION ${CMAKE_INSTALL_LIBDIR})

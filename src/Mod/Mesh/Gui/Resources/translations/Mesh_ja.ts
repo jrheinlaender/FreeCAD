@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="ja" sourcelanguage="en">
   <context>
     <name>CmdMeshAddFacet</name>
     <message>
@@ -13,7 +13,7 @@
     </message>
     <message>
       <source>Add triangle manually to a mesh</source>
-      <translation>Add triangle manually to a mesh</translation>
+      <translation>手動でメッシュに三角形を追加</translation>
     </message>
   </context>
   <context>
@@ -24,11 +24,11 @@
     </message>
     <message>
       <source>Boundings info...</source>
-      <translation>Boundings info...</translation>
+      <translation>バウンディングボックス情報...</translation>
     </message>
     <message>
       <source>Shows the boundings of the selected mesh</source>
-      <translation>Shows the boundings of the selected mesh</translation>
+      <translation>選択されたメッシュのバウンディングボックスを表示します</translation>
     </message>
   </context>
   <context>
@@ -39,18 +39,18 @@
     </message>
     <message>
       <source>Regular solid...</source>
-      <translation>Regular solid...</translation>
+      <translation>正多面体...</translation>
     </message>
     <message>
       <source>Builds a regular solid</source>
-      <translation>Builds a regular solid</translation>
+      <translation>正多面体を作成</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshDemolding</name>
     <message>
       <source>Interactive demolding direction</source>
-      <translation>Interactive demolding direction</translation>
+      <translation>インタラクティブな離型方向</translation>
     </message>
     <message>
       <source>Mesh</source>
@@ -65,7 +65,7 @@
     </message>
     <message>
       <source>Difference</source>
-      <translation>Difference</translation>
+      <translation>差集合</translation>
     </message>
   </context>
   <context>
@@ -80,7 +80,7 @@
     </message>
     <message>
       <source>Information about face</source>
-      <translation>Information about face</translation>
+      <translation>面の情報</translation>
     </message>
   </context>
   <context>
@@ -91,11 +91,11 @@
     </message>
     <message>
       <source>Check solid mesh</source>
-      <translation>Check solid mesh</translation>
+      <translation>ソリッドメッシュをチェック</translation>
     </message>
     <message>
       <source>Checks whether the mesh is a solid</source>
-      <translation>Checks whether the mesh is a solid</translation>
+      <translation>メッシュがソリッドかどうか調べる</translation>
     </message>
   </context>
   <context>
@@ -106,44 +106,44 @@
     </message>
     <message>
       <source>Opens a dialog to analyze and repair a mesh</source>
-      <translation>Opens a dialog to analyze and repair a mesh</translation>
+      <translation>メッシュの分析・修復ダイアログを開く</translation>
     </message>
     <message>
       <source>Evaluate &amp;&amp; Repair mesh...</source>
-      <translation>Evaluate &amp;&amp; Repair mesh...</translation>
+      <translation>メッシュの評価と修復...</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeMesh</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make a Box</source>
-      <translation>Make a Box</translation>
+      <translation type="obsolete">Make a Box</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeTool</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make a Tool</source>
-      <translation>Make a Tool</translation>
+      <translation type="obsolete">Make a Tool</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeUnion</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make Union</source>
-      <translation>Make Union</translation>
+      <translation type="obsolete">Make Union</translation>
     </message>
   </context>
   <context>
@@ -154,7 +154,7 @@
     </message>
     <message>
       <source>Export mesh...</source>
-      <translation>Export mesh...</translation>
+      <translation>メッシュをエクスポート...</translation>
     </message>
     <message>
       <source>Exports a mesh to file</source>
@@ -169,7 +169,7 @@
     </message>
     <message>
       <source>Close hole</source>
-      <translation>Close hole</translation>
+      <translation>穴をふさぐ</translation>
     </message>
     <message>
       <source>Close holes interactively</source>
@@ -203,7 +203,7 @@
     </message>
     <message>
       <source>Flips the normals of the mesh</source>
-      <translation>Flips the normals of the mesh</translation>
+      <translation>メッシュの法線を反転</translation>
     </message>
   </context>
   <context>
@@ -214,11 +214,26 @@
     </message>
     <message>
       <source>Create mesh from geometry...</source>
-      <translation>Create mesh from geometry...</translation>
+      <translation>ジオメトリからメッシュを作成...</translation>
     </message>
     <message>
       <source>Create mesh from the selected geometry</source>
-      <translation>Create mesh from the selected geometry</translation>
+      <translation>選択されたジオメトリからメッシュを作成します</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeshFromPartShape</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Mesh</translation>
+    </message>
+    <message>
+      <source>Create mesh from shape...</source>
+      <translation type="unfinished">シェイプからメッシュを作成する...</translation>
+    </message>
+    <message>
+      <source>Tessellate shape</source>
+      <translation type="unfinished">シェイプを細分化します。</translation>
     </message>
   </context>
   <context>
@@ -229,11 +244,11 @@
     </message>
     <message>
       <source>Harmonize normals</source>
-      <translation>Harmonize normals</translation>
+      <translation>法線を一致</translation>
     </message>
     <message>
       <source>Harmonizes the normals of the mesh</source>
-      <translation>Harmonizes the normals of the mesh</translation>
+      <translation>メッシュの法線の向きを一致させます</translation>
     </message>
   </context>
   <context>
@@ -244,11 +259,11 @@
     </message>
     <message>
       <source>Import mesh...</source>
-      <translation>Import mesh...</translation>
+      <translation>メッシュをインポート...</translation>
     </message>
     <message>
       <source>Imports a mesh from file</source>
-      <translation>Imports a mesh from file</translation>
+      <translation>ファイルからメッシュをインポートします</translation>
     </message>
   </context>
   <context>
@@ -259,7 +274,7 @@
     </message>
     <message>
       <source>Intersection</source>
-      <translation>Intersection</translation>
+      <translation>共通集合</translation>
     </message>
   </context>
   <context>
@@ -270,11 +285,11 @@
     </message>
     <message>
       <source>Cut mesh</source>
-      <translation>Cut mesh</translation>
+      <translation>メッシュを切断</translation>
     </message>
     <message>
       <source>Cuts a mesh with a picked polygon</source>
-      <translation>Cuts a mesh with a picked polygon</translation>
+      <translation>選択ポリゴンでメッシュを切断します</translation>
     </message>
   </context>
   <context>
@@ -285,11 +300,11 @@
     </message>
     <message>
       <source>Make segment</source>
-      <translation>セグメントを作成する</translation>
+      <translation>セグメントを作成</translation>
     </message>
     <message>
       <source>Creates a mesh segment</source>
-      <translation>メッシュのセグメントを作成</translation>
+      <translation>メッシュのセグメントを作成します</translation>
     </message>
   </context>
   <context>
@@ -300,11 +315,11 @@
     </message>
     <message>
       <source>Select mesh</source>
-      <translation>Select mesh</translation>
+      <translation>メッシュを選択</translation>
     </message>
     <message>
       <source>Select an area of the mesh</source>
-      <translation>Select an area of the mesh</translation>
+      <translation>メッシュを領域で選択します</translation>
     </message>
   </context>
   <context>
@@ -315,11 +330,11 @@
     </message>
     <message>
       <source>Split mesh</source>
-      <translation>Split mesh</translation>
+      <translation>メッシュを分割</translation>
     </message>
     <message>
       <source>Splits a mesh into two meshes</source>
-      <translation>Splits a mesh into two meshes</translation>
+      <translation>メッシュを2つのメッシュに分割します</translation>
     </message>
   </context>
   <context>
@@ -330,11 +345,11 @@
     </message>
     <message>
       <source>Trim mesh</source>
-      <translation>Trim mesh</translation>
+      <translation>メッシュをトリム</translation>
     </message>
     <message>
       <source>Trims a mesh with a picked polygon</source>
-      <translation>Trims a mesh with a picked polygon</translation>
+      <translation>選択ポリゴンでメッシュをトリムします</translation>
     </message>
   </context>
   <context>
@@ -345,11 +360,11 @@
     </message>
     <message>
       <source>Remove components by hand...</source>
-      <translation>Remove components by hand...</translation>
+      <translation>手動によるコンポーネントの削除...</translation>
     </message>
     <message>
       <source>Mark a component to remove it from the mesh</source>
-      <translation>Mark a component to remove it from the mesh</translation>
+      <translation>メッシュから削除するコンポーネントを選択します</translation>
     </message>
   </context>
   <context>
@@ -360,11 +375,11 @@
     </message>
     <message>
       <source>Remove components...</source>
-      <translation>Remove components...</translation>
+      <translation>コンポーネントの削除...</translation>
     </message>
     <message>
       <source>Remove topologic independent components from the mesh</source>
-      <translation>Remove topologic independent components from the mesh</translation>
+      <translation>トポロジーとして独立しているコンポーネントをメッシュから削除します</translation>
     </message>
   </context>
   <context>
@@ -375,11 +390,11 @@
     </message>
     <message>
       <source>Create mesh segments...</source>
-      <translation>Create mesh segments...</translation>
+      <translation>メッシュセグメントを作成...</translation>
     </message>
     <message>
       <source>Create mesh segments</source>
-      <translation>Create mesh segments</translation>
+      <translation>メッシュのセグメントを作成します</translation>
     </message>
   </context>
   <context>
@@ -390,11 +405,11 @@
     </message>
     <message>
       <source>Smooth...</source>
-      <translation>Smooth...</translation>
+      <translation>スムージング</translation>
     </message>
     <message>
       <source>Smooth the selected meshes</source>
-      <translation>Smooth the selected meshes</translation>
+      <translation>選択したメッシュを滑らかにします</translation>
     </message>
   </context>
   <context>
@@ -409,7 +424,7 @@
     </message>
     <message>
       <source>Creates a segment from a given tool mesh</source>
-      <translation>指定されたツールメッシュからセグメントを作成</translation>
+      <translation>指定されたツールメッシュからセグメントを作成します</translation>
     </message>
   </context>
   <context>
@@ -420,11 +435,26 @@
     </message>
     <message>
       <source>Transform mesh</source>
-      <translation>メッシュに変換します。</translation>
+      <translation>メッシュを変形</translation>
     </message>
     <message>
       <source>Rotate or move a mesh</source>
-      <translation>Rotate or move a mesh</translation>
+      <translation>メッシュを回転または移動します</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeshTrimByPlane</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Mesh</translation>
+    </message>
+    <message>
+      <source>Trim mesh with a plane</source>
+      <translation type="unfinished">Trim mesh with a plane</translation>
+    </message>
+    <message>
+      <source>Trims a mesh with a plane</source>
+      <translation type="unfinished">Trims a mesh with a plane</translation>
     </message>
   </context>
   <context>
@@ -435,7 +465,7 @@
     </message>
     <message>
       <source>Union</source>
-      <translation>Union</translation>
+      <translation>結合</translation>
     </message>
   </context>
   <context>
@@ -446,11 +476,11 @@
     </message>
     <message>
       <source>Calculates the curvature of the vertices of a mesh</source>
-      <translation>メッシュの頂点の曲率を計算</translation>
+      <translation>メッシュの頂点の曲率を計算します</translation>
     </message>
     <message>
       <source>Curvature plot</source>
-      <translation>Curvature plot</translation>
+      <translation>曲率プロット</translation>
     </message>
   </context>
   <context>
@@ -461,42 +491,42 @@
     </message>
     <message>
       <source>Curvature info</source>
-      <translation>Curvature info</translation>
+      <translation>曲率の情報</translation>
     </message>
     <message>
       <source>Information about curvature</source>
-      <translation>Information about curvature</translation>
+      <translation>曲率の情報を表示します</translation>
     </message>
   </context>
   <context>
     <name>MeshGui::DlgEvaluateMesh</name>
     <message>
       <source>&amp;Help</source>
-      <translation>ヘルプ (&amp;H)</translation>
+      <translation type="obsolete">ヘルプ (&amp;H)</translation>
     </message>
     <message>
       <source>F1</source>
-      <translation>F1</translation>
+      <translation type="obsolete">F1</translation>
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>閉じる (&amp;C)</translation>
+      <translation type="obsolete">閉じる(&amp;C)</translation>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt+C</translation>
+      <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
       <source>Mesh information</source>
-      <translation>Mesh information</translation>
+      <translation>メッシュ情報</translation>
     </message>
     <message>
       <source>No information</source>
-      <translation>No information</translation>
+      <translation>情報なし</translation>
     </message>
     <message>
       <source>Number of points:</source>
-      <translation>Number of points:</translation>
+      <translation>点の数:</translation>
     </message>
     <message>
       <source>Number of edges:</source>
@@ -508,11 +538,11 @@
     </message>
     <message>
       <source>Analyze</source>
-      <translation>Analyze</translation>
+      <translation>分析</translation>
     </message>
     <message>
       <source>Repair</source>
-      <translation>Repair</translation>
+      <translation>修復</translation>
     </message>
     <message>
       <source>Orientation</source>
@@ -520,11 +550,11 @@
     </message>
     <message>
       <source>Degenerated faces</source>
-      <translation>Degenerated faces</translation>
+      <translation>メッシュの縮退</translation>
     </message>
     <message>
       <source>Face indices</source>
-      <translation>Face indices</translation>
+      <translation>面のインデックス</translation>
     </message>
     <message>
       <source>Number of faces:</source>
@@ -532,54 +562,54 @@
     </message>
     <message>
       <source>Duplicated faces</source>
-      <translation>Duplicated faces</translation>
+      <translation>重複面</translation>
     </message>
     <message>
       <source>Duplicated points</source>
-      <translation>Duplicated points</translation>
+      <translation>重複点</translation>
     </message>
     <message>
       <source>Non-manifolds</source>
-      <translation>Non-manifolds</translation>
+      <translation>ノンマニフォールド</translation>
     </message>
     <message>
       <source>Self-intersections</source>
-      <translation>Self-intersections</translation>
+      <translation>自己干渉</translation>
     </message>
     <message>
       <source>All above tests together</source>
-      <translation>All above tests together</translation>
+      <translation>上記のすべてのテストを一緒に行う</translation>
     </message>
     <message>
       <source>Repetitive repair</source>
-      <translation>Repetitive repair</translation>
+      <translation>繰り返し修復</translation>
     </message>
     <message>
       <source>Evaluate &amp; Repair Mesh</source>
-      <translation>Evaluate &amp; Repair Mesh</translation>
+      <translation>メッシュの評価と修復</translation>
     </message>
     <message>
       <source>Folds on surface</source>
-      <translation>Folds on surface</translation>
+      <translation>面上の折り畳み構造</translation>
     </message>
   </context>
   <context>
     <name>MeshGui::DlgEvaluateMeshImp</name>
     <message>
       <source>No information</source>
-      <translation>No information</translation>
+      <translation>情報なし</translation>
     </message>
     <message>
       <source>Invalid neighbour indices</source>
-      <translation>Invalid neighbour indices</translation>
+      <translation>無効な隣接インデックス</translation>
     </message>
     <message>
       <source>Invalid face indices</source>
-      <translation>Invalid face indices</translation>
+      <translation>無効な面のインデックス</translation>
     </message>
     <message>
       <source>Invalid point indices</source>
-      <translation>Invalid point indices</translation>
+      <translation>無効な点のインデックス</translation>
     </message>
     <message>
       <source>Multiple point indices</source>
@@ -587,59 +617,59 @@
     </message>
     <message>
       <source>Non-manifolds</source>
-      <translation>Non-manifolds</translation>
+      <translation>ノンマニフォールド</translation>
     </message>
     <message>
       <source>Cannot remove non-manifolds</source>
-      <translation>Cannot remove non-manifolds</translation>
+      <translation>ノンマニフォールドを取り除くことができません</translation>
     </message>
     <message>
       <source>No selection</source>
-      <translation>No selection</translation>
+      <translation>選択されていません</translation>
     </message>
     <message>
       <source>No flipped normals</source>
-      <translation>No flipped normals</translation>
+      <translation>逆向きの法線はありません</translation>
     </message>
     <message>
       <source>%1 flipped normals</source>
-      <translation>%1 flipped normals</translation>
+      <translation>%1 個の逆向きの法線があります</translation>
     </message>
     <message>
       <source>No non-manifolds</source>
-      <translation>No non-manifolds</translation>
+      <translation>ノンマニフォールドはありません</translation>
     </message>
     <message>
       <source>%1 non-manifolds</source>
-      <translation>%1 non-manifolds</translation>
+      <translation>%1 個のノンマニフォールドがあります</translation>
     </message>
     <message>
       <source>No invalid indices</source>
-      <translation>No invalid indices</translation>
+      <translation>無効なインデックスはありません</translation>
     </message>
     <message>
       <source>No degenerations</source>
-      <translation>No degenerations</translation>
+      <translation>縮退はありません</translation>
     </message>
     <message>
       <source>%1 degenerated faces</source>
-      <translation>%1 degenerated faces</translation>
+      <translation>%1 この縮退された面があります</translation>
     </message>
     <message>
       <source>No duplicated faces</source>
-      <translation>No duplicated faces</translation>
+      <translation>重複面はありません</translation>
     </message>
     <message>
       <source>%1 duplicated faces</source>
-      <translation>%1 の重複面</translation>
+      <translation>%1 の重複面があります</translation>
     </message>
     <message>
       <source>No duplicated points</source>
-      <translation>No duplicated points</translation>
+      <translation>重複点はありません</translation>
     </message>
     <message>
       <source>Duplicated points</source>
-      <translation>Duplicated points</translation>
+      <translation>重複点</translation>
     </message>
     <message>
       <source>Orientation</source>
@@ -647,23 +677,23 @@
     </message>
     <message>
       <source>Indices</source>
-      <translation>Indices</translation>
+      <translation>インデックス</translation>
     </message>
     <message>
       <source>Degenerations</source>
-      <translation>Degenerations</translation>
+      <translation>縮退</translation>
     </message>
     <message>
       <source>Duplicated faces</source>
-      <translation>Duplicated faces</translation>
+      <translation>重複面</translation>
     </message>
     <message>
       <source>No self-intersections</source>
-      <translation>No self-intersections</translation>
+      <translation>自己干渉はありません</translation>
     </message>
     <message>
       <source>Self-intersections</source>
-      <translation>Self-intersections</translation>
+      <translation>自己干渉</translation>
     </message>
     <message>
       <source>Mesh repair</source>
@@ -676,27 +706,27 @@
     <message>
       <source>Check failed due to folds on the surface.
 Please run the command to repair folds first</source>
-      <translation>Check failed due to folds on the surface.
-Please run the command to repair folds first</translation>
+      <translation>面上の折り畳み構造が原因で失敗しました。
+まず折り畳み構造の修正のためのコマンドを実行してください。</translation>
     </message>
     <message>
       <source>No folds on surface</source>
-      <translation>No folds on surface</translation>
+      <translation>面上に折り畳み構造はありません</translation>
     </message>
     <message>
       <source>%1 folds on surface</source>
-      <translation>%1 folds on surface</translation>
+      <translation>%1 個の折り畳み構造が面上にあります</translation>
     </message>
     <message>
       <source>Folds</source>
-      <translation>Folds</translation>
+      <translation>折り畳み構造</translation>
     </message>
   </context>
   <context>
     <name>MeshGui::DlgRegularSolid</name>
     <message>
       <source>Regular Solid</source>
-      <translation>Regular Solid</translation>
+      <translation>標準のソリッド</translation>
     </message>
     <message>
       <source>&amp;Create</source>
@@ -760,11 +790,11 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Closed</source>
-      <translation>Closed</translation>
+      <translation>閉じる</translation>
     </message>
     <message>
       <source>Sampling:</source>
-      <translation>Sampling:</translation>
+      <translation>サンプリング:</translation>
     </message>
     <message>
       <source>Edge length:</source>
@@ -787,7 +817,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>No active document</source>
-      <translation>No active document</translation>
+      <translation>アクティブなドキュメントがありません</translation>
     </message>
   </context>
   <context>
@@ -798,11 +828,11 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Two-side rendering</source>
-      <translation>Two-side rendering</translation>
+      <translation>両面を描画</translation>
     </message>
     <message>
       <source>Backface color</source>
-      <translation>Backface color</translation>
+      <translation>裏面の色</translation>
     </message>
     <message>
       <source>Smoothing</source>
@@ -810,21 +840,21 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;This is the smallest angle between two faces where normals get calculated to do flat shading.&lt;/p&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;If the angle between the normals of two neighbouring faces is less than the crease angle, the faces will be smoothshaded around their common edge.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;This is the smallest angle between two faces where normals get calculated to do flat shading.&lt;/p&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;If the angle between the normals of two neighbouring faces is less than the crease angle, the faces will be smoothshaded around their common edge.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;フラットシェーディングを行うための法線を計算する2面間の最小角度です&lt;/p&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;隣り合う2面の法線のなす角が折り目の角より小さい場合、それらの面は共有するエッジの周りでスムースシェーディングされます。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Crease angle</source>
-      <translation>Crease angle</translation>
+      <translation>折り目の角度</translation>
     </message>
     <message>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Flat shading/Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Defines the appearance of surfaces.&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;With flat shading the surface normals are not defined per vertex that leads to a unreal appearance for curved surfaces while using Phong shading leads to a smoother appearance. &lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;If this option is set Phong shading is used, if it is unset flat shading is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Flat shading/Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Defines the appearance of surfaces.&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;With flat shading the surface normals are not defined per vertex that leads to a unreal appearance for curved surfaces while using Phong shading leads to a smoother appearance. &lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;If this option is set Phong shading is used, if it is unset flat shading is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext"content="1"/&gt;&lt;/head&gt; &lt;body style="white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt; &lt;p style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;-qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt; &lt;span style="font-weight:600;"&gt; フラット シェーディング/フォン シェーディング&lt;/span&gt;&lt;/p&gt; &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;-qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt; &lt;p style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;-qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt; サーフェスの外観を定義します&lt;/p&gt;。&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;-qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt; &lt;p style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;-qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt; フラットシェーディングでは頂点ごとに法線が定義されていないため、曲面の外観がよくありません。フォンシェーディングを使うと滑らかな外観が得られます。&lt;/p&gt;。&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;-qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt; &lt;p style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;-qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;このオプションが設定されるとフォンシェーディングを使用します。セットしない場合はフラットシェーディングを使用します。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Define normal per vertex</source>
       <translation>頂点ごとに法線を定義します。</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source> °</source>
       <translation>°</translation>
     </message>
@@ -834,7 +864,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Default appearance for new meshes</source>
-      <translation>Default appearance for new meshes</translation>
+      <translation>新しいメッシュのデフォルトの外観</translation>
     </message>
     <message>
       <source>Default line color</source>
@@ -850,7 +880,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Show bounding-box for highlighted or selected meshes</source>
-      <translation>Show bounding-box for highlighted or selected meshes</translation>
+      <translation>ハイライト、または選択されたメッシュのバウンディングボックスを表示します</translation>
     </message>
     <message>
       <source>Line transparency</source>
@@ -869,11 +899,11 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Taubin</source>
-      <translation>Taubin</translation>
+      <translation>タウビン法</translation>
     </message>
     <message>
       <source>Laplace</source>
-      <translation>Laplace</translation>
+      <translation>ラプラシアン法</translation>
     </message>
     <message>
       <source>Parameter</source>
@@ -881,15 +911,19 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Iterations:</source>
-      <translation>Iterations:</translation>
+      <translation>反復回数:</translation>
     </message>
     <message>
       <source>Lambda:</source>
-      <translation>Lambda:</translation>
+      <translation>λ:</translation>
     </message>
     <message>
       <source>Mu:</source>
-      <translation>Mu:</translation>
+      <translation>μ:</translation>
+    </message>
+    <message>
+      <source>Only selection</source>
+      <translation type="unfinished">Only selection</translation>
     </message>
   </context>
   <context>
@@ -912,10 +946,17 @@ Please run the command to repair folds first</translation>
     </message>
   </context>
   <context>
+    <name>MeshGui::MeshFillHole</name>
+    <message>
+      <source>Finish</source>
+      <translation type="unfinished">完了</translation>
+    </message>
+  </context>
+  <context>
     <name>MeshGui::RemoveComponents</name>
     <message>
       <source>Remove components</source>
-      <translation>コンポーネントを削除します。</translation>
+      <translation>コンポーネントを削除します</translation>
     </message>
     <message>
       <source>Select</source>
@@ -923,7 +964,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Select whole component</source>
-      <translation>Select whole component</translation>
+      <translation>コンポーネント全体を選択</translation>
     </message>
     <message>
       <source>Pick triangle</source>
@@ -931,7 +972,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>&lt; faces than</source>
-      <translation>&lt; faces than</translation>
+      <translation>&lt; 面以下</translation>
     </message>
     <message>
       <source>Region</source>
@@ -939,7 +980,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Components</source>
-      <translation>Components</translation>
+      <translation>コンポーネント</translation>
     </message>
     <message>
       <source>All</source>
@@ -955,7 +996,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>&gt; faces than</source>
-      <translation>&gt; faces than</translation>
+      <translation>&gt; 面以上</translation>
     </message>
     <message>
       <source>Region options</source>
@@ -963,26 +1004,26 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Respect only triangles with normals facing screen</source>
-      <translation>Respect only triangles with normals facing screen</translation>
+      <translation>画面の方向を向いた法線を持つ三角形のみ考慮</translation>
     </message>
     <message>
       <source>Respect only visible triangles</source>
-      <translation>Respect only visible triangles</translation>
+      <translation>表示されている三角形のみ考慮</translation>
     </message>
   </context>
   <context>
     <name>MeshGui::Segmentation</name>
     <message>
       <source>Mesh segmentation</source>
-      <translation>Mesh segmentation</translation>
+      <translation>メッシュの分割</translation>
     </message>
     <message>
       <source>Smooth mesh</source>
-      <translation>Smooth mesh</translation>
+      <translation>メッシュのスムージング</translation>
     </message>
     <message>
       <source>Plane</source>
-      <translation>Plane</translation>
+      <translation>平面</translation>
     </message>
     <message>
       <source>Tolerance</source>
@@ -990,7 +1031,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Minumum number of faces</source>
-      <translation>Minumum number of faces</translation>
+      <translation>面の最小数</translation>
     </message>
     <message>
       <source>Cylinder</source>
@@ -1002,19 +1043,50 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Tolerance (Flat)</source>
-      <translation>Tolerance (Flat)</translation>
+      <translation>トレランス (平面)</translation>
     </message>
     <message>
       <source>Tolerance (Curved)</source>
-      <translation>Tolerance (Curved)</translation>
+      <translation>トレランス (曲面)</translation>
     </message>
     <message>
       <source>Minimum number of faces</source>
-      <translation>Minimum number of faces</translation>
+      <translation>面の最小数</translation>
     </message>
     <message>
       <source>Sphere</source>
       <translation>球</translation>
+    </message>
+  </context>
+  <context>
+    <name>MeshGui::Selection</name>
+    <message>
+      <source>Selection</source>
+      <translation type="unfinished">選択範囲</translation>
+    </message>
+    <message>
+      <source>Add</source>
+      <translation type="unfinished">追加</translation>
+    </message>
+    <message>
+      <source>Clear</source>
+      <translation type="unfinished">クリア</translation>
+    </message>
+    <message>
+      <source>Respect only visible triangles</source>
+      <translation type="unfinished">表示されている三角形のみ考慮</translation>
+    </message>
+    <message>
+      <source>Respect only triangles with normals facing screen</source>
+      <translation type="unfinished">画面の方向を向いた法線を持つ三角形のみ考慮</translation>
+    </message>
+    <message>
+      <source>Use a brush tool to select the area</source>
+      <translation type="unfinished">Use a brush tool to select the area</translation>
+    </message>
+    <message>
+      <source>Clears completely the selected area</source>
+      <translation type="unfinished">Clears completely the selected area</translation>
     </message>
   </context>
   <context>
@@ -1029,29 +1101,57 @@ Please run the command to repair folds first</translation>
     </message>
   </context>
   <context>
+    <name>Mesh_TrimByPlane</name>
+    <message>
+      <source>Select plane</source>
+      <translation type="unfinished">Select plane</translation>
+    </message>
+    <message>
+      <source>Please select a plane at which you trim the mesh.</source>
+      <translation type="unfinished">Please select a plane at which you trim the mesh.</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_Union</name>
+    <message>
+      <source>OpenSCAD</source>
+      <translation type="unfinished">OpenSCAD</translation>
+    </message>
+    <message>
+      <source>Unknwon error occured while running OpenSCAD.</source>
+      <translation type="unfinished">OpenSCAD の実行中に、不明なエラーが発生しました。</translation>
+    </message>
+    <message>
+      <source>OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</source>
+      <translation type="unfinished">OpenSCAD がシステムに見つかりません。
+インストール方法につて http://www.openscad.org/index.html を参照してください。</translation>
+    </message>
+  </context>
+  <context>
     <name>QDockWidget</name>
     <message>
       <source>Evaluate &amp; Repair Mesh</source>
-      <translation>Evaluate &amp; Repair Mesh</translation>
+      <translation>メッシュの評価と修復</translation>
     </message>
   </context>
   <context>
     <name>QObject</name>
     <message>
       <source>Import mesh</source>
-      <translation>Import mesh</translation>
+      <translation>メッシュをインポート</translation>
     </message>
     <message>
       <source>Export mesh</source>
-      <translation>Export mesh</translation>
+      <translation>メッシュをエクスポート</translation>
     </message>
     <message>
       <source>Solid Mesh</source>
-      <translation>Solid Mesh</translation>
+      <translation>ソリッドメッシュ</translation>
     </message>
     <message>
       <source>Boundings</source>
-      <translation>Boundings</translation>
+      <translation>バウンディングボックス</translation>
     </message>
     <message>
       <source>Fill holes</source>
@@ -1059,11 +1159,11 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Fill holes with maximum number of edges:</source>
-      <translation>Fill holes with maximum number of edges:</translation>
+      <translation>最大数以下のエッジを持つ穴を埋める:</translation>
     </message>
     <message>
       <source>Binary STL (*.stl)</source>
-      <translation>Binary STL (*.stl)</translation>
+      <translation>バイナリーSTL (*.stl)</translation>
     </message>
     <message>
       <source>ASCII STL (*.ast)</source>
@@ -1071,11 +1171,11 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Binary Mesh (*.bms)</source>
-      <translation>Binary Mesh (*.bms)</translation>
+      <translation>バイナリーメッシュ (*.bms)</translation>
     </message>
     <message>
       <source>Alias Mesh (*.obj)</source>
-      <translation>Alias Mesh (*.obj)</translation>
+      <translation>Alias メッシュ (*.obj)</translation>
     </message>
     <message>
       <source>Inventor V2.1 ascii (*.iv)</source>
@@ -1095,7 +1195,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Compressed VRML 2.0 (*.wrz)</source>
-      <translation>Compressed VRML 2.0 (*.wrz)</translation>
+      <translation>圧縮 VRML 2.0 (*.wrz)</translation>
     </message>
     <message>
       <source>Nastran (*.nas *.bdf)</source>
@@ -1107,11 +1207,11 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Meshing Tolerance</source>
-      <translation>Meshing Tolerance</translation>
+      <translation>メッシュ処理のトレランス</translation>
     </message>
     <message>
       <source>Enter tolerance for meshing geometry:</source>
-      <translation>Enter tolerance for meshing geometry:</translation>
+      <translation>ジオメトリーのメッシュ処理用のトレランスを入力:</translation>
     </message>
     <message>
       <source>The mesh '%1' is a solid.</source>
@@ -1119,7 +1219,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>The mesh '%1' is not a solid.</source>
-      <translation>The mesh '%1' is not a solid.</translation>
+      <translation>メッシュ '%1' はソリッドではありません。</translation>
     </message>
     <message>
       <source>Min=&lt;%1,%2,%3&gt;
@@ -1130,47 +1230,47 @@ Max=&lt;%4,%5,%6&gt;</source>
     </message>
     <message>
       <source>[Points: %1, Edges: %2 Faces: %3]</source>
-      <translation>[Points: %1, Edges: %2 Faces: %3]</translation>
+      <translation>[点: %1, エッジ: %2 面: %3]</translation>
     </message>
     <message>
       <source>Leave info mode</source>
-      <translation>Leave info mode</translation>
+      <translation>情報モードを解除</translation>
     </message>
     <message>
       <source>Index: %1</source>
-      <translation>Index: %1</translation>
+      <translation>インデックス: %1</translation>
     </message>
     <message>
       <source>Leave hole-filling mode</source>
-      <translation>Leave hole-filling mode</translation>
+      <translation>穴埋めモードを解除</translation>
     </message>
     <message>
       <source>Leave removal mode</source>
-      <translation>Leave removal mode</translation>
+      <translation>削除モードを解除</translation>
     </message>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</source>
-      <translation>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
+      <translation type="obsolete">All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
     </message>
     <message>
       <source>Stanford Polygon (*.ply)</source>
-      <translation>Stanford Polygon (*.ply)</translation>
+      <translation>スタンフォードポリゴンファイル (*.ply)</translation>
     </message>
     <message>
       <source>Object File Format (*.off)</source>
-      <translation>Object File Format (*.off)</translation>
+      <translation>オブジェクトファイル形式 (*.off)</translation>
     </message>
     <message>
       <source>Standford Polygon (*.ply)</source>
-      <translation>Standford Polygon (*.ply)</translation>
+      <translation>スタンフォードポリゴンファイル (*.ply)</translation>
     </message>
     <message>
       <source>Delete selected faces</source>
-      <translation>Delete selected faces</translation>
+      <translation>選択した面を削除</translation>
     </message>
     <message>
       <source>Clear selected faces</source>
-      <translation>Clear selected faces</translation>
+      <translation>選択した面をクリア</translation>
     </message>
     <message>
       <source>Annotation</source>
@@ -1178,18 +1278,22 @@ Max=&lt;%4,%5,%6&gt;</source>
     </message>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.off *.ply)</source>
-      <translation>All Mesh Files (*.stl *.ast *.bms *.obj *.off *.ply)</translation>
+      <translation>すべてのメッシュファイル (*.stl *.ast *.bms *.obj *.off *.ply）</translation>
+    </message>
+    <message>
+      <source>X3D Extensible 3D(*.x3d)</source>
+      <translation type="unfinished">X3D Extensible 3D(*.x3d)</translation>
     </message>
   </context>
   <context>
     <name>Workbench</name>
     <message>
       <source>Analyze</source>
-      <translation>Analyze</translation>
+      <translation>分析</translation>
     </message>
     <message>
       <source>Boolean</source>
-      <translation>Boolean</translation>
+      <translation>論理演算</translation>
     </message>
     <message>
       <source>&amp;Meshes</source>

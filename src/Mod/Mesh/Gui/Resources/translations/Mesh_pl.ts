@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="pl" sourcelanguage="en">
   <context>
     <name>CmdMeshAddFacet</name>
     <message>
@@ -117,33 +117,33 @@
     <name>CmdMeshExMakeMesh</name>
     <message>
       <source>Mesh</source>
-      <translation>siatka</translation>
+      <translation type="obsolete">siatka</translation>
     </message>
     <message>
       <source>Make a Box</source>
-      <translation>Make a Box</translation>
+      <translation type="obsolete">Make a Box</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeTool</name>
     <message>
       <source>Mesh</source>
-      <translation>siatka</translation>
+      <translation type="obsolete">siatka</translation>
     </message>
     <message>
       <source>Make a Tool</source>
-      <translation>Make a Tool</translation>
+      <translation type="obsolete">Make a Tool</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeUnion</name>
     <message>
       <source>Mesh</source>
-      <translation>siatka</translation>
+      <translation type="obsolete">siatka</translation>
     </message>
     <message>
       <source>Make Union</source>
-      <translation>Make Union</translation>
+      <translation type="obsolete">Make Union</translation>
     </message>
   </context>
   <context>
@@ -219,6 +219,21 @@
     <message>
       <source>Create mesh from the selected geometry</source>
       <translation>Utwórz siatkę z zaznaczonych elementów geometrii</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeshFromPartShape</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">siatka</translation>
+    </message>
+    <message>
+      <source>Create mesh from shape...</source>
+      <translation type="unfinished">Utwórz siatkę z obwiedni...</translation>
+    </message>
+    <message>
+      <source>Tessellate shape</source>
+      <translation type="unfinished">Tesselacja obwiedni</translation>
     </message>
   </context>
   <context>
@@ -428,6 +443,21 @@
     </message>
   </context>
   <context>
+    <name>CmdMeshTrimByPlane</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">siatka</translation>
+    </message>
+    <message>
+      <source>Trim mesh with a plane</source>
+      <translation type="unfinished">Trim mesh with a plane</translation>
+    </message>
+    <message>
+      <source>Trims a mesh with a plane</source>
+      <translation type="unfinished">Trims a mesh with a plane</translation>
+    </message>
+  </context>
+  <context>
     <name>CmdMeshUnion</name>
     <message>
       <source>Mesh</source>
@@ -472,19 +502,19 @@
     <name>MeshGui::DlgEvaluateMesh</name>
     <message>
       <source>&amp;Help</source>
-      <translation>&amp;Pomoc</translation>
+      <translation type="obsolete">&amp;Pomoc</translation>
     </message>
     <message>
       <source>F1</source>
-      <translation>F1</translation>
+      <translation type="obsolete">F1</translation>
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>Zamknij</translation>
+      <translation type="obsolete">Zamknij</translation>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt+C</translation>
+      <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
       <source>Mesh information</source>
@@ -823,13 +853,13 @@ Please run the command to repair folds first</source>
       <source>Define normal per vertex</source>
       <translation>Zdefiniuj 'normalną' wierzchołka</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source> °</source>
       <translation> °</translation>
     </message>
     <message>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Hint&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Defining the normals per vertex is also called &lt;span style=" font-style:italic;"&gt;Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;"&gt;&lt;span style=" font-style:normal;"&gt;while defining the normals per face is called &lt;/span&gt;Flat shading&lt;span style=" font-style:normal;"&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Hint&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Defining the normals per vertex is also called &lt;span style=" font-style:italic;"&gt;Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;"&gt;&lt;span style=" font-style:normal;"&gt;while defining the normals per face is called &lt;/span&gt;Flat shading&lt;span style=" font-style:normal;"&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Hint&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Definiowanie normalnych poprzez wierzchołek jest równiez nazywane &lt;span style=" font-style:italic;"&gt;Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;"&gt;&lt;span style=" font-style:normal;"&gt;podczas definiowania normalnych poprzez obszar jest nazywane &lt;/span&gt;Flat shading&lt;span style=" font-style:normal;"&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Default appearance for new meshes</source>
@@ -890,6 +920,10 @@ Please run the command to repair folds first</source>
       <source>Mu:</source>
       <translation>Mu:</translation>
     </message>
+    <message>
+      <source>Only selection</source>
+      <translation type="unfinished">Only selection</translation>
+    </message>
   </context>
   <context>
     <name>MeshGui::MeshFaceAddition</name>
@@ -908,6 +942,13 @@ Please run the command to repair folds first</source>
     <message>
       <source>Finish</source>
       <translation>Zakończ</translation>
+    </message>
+  </context>
+  <context>
+    <name>MeshGui::MeshFillHole</name>
+    <message>
+      <source>Finish</source>
+      <translation type="unfinished">Zakończ</translation>
     </message>
   </context>
   <context>
@@ -1017,6 +1058,37 @@ Please run the command to repair folds first</source>
     </message>
   </context>
   <context>
+    <name>MeshGui::Selection</name>
+    <message>
+      <source>Selection</source>
+      <translation type="unfinished">Zaznaczanie</translation>
+    </message>
+    <message>
+      <source>Add</source>
+      <translation type="unfinished">Dodaj</translation>
+    </message>
+    <message>
+      <source>Clear</source>
+      <translation type="unfinished">Wyczyść</translation>
+    </message>
+    <message>
+      <source>Respect only visible triangles</source>
+      <translation type="unfinished">akceptuj tylko widoczne trójkąty</translation>
+    </message>
+    <message>
+      <source>Respect only triangles with normals facing screen</source>
+      <translation type="unfinished">akceptuj tylko trójkąty zwrócone stroną zewnętrzną</translation>
+    </message>
+    <message>
+      <source>Use a brush tool to select the area</source>
+      <translation type="unfinished">Use a brush tool to select the area</translation>
+    </message>
+    <message>
+      <source>Clears completely the selected area</source>
+      <translation type="unfinished">Clears completely the selected area</translation>
+    </message>
+  </context>
+  <context>
     <name>MeshGui::TaskRemoveComponents</name>
     <message>
       <source>Delete</source>
@@ -1025,6 +1097,34 @@ Please run the command to repair folds first</source>
     <message>
       <source>Invert</source>
       <translation>przeciwny</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_TrimByPlane</name>
+    <message>
+      <source>Select plane</source>
+      <translation type="unfinished">Select plane</translation>
+    </message>
+    <message>
+      <source>Please select a plane at which you trim the mesh.</source>
+      <translation type="unfinished">Please select a plane at which you trim the mesh.</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_Union</name>
+    <message>
+      <source>OpenSCAD</source>
+      <translation type="unfinished">OpenSCAD</translation>
+    </message>
+    <message>
+      <source>Unknwon error occured while running OpenSCAD.</source>
+      <translation type="unfinished">Unknwon error occured while running OpenSCAD.</translation>
+    </message>
+    <message>
+      <source>OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</source>
+      <translation type="unfinished">OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</translation>
     </message>
   </context>
   <context>
@@ -1148,7 +1248,7 @@ Max=&lt;%4,%5,%6&gt;</source>
     </message>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</source>
-      <translation>Wszystkie pliki siatki (*.stl *.ast *.bms *.obj *.ply)</translation>
+      <translation type="obsolete">Wszystkie pliki siatki (*.stl *.ast *.bms *.obj *.ply)</translation>
     </message>
     <message>
       <source>Stanford Polygon (*.ply)</source>
@@ -1177,6 +1277,10 @@ Max=&lt;%4,%5,%6&gt;</source>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.off *.ply)</source>
       <translation>Wszystkie pliki siatek (*.stl *.ast *.bms *.obj *.off *.ply)</translation>
+    </message>
+    <message>
+      <source>X3D Extensible 3D(*.x3d)</source>
+      <translation type="unfinished">X3D Extensible 3D(*.x3d)</translation>
     </message>
   </context>
   <context>

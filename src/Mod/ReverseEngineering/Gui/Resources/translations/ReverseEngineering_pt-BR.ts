@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="pt-BR" sourcelanguage="en">
   <context>
     <name>CmdApproxPlane</name>
     <message>
@@ -9,10 +9,12 @@
       <translation>Engenharia Reversa</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Approximate plane...</source>
       <translation>Aproximar um plano...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Approximate a plane</source>
       <translation>Aproximar um plano</translation>
     </message>
@@ -20,14 +22,17 @@
   <context>
     <name>CmdApproxSurface</name>
     <message>
+      <location line="-62"/>
       <source>Reverse Engineering</source>
       <translation>Engenharia Reversa</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Approximate surface...</source>
-      <translation>Superfície aproximada...</translation>
+      <translation>Aproximar uma superfície...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Approximate a B-Spline surface</source>
       <translation>Aproximar uma superfície B-Spline</translation>
     </message>

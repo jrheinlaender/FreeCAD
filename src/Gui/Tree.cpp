@@ -204,10 +204,12 @@ void TreeWidget::contextMenuEvent (QContextMenuEvent * e)
             action->setData(QByteArray((*it)->getName()));
             if (*it == activeDoc) active = action;
         }
-        if (active) active->setChecked(true);
-        active = subMenuGroup.checkedAction();
+
+        if (active)
+            active->setChecked(true);
         subMenu.addActions(subMenuGroup.actions());
     }
+
     if (contextMenu.actions().count() > 0)
         contextMenu.exec(QCursor::pos());
 }
@@ -307,12 +309,6 @@ void TreeWidget::onActivateDocument(QAction* active)
     getMainWindow()->setActiveWindow(view);
 }
 
-bool TreeWidget::dropMimeData(QTreeWidgetItem *parent, int index,
-                              const QMimeData *data, Qt::DropAction action)
-{
-    return QTreeWidget::dropMimeData(parent, index, data, action);
-}
-
 Qt::DropActions TreeWidget::supportedDropActions () const
 {
     return QTreeWidget::supportedDropActions();
@@ -365,6 +361,11 @@ void TreeWidget::mouseDoubleClickEvent (QMouseEvent * event)
     }
 }
 
+void TreeWidget::startDrag(Qt::DropActions supportedActions)
+{
+    QTreeWidget::startDrag(supportedActions);
+}
+
 QMimeData * TreeWidget::mimeData (const QList<QTreeWidgetItem *> items) const
 {
     // all selected items must reference an object from the same document
@@ -378,16 +379,36 @@ QMimeData * TreeWidget::mimeData (const QList<QTreeWidgetItem *> items) const
         else if (doc != obj->getDocument())
             return 0;
         // Now check for object with a parent that is an ObjectType, too.
-        // If this object is *not* a group we are not allowed to remove
+        // If this object is *not* selected and *not* a group we are not allowed to remove
         // its child (e.g. the sketch of a pad).
         QTreeWidgetItem* parent = (*it)->parent();
         if (parent && parent->type() == TreeWidget::ObjectType) {
-            App::DocumentObject* par = static_cast<DocumentObjectItem *>(parent)->object()->getObject();
-            if (!par->getTypeId().isDerivedFrom(App::DocumentObjectGroup::getClassTypeId()))
-                return 0;
+            // fix issue #0001456
+            if (!items.contains(parent)) {
+                Gui::ViewProvider* vp = static_cast<DocumentObjectItem *>(parent)->object();
+                if (!vp->canDragObjects()) {
+                    return 0;
+                }
+            }
         }
     }
     return QTreeWidget::mimeData(items);
+}
+
+bool TreeWidget::dropMimeData(QTreeWidgetItem *parent, int index,
+                              const QMimeData *data, Qt::DropAction action)
+{
+    return QTreeWidget::dropMimeData(parent, index, data, action);
+}
+
+void TreeWidget::dragEnterEvent(QDragEnterEvent * event)
+{
+    QTreeWidget::dragEnterEvent(event);
+}
+
+void TreeWidget::dragLeaveEvent(QDragLeaveEvent * event)
+{
+    QTreeWidget::dragLeaveEvent(event);
 }
 
 void TreeWidget::dragMoveEvent(QDragMoveEvent *event)
@@ -419,11 +440,16 @@ void TreeWidget::dragMoveEvent(QDragMoveEvent *event)
         }
     }
     else if (targetitem->type() == TreeWidget::ObjectType) {
-        App::DocumentObject* grp = static_cast<DocumentObjectItem*>(targetitem)->
-            object()->getObject();
-        if (!grp->getTypeId().isDerivedFrom(App::DocumentObjectGroup::
-            getClassTypeId()))
+        Gui::ViewProviderDocumentObject* vp = static_cast<DocumentObjectItem*>(targetitem)->object();
+        if (!vp->canDropObjects()) {
             event->ignore();
+        }
+
+        QList<QTreeWidgetItem *> children;
+        for (int i=0; i<targetitem->childCount(); i++)
+            children << targetitem->child(i);
+
+        App::DocumentObject* grp = vp->getObject();
         App::Document* doc = grp->getDocument();
         QList<QModelIndex> idxs = selectedIndexes();
         for (QList<QModelIndex>::Iterator it = idxs.begin(); it != idxs.end(); ++it) {
@@ -438,12 +464,19 @@ void TreeWidget::dragMoveEvent(QDragMoveEvent *event)
                 event->ignore();
                 return;
             }
-            if (obj->getTypeId().isDerivedFrom(App::DocumentObjectGroup::getClassTypeId())) {
-                if (static_cast<App::DocumentObjectGroup*>(grp)->isChildOf(
-                    static_cast<App::DocumentObjectGroup*>(obj))) {
-                    event->ignore();
-                    return;
-                }
+
+            // To avoid a cylic dependency it must be made sure to not allow to
+            // drag'n'drop a tree item onto a child or grandchild item of it.
+            if (static_cast<DocumentObjectItem*>(targetitem)->isChildOfItem(
+                static_cast<DocumentObjectItem*>(item))) {
+                event->ignore();
+                return;
+            }
+
+            // if the item is already a child of the target item there is nothing to do
+            if (children.contains(item)) {
+                event->ignore();
+                return;
             }
         }
     }
@@ -454,6 +487,8 @@ void TreeWidget::dragMoveEvent(QDragMoveEvent *event)
 
 void TreeWidget::dropEvent(QDropEvent *event)
 {
+    //FIXME: This should actually be done inside dropMimeData
+
     QTreeWidgetItem* targetitem = itemAt(event->pos());
     // not dropped onto an item
     if (!targetitem)
@@ -466,6 +501,10 @@ void TreeWidget::dropEvent(QDropEvent *event)
     QList<QTreeWidgetItem*> items;
     QList<QModelIndex> idxs = selectedIndexes();
     for (QList<QModelIndex>::Iterator it = idxs.begin(); it != idxs.end(); ++it) {
+        // ignore child elements if the parent is selected
+        QModelIndex parent = (*it).parent();
+        if (idxs.contains(parent))
+            continue;
         QTreeWidgetItem* item = itemFromIndex(*it);
         if (item == targetitem)
             continue;
@@ -479,40 +518,29 @@ void TreeWidget::dropEvent(QDropEvent *event)
 
     if (targetitem->type() == TreeWidget::ObjectType) {
         // add object to group
-        App::DocumentObject* grp = static_cast<DocumentObjectItem*>(targetitem)
-            ->object()->getObject();
-        if (!grp->getTypeId().isDerivedFrom(App::DocumentObjectGroup::getClassTypeId()))
-            return; // no group object
+        Gui::ViewProviderDocumentObject* vp = static_cast<DocumentObjectItem*>(targetitem)->object();
+        App::DocumentObject* grp = vp->getObject();
+        if (!vp->canDropObjects()) {
+            return; // no group like object
+        }
 
         // Open command
         App::Document* doc = grp->getDocument();
         Gui::Document* gui = Gui::Application::Instance->getDocument(doc);
         gui->openCommand("Move object");
         for (QList<QTreeWidgetItem*>::Iterator it = items.begin(); it != items.end(); ++it) {
-            // get document object
-            App::DocumentObject* obj = static_cast<DocumentObjectItem*>(*it)
-                ->object()->getObject();
-            App::DocumentObjectGroup* par = App::DocumentObjectGroup
-                ::getGroupOfObject(obj);
-            if (par) {
-                // allow an object to be in one group only
-                QString cmd;
-                cmd = QString::fromAscii("App.getDocument(\"%1\").getObject(\"%2\").removeObject("
-                                  "App.getDocument(\"%1\").getObject(\"%3\"))")
-                                  .arg(QString::fromAscii(doc->getName()))
-                                  .arg(QString::fromAscii(par->getNameInDocument()))
-                                  .arg(QString::fromAscii(obj->getNameInDocument()));
-                Gui::Application::Instance->runPythonCode(cmd.toUtf8());
+            Gui::ViewProviderDocumentObject* vpc = static_cast<DocumentObjectItem*>(*it)->object();
+            App::DocumentObject* obj = vpc->getObject();
+
+            // does this have a parent object
+            QTreeWidgetItem* parent = (*it)->parent();
+            if (parent && parent->type() == TreeWidget::ObjectType) {
+                Gui::ViewProvider* vpp = static_cast<DocumentObjectItem *>(parent)->object();
+                vpp->dragObject(obj);
             }
 
-            // build Python command for execution
-            QString cmd;
-            cmd = QString::fromAscii("App.getDocument(\"%1\").getObject(\"%2\").addObject("
-                              "App.getDocument(\"%1\").getObject(\"%3\"))")
-                              .arg(QString::fromAscii(doc->getName()))
-                              .arg(QString::fromAscii(grp->getNameInDocument()))
-                              .arg(QString::fromAscii(obj->getNameInDocument()));
-            Gui::Application::Instance->runPythonCode(cmd.toUtf8());
+            // now add the object to the target object
+            vp->dropObject(obj);
         }
         gui->commitCommand();
     }
@@ -522,19 +550,14 @@ void TreeWidget::dropEvent(QDropEvent *event)
         Gui::Document* gui = Gui::Application::Instance->getDocument(doc);
         gui->openCommand("Move object");
         for (QList<QTreeWidgetItem*>::Iterator it = items.begin(); it != items.end(); ++it) {
-            // get document object
-            // there must be a group that references this object
-            App::DocumentObject* obj = static_cast<DocumentObjectItem*>(*it)
-                ->object()->getObject();
-            App::DocumentObjectGroup* grp = App::DocumentObjectGroup
-                ::getGroupOfObject(obj);
-            if (grp) {
-                QString cmd = QString::fromAscii("App.getDocument(\"%1\").getObject(\"%2\").removeObject("
-                                      "App.getDocument(\"%1\").getObject(\"%3\"))")
-                                      .arg(QString::fromAscii(doc->getName()))
-                                      .arg(QString::fromAscii(grp->getNameInDocument()))
-                                      .arg(QString::fromAscii(obj->getNameInDocument()));
-                Gui::Application::Instance->runPythonCode(cmd.toUtf8());
+            Gui::ViewProviderDocumentObject* vpc = static_cast<DocumentObjectItem*>(*it)->object();
+            App::DocumentObject* obj = vpc->getObject();
+
+            // does this have a parent object
+            QTreeWidgetItem* parent = (*it)->parent();
+            if (parent && parent->type() == TreeWidget::ObjectType) {
+                Gui::ViewProvider* vpp = static_cast<DocumentObjectItem *>(parent)->object();
+                vpp->dragObject(obj);
             }
         }
         gui->commitCommand();
@@ -1255,9 +1278,9 @@ void DocumentObjectItem::testStatus()
         QStyleOptionViewItem opt;
         opt.initFrom(this->treeWidget());
 #if QT_VERSION >= 0x040200
-        this->setForeground(0, opt.palette.color(QPalette::Disabled,QPalette::Dark));
+        this->setForeground(0, opt.palette.color(QPalette::Disabled,QPalette::Text));
 #else
-        this->setTextColor(0, opt.palette.color(QPalette::Disabled,QPalette::Dark));
+        this->setTextColor(0, opt.palette.color(QPalette::Disabled,QPalette::Text);
 #endif
         mode = QIcon::Disabled;
     }
@@ -1306,6 +1329,23 @@ void DocumentObjectItem::setData (int column, int role, const QVariant & value)
         QString label = value.toString();
         viewObject->getObject()->Label.setValue((const char*)label.toUtf8());
     }
+}
+
+bool DocumentObjectItem::isChildOfItem(DocumentObjectItem* item)
+{
+    int numChild = item->childCount();
+    for (int i=0; i<numChild; i++) {
+        QTreeWidgetItem* child = item->child(i);
+        if (child == this)
+            return true;
+        if (child->type() == TreeWidget::ObjectType) {
+            DocumentObjectItem* obj = static_cast<DocumentObjectItem*>(child);
+            if (this->isChildOfItem(obj))
+                return true;
+        }
+    }
+
+    return false;
 }
 
 void DocumentObjectItem::slotChangeIcon()

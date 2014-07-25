@@ -47,6 +47,7 @@ reserved = (
     'undef',
     'polyhedron',
     'triangles',
+    'faces',
     'render',
     'surface',
     'subdiv',
@@ -54,11 +55,11 @@ reserved = (
     'hull',
     'minkowski',
     'projection',
-    'import_stl',
-    'import_dxf',
     'import',
     'color',
     'cut',
+    'offset',
+    'resize',
     )
 
 # List of token names.   This is always required

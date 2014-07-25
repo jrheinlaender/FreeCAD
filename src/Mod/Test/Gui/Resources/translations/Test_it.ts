@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="it" sourcelanguage="en">
   <context>
     <name>TestGui::UnitTest</name>
     <message>
@@ -106,9 +106,9 @@ FreeCAD UnitTest è parte di FreeCAD e supporta la scrittura di test unitari per
       <source>Enter the name of a callable object which, when called, will return a TestCase.Click 'start', and the test thus produced will be run.
 
 Double click on an error in the tree view to see more information about it,including the stack trace.</source>
-      <translation>Inserisci il nome di un oggetto richiamabile che, quando richiamato, restituirà un TestCase. Fare clic su 'inizio', e la prova così prodotta sarà eseguita.
+      <translation>Inserisci il nome di un oggetto richiamabile che, quando richiamato, restituirà un TestCase. Fare clic su 'inizio' e la prova così prodotta sarà eseguita.
 
-Doppio click su un errore nell'albero per visualizzare più informazioni, inclusa la traccia dello stack.</translation>
+Doppio clic su un errore nell'albero per visualizzare più informazioni, inclusa la traccia dello stack.</translation>
     </message>
   </context>
 </TS>

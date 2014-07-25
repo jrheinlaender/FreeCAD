@@ -448,8 +448,8 @@ void CmdMeshExport::activated(int iMsg)
     ext << qMakePair<QString, QByteArray>(QObject::tr("Alias Mesh (*.obj)"), "OBJ");
     ext << qMakePair<QString, QByteArray>(QObject::tr("Object File Format (*.off)"), "OFF");
     ext << qMakePair<QString, QByteArray>(QObject::tr("Inventor V2.1 ascii (*.iv)"), "IV");
-    ext << qMakePair<QString, QByteArray>(QObject::tr("X3D Extensible 3D(*.x3d)"), "X3D");
-    ext << qMakePair<QString, QByteArray>(QObject::tr("Standford Polygon (*.ply)"), "PLY");
+    ext << qMakePair<QString, QByteArray>(QObject::tr("X3D Extensible 3D (*.x3d)"), "X3D");
+    ext << qMakePair<QString, QByteArray>(QObject::tr("Stanford Polygon (*.ply)"), "PLY");
     ext << qMakePair<QString, QByteArray>(QObject::tr("VRML V2.0 (*.wrl *.vrml)"), "VRML");
     ext << qMakePair<QString, QByteArray>(QObject::tr("Compressed VRML 2.0 (*.wrz)"), "WRZ");
     ext << qMakePair<QString, QByteArray>(QObject::tr("Nastran (*.nas *.bdf)"), "NAS");
@@ -1179,7 +1179,7 @@ void CmdMeshEvaluateFacet::activated(int iMsg)
     if (view) {
         Gui::View3DInventorViewer* viewer = view->getViewer();
         viewer->setEditing(true);
-        viewer->setEditingCursor(QCursor(Gui::BitmapFactory().pixmap("mesh_pipette"),4,29));
+        viewer->setEditingCursor(QCursor(Gui::BitmapFactory().pixmapFromSvg("mesh_pipette",QSize(32,32)),4,29));
         viewer->addEventCallback(SoMouseButtonEvent::getClassTypeId(), MeshGui::ViewProviderMeshFaceSet::faceInfoCallback);
      }
 }

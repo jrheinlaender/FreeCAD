@@ -33,6 +33,7 @@
 #include <App/DocumentObjectPy.h>
 #include <App/DocumentObject.h>
 #include <Base/Interpreter.h>
+#include <CXX/Objects.hxx>
 
 #include "Selection.h"
 #include "SelectionFilter.h"
@@ -71,7 +72,64 @@ bool SelectionFilterGate::allow(App::Document*pDoc,App::DocumentObject*pObj, con
     return Filter->test(pObj,sSubName);
 }
 
+// ----------------------------------------------------------------------------
 
+SelectionGatePython::SelectionGatePython(const Py::Object& obj)
+  : gate(obj)
+{
+}
+
+SelectionGatePython::~SelectionGatePython()
+{
+}
+
+bool SelectionGatePython::allow(App::Document* doc, App::DocumentObject* obj, const char* sub)
+{
+    Base::PyGILStateLocker lock;
+    try {
+        if (this->gate.hasAttr(std::string("allow"))) {
+            Py::Callable method(this->gate.getAttr(std::string("allow")));
+            Py::Object pyDoc = Py::asObject(doc->getPyObject());
+            Py::Object pyObj = Py::asObject(obj->getPyObject());
+            Py::String pySub;
+            if (sub)
+                pySub = std::string(sub);
+            Py::Tuple args(3);
+            args.setItem(0, pyDoc);
+            args.setItem(1, pyObj);
+            args.setItem(2, pySub);
+            Py::Boolean ok(method.apply(args));
+            return (bool)ok;
+        }
+    }
+    catch (Py::Exception&) {
+        Base::PyException e; // extract the Python error text
+        e.ReportException();
+    }
+
+    return true;
+}
+
+// ----------------------------------------------------------------------------
+
+SelectionFilterGatePython::SelectionFilterGatePython(SelectionFilterPy* obj) : filter(obj)
+{
+    Base::PyGILStateLocker lock;
+    Py_INCREF(filter);
+}
+
+SelectionFilterGatePython::~SelectionFilterGatePython()
+{
+    Base::PyGILStateLocker lock;
+    Py_DECREF(filter);
+}
+
+bool SelectionFilterGatePython::allow(App::Document*, App::DocumentObject* obj, const char* sub)
+{
+    return filter->filter.test(obj, sub);
+}
+
+// ----------------------------------------------------------------------------
 
 SelectionFilter::SelectionFilter(const char* filter)
   : Ast(0)
@@ -87,13 +145,13 @@ SelectionFilter::SelectionFilter(const std::string& filter)
 
 void SelectionFilter::setFilter(const char* filter)
 {
-    if( ! filter || filter[0] == 0){
-        if (Ast)
-            delete Ast;      
+    if (!filter || filter[0] == 0) {
+        delete Ast;
         Ast = 0;
-    }else{
+    }
+    else {
         Filter = filter;
-        if(! parse())
+        if (!parse())
             throw Base::Exception(Errors.c_str());
     }
 }
@@ -108,7 +166,7 @@ bool SelectionFilter::match(void)
         return false;
     Result.clear();
 
-    for (std::vector< Node_Object *>::iterator it= Ast->Objects.begin();it!=Ast->Objects.end();++it){
+    for (std::vector< Node_Object *>::iterator it= Ast->Objects.begin();it!=Ast->Objects.end();++it) {
         int min;
         int max;
 
@@ -124,20 +182,25 @@ bool SelectionFilter::match(void)
         std::vector<Gui::SelectionObject> temp = Gui::Selection().getSelectionEx(0,(*it)->ObjectType);
 
         // test if subnames present
-        if((*it)->SubName == ""){
+        if ((*it)->SubName.empty()) {
             // if no subnames the count of the object get tested
             if ((int)temp.size()<min || (int)temp.size()>max)
                 return false;
-        }else{
+        }
+        else {
             // if subnames present count all subs over the selected object of type
             int subCount=0;
-            for(std::vector<Gui::SelectionObject>::const_iterator it2=temp.begin();it2!=temp.end();++it2){
-                for(std::vector<std::string>::const_iterator it3=it2->getSubNames().begin();it3!=it2->getSubNames().end();++it3)
-                    if( it3->find((*it)->SubName) != 0)
+            for (std::vector<Gui::SelectionObject>::const_iterator it2=temp.begin();it2!=temp.end();++it2) {
+                const std::vector<std::string>& subNames = it2->getSubNames();
+                if (subNames.empty())
+                    return false;
+                for (std::vector<std::string>::const_iterator it3=subNames.begin();it3!=subNames.end();++it3) {
+                    if (it3->find((*it)->SubName) != 0)
                         return false;
-                subCount += it2->getSubNames().size();
+                }
+                subCount += subNames.size();
             }
-            if(subCount<min || subCount>max)
+            if (subCount<min || subCount>max)
                 return false;
         }
         Result.push_back(temp);
@@ -150,15 +213,13 @@ bool SelectionFilter::test(App::DocumentObject*pObj, const char*sSubName)
     if (!Ast)
         return false;
 
-    for (std::vector< Node_Object *>::iterator it= Ast->Objects.begin();it!=Ast->Objects.end();++it){
-
-        if( pObj->getTypeId().isDerivedFrom((*it)->ObjectType) )
-        {
-            if(!sSubName)
+    for (std::vector< Node_Object *>::iterator it= Ast->Objects.begin();it!=Ast->Objects.end();++it) {
+        if (pObj->getTypeId().isDerivedFrom((*it)->ObjectType)) {
+            if (!sSubName)
                 return true;
-            if((*it)->SubName == "")
+            if ((*it)->SubName.empty())
                 return true;
-            if( std::string(sSubName).find((*it)->SubName) == 0)
+            if (std::string(sSubName).find((*it)->SubName) == 0)
                 return true;
         }
     }
@@ -171,17 +232,7 @@ void SelectionFilter::addError(const char* e)
     Errors += '\n';
 }
 
-
-//const App::DocumentObject * SelectionFilter::getObject(void) const
-//{
-//	if(DocName != ""){
-//		App::Document *doc = App::GetApplication().getDocument(DocName.c_str());
-//		if(doc && FeatName != "")
-//			return doc->getObject(FeatName.c_str());
-//	}
-//	return 0;
-//}
-
+// ----------------------------------------------------------------------------
 
 void SelectionFilterPy::init_type()
 {
@@ -195,6 +246,7 @@ void SelectionFilterPy::init_type()
     add_varargs_method("match",&SelectionFilterPy::match,"match()");
     add_varargs_method("result",&SelectionFilterPy::result,"result()");
     add_varargs_method("test",&SelectionFilterPy::test,"test()");
+    add_varargs_method("setFilter",&SelectionFilterPy::setFilter,"setFilter()");
 }
 
 PyObject *SelectionFilterPy::PyMake(struct _typeobject *, PyObject *args, PyObject *)
@@ -229,7 +281,7 @@ Py::Object SelectionFilterPy::match(const Py::Tuple& args)
 
 Py::Object SelectionFilterPy::test(const Py::Tuple& args)
 {
-    PyObject * pcObj ;
+    PyObject * pcObj;
     char* text=0;
     if (!PyArg_ParseTuple(args.ptr(), "O!|s",&(App::DocumentObjectPy::Type),&pcObj,&text))
         throw Py::Exception();
@@ -248,14 +300,21 @@ Py::Object SelectionFilterPy::result(const Py::Tuple&)
         Py::Tuple tuple(it->size());
         int index=0;
         for (jt = it->begin(); jt != it->end(); ++jt) {
-            tuple[index++] = Py::asObject(jt->getObject()->getPyObject());
+            tuple[index++] = Py::asObject(jt->getPyObject());
         }
         list.append(tuple);
     }
     return list;
 }
 
-
+Py::Object SelectionFilterPy::setFilter(const Py::Tuple& args)
+{
+    char* text=0;
+    if (!PyArg_ParseTuple(args.ptr(), "s",&text))
+        throw Py::Exception();
+    filter.setFilter(text);
+    return Py::None();
+}
 
 // === Parser & Scanner stuff ===============================================
 

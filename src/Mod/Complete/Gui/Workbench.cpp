@@ -241,7 +241,9 @@ Gui::MenuItem* Workbench::setupMenuBar() const
     geom->setCommand("Sketcher geometries");
     *geom << "Sketcher_CreatePoint"
           << "Sketcher_CreateArc"
+          << "Sketcher_Create3PointArc"
           << "Sketcher_CreateCircle"
+          << "Sketcher_Create3PointCircle"
           << "Sketcher_CreateLine"
           << "Sketcher_CreatePolyline"
           << "Sketcher_CreateRectangle"
@@ -272,6 +274,7 @@ Gui::MenuItem* Workbench::setupMenuBar() const
 
     *sketch
         << "Sketcher_NewSketch"
+        << "Sketcher_EditSketch"
         << "Sketcher_LeaveSketch"
         << "Sketcher_ViewSketch"
         << "Sketcher_MapSketch"
@@ -456,7 +459,7 @@ Gui::ToolBarItem* Workbench::setupToolBars() const
           << "Separator"
           << "Std_Refresh"
           << "Separator"
-          //<< "Std_Workbench"
+          << "Std_Workbench"
           << "Std_WhatsThis";
 
     // Macro
@@ -502,8 +505,8 @@ Gui::ToolBarItem* Workbench::setupToolBars() const
           << "Sketcher_LeaveSketch"
           << "Separator"
           << "Sketcher_CreatePoint"
-          << "Sketcher_CreateArc"
-          << "Sketcher_CreateCircle"
+          << "Sketcher_CompCreateArc"
+          << "Sketcher_CompCreateCircle"
           << "Sketcher_CreateLine"
           << "Sketcher_CreatePolyline"
           << "Sketcher_CreateRectangle"

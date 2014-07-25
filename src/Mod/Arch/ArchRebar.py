@@ -42,7 +42,9 @@ def makeRebar(baseobj,sketch,diameter=None,amount=1,offset=None,name=translate("
     p = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/Arch")
     obj = FreeCAD.ActiveDocument.addObject("Part::FeaturePython",name)
     _Rebar(obj)
-    _ViewProviderRebar(obj.ViewObject)
+    if FreeCAD.GuiUp:
+        _ViewProviderRebar(obj.ViewObject)
+        obj.ViewObject.ShapeColor = ArchCommands.getDefaultColor("Rebar")
     if hasattr(sketch,"Support"):
         if sketch.Support:
             if isinstance(sketch.Support,tuple):
@@ -51,7 +53,8 @@ def makeRebar(baseobj,sketch,diameter=None,amount=1,offset=None,name=translate("
             elif sketch.Support == baseobj:
                 sketch.Support = None
     obj.Base = sketch
-    sketch.ViewObject.hide()
+    if FreeCAD.GuiUp:
+        sketch.ViewObject.hide()
     a = baseobj.Armatures
     a.append(obj)
     baseobj.Armatures = a
@@ -66,7 +69,6 @@ def makeRebar(baseobj,sketch,diameter=None,amount=1,offset=None,name=translate("
     else:
         obj.OffsetStart = p.GetFloat("RebarOffset",30)
         obj.OffsetEnd = p.GetFloat("RebarOffset",30)
-    obj.ViewObject.ShapeColor = ArchCommands.getDefaultColor("Rebar")
     return obj
 
 
@@ -78,6 +80,9 @@ class _CommandRebar:
                 'MenuText': QtCore.QT_TRANSLATE_NOOP("Arch_Rebar","Rebar"),
                 'Accel': "R, B",
                 'ToolTip': QtCore.QT_TRANSLATE_NOOP("Arch_Rebar","Creates a Reinforcement bar from the selected face of a structural object")}
+
+    def IsActive(self):
+        return not FreeCAD.ActiveDocument is None
 
     def Activated(self):
         sel = FreeCADGui.Selection.getSelectionEx()
@@ -164,16 +169,16 @@ class _Rebar(ArchComponent.Component):
             return
         if not obj.Base.Shape.Wires:
             return
-        if not obj.Diameter:
+        if not obj.Diameter.Value:
             return
         if not obj.Amount:
             return
         father = obj.InList[0]
         wire = obj.Base.Shape.Wires[0]
         if hasattr(obj,"Rounding"):
-            print obj.Rounding
+            #print obj.Rounding
             if obj.Rounding:
-                radius = obj.Rounding * obj.Diameter
+                radius = obj.Rounding * obj.Diameter.Value
                 import DraftGeomUtils
                 wire = DraftGeomUtils.filletWire(wire,radius)
         bpoint, bvec = self.getBaseAndAxis(obj)
@@ -188,13 +193,13 @@ class _Rebar(ArchComponent.Component):
                 size = axis.Length
         #print axis
         #print size
-        if (obj.OffsetStart+obj.OffsetEnd) > size:
+        if (obj.OffsetStart.Value + obj.OffsetEnd.Value) > size:
             return
 
         # all tests ok!
         pl = obj.Placement
         import Part
-        circle = Part.makeCircle(obj.Diameter/2,bpoint,bvec)
+        circle = Part.makeCircle(obj.Diameter.Value/2,bpoint,bvec)
         circle = Part.Wire(circle)
         try:
             bar = wire.makePipeShell([circle],True,False,2)
@@ -210,11 +215,11 @@ class _Rebar(ArchComponent.Component):
             if hasattr(obj,"Spacing"):
                 obj.Spacing = 0
         else:
-            if obj.OffsetStart:
-                baseoffset = DraftVecUtils.scaleTo(axis,obj.OffsetStart)
+            if obj.OffsetStart.Value:
+                baseoffset = DraftVecUtils.scaleTo(axis,obj.OffsetStart.Value)
             else:
                 baseoffset = None
-            interval = size - (obj.OffsetStart + obj.OffsetEnd)
+            interval = size - (obj.OffsetStart.Value + obj.OffsetEnd.Value)
             interval = interval / (obj.Amount - 1)
             vinterval = DraftVecUtils.scaleTo(axis,interval)
             for i in range(obj.Amount):

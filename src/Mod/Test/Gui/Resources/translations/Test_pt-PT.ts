@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="pt-PT" sourcelanguage="en">
   <context>
     <name>TestGui::UnitTest</name>
     <message>
       <source>FreeCAD UnitTest</source>
-      <translation>FreeCAD UnitTest</translation>
+      <translation>Unidade de teste FreeCAD</translation>
     </message>
     <message>
       <source>Failures and errors</source>
@@ -17,7 +17,7 @@
     </message>
     <message>
       <source>&amp;Start</source>
-      <translation>Iniciar</translation>
+      <translation>&amp;Iniciar</translation>
     </message>
     <message>
       <source>Alt+S</source>
@@ -92,7 +92,7 @@
     </message>
     <message>
       <source>About FreeCAD UnitTest</source>
-      <translation>Sobre o UnitTest do FreeCAD</translation>
+      <translation>Sobre o FreeCAD UnitTest</translation>
     </message>
     <message>
       <source>Copyright (c) Werner Mayer
@@ -100,14 +100,13 @@
 FreeCAD UnitTest is part of FreeCAD and supports writing Unit Tests for own modules.</source>
       <translation>Direitos de Autor (c) Werner Mayer
 
-FreeCAD UnitTest é parte do FreeCAD e suporta o desenvolvimento dos Testes de Unidade para os módulos próprios.
-</translation>
+O FreeCAD UnitTest é parte do FreeCAD e suporta o desenvolvimento dos Testes de Unidade para os seus próprios módulos.</translation>
     </message>
     <message>
       <source>Enter the name of a callable object which, when called, will return a TestCase.Click 'start', and the test thus produced will be run.
 
 Double click on an error in the tree view to see more information about it,including the stack trace.</source>
-      <translation>Digite o nome de um objeto invocável que quando chamado, irá retornar um TestCase. Clique 'Iniciar' e o teste produzido será executado. Clique duplo num erro na visualização em árvore para mais informações sobre o mesmo, incluindo o rastreamento do empilhamento.</translation>
+      <translation>Digite o nome de um objeto invocável que quando chamado, irá retornar um TestCase. Clique 'Iniciar' e o teste produzido será executado. Clique duplo num erro na visualização em árvore para mais informação sobre o mesmo, incluindo o rastreamento do empilhamento.</translation>
     </message>
   </context>
 </TS>

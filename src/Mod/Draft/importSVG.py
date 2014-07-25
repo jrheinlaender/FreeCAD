@@ -451,10 +451,7 @@ class svgHandler(xml.sax.ContentHandler):
                 if name == 'svg':
                         m=FreeCAD.Matrix()
                         if 'width' in data and 'height' in data and \
-                            'viewBox' in data and\
-                            (getsize(attrs.getValue('width'),'isabsolute') and\
-                            getsize(attrs.getValue('height'),'isabsolute') or\
-                            len(self.grouptransform)!=0):
+                            'viewBox' in data:
                                 vbw=float(data['viewBox'][2])
                                 vbh=float(data['viewBox'][3])
                                 w=attrs.getValue('width')
@@ -964,7 +961,7 @@ class svgHandler(xml.sax.ContentHandler):
                 
         def characters(self,content):
                 if self.text:
-                        FreeCAD.Console.PrintMessage("reading characters %s\n" % str(content))
+                        FreeCAD.Console.PrintMessage("reading characters %s\n" % content)
                         obj=self.doc.addObject("App::Annotation",'Text')
                         obj.LabelText = content.encode('latin1')
                         vec = Vector(self.x,-self.y,0)

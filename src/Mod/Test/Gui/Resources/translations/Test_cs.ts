@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="cs" sourcelanguage="en">
   <context>
     <name>TestGui::UnitTest</name>
     <message>
@@ -25,7 +25,7 @@
     </message>
     <message>
       <source>&amp;Help</source>
-      <translation>Pomoc</translation>
+      <translation>Nápověda</translation>
     </message>
     <message>
       <source>F1</source>
@@ -88,7 +88,7 @@
     <name>TestGui::UnitTestDialog</name>
     <message>
       <source>Help</source>
-      <translation>Pomoc</translation>
+      <translation>Nápověda</translation>
     </message>
     <message>
       <source>About FreeCAD UnitTest</source>
@@ -104,9 +104,9 @@ FreeCAD UnitTest is part of FreeCAD and supports writing Unit Tests for own modu
       <source>Enter the name of a callable object which, when called, will return a TestCase.Click 'start', and the test thus produced will be run.
 
 Double click on an error in the tree view to see more information about it,including the stack trace.</source>
-      <translation>Enter the name of a callable object which, when called, will return a TestCase.Click 'start', and the test thus produced will be run.
+      <translation>Zadejte název volatelného objektu, který při volání, vrátí TestCase. Klikněte 'start' a takto vytvořeny test bude spuštěn.
 
-Double click on an error in the tree view to see more information about it,including the stack trace.</translation>
+Poklepáním na chybu ve stromovém zobrazení zobrazíte další informace o chybě, včetně zásobníku.</translation>
     </message>
   </context>
 </TS>

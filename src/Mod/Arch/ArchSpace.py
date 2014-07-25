@@ -34,13 +34,16 @@ else:
     def translate(ctxt,txt):
         return txt
 
-def makeSpace(objects=None,name=translate("Arch","Space")):
+def makeSpace(objects=None,baseobj=None,name=translate("Arch","Space")):
     """makeSpace([objects]): Creates a space object from the given objects. Objects can be one
     document object, in which case it becomes the base shape of the space object, or a list of
     selection objects as got from getSelectionEx(), or a list of tuples (object, subobjectname)"""
     obj = FreeCAD.ActiveDocument.addObject("Part::FeaturePython",name)
     _Space(obj)
-    _ViewProviderSpace(obj.ViewObject)
+    if FreeCAD.GuiUp:
+        _ViewProviderSpace(obj.ViewObject)
+    if baseobj:
+        objects = baseobj
     if objects:
         if not isinstance(objects,list):
             objects = [objects]
@@ -77,6 +80,9 @@ class _CommandSpace:
                 'Accel': "S, P",
                 'ToolTip': QtCore.QT_TRANSLATE_NOOP("Arch_Space","Creates a space object from selected boundary objects")}
 
+    def IsActive(self):
+        return not FreeCAD.ActiveDocument is None
+
     def Activated(self):
         FreeCAD.ActiveDocument.openTransaction(translate("Arch","Create Space"))
         FreeCADGui.doCommand("import Arch")
@@ -100,10 +106,8 @@ class _Space(ArchComponent.Component):
     "A space object"
     def __init__(self,obj):
         obj.Proxy = self
-        obj.addProperty("App::PropertyLink","Base","Arch",
-                        translate("Arch","A base shape defining this space"))
-        obj.addProperty("App::PropertyLinkSubList","Boundaries","Arch",
-                        translate("Arch","The objects that make the boundaries of this space object"))
+        obj.addProperty("App::PropertyLink","Base","Arch",translate("Arch","A base shape defining this space"))
+        obj.addProperty("App::PropertyLinkSubList","Boundaries","Arch",translate("Arch","The objects that make the boundaries of this space object"))
         self.Type = "Space"
 
     def execute(self,obj):
@@ -216,10 +220,8 @@ class _ViewProviderSpace(ArchComponent.ViewProviderComponent):
         vobj.LineWidth = 1
         vobj.LineColor = (1.0,0.0,0.0,1.0)
         vobj.DrawStyle = "Dotted"
-        vobj.addProperty("App::PropertyString","Override","Base",
-            "Text override. Use $area to insert the area")
-        vobj.addProperty("App::PropertyColor","TextColor","Base",
-            "The color of the area text")
+        vobj.addProperty("App::PropertyString","Override","Base","Text override. Use $area to insert the area")
+        vobj.addProperty("App::PropertyColor","TextColor","Base","The color of the area text")
         vobj.TextColor = (1.0,0.0,0.0,1.0)
         vobj.Override = "$area m2"
         ArchComponent.ViewProviderComponent.__init__(self,vobj)

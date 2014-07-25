@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="ro" sourcelanguage="en">
   <context>
     <name>TestGui::UnitTest</name>
     <message>
@@ -104,9 +104,9 @@ FreeCAD UnitTest is part of FreeCAD and supports writing Unit Tests for own modu
       <source>Enter the name of a callable object which, when called, will return a TestCase.Click 'start', and the test thus produced will be run.
 
 Double click on an error in the tree view to see more information about it,including the stack trace.</source>
-      <translation>Enter the name of a callable object which, when called, will return a TestCase.Click 'start', and the test thus produced will be run.
+      <translation>Introduceti numele unui obiect apelabil ce creaza un TestCase. Apasati pe "start" pentru a rula testul rezultat.
 
-Double click on an error in the tree view to see more information about it,including the stack trace.</translation>
+Faceti dublu-click pe o eroare in vizualizarea arborescenta pentru mai multe informatii despre ea, incluzand istoria de apeluri.</translation>
     </message>
   </context>
 </TS>

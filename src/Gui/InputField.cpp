@@ -25,6 +25,7 @@
 #ifndef _PreComp_
 # include <QContextMenuEvent>
 # include <QMenu>
+# include <QPixmapCache>
 #endif
 
 #include <Base/Console.h>
@@ -40,17 +41,37 @@ using namespace Base;
 
 // --------------------------------------------------------------------
 
-InputField::InputField ( QWidget * parent )
-  : QLineEdit(parent), 
-  StepSize(1.0), 
-  Maximum(DOUBLE_MAX),
-  Minimum(-DOUBLE_MAX),
-  HistorySize(5),
-  SaveSize(5)
+namespace Gui {
+class InputValidator : public QValidator
 {
+public:
+    InputValidator(InputField* parent);
+    ~InputValidator();
+
+    void fixup(QString& input) const;
+    State validate(QString& input, int& pos) const;
+
+private:
+    InputField* dptr;
+};
+}
+
+// --------------------------------------------------------------------
+
+InputField::InputField(QWidget * parent)
+  : QLineEdit(parent),
+    actUnitValue(0),
+    validInput(true),
+    Maximum(DOUBLE_MAX),
+    Minimum(-DOUBLE_MAX),
+    StepSize(1.0),
+    HistorySize(5),
+    SaveSize(5)
+{
+    setValidator(new InputValidator(this));
     iconLabel = new QLabel(this);
     iconLabel->setCursor(Qt::ArrowCursor);
-    QPixmap pixmap = BitmapFactory().pixmapFromSvg(":/icons/button_valid.svg", QSize(sizeHint().height(),sizeHint().height()));
+    QPixmap pixmap = getValidationIcon(":/icons/button_valid.svg", QSize(sizeHint().height(),sizeHint().height()));
     iconLabel->setPixmap(pixmap);
     iconLabel->setStyleSheet(QString::fromAscii("QLabel { border: none; padding: 0px; }"));
     iconLabel->hide();
@@ -63,12 +84,36 @@ InputField::InputField ( QWidget * parent )
 
     this->setContextMenuPolicy(Qt::DefaultContextMenu);
 
-    QObject::connect(this, SIGNAL(textChanged  (QString)),
+    QObject::connect(this, SIGNAL(textChanged(QString)),
                      this, SLOT(newInput(QString)));
 }
 
 InputField::~InputField()
 {
+}
+
+QPixmap InputField::getValidationIcon(const char* name, const QSize& size) const
+{
+    QString key = QString::fromAscii("%1_%2x%3")
+        .arg(QString::fromAscii(name))
+        .arg(size.width())
+        .arg(size.height());
+    QPixmap icon;
+    if (QPixmapCache::find(key, icon))
+        return icon;
+
+    icon = BitmapFactory().pixmapFromSvg(name, size);
+    if (!icon.isNull())
+        QPixmapCache::insert(key, icon);
+    return icon;
+}
+
+void InputField::updateText(const Base::Quantity& quant)
+{
+    double dFactor;
+    QString txt = quant.getUserString(dFactor,actUnitStr);
+    actUnitValue = quant.getValue()/dFactor;
+    setText(txt);
 }
 
 void InputField::resizeEvent(QResizeEvent *)
@@ -134,40 +179,76 @@ void InputField::contextMenuEvent(QContextMenuEvent *event)
 void InputField::newInput(const QString & text)
 {
     Quantity res;
-    try{
-        res = Quantity::parse(text);
-    }catch(Base::Exception &e){
+    try {
+        QString input = text;
+        input.remove(locale().groupSeparator());
+        res = Quantity::parse(input);
+    }
+    catch(Base::Exception &e){
         ErrorText = e.what();
         this->setToolTip(QString::fromAscii(ErrorText.c_str()));
-        QPixmap pixmap = BitmapFactory().pixmapFromSvg(":/icons/button_invalid.svg", QSize(sizeHint().height(),sizeHint().height()));
+        QPixmap pixmap = getValidationIcon(":/icons/button_invalid.svg", QSize(sizeHint().height(),sizeHint().height()));
         iconLabel->setPixmap(pixmap);
         parseError(QString::fromAscii(ErrorText.c_str()));
+        validInput = false;
         return;
     }
 
-    QPixmap pixmap = BitmapFactory().pixmapFromSvg(":/icons/button_valid.svg", QSize(sizeHint().height(),sizeHint().height()));
-    iconLabel->setPixmap(pixmap);
+    if (res.getUnit().isEmpty())
+        res.setUnit(this->actUnit);
 
+    // check if unit fits!
+    if(!actUnit.isEmpty() && !res.getUnit().isEmpty() && actUnit != res.getUnit()){
+        this->setToolTip(QString::fromAscii("Wrong unit"));
+        QPixmap pixmap = getValidationIcon(":/icons/button_invalid.svg", QSize(sizeHint().height(),sizeHint().height()));
+        iconLabel->setPixmap(pixmap);
+        parseError(QString::fromAscii("Wrong unit"));
+        validInput = false;
+        return;
+    }
+
+
+    QPixmap pixmap = getValidationIcon(":/icons/button_valid.svg", QSize(sizeHint().height(),sizeHint().height()));
+    iconLabel->setPixmap(pixmap);
     ErrorText = "";
+    validInput = true;
+
+    if (res.getValue() > Maximum){
+        res.setValue(Maximum);
+        ErrorText = "Maximum reached";
+    }
+    if (res.getValue() < Minimum){
+        res.setValue(Minimum);
+        ErrorText = "Minimum reached";
+    }
+
     this->setToolTip(QString::fromAscii(ErrorText.c_str()));
-    actQuantity = res;
+
     double dFactor;
     res.getUserString(dFactor,actUnitStr);
-    // calculate the number shown 
-    actUnitValue = res.getValue()/dFactor; 
-    // signaling 
-    valueChanged(res);
+    actUnitValue = res.getValue()/dFactor;
+    actQuantity = res;
 
+    // signaling
+    valueChanged(res);
+    valueChanged(res.getValue());
 }
 
 void InputField::pushToHistory(const QString &valueq)
 {
-    std::string value;
+    QString val;
     if(valueq.isEmpty())
-        value = this->text().toUtf8().constData();
+        val = this->text();
     else
-        value = valueq.toUtf8().constData();
+        val = valueq;
+
+    // check if already in:
+    std::vector<QString> hist = InputField::getHistory();
+    for(std::vector<QString>::const_iterator it = hist.begin();it!=hist.end();++it)
+        if( *it == val)
+            return;
     
+    std::string value(val.toUtf8());
     if(_handle.isValid()){
         char hist1[21];
         char hist0[21];
@@ -199,6 +280,13 @@ std::vector<QString> InputField::getHistory(void)
         }
     }
     return res;
+}
+
+void InputField::setToLastUsedValue(void)
+{
+    std::vector<QString> hist = getHistory();
+    if(!hist.empty())
+        this->setText(hist[0]);
 }
 
 void InputField::pushToSavedValues(const QString &valueq)
@@ -245,10 +333,9 @@ std::vector<QString> InputField::getSavedValues(void)
 /** Sets the preference path to \a path. */
 void InputField::setParamGrpPath( const QByteArray& path )
 {
-   
-  _handle = App::GetApplication().GetParameterGroupByPath( path);
-  if (_handle.isValid())
-      sGroupString = (const char*)path;
+    _handle = App::GetApplication().GetParameterGroupByPath( path);
+    if (_handle.isValid())
+        sGroupString = (const char*)path;
 }
 
 /** Returns the widget's preferences path. */
@@ -263,20 +350,33 @@ QByteArray InputField::paramGrpPath() const
 void InputField::setValue(const Base::Quantity& quant)
 {
     actQuantity = quant;
-    if(!quant.getUnit().isEmpty())
-        actUnit = quant.getUnit();
+    // check limits
+    if (actQuantity.getValue() > Maximum)
+        actQuantity.setValue(Maximum);
+    if (actQuantity.getValue() < Minimum)
+        actQuantity.setValue(Minimum);
 
-    double dFactor;
-    setText(quant.getUserString(dFactor,actUnitStr));
-    actUnitValue = quant.getValue()/dFactor;
+    actUnit = quant.getUnit();
+
+    updateText(quant);
+}
+
+void InputField::setValue(const double& value)
+{
+    setValue(Base::Quantity(value, actUnit));
 }
 
 void InputField::setUnit(const Base::Unit& unit)
 {
     actUnit = unit;
+    actQuantity.setUnit(unit);
+    updateText(actQuantity);
 }
 
-
+const Base::Unit& InputField::getUnit() const
+{
+    return actUnit;
+}
 
 /// get the value of the singleStep property
 double InputField::singleStep(void)const
@@ -300,6 +400,10 @@ double InputField::maximum(void)const
 void InputField::setMaximum(double m)
 {
     Maximum = m;
+    if (actQuantity.getValue() > Maximum) {
+        actQuantity.setValue(Maximum);
+        updateText(actQuantity);
+    }
 }
 
 /// get the value of the minimum property
@@ -312,6 +416,21 @@ double InputField::minimum(void)const
 void InputField::setMinimum(double m)
 {
     Minimum = m;
+    if (actQuantity.getValue() < Minimum) {
+        actQuantity.setValue(Minimum);
+        updateText(actQuantity);
+    }
+}
+
+void InputField::setUnitText(const QString& str)
+{
+    Base::Quantity quant = Base::Quantity::parse(str);
+    setUnit(quant.getUnit());
+}
+
+QString InputField::getUnitText(void)
+{
+    return actUnitStr;
 }
 
 // get the value of the minimum property
@@ -319,6 +438,7 @@ int InputField::historySize(void)const
 {
     return HistorySize;
 }
+
 // set the value of the minimum property 
 void InputField::setHistorySize(int i)
 {
@@ -333,30 +453,128 @@ void InputField::selectNumber(void)
     QByteArray str = text().toLatin1();
     unsigned int i = 0;
 
-    while ( (str.at(i) >= '0' && str.at(i) <= '9') || str.at(i)== ',' ||  str.at(i)== '.'||  str.at(i)== '-' ) 
-        i++;
+    for (QByteArray::iterator it = str.begin(); it != str.end(); ++it) {
+        if (*it >= '0' && *it <= '9')
+            i++;
+        else if (*it == ',' || *it == '.')
+            i++;
+        else if (*it == '-')
+            i++;
+        else // any non-number character
+            break;
+    }
 
     setSelection(0,i);
-
 }
 
-void InputField::wheelEvent ( QWheelEvent * event )
+void InputField::showEvent(QShowEvent * event)
 {
-     int numDegrees = event->delta() / 8;
-     int numSteps = numDegrees / 15;
+    QLineEdit::showEvent(event);
 
-     double val = actUnitValue + numSteps;
-
-     this->setText( QString::fromUtf8("%1 %2").arg(val).arg(actUnitStr));
-
-     //if (event->orientation() == Qt::Horizontal) {
-     //    scrollHorizontally(numSteps);
-     //} else {
-     //    scrollVertically(numSteps);
-     //}
-     event->accept();
+    bool selected = this->hasSelectedText();
+    updateText(actQuantity);
+    if (selected)
+        selectNumber();
 }
+
+void InputField::focusInEvent(QFocusEvent * event)
+{
+    if (event->reason() == Qt::TabFocusReason ||
+        event->reason() == Qt::BacktabFocusReason  ||
+        event->reason() == Qt::ShortcutFocusReason) {
+        if (!this->hasSelectedText())
+            selectNumber();
+    }
+
+    QLineEdit::focusInEvent(event);
+}
+
+void InputField::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+    case Qt::Key_Up:
+        {
+            double val = actUnitValue + StepSize;
+            this->setText( QString::fromUtf8("%L1 %2").arg(val).arg(actUnitStr));
+            event->accept();
+        }
+        break;
+    case Qt::Key_Down:
+        {
+            double val = actUnitValue - StepSize;
+            this->setText( QString::fromUtf8("%L1 %2").arg(val).arg(actUnitStr));
+            event->accept();
+        }
+        break;
+    default:
+        QLineEdit::keyPressEvent(event);
+        break;
+    }
+}
+
+void InputField::wheelEvent (QWheelEvent * event)
+{
+    double step = event->delta() > 0 ? StepSize : -StepSize;
+    double val = actUnitValue + step;
+    if (val > Maximum)
+        val = Maximum;
+    else if (val < Minimum)
+        val = Minimum;
+
+    this->setText(QString::fromUtf8("%L1 %2").arg(val).arg(actUnitStr));
+    selectNumber();
+    event->accept();
+}
+
+void InputField::fixup(QString& input) const
+{
+    input.remove(locale().groupSeparator());
+}
+
+QValidator::State InputField::validate(QString& input, int& pos) const
+{
+    try {
+        Quantity res;
+        QString text = input;
+        text.remove(locale().groupSeparator());
+        res = Quantity::parse(text);
+
+        double factor;
+        QString unitStr;
+        res.getUserString(factor, unitStr);
+        double value = res.getValue()/factor;
+        // disallow to enter numbers out of range
+        if (value > this->Maximum || value < this->Minimum)
+            return QValidator::Invalid;
+    }
+    catch(Base::Exception&) {
+        // Actually invalid input but the newInput slot gives
+        // some feedback
+        return QValidator::Intermediate;
+    }
+
+    return QValidator::Acceptable;
+}
+
 // --------------------------------------------------------------------
+
+InputValidator::InputValidator(InputField* parent) : QValidator(parent), dptr(parent)
+{
+}
+
+InputValidator::~InputValidator()
+{
+}
+
+void InputValidator::fixup(QString& input) const
+{
+    dptr->fixup(input);
+}
+
+QValidator::State InputValidator::validate(QString& input, int& pos) const
+{
+    return dptr->validate(input, pos);
+}
 
 
 #include "moc_InputField.cpp"

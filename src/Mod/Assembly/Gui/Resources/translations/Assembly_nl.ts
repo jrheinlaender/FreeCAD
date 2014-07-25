@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="nl" sourcelanguage="en">
   <context>
     <name>AssemblyGui::Workbench</name>
     <message>
@@ -17,10 +17,12 @@
       <translation>Samenstelling</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Constraint Axle...</source>
       <translation>As-beperking...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>set a axle constraint between two objects</source>
       <translation>Stel een as-beperking tussen twee objecten in</translation>
     </message>
@@ -29,7 +31,7 @@
     <name>Workbench</name>
     <message>
       <source>Assembly</source>
-      <translation>Samenstelling</translation>
+      <translation type="obsolete">Samenstelling</translation>
     </message>
   </context>
 </TS>

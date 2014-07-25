@@ -4,8 +4,9 @@ else(MSVC)
     add_definitions(-DHAVE_LIMITS_H -DHAVE_CONFIG_H)
 endif(MSVC)
 
-
-add_definitions(-DHAVE_SMESH)
+if (FREECAD_BUILD_SMESH)
+    add_definitions(-DHAVE_SMESH -DHAVE_MEFISTO)
+endif(FREECAD_BUILD_SMESH)
 
 if(FREECAD_BUILD_FEM_NETGEN)
     add_definitions(-DHAVE_NETGEN)
@@ -66,20 +67,7 @@ fc_target_copy_resource(MeshPart
     ${CMAKE_BINARY_DIR}/Mod/MeshPart
     Init.py)
 
-if(MSVC)
-    set_target_properties(MeshPart PROPERTIES SUFFIX ".pyd")
-    set_target_properties(MeshPart PROPERTIES DEBUG_OUTPUT_NAME "MeshPart_d")
-    set_target_properties(MeshPart PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/MeshPart)
-    set_target_properties(MeshPart PROPERTIES PREFIX "../")
-elseif(MINGW)
-    set_target_properties(MeshPart PROPERTIES SUFFIX ".pyd")
-    set_target_properties(MeshPart PROPERTIES DEBUG_OUTPUT_NAME "MeshPart_d")
-    set_target_properties(MeshPart PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/MeshPart)
-    set_target_properties(MeshPart PROPERTIES PREFIX "")
-else(MSVC)
-    set_target_properties(MeshPart PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/MeshPart)
-    set_target_properties(MeshPart PROPERTIES PREFIX "")
-    set_target_properties(MeshPart PROPERTIES INSTALL_RPATH ${INSTALL_RPATH})
-endif(MSVC)
+SET_BIN_DIR(MeshPart MeshPart /Mod/MeshPart)
+SET_PYTHON_PREFIX_SUFFIX(MeshPart)
 
-INSTALL(TARGETS MeshPart DESTINATION lib)
+INSTALL(TARGETS MeshPart DESTINATION ${CMAKE_INSTALL_LIBDIR})

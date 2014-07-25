@@ -36,6 +36,7 @@
 #include <Gui/ViewProvider.h>
 #include <Gui/WaitCursor.h>
 #include <Base/Console.h>
+#include <Base/UnitsApi.h>
 #include <Gui/Selection.h>
 #include <Gui/Command.h>
 #include <Mod/PartDesign/App/FeatureChamfer.h>
@@ -56,7 +57,7 @@ TaskChamferParameters::TaskChamferParameters(ViewProviderChamfer *ChamferView,QW
     ui->setupUi(proxy);
     QMetaObject::connectSlotsByName(this);
 
-    connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)),
+    connect(ui->chamferDistance, SIGNAL(valueChanged(double)),
             this, SLOT(onLengthChanged(double)));
 
     this->groupLayout()->addWidget(proxy);
@@ -64,10 +65,11 @@ TaskChamferParameters::TaskChamferParameters(ViewProviderChamfer *ChamferView,QW
     PartDesign::Chamfer* pcChamfer = static_cast<PartDesign::Chamfer*>(ChamferView->getObject());
     double r = pcChamfer->Size.getValue();
 
-    ui->doubleSpinBox->setMaximum(INT_MAX);
-    ui->doubleSpinBox->setValue(r);
-    ui->doubleSpinBox->selectAll();
-    QMetaObject::invokeMethod(ui->doubleSpinBox, "setFocus", Qt::QueuedConnection);
+    ui->chamferDistance->setUnit(Base::Unit::Length);
+    ui->chamferDistance->setValue(r);
+    ui->chamferDistance->setMinimum(0);
+    ui->chamferDistance->selectNumber();
+    QMetaObject::invokeMethod(ui->chamferDistance, "setFocus", Qt::QueuedConnection);
 }
 
 void TaskChamferParameters::onLengthChanged(double len)
@@ -79,9 +81,8 @@ void TaskChamferParameters::onLengthChanged(double len)
 
 double TaskChamferParameters::getLength(void) const
 {
-    return ui->doubleSpinBox->value();
+    return ui->chamferDistance->getQuantity().getValue();
 }
-
 
 TaskChamferParameters::~TaskChamferParameters()
 {
@@ -120,7 +121,11 @@ TaskDlgChamferParameters::~TaskDlgChamferParameters()
 
 void TaskDlgChamferParameters::open()
 {
-
+    // a transaction is already open at creation time of the chamfer
+    if (!Gui::Command::hasPendingCommand()) {
+        QString msg = tr("Edit chamfer");
+        Gui::Command::openCommand((const char*)msg.toUtf8());
+    }
 }
 
 void TaskDlgChamferParameters::clicked(int)

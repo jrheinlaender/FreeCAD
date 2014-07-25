@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="ro" sourcelanguage="en">
   <context>
     <name>BlockDefinition</name>
     <message>
@@ -9,136 +9,259 @@
       <translation>Definiția blocului</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>First limit</source>
       <translation>Prima limită</translation>
     </message>
     <message>
+      <location line="+20"/>
+      <location line="+181"/>
       <source>Type:</source>
       <translation>Tip:</translation>
     </message>
     <message>
+      <location line="-174"/>
+      <location line="+154"/>
       <source>mm</source>
       <translation>mm</translation>
     </message>
     <message>
+      <location line="-144"/>
+      <location line="+200"/>
       <source>Length:</source>
       <translation>Lungime:</translation>
     </message>
     <message>
+      <location line="-192"/>
+      <location line="+164"/>
       <source>Dimension</source>
       <translation>Dimensiune</translation>
     </message>
     <message>
+      <location line="-159"/>
+      <location line="+164"/>
       <source>Up to next</source>
       <translation>Până la următorul</translation>
     </message>
     <message>
+      <location line="-159"/>
+      <location line="+164"/>
       <source>Up to last</source>
       <translation>Până la ultimul</translation>
     </message>
     <message>
+      <location line="-159"/>
+      <location line="+164"/>
       <source>Up to plane</source>
       <translation>Până la plan</translation>
     </message>
     <message>
+      <location line="-159"/>
+      <location line="+164"/>
       <source>Up to face</source>
       <translation>Până la față</translation>
     </message>
     <message>
+      <location line="-156"/>
+      <location line="+171"/>
       <source>Limit:</source>
       <translation>Limita:</translation>
     </message>
     <message>
+      <location line="-161"/>
+      <location line="+39"/>
+      <location line="+72"/>
+      <location line="+95"/>
       <source>No selection</source>
       <translation>Nici o selecţie</translation>
     </message>
     <message>
+      <location line="-194"/>
       <source>Profile</source>
       <translation>Profil</translation>
     </message>
     <message>
+      <location line="+20"/>
       <source>Selection:</source>
       <translation>Selecţie:</translation>
     </message>
     <message>
+      <location line="+27"/>
       <source>Reverse</source>
       <translation>Invers</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Both sides</source>
       <translation>Ambele părţi</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>Second limit</source>
       <translation>Al doua limită</translation>
     </message>
     <message>
+      <location line="+95"/>
       <source>Direction</source>
       <translation>Direcţia</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>Perpendicular to sketch</source>
-      <translation>Perpendicular to sketch</translation>
+      <translation>Perpendicular pe schita</translation>
     </message>
     <message>
+      <location line="+28"/>
       <source>Reference</source>
       <translation>Referinţă</translation>
     </message>
     <message>
       <source>Apply</source>
-      <translation>Aplică</translation>
+      <translation type="obsolete">Aplică</translation>
     </message>
     <message>
       <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="obsolete">Renunţă</translation>
     </message>
     <message>
       <source>OK</source>
-      <translation>OK</translation>
+      <translation type="obsolete">OK</translation>
     </message>
   </context>
   <context>
     <name>CmdCheckGeometry</name>
     <message>
-      <location filename="../../Command.cpp" line="+1327"/>
+      <location filename="../../Command.cpp" line="+1452"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Check Geometry</source>
-      <translation>Check Geometry</translation>
+      <translation>Verifica geometria</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Analyzes Geometry For Errors</source>
-      <translation>Analyzes Geometry For Errors</translation>
+      <translation>Analizeaza geometria pentru erori</translation>
     </message>
   </context>
   <context>
     <name>CmdColorPerFace</name>
     <message>
+      <location line="+31"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Color per face</source>
-      <translation>Color per face</translation>
+      <translation>Culoare pe fata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Set color per face</source>
-      <translation>Set color per face</translation>
+      <translation>Seteaza culoarea pentru fata</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeasureAngular</name>
+    <message>
+      <location line="+62"/>
+      <source>Part</source>
+      <translation type="unfinished">Componentă</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <source>Measure Angular</source>
+      <translation type="unfinished">Measure Angular</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeasureClearAll</name>
+    <message>
+      <location line="+26"/>
+      <source>Part</source>
+      <translation type="unfinished">Componentă</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <source>Clear All</source>
+      <translation type="unfinished">Clear All</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeasureLinear</name>
+    <message>
+      <location line="-58"/>
+      <source>Part</source>
+      <translation type="unfinished">Componentă</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <source>Measure Linear</source>
+      <translation type="unfinished">Measure Linear</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeasureToggle3d</name>
+    <message>
+      <location line="+116"/>
+      <source>Part</source>
+      <translation type="unfinished">Componentă</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <source>Toggle 3d</source>
+      <translation type="unfinished">Toggle 3d</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeasureToggleAll</name>
+    <message>
+      <location line="-36"/>
+      <source>Part</source>
+      <translation type="unfinished">Componentă</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <source>Toggle All</source>
+      <translation type="unfinished">Toggle All</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeasureToggleDelta</name>
+    <message>
+      <location line="+60"/>
+      <source>Part</source>
+      <translation type="unfinished">Componentă</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <source>Toggle Delta</source>
+      <translation type="unfinished">Toggle Delta</translation>
     </message>
   </context>
   <context>
     <name>CmdPartBoolean</name>
     <message>
+      <location line="-840"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Boolean...</source>
       <translation>Boolean...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Run a boolean operation with two shapes selected</source>
       <translation>Executaţi o operaţiune de booleană cu două forme selectate</translation>
     </message>
@@ -146,76 +269,99 @@
   <context>
     <name>CmdPartBox</name>
     <message>
-      <location filename="../../CommandParametric.cpp" line="+79"/>
+      <location filename="../../CommandParametric.cpp" line="+86"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+10"/>
+      <location line="+5"/>
+      <source>Cube</source>
+      <translation type="unfinished">Cub</translation>
+    </message>
+    <message>
+      <location line="-14"/>
+      <source>Create a cube solid</source>
+      <translation type="unfinished">Create a cube solid</translation>
+    </message>
+    <message>
       <source>Box</source>
-      <translation>Box</translation>
+      <translation type="obsolete">Caseta</translation>
     </message>
     <message>
       <source>Create a box solid</source>
-      <translation>Create a box solid</translation>
+      <translation type="obsolete">Creaza o caseta solida</translation>
     </message>
   </context>
   <context>
     <name>CmdPartBox2</name>
     <message>
-      <location filename="../../Command.cpp" line="-597"/>
+      <location filename="../../Command.cpp" line="-705"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Box fix 1</source>
-      <translation>Box fix 1</translation>
+      <translation>Caseta fiza 1</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create a box solid without dialog</source>
-      <translation>Create a box solid without dialog</translation>
+      <translation>Creaza o caseta solida fara dialog</translation>
     </message>
   </context>
   <context>
     <name>CmdPartBox3</name>
     <message>
+      <location line="+39"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Box fix 2</source>
-      <translation>Box fix 2</translation>
+      <translation>Caseta fiza 2</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create a box solid without dialog</source>
-      <translation>Create a box solid without dialog</translation>
+      <translation>Creaza o caseta solida fara dialog</translation>
     </message>
   </context>
   <context>
     <name>CmdPartBuilder</name>
     <message>
+      <location line="+864"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Shape builder...</source>
-      <translation>Shape builder...</translation>
+      <translation>Constructor de forme...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Advanced utility to create shapes</source>
-      <translation>Advanced utility to create shapes</translation>
+      <translation>Utilitar avansat pentru constructia de forme</translation>
     </message>
   </context>
   <context>
     <name>CmdPartChamfer</name>
     <message>
+      <location line="-95"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Chamfer...</source>
       <translation>Chamfer...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Chamfer the selected edges of a shape</source>
       <translation>Definiţi teşirea muchiilor selectate ale formei</translation>
     </message>
@@ -223,108 +369,147 @@
   <context>
     <name>CmdPartCommon</name>
     <message>
+      <location line="-619"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Intersection</source>
       <translation>Intersecţie</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Make an intersection of two shapes</source>
-      <translation>Make an intersection of two shapes</translation>
+      <translation>Creaza intersectia a doua forme</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdPartCompound</name>
+    <message>
+      <location line="+128"/>
+      <source>Part</source>
+      <translation type="unfinished">Componentă</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>Make compound</source>
+      <translation type="unfinished">Make compound</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>Make a compound of several shapes</source>
+      <translation type="unfinished">Make a compound of several shapes</translation>
     </message>
   </context>
   <context>
     <name>CmdPartCone</name>
     <message>
-      <location filename="../../CommandParametric.cpp" line="+66"/>
+      <location filename="../../CommandParametric.cpp" line="+78"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+10"/>
+      <location line="+5"/>
       <source>Cone</source>
-      <translation>Cone</translation>
+      <translation>Con</translation>
     </message>
     <message>
+      <location line="-14"/>
       <source>Create a cone solid</source>
-      <translation>Create a cone solid</translation>
+      <translation>Creaza un con solid</translation>
     </message>
   </context>
   <context>
     <name>CmdPartCrossSections</name>
     <message>
-      <location filename="../../Command.cpp" line="+600"/>
+      <location filename="../../Command.cpp" line="+539"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Cross-sections...</source>
-      <translation>Cross-sections...</translation>
+      <translation>Sectiune transversala...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Cross-sections</source>
-      <translation>Cross-sections</translation>
+      <translation>Sectiune transversala</translation>
     </message>
   </context>
   <context>
     <name>CmdPartCut</name>
     <message>
+      <location line="-736"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Cut</source>
       <translation>Scădere</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Make a cut of two shapes</source>
-      <translation>Make a cut of two shapes</translation>
+      <translation>Creaza o decupare din doua forme</translation>
     </message>
   </context>
   <context>
     <name>CmdPartCylinder</name>
     <message>
-      <location filename="../../CommandParametric.cpp" line="-104"/>
+      <location filename="../../CommandParametric.cpp" line="-122"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+2"/>
       <source>Create a Cylinder</source>
       <translation>Creaţi un Cilindru</translation>
     </message>
     <message>
+      <location line="-1"/>
+      <location line="+10"/>
+      <location line="+5"/>
       <source>Cylinder</source>
-      <translation>Cylinder</translation>
+      <translation>Cilindru</translation>
     </message>
   </context>
   <context>
     <name>CmdPartExport</name>
     <message>
-      <location filename="../../Command.cpp" line="+262"/>
+      <location filename="../../Command.cpp" line="+345"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Export CAD...</source>
-      <translation>Export CAD...</translation>
+      <translation>Exporta CAD...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Exports to a CAD file</source>
-      <translation>Exports to a CAD file</translation>
+      <translation>Exporta un CAD intr-un fisier</translation>
     </message>
   </context>
   <context>
     <name>CmdPartExtrude</name>
     <message>
+      <location line="+250"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Extrude...</source>
       <translation>Extrudare...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Extrude a selected sketch</source>
       <translation>Extrudați o schiță selectată</translation>
     </message>
@@ -332,14 +517,17 @@
   <context>
     <name>CmdPartFillet</name>
     <message>
+      <location line="+52"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Fillet...</source>
       <translation>Rotunjire...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Fillet the selected edges of a shape</source>
       <translation>Rotunjiți marginile selectate ale unei forme</translation>
     </message>
@@ -347,29 +535,35 @@
   <context>
     <name>CmdPartFuse</name>
     <message>
+      <location line="-527"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Union</source>
       <translation>Reuniune</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Make a union of several shapes</source>
-      <translation>Make a union of several shapes</translation>
+      <translation>Creaza uniunea mai multor forme</translation>
     </message>
   </context>
   <context>
     <name>CmdPartImport</name>
     <message>
+      <location line="+158"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+2"/>
       <source>Imports a CAD file</source>
       <translation>Importați un fişier CAD</translation>
     </message>
     <message>
+      <location line="-1"/>
       <source>Import CAD...</source>
       <translation>Import CAD...</translation>
     </message>
@@ -377,14 +571,17 @@
   <context>
     <name>CmdPartImportCurveNet</name>
     <message>
+      <location line="+104"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+2"/>
       <source>Import a curve network</source>
       <translation>Importați o rețea de curbe</translation>
     </message>
     <message>
+      <location line="-1"/>
       <source>Import curve network...</source>
       <translation>Import o rețea de curbe...</translation>
     </message>
@@ -392,78 +589,93 @@
   <context>
     <name>CmdPartLoft</name>
     <message>
+      <location line="+407"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Loft...</source>
-      <translation>Loft...</translation>
+      <translation>Pod...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Utility to loft</source>
-      <translation>Utility to loft</translation>
+      <translation>Utilitar pentru unire</translation>
     </message>
     <message>
       <source>Advanced utility to lofts</source>
-      <translation>Advanced utility to lofts</translation>
+      <translation type="obsolete">Advanced utility to lofts</translation>
     </message>
   </context>
   <context>
     <name>CmdPartMakeSolid</name>
     <message>
+      <location line="-365"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Convert to solid</source>
-      <translation>Convert to solid</translation>
+      <translation>Converteste in solid</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create solid from a shell or compound</source>
-      <translation>Create solid from a shell or compound</translation>
+      <translation>Creaza un solid din carcasa sau component</translation>
     </message>
   </context>
   <context>
     <name>CmdPartMirror</name>
     <message>
+      <location line="+267"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Mirroring...</source>
-      <translation>Mirroring...</translation>
+      <translation>Oglindire...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Mirroring a selected shape</source>
-      <translation>Mirroring a selected shape</translation>
+      <translation>Copiaza in oglinda forma selectata</translation>
     </message>
   </context>
   <context>
     <name>CmdPartOffset</name>
     <message>
+      <location line="+148"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Offset...</source>
-      <translation>Offset...</translation>
+      <translation>Expandare...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Utility to offset</source>
-      <translation>Utility to offset</translation>
+      <translation>Utilitar pentru expandare</translation>
     </message>
   </context>
   <context>
     <name>CmdPartPickCurveNet</name>
     <message>
+      <location line="-1038"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Pick curve network</source>
       <translation>Alegeți reţeaua de curbe</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Pick a curve network</source>
       <translation>Alegeți o reţea de curbe</translation>
     </message>
@@ -471,14 +683,17 @@
   <context>
     <name>CmdPartPrimitives</name>
     <message>
+      <location line="+124"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create primitives...</source>
       <translation>Creaţi primitive...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Creation of parametrized geometric primitives</source>
       <translation>Crearea de pprimitive geometrice parametrizate</translation>
     </message>
@@ -486,76 +701,93 @@
   <context>
     <name>CmdPartRefineShape</name>
     <message>
-      <location filename="../../CommandSimple.cpp" line="+212"/>
+      <location filename="../../CommandSimple.cpp" line="+213"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Refine shape</source>
-      <translation>Refine shape</translation>
+      <translation>Rafineaza forma</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Refine the copy of a shape</source>
-      <translation>Refine the copy of a shape</translation>
+      <translation>Rafineaza copia formei</translation>
     </message>
   </context>
   <context>
     <name>CmdPartReverseShape</name>
     <message>
-      <location filename="../../Command.cpp" line="+459"/>
+      <location filename="../../Command.cpp" line="+567"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Reverse shapes</source>
-      <translation>Reverse shapes</translation>
+      <translation>Inverseaza forma</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Reverse orientation of shapes</source>
-      <translation>Reverse orientation of shapes</translation>
+      <translation>Inverseaza orientarea formei</translation>
     </message>
   </context>
   <context>
     <name>CmdPartRevolve</name>
     <message>
+      <location line="+108"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Revolve...</source>
-      <translation>Revolve...</translation>
+      <translation>Roteste...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Revolve a selected shape</source>
-      <translation>Revolve a selected shape</translation>
+      <translation>Roteste forma selectata</translation>
     </message>
   </context>
   <context>
     <name>CmdPartRuledSurface</name>
     <message>
+      <location line="+449"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create ruled surface</source>
-      <translation>Create ruled surface</translation>
+      <translation>Creaza suprafata dreapta</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>Create a ruled surface from either two Edges or two wires</source>
+      <translation type="unfinished">Create a ruled surface from either two Edges or two wires</translation>
     </message>
     <message>
       <source>Create a ruled surface from two curves</source>
-      <translation>Create a ruled surface from two curves</translation>
+      <translation type="obsolete">Creaza o suprafata dreapta din doua curbe</translation>
     </message>
   </context>
   <context>
     <name>CmdPartSection</name>
     <message>
+      <location line="-835"/>
       <source>Make a section of two shapes</source>
-      <translation>Make a section of two shapes</translation>
+      <translation>Creaza o sectiune a doua forme</translation>
     </message>
     <message>
+      <location line="-2"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Section</source>
       <translation>Secţiune</translation>
     </message>
@@ -563,45 +795,53 @@
   <context>
     <name>CmdPartShapeFromMesh</name>
     <message>
-      <location filename="../../CommandSimple.cpp" line="-107"/>
+      <location filename="../../CommandSimple.cpp" line="-108"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create shape from mesh...</source>
-      <translation>Create shape from mesh...</translation>
+      <translation>Creaza forma din retea...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create shape from selected mesh object</source>
-      <translation>Create shape from selected mesh object</translation>
+      <translation>Creaza forma din reteaua selectata</translation>
     </message>
   </context>
   <context>
     <name>CmdPartSimpleCopy</name>
     <message>
+      <location line="+61"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create simple copy</source>
-      <translation>Create simple copy</translation>
+      <translation>Creaza copie simpla</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create a simple non-parametric copy</source>
-      <translation>Create a simple non-parametric copy</translation>
+      <translation>Creaza o copie neparametrica</translation>
     </message>
   </context>
   <context>
     <name>CmdPartSimpleCylinder</name>
     <message>
+      <location line="-115"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create Cylinder...</source>
       <translation>Creaţi cilindru...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create a Cylinder</source>
       <translation>Creaţi un Cilindru</translation>
     </message>
@@ -609,105 +849,122 @@
   <context>
     <name>CmdPartSphere</name>
     <message>
-      <location filename="../../CommandParametric.cpp" line="+69"/>
+      <location filename="../../CommandParametric.cpp" line="+66"/>
       <source>Create a sphere solid</source>
-      <translation>Create a sphere solid</translation>
+      <translation>Creaza o sfera solida</translation>
     </message>
     <message>
+      <location line="-2"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+10"/>
+      <location line="+5"/>
       <source>Sphere</source>
-      <translation>Sphere</translation>
+      <translation>Sfera</translation>
     </message>
   </context>
   <context>
     <name>CmdPartSweep</name>
     <message>
-      <location filename="../../Command.cpp" line="+582"/>
+      <location filename="../../Command.cpp" line="+586"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Sweep...</source>
-      <translation>Sweep...</translation>
+      <translation>Matura...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Utility to sweep</source>
-      <translation>Utility to sweep</translation>
+      <translation>Utilitate pentru maturare</translation>
     </message>
   </context>
   <context>
     <name>CmdPartThickness</name>
     <message>
+      <location line="+73"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Thickness...</source>
-      <translation>Thickness...</translation>
+      <translation>Grosime...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Utility to apply a thickness</source>
-      <translation>Utility to apply a thickness</translation>
+      <translation>Utilitate pentru a aplica o grosime</translation>
     </message>
     <message>
+      <location line="+11"/>
+      <location line="+20"/>
       <source>Wrong selection</source>
       <translation>Selecţie greşită</translation>
     </message>
     <message>
+      <location line="-19"/>
       <source>Selected one or more faces of a shape</source>
-      <translation>Selected one or more faces of a shape</translation>
+      <translation>Selectaţi unul sau mai multe fete ale formei</translation>
     </message>
     <message>
+      <location line="+20"/>
       <source>Selected shape is not a solid</source>
-      <translation>Selected shape is not a solid</translation>
+      <translation>Forma selectata nu este un solid</translation>
     </message>
   </context>
   <context>
     <name>CmdPartTorus</name>
     <message>
-      <location filename="../../CommandParametric.cpp" line="+69"/>
+      <location filename="../../CommandParametric.cpp" line="+66"/>
       <source>Create a torus solid</source>
-      <translation>Create a torus solid</translation>
+      <translation>Creaza un tor solid</translation>
     </message>
     <message>
+      <location line="-2"/>
       <source>Part</source>
       <translation>Componentă</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+10"/>
+      <location line="+5"/>
       <source>Torus</source>
-      <translation>Torus</translation>
+      <translation>Tor</translation>
     </message>
   </context>
   <context>
     <name>DlgExtrusion</name>
     <message>
       <source>Select a shape for extrusion, first.</source>
-      <translation>Select a shape for extrusion, first.</translation>
+      <translation type="obsolete">Select a shape for extrusion, first.</translation>
     </message>
     <message>
       <source>The document '%1' doesn't exist.</source>
-      <translation>The document '%1' doesn't exist.</translation>
+      <translation type="obsolete">The document '%1' doesn't exist.</translation>
     </message>
   </context>
   <context>
     <name>DlgRevolution</name>
     <message>
       <source>Select a shape for revolution, first.</source>
-      <translation>Select a shape for revolution, first.</translation>
+      <translation type="obsolete">Select a shape for revolution, first.</translation>
     </message>
   </context>
   <context>
     <name>DlgSettings3DViewPart</name>
     <message>
       <source>Deviation</source>
-      <translation>Deviation</translation>
+      <translation type="obsolete">Deviation</translation>
     </message>
     <message>
       <source>Setting a too small deviation causes the tessellation to take longerand thus freezes or slows down the GUI.</source>
-      <translation>Setting a too small deviation causes the tessellation to take longerand thus freezes or slows down the GUI.</translation>
+      <translation type="obsolete">Setting a too small deviation causes the tessellation to take longerand thus freezes or slows down the GUI.</translation>
     </message>
   </context>
   <context>
@@ -715,43 +972,52 @@
     <message>
       <location filename="../../CrossSections.ui" line="+14"/>
       <source>Cross sections</source>
-      <translation>Cross sections</translation>
+      <translation>Sectiune transversala</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>Guiding plane</source>
-      <translation>Guiding plane</translation>
+      <translation>Plan director</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>XY</source>
       <translation>XY</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>XZ</source>
       <translation>XZ</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>YZ</source>
       <translation>YZ</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Position:</source>
-      <translation>Position:</translation>
+      <translation>Pozitie:</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>Sections</source>
-      <translation>Sections</translation>
+      <translation>Sectiuni</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>On both sides</source>
-      <translation>On both sides</translation>
+      <translation>Pe ambele parti</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Count</source>
-      <translation>Count</translation>
+      <translation>Numar</translation>
     </message>
     <message>
+      <location line="+17"/>
       <source>Distance:</source>
-      <translation>Distance:</translation>
+      <translation>Distanta:</translation>
     </message>
   </context>
   <context>
@@ -762,93 +1028,114 @@
       <translation>Operație booleană</translation>
     </message>
     <message>
+      <location line="+100"/>
       <source>Second shape</source>
       <translation>A doua formă</translation>
     </message>
     <message>
+      <location line="-38"/>
       <source>First shape</source>
       <translation>Prima formă</translation>
     </message>
     <message>
+      <location line="-56"/>
       <source>Boolean operation</source>
       <translation>Operație booleană</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>Section</source>
       <translation>Secţiune</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Difference</source>
       <translation>Diferenţa</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Union</source>
       <translation>Reuniune</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>Intersection</source>
       <translation>Intersecţie</translation>
     </message>
     <message>
-      <location filename="../../DlgBooleanOperation.cpp" line="+317"/>
+      <location filename="../../DlgBooleanOperation.cpp" line="+385"/>
       <source>Cannot perform a boolean operation with the same shape</source>
-      <translation>Cannot perform a boolean operation with the same shape</translation>
+      <translation>Imposibil de efectuat o operaţiune logica cu aceeasi forma</translation>
     </message>
     <message>
       <location filename="../../DlgBooleanOperation.ui" line="+25"/>
+      <location line="+38"/>
       <source>Solids</source>
       <translation>Solide</translation>
     </message>
     <message>
+      <location line="-33"/>
+      <location line="+38"/>
       <source>Shells</source>
-      <translation>Shells</translation>
+      <translation>Invlis</translation>
     </message>
     <message>
+      <location line="-33"/>
+      <location line="+38"/>
       <source>Compounds</source>
-      <translation>Compounds</translation>
+      <translation>Compusi</translation>
     </message>
     <message>
+      <location line="-33"/>
+      <location line="+38"/>
       <source>Faces</source>
-      <translation>Faces</translation>
+      <translation>Fete</translation>
     </message>
     <message>
+      <location line="+21"/>
       <source>Swap selection</source>
-      <translation>Swap selection</translation>
+      <translation>Schimba selectia</translation>
     </message>
     <message>
       <location filename="../../DlgBooleanOperation.cpp" line="-10"/>
       <source>Select a shape on the left side, first</source>
-      <translation>Select a shape on the left side, first</translation>
+      <translation>Selectati mai intai o forma in stanga</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Select a shape on the right side, first</source>
-      <translation>Select a shape on the right side, first</translation>
+      <translation>Selectati mai intai o forma in dreapta</translation>
     </message>
     <message>
+      <location line="+15"/>
       <source>No active document available</source>
-      <translation>No active document available</translation>
+      <translation>Nici un document activ disponibil</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>One of the selected objects doesn't exist anymore</source>
-      <translation>One of the selected objects doesn't exist anymore</translation>
+      <translation>Unul dintre obiectele selectate nu mai exista</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Performing union on non-solids is not possible</source>
-      <translation>Performing union on non-solids is not possible</translation>
+      <translation>Realizarea Uniunii pe non-solide nu este posibila</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Performing intersection on non-solids is not possible</source>
-      <translation>Performing intersection on non-solids is not possible</translation>
+      <translation>Efectuarea intersectiei pe non-solide nu este posibila</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Performing difference on non-solids is not possible</source>
-      <translation>Performing difference on non-solids is not possible</translation>
+      <translation>Efectuarea diferentei pe non-solide nu este posibila</translation>
     </message>
   </context>
   <context>
     <name>PartGui::DlgChamferEdges</name>
     <message>
-      <location filename="../../DlgFilletEdges.cpp" line="+715"/>
+      <location filename="../../DlgFilletEdges.cpp" line="+951"/>
       <source>Chamfer Edges</source>
       <translation>Chamfer Edges</translation>
     </message>
@@ -858,64 +1145,88 @@
     <message>
       <location filename="../../DlgExtrusion.ui" line="+14"/>
       <source>Extrude</source>
-      <translation>Extrude</translation>
+      <translation>Extrudare</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>Direction</source>
       <translation>Direcţia</translation>
     </message>
     <message>
+      <location line="+123"/>
       <source>Along normal</source>
-      <translation>Along normal</translation>
+      <translation>De-a lungul normalei</translation>
     </message>
     <message>
+      <location line="-34"/>
       <source>Length:</source>
       <translation>Lungime:</translation>
     </message>
     <message>
+      <location line="+41"/>
       <source>3D view</source>
-      <translation>3D view</translation>
+      <translation>Vizualizare 3D</translation>
     </message>
     <message>
+      <location line="+20"/>
       <source>Note:This option works for planes only</source>
-      <translation>Note:This option works for planes only</translation>
+      <translation>Nota: această optiune functioneaza doar pentru planuri</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>Create solid</source>
-      <translation>Create solid</translation>
+      <translation>Creare solid</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Taper outward angle</source>
-      <translation>Taper outward angle</translation>
+      <translation>Cizelati unghiul exterior</translation>
     </message>
     <message>
+      <location line="+38"/>
       <source>Shape</source>
       <translation>Forma</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
     <message>
+      <location line="-199"/>
       <source>X:</source>
       <translation>X:</translation>
     </message>
     <message>
+      <location line="+52"/>
       <source>Z:</source>
       <translation>Z:</translation>
     </message>
     <message>
+      <location line="-26"/>
       <source>Y:</source>
       <translation>Y:</translation>
     </message>
     <message>
-      <location filename="../../DlgExtrusion.cpp" line="+142"/>
+      <location filename="../../DlgExtrusion.cpp" line="+149"/>
       <source>Select a shape for extrusion, first.</source>
       <translation>Select a shape for extrusion, first.</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>The document '%1' doesn't exist.</source>
       <translation>The document '%1' doesn't exist.</translation>
+    </message>
+    <message>
+      <location line="+85"/>
+      <source>Suceeded</source>
+      <translation type="unfinished">Suceeded</translation>
+    </message>
+    <message>
+      <location line="+4"/>
+      <location line="+5"/>
+      <location line="+5"/>
+      <source>Failed</source>
+      <translation type="unfinished">Failed</translation>
     </message>
   </context>
   <context>
@@ -923,140 +1234,213 @@
     <message>
       <location filename="../../DlgFilletEdges.ui" line="+14"/>
       <source>Fillet Edges</source>
-      <translation>Fillet Edges</translation>
+      <translation>Margini in panglica</translation>
     </message>
     <message>
+      <location line="+37"/>
       <source>Fillet Parameter</source>
-      <translation>Fillet Parameter</translation>
+      <translation>Parametru panglica</translation>
     </message>
     <message>
+      <location line="+45"/>
       <source>Radius:</source>
-      <translation>Radius:</translation>
+      <translation>Raza:</translation>
     </message>
     <message>
+      <location line="+52"/>
+      <source>Select faces</source>
+      <translation type="unfinished">Select faces</translation>
+    </message>
+    <message>
+      <location line="+20"/>
+      <source>Select edges</source>
+      <translation type="unfinished">Select edges</translation>
+    </message>
+    <message>
+      <location line="-104"/>
       <source>Fillet type:</source>
-      <translation>Fillet type:</translation>
+      <translation>Tipul panglicii:</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>Constant Radius</source>
-      <translation>Constant Radius</translation>
+      <translation>Raza constanta</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Variable Radius</source>
-      <translation>Variable Radius</translation>
+      <translation>Raza variabila</translation>
     </message>
     <message>
+      <location line="-57"/>
       <source>Shape</source>
       <translation>Forma</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>Selected shape:</source>
-      <translation>Selected shape:</translation>
+      <translation>Forma selectata:</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>No selection</source>
       <translation>Nici o selecţie</translation>
     </message>
     <message>
-      <location filename="../../DlgFilletEdges.cpp" line="-527"/>
+      <location filename="../../DlgFilletEdges.cpp" line="-715"/>
+      <source>Length:</source>
+      <translation type="unfinished">Lungime:</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>Constant Length</source>
+      <translation type="unfinished">Constant Length</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>Variable Length</source>
+      <translation type="unfinished">Variable Length</translation>
+    </message>
+    <message>
+      <location line="+2"/>
+      <source>Edges to chamfer</source>
+      <translation type="unfinished">Edges to chamfer</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <location line="+507"/>
+      <source>Start length</source>
+      <translation type="unfinished">Start length</translation>
+    </message>
+    <message>
+      <location line="-506"/>
+      <source>End length</source>
+      <translation type="unfinished">End length</translation>
+    </message>
+    <message>
+      <location line="+3"/>
       <source>Edges to fillet</source>
-      <translation>Edges to fillet</translation>
+      <translation>Margini in panglica</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+504"/>
       <source>Start radius</source>
-      <translation>Start radius</translation>
+      <translation>Raza de inceput</translation>
     </message>
     <message>
+      <location line="-503"/>
       <source>End radius</source>
-      <translation>End radius</translation>
+      <translation>Raza finala</translation>
     </message>
     <message>
+      <location line="+493"/>
+      <source>Length</source>
+      <translation type="unfinished">Lungime</translation>
+    </message>
+    <message>
+      <location line="+2"/>
       <source>Radius</source>
       <translation>Raza</translation>
     </message>
     <message>
+      <location line="+106"/>
       <source>No edge selected</source>
-      <translation>No edge selected</translation>
+      <translation>Nici o margine selectata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>No edge entity is checked to fillet.
 Please check one or more edge entities first.</source>
-      <translation>No edge entity is checked to fillet.
-Please check one or more edge entities first.</translation>
+      <translation>Nici o margine nu e selectata.
+Selectati mai intai una sau mai multe margini.</translation>
     </message>
     <message>
-      <location filename="../../DlgFilletEdges.ui" line="+30"/>
+      <location filename="../../DlgFilletEdges.ui" line="+101"/>
       <source>All</source>
-      <translation>All</translation>
+      <translation>Toate</translation>
     </message>
     <message>
+      <location line="-84"/>
       <source>None</source>
       <translation>Niciunul</translation>
     </message>
     <message>
-      <location filename="../../DlgFilletEdges.cpp" line="-196"/>
+      <location filename="../../DlgFilletEdges.cpp" line="-246"/>
+      <location line="+60"/>
       <source>Edge%1</source>
-      <translation>Edge%1</translation>
+      <translation>Marginea %1</translation>
     </message>
     <message>
+      <location line="+135"/>
       <source>No shape selected</source>
-      <translation>No shape selected</translation>
+      <translation>Nici o forma selectata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>No valid shape is selected.
 Please select a valid shape in the drop-down box first.</source>
-      <translation>No valid shape is selected.
-Please select a valid shape in the drop-down box first.</translation>
+      <translation>Nici o forma valida nu este selectata.
+Selectati mai intai o forma valida in casuta de selectie.</translation>
     </message>
   </context>
   <context>
     <name>PartGui::DlgPartBox</name>
     <message>
-      <location filename="../../DlgPartBox.ui" line="+16"/>
+      <location filename="../../DlgPartBox.ui" line="+14"/>
       <source>Box definition</source>
-      <translation>Box definition</translation>
+      <translation>Definitie caseta</translation>
     </message>
     <message>
+      <location line="+62"/>
       <source>X:</source>
       <translation>X:</translation>
     </message>
     <message>
+      <location line="+14"/>
       <source>Z:</source>
       <translation>Z:</translation>
     </message>
     <message>
+      <location line="-7"/>
       <source>Y:</source>
       <translation>Y:</translation>
     </message>
     <message>
       <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="obsolete">Renunţă</translation>
     </message>
     <message>
       <source>OK</source>
-      <translation>OK</translation>
+      <translation type="obsolete">OK</translation>
     </message>
     <message>
+      <location line="+17"/>
       <source>Size:</source>
       <translation>Dimensiune:</translation>
     </message>
     <message>
+      <location line="+42"/>
       <source>Height:</source>
-      <translation>Height:</translation>
+      <translation>Inaltime:</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Width:</source>
-      <translation>Width:</translation>
+      <translation>Latime:</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Length:</source>
       <translation>Lungime:</translation>
     </message>
     <message>
+      <location line="-136"/>
       <source>Position:</source>
-      <translation>Position:</translation>
+      <translation>Pozitie:</translation>
     </message>
     <message>
+      <location line="+49"/>
       <source>Direction:</source>
       <translation>Direction:</translation>
     </message>
@@ -1064,77 +1448,87 @@ Please select a valid shape in the drop-down box first.</translation>
   <context>
     <name>PartGui::DlgPartCylinder</name>
     <message>
-      <location filename="../../DlgPartCylinder.ui" line="+16"/>
+      <location filename="../../DlgPartCylinder.ui" line="+14"/>
       <source>Cylinder definition</source>
-      <translation>Cylinder definition</translation>
+      <translation>Definitie cilindru</translation>
     </message>
     <message>
+      <location line="+86"/>
       <source>Parameter</source>
-      <translation>Parameter</translation>
+      <translation>Parametru</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>Height:</source>
-      <translation>Height:</translation>
+      <translation>Inaltime:</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Radius:</source>
-      <translation>Radius:</translation>
+      <translation>Raza:</translation>
     </message>
     <message>
+      <location line="-99"/>
       <source>Position:</source>
-      <translation>Position:</translation>
+      <translation>Pozitie:</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>Direction:</source>
       <translation>Direction:</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>X:</source>
       <translation>X:</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Z:</source>
       <translation>Z:</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Y:</source>
       <translation>Y:</translation>
     </message>
     <message>
       <source>OK</source>
-      <translation>OK</translation>
+      <translation type="obsolete">OK</translation>
     </message>
     <message>
       <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="obsolete">Renunţă</translation>
     </message>
   </context>
   <context>
     <name>PartGui::DlgPartImportIges</name>
     <message>
-      <location filename="../../DlgPartImportIges.ui" line="+16"/>
+      <location filename="../../DlgPartImportIges.ui" line="+14"/>
       <source>IGES input file</source>
-      <translation>IGES input file</translation>
+      <translation>Fisier de intrare IGES</translation>
     </message>
     <message>
+      <location line="+40"/>
       <source>...</source>
       <translation>...</translation>
     </message>
     <message>
       <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="obsolete">Renunţă</translation>
     </message>
     <message>
       <source>OK</source>
-      <translation>OK</translation>
+      <translation type="obsolete">OK</translation>
     </message>
     <message>
+      <location line="-34"/>
       <source>File Name</source>
-      <translation>File Name</translation>
+      <translation>Numele fisierului</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
@@ -1148,29 +1542,31 @@ Please select a valid shape in the drop-down box first.</translation>
   <context>
     <name>PartGui::DlgPartImportStep</name>
     <message>
-      <location filename="../../DlgPartImportStep.ui" line="+67"/>
+      <location filename="../../DlgPartImportStep.ui" line="+54"/>
       <source>...</source>
       <translation>...</translation>
     </message>
     <message>
       <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="obsolete">Renunţă</translation>
     </message>
     <message>
       <source>OK</source>
-      <translation>OK</translation>
+      <translation type="obsolete">OK</translation>
     </message>
     <message>
+      <location line="-40"/>
       <source>Step input file</source>
-      <translation>Step input file</translation>
+      <translation>Sari peste fisierul de intrare</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>File Name</source>
-      <translation>File Name</translation>
+      <translation>Numele fisierului</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
@@ -1186,285 +1582,411 @@ Please select a valid shape in the drop-down box first.</translation>
     <message>
       <location filename="../../DlgPrimitives.ui" line="+14"/>
       <source>Geometric Primitives</source>
-      <translation>Geometric Primitives</translation>
+      <translation>Primitive geometrice</translation>
     </message>
     <message>
       <source>Primitive</source>
-      <translation>Primitive</translation>
+      <translation type="obsolete">Primitive</translation>
     </message>
     <message>
       <source>X min</source>
-      <translation>X min</translation>
+      <translation type="obsolete">X min</translation>
     </message>
     <message>
       <source>x max</source>
-      <translation>x max</translation>
+      <translation type="obsolete">x max</translation>
     </message>
     <message>
       <source>Y min</source>
-      <translation>Y min</translation>
+      <translation type="obsolete">Y min</translation>
     </message>
     <message>
       <source>Y max</source>
-      <translation>Y max</translation>
+      <translation type="obsolete">Y max</translation>
     </message>
     <message>
       <source>Z min</source>
-      <translation>Z min</translation>
+      <translation type="obsolete">Z min</translation>
     </message>
     <message>
       <source>Z max</source>
-      <translation>Z max</translation>
+      <translation type="obsolete">Z max</translation>
     </message>
     <message>
       <source>X2 min</source>
-      <translation>X2 min</translation>
+      <translation type="obsolete">X2 min</translation>
     </message>
     <message>
       <source>X2 max</source>
-      <translation>X2 max</translation>
+      <translation type="obsolete">X2 max</translation>
     </message>
     <message>
       <source>Z2 min</source>
-      <translation>Z2 min</translation>
+      <translation type="obsolete">Z2 min</translation>
     </message>
     <message>
       <source>Z2 max</source>
-      <translation>Z2 max</translation>
+      <translation type="obsolete">Z2 max</translation>
     </message>
     <message>
       <source>Angle - 0 for cyl</source>
-      <translation>Angle - 0 for cyl</translation>
+      <translation type="obsolete">Angle - 0 for cyl</translation>
     </message>
     <message>
       <source>Angle0</source>
-      <translation>Angle0</translation>
+      <translation type="obsolete">Angle0</translation>
     </message>
     <message>
       <source>Angle1</source>
-      <translation>Angle1</translation>
+      <translation type="obsolete">Angle1</translation>
     </message>
     <message>
       <source>X Axis Value:</source>
-      <translation>X Axis Value:</translation>
+      <translation type="obsolete">X Axis Value:</translation>
     </message>
     <message>
       <source>Y Axis Value:</source>
-      <translation>Y Axis Value:</translation>
+      <translation type="obsolete">Y Axis Value:</translation>
     </message>
     <message>
       <source>Z Axis Value:</source>
-      <translation>Z Axis Value:</translation>
+      <translation type="obsolete">Z Axis Value:</translation>
     </message>
     <message>
+      <location line="+91"/>
+      <location filename="../../DlgPrimitives.cpp" line="+520"/>
       <source>Wedge</source>
-      <translation>Wedge</translation>
+      <translation>Piedica</translation>
     </message>
     <message>
+      <location line="+27"/>
+      <location filename="../../DlgPrimitives.cpp" line="+53"/>
       <source>Circle</source>
       <translation>Cerc</translation>
     </message>
     <message>
+      <location filename="../../DlgPrimitives.cpp" line="+34"/>
       <source>Vertex</source>
       <translation>Vertex</translation>
     </message>
     <message>
       <source>Position</source>
-      <translation>Position</translation>
+      <translation type="obsolete">Position</translation>
     </message>
     <message>
+      <location filename="../../DlgPrimitives.ui" line="+1619"/>
+      <location line="+51"/>
+      <location line="+54"/>
       <source>Z:</source>
       <translation>Z:</translation>
     </message>
     <message>
+      <location line="-125"/>
+      <location line="+51"/>
+      <location line="+54"/>
       <source>X:</source>
       <translation>X:</translation>
     </message>
     <message>
       <source>Direction:</source>
-      <translation>Direction:</translation>
+      <translation type="obsolete">Direction:</translation>
     </message>
     <message>
+      <location line="-95"/>
+      <location line="+51"/>
+      <location line="+54"/>
       <source>Y:</source>
       <translation>Y:</translation>
     </message>
     <message>
+      <location line="-1813"/>
+      <location filename="../../DlgPrimitives.cpp" line="-241"/>
       <source>Plane</source>
-      <translation>Plane</translation>
+      <translation>Plan</translation>
     </message>
     <message>
+      <location line="+9"/>
+      <location filename="../../DlgPrimitives.cpp" line="+16"/>
       <source>Box</source>
-      <translation>Box</translation>
+      <translation>Caseta</translation>
     </message>
     <message>
+      <location line="+9"/>
+      <location filename="../../DlgPrimitives.cpp" line="+16"/>
       <source>Cylinder</source>
-      <translation>Cylinder</translation>
+      <translation>Cilindru</translation>
     </message>
     <message>
+      <location line="+9"/>
+      <location filename="../../DlgPrimitives.cpp" line="+18"/>
       <source>Cone</source>
-      <translation>Cone</translation>
+      <translation>Con</translation>
     </message>
     <message>
+      <location line="+9"/>
+      <location filename="../../DlgPrimitives.cpp" line="+18"/>
       <source>Sphere</source>
-      <translation>Sphere</translation>
+      <translation>Sfera</translation>
     </message>
     <message>
+      <location line="+9"/>
+      <location filename="../../DlgPrimitives.cpp" line="+20"/>
       <source>Ellipsoid</source>
-      <translation>Ellipsoid</translation>
+      <translation>Elipsoid</translation>
     </message>
     <message>
+      <location line="+9"/>
+      <location filename="../../DlgPrimitives.cpp" line="+20"/>
       <source>Torus</source>
-      <translation>Torus</translation>
+      <translation>Tor</translation>
     </message>
     <message>
+      <location line="+9"/>
+      <location filename="../../DlgPrimitives.cpp" line="+16"/>
+      <source>Prism</source>
+      <translation type="unfinished">Prism</translation>
+    </message>
+    <message>
+      <location line="+27"/>
+      <location filename="../../DlgPrimitives.cpp" line="+67"/>
+      <source>Spiral</source>
+      <translation type="unfinished">Spiral</translation>
+    </message>
+    <message>
+      <location line="+18"/>
+      <location filename="../../DlgPrimitives.cpp" line="+34"/>
       <source>Ellipse</source>
-      <translation>Ellipse</translation>
+      <translation>Elipsa</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Point</source>
       <translation>Punct</translation>
     </message>
     <message>
+      <location line="+9"/>
+      <location filename="../../DlgPrimitives.cpp" line="+38"/>
       <source>Line</source>
       <translation>Linie</translation>
     </message>
     <message>
+      <location line="+9"/>
+      <location filename="../../DlgPrimitives.cpp" line="+14"/>
+      <source>Regular polygon</source>
+      <translation type="unfinished">Regular polygon</translation>
+    </message>
+    <message>
+      <location line="+12"/>
       <source>Parameter</source>
-      <translation>Parameter</translation>
+      <translation>Parametru</translation>
     </message>
     <message>
+      <location line="+46"/>
+      <location line="+120"/>
       <source>Width:</source>
-      <translation>Width:</translation>
+      <translation>Latime:</translation>
     </message>
     <message>
+      <location line="-113"/>
+      <location line="+96"/>
       <source>Length:</source>
       <translation>Lungime:</translation>
     </message>
     <message>
+      <location line="-30"/>
+      <location line="+154"/>
+      <location line="+80"/>
+      <location line="+559"/>
+      <location line="+284"/>
       <source>Height:</source>
-      <translation>Height:</translation>
+      <translation>Inaltime:</translation>
     </message>
     <message>
+      <location line="-1003"/>
+      <location line="+107"/>
+      <location line="+903"/>
       <source>Angle:</source>
       <translation>Unghiul:</translation>
     </message>
     <message>
+      <location line="-957"/>
+      <location line="+280"/>
+      <location line="+626"/>
+      <location line="+128"/>
+      <location line="+65"/>
       <source>Radius:</source>
-      <translation>Radius:</translation>
+      <translation>Raza:</translation>
     </message>
     <message>
+      <location line="-955"/>
+      <location line="+216"/>
+      <location line="+219"/>
       <source>Radius 1:</source>
-      <translation>Radius 1:</translation>
+      <translation>Raza 1:</translation>
     </message>
     <message>
+      <location line="-428"/>
+      <location line="+216"/>
+      <location line="+205"/>
       <source>Radius 2:</source>
-      <translation>Radius 2:</translation>
+      <translation>Raza 2:</translation>
     </message>
     <message>
+      <location line="-384"/>
+      <location line="+196"/>
+      <location line="+96"/>
       <source>U parametric:</source>
-      <translation>U parametric:</translation>
+      <translation>parametrul U:</translation>
     </message>
     <message>
+      <location line="-256"/>
+      <location line="+196"/>
+      <location line="+96"/>
       <source>V parametric:</source>
-      <translation>V parametric:</translation>
+      <translation>parametrul V:</translation>
     </message>
     <message>
+      <location line="+110"/>
+      <location line="+892"/>
+      <source>Polygon:</source>
+      <translation type="unfinished">Polygon:</translation>
+    </message>
+    <message>
+      <location line="-872"/>
+      <location line="+892"/>
+      <source>Circumradius:</source>
+      <translation type="unfinished">Circumradius:</translation>
+    </message>
+    <message>
+      <location line="-834"/>
       <source>X min/max:</source>
       <translation>X min/max:</translation>
     </message>
     <message>
+      <location line="+30"/>
       <source>Y min/max:</source>
       <translation>Y min/max:</translation>
     </message>
     <message>
+      <location line="+30"/>
       <source>Z min/max:</source>
       <translation>Z min/max:</translation>
     </message>
     <message>
+      <location line="+30"/>
       <source>X2 min/max:</source>
-      <translation>X2 min/max:</translation>
+      <translation>X 2 min/max:</translation>
     </message>
     <message>
+      <location line="+33"/>
       <source>Z2 min/max:</source>
       <translation>Z2 min/max:</translation>
     </message>
     <message>
+      <location line="+153"/>
       <source>Coordinate system:</source>
-      <translation>Coordinate system:</translation>
+      <translation>Sistemul de coordonate:</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>Right-handed</source>
-      <translation>Right-handed</translation>
+      <translation>mana dreapta</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Left-handed</source>
-      <translation>Left-handed</translation>
+      <translation>mana stanga</translation>
     </message>
     <message>
+      <location line="+48"/>
+      <source>Growth:</source>
+      <translation type="unfinished">Growth:</translation>
+    </message>
+    <message>
+      <location line="+37"/>
+      <source>Number of rotations:</source>
+      <translation type="unfinished">Number of rotations:</translation>
+    </message>
+    <message>
+      <location line="+38"/>
+      <location line="+119"/>
       <source>Angle 1:</source>
-      <translation>Angle 1:</translation>
+      <translation>Unghiul 1:</translation>
     </message>
     <message>
+      <location line="-102"/>
+      <location line="+119"/>
       <source>Angle 2:</source>
-      <translation>Angle 2:</translation>
+      <translation>Unghiul 2:</translation>
     </message>
     <message>
+      <location line="-79"/>
       <source>From three points</source>
-      <translation>From three points</translation>
+      <translation>Din trei puncte</translation>
     </message>
     <message>
+      <location line="+28"/>
       <source>Major radius:</source>
-      <translation>Major radius:</translation>
+      <translation>Raza mare:</translation>
     </message>
     <message>
+      <location line="+17"/>
       <source>Minor radius:</source>
-      <translation>Minor radius:</translation>
+      <translation>Raza mica:</translation>
     </message>
     <message>
+      <location line="+175"/>
       <source>End point</source>
-      <translation>End point</translation>
+      <translation>Punct final</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>Start point</source>
-      <translation>Start point</translation>
+      <translation>Punctul de pornire</translation>
     </message>
     <message>
-      <location filename="../../DlgPrimitives.cpp" line="+755"/>
+      <location filename="../../DlgPrimitives.cpp" line="+193"/>
       <source>&amp;Create</source>
-      <translation>&amp;Create</translation>
+      <translation>&amp;Creeaza</translation>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt + C</translation>
+      <translation type="obsolete">Alt + C</translation>
     </message>
     <message>
       <source>Cl&amp;ose</source>
-      <translation>În&amp;chide</translation>
+      <translation type="obsolete">În&amp;chide</translation>
     </message>
     <message>
       <source>Alt+O</source>
-      <translation>Alt+O</translation>
+      <translation type="obsolete">Alt+O</translation>
     </message>
     <message>
+      <location line="-486"/>
+      <location line="+297"/>
+      <location line="+8"/>
       <source>Create %1</source>
-      <translation>Create %1</translation>
+      <translation>Creati %1</translation>
     </message>
     <message>
+      <location line="-304"/>
       <source>No active document</source>
-      <translation>No active document</translation>
+      <translation>Nici un document activ</translation>
     </message>
     <message>
-      <location filename="../../DlgPrimitives.ui" line="-406"/>
+      <location filename="../../DlgPrimitives.ui" line="-490"/>
       <source>Pitch:</source>
-      <translation>Pitch:</translation>
+      <translation>Tonalitate:</translation>
     </message>
     <message>
+      <location line="-1225"/>
+      <location filename="../../DlgPrimitives.cpp" line="+190"/>
       <source>Helix</source>
-      <translation>Helix</translation>
+      <translation>Spirala</translation>
     </message>
     <message>
       <source>3D View</source>
-      <translation>Vizualizare 3D</translation>
+      <translation type="obsolete">Vizualizare 3D</translation>
     </message>
   </context>
   <context>
@@ -1472,38 +1994,50 @@ Please select a valid shape in the drop-down box first.</translation>
     <message>
       <location filename="../../DlgRevolution.ui" line="+14"/>
       <source>Revolve</source>
-      <translation>Revolve</translation>
+      <translation>Roteste</translation>
     </message>
     <message>
+      <location line="+20"/>
       <source>Y:</source>
       <translation>Y:</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>X:</source>
       <translation>X:</translation>
     </message>
     <message>
+      <location line="+13"/>
       <source>Angle:</source>
       <translation>Unghiul:</translation>
     </message>
     <message>
+      <location line="+16"/>
       <source>Z:</source>
       <translation>Z:</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>Axis:</source>
       <translation>Axa:</translation>
     </message>
     <message>
+      <location line="+38"/>
       <source>Shape</source>
       <translation>Forma</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>Select line in 3D view</source>
-      <translation>Select line in 3D view</translation>
+      <translation>Selecteaza linia în vizualizarea 3D</translation>
     </message>
     <message>
-      <location filename="../../DlgRevolution.cpp" line="+169"/>
+      <location line="+7"/>
+      <source>Create Solid</source>
+      <translation type="unfinished">Create Solid</translation>
+    </message>
+    <message>
+      <location filename="../../DlgRevolution.cpp" line="+176"/>
       <source>Select a shape for revolution, first.</source>
       <translation>Select a shape for revolution, first.</translation>
     </message>
@@ -1513,61 +2047,75 @@ Please select a valid shape in the drop-down box first.</translation>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="+171"/>
       <source>View accuracy / Performance</source>
-      <translation>View accuracy / Performance</translation>
+      <translation>Precizia de redare/performanta</translation>
     </message>
     <message>
+      <location line="-73"/>
       <source>View smoothing</source>
-      <translation>View smoothing</translation>
+      <translation>Netezimea vizualizarii</translation>
     </message>
     <message>
+      <location line="+41"/>
       <source>Using high-quality normals</source>
-      <translation>Using high-quality normals</translation>
+      <translation>Se folosesc normale de inalta calitate</translation>
     </message>
     <message>
+      <location line="-6"/>
       <source>This will slow down render speed but will lead to nicer results</source>
-      <translation>This will slow down render speed but will lead to nicer results</translation>
+      <translation>Aceasta va scadea viteza de redare dar va creste calitatea ei</translation>
     </message>
     <message>
+      <location line="-74"/>
       <source>Defines the appearance of surfaces</source>
-      <translation>Defines the appearance of surfaces</translation>
+      <translation>Defineste aparenta suprafetei</translation>
     </message>
     <message>
+      <location line="-45"/>
       <source>Shape view</source>
-      <translation>Shape view</translation>
+      <translation>Vizualizare forma</translation>
     </message>
     <message>
+      <location line="+25"/>
       <source>Tessellation</source>
-      <translation>Tessellation</translation>
+      <translation>Mozaicare</translation>
     </message>
     <message>
+      <location line="+23"/>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Flat shading/Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;With flat shading the surface normals are not defined per vertex that leads to a unreal appearance for curved surfaces while using Phong shading leads to a smoother appearance. &lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;If this option is unset Phong shading is used, if it is set flat shading is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Flat shading/Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;With flat shading the surface normals are not defined per vertex that leads to a unreal appearance for curved surfaces while using Phong shading leads to a smoother appearance. &lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;If this option is unset Phong shading is used, if it is set flat shading is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Umbrire plana/Unbrire Phong&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Cu umbrirea plana normalele suprafetelor nu sunt definite pentru fiecare varf, ceea ce conduce la o imagine nerealista pentru suprafetele curbe, pe cand umbrirea Phong rezulta intr-o umbrire mai placuta &lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Daca aceasta optiune nu este setata se foloseste umbrirea Phong, altfel umbrirea plana&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+      <location line="+3"/>
       <source>Do not define normal per vertex</source>
       <translation>Nu definii normale pe vertex</translation>
     </message>
     <message>
+      <location line="+13"/>
       <source>Defines the deviation of tessellation to the actual surface</source>
       <translation>Definește deviația tessellatiei pe suprafața actuală</translation>
     </message>
     <message>
+      <location line="+3"/>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Tessellation&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;span style=" font-weight:400;"&gt;Defines the maximum deviation of the tessellated mesh to the surface. The smaller the value is the slower the render speed and the nicer the appearance are.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Tessellation&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;span style=" font-weight:400;"&gt;Defines the maximum deviation of the tessellated mesh to the surface. The smaller the value is the slower the render speed and the nicer the appearance are.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Tessellation&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;span style=" font-weight:400;"&gt;Defineste deviatia maxima a retelei tinta fata de suprafata. Cu cat aceasta valoare este mai mica cu atat scade viteza de redare si creste calitatea imaginii&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Hint&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Defining the normals per vertex is also called &lt;span style=" font-style:italic;"&gt;Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;"&gt;&lt;span style=" font-style:normal;"&gt;while defining the normals per face is called &lt;/span&gt;Flat shading&lt;span style=" font-style:normal;"&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Hint&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Defining the normals per vertex is also called &lt;span style=" font-style:italic;"&gt;Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;"&gt;&lt;span style=" font-style:normal;"&gt;while defining the normals per face is called &lt;/span&gt;Flat shading&lt;span style=" font-style:normal;"&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Indiciu&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Definirea normalelor pentru fiecare varf se mai numeste&lt;span style=" font-style:italic;"&gt;umbrir Phong&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;"&gt;&lt;span style=" font-style:normal;"&gt;pe cand definirea normalelor pentru fiecare fata se numeste &lt;/span&gt;umbrire Plana&lt;span style=" font-style:normal;"&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+      <location line="+45"/>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;High-quality normals&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;This will slow down render speed but will lead to nicer results.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;High-quality normals&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;This will slow down render speed but will lead to nicer results.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Normale de inalta calitate&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Aceasta va scadea viteza de redare dar va imbunatati rezultatul.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+      <location line="-52"/>
       <source>Maximum deviation depending on the model bounding box</source>
-      <translation>Maximum deviation depending on the model bounding box</translation>
+      <translation>Abaterea maxima depinde de caseta de incadrare a modelului</translation>
     </message>
     <message>
+      <location line="+21"/>
       <source> %</source>
       <translation> %</translation>
     </message>
@@ -1577,6 +2125,7 @@ Please select a valid shape in the drop-down box first.</translation>
       <translation>Deviation</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Setting a too small deviation causes the tessellation to take longerand thus freezes or slows down the GUI.</source>
       <translation>Setting a too small deviation causes the tessellation to take longerand thus freezes or slows down the GUI.</translation>
     </message>
@@ -1589,48 +2138,143 @@ Please select a valid shape in the drop-down box first.</translation>
       <translation>General</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>Export</source>
       <translation>Export</translation>
     </message>
     <message>
+      <location line="+13"/>
       <source>Millimeter</source>
-      <translation>Millimeter</translation>
+      <translation>Milimetru</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Meter</source>
-      <translation>Meter</translation>
+      <translation>Metru</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Inch</source>
       <translation>Inch</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>Units for export of STEP/IGES</source>
-      <translation>Units for export of STEP/IGES</translation>
+      <translation>Unitati pentru exportul STEP/IGES</translation>
     </message>
     <message>
+      <location line="+23"/>
       <source>Model settings</source>
-      <translation>Model settings</translation>
+      <translation>Setarile modelului</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>Automatically refine model after boolean operation</source>
-      <translation>Automatically refine model after boolean operation</translation>
+      <translation>Ajusteaza automat modelul dupa operatiunea logica</translation>
     </message>
     <message>
+      <location line="+13"/>
+      <source>Automatically refine model after sketch-based operation</source>
+      <translation type="unfinished">Automatically refine model after sketch-based operation</translation>
+    </message>
+    <message>
+      <location line="+16"/>
+      <source>Object naming</source>
+      <translation type="unfinished">Object naming</translation>
+    </message>
+    <message>
+      <location line="+6"/>
+      <source>Add name of base object</source>
+      <translation type="unfinished">Add name of base object</translation>
+    </message>
+    <message>
+      <location line="-48"/>
       <source>Automatically check model after boolean operation</source>
-      <translation>Automatically check model after boolean operation</translation>
+      <translation>Verifica automat modelul dupa operatiunea logica</translation>
+    </message>
+  </context>
+  <context>
+    <name>PartGui::DlgSettingsObjectColor</name>
+    <message>
+      <location filename="../../DlgSettingsObjectColor.ui" line="+14"/>
+      <source>Part colors</source>
+      <translation type="unfinished">Part colors</translation>
+    </message>
+    <message>
+      <location line="+6"/>
+      <source>Default Part colors</source>
+      <translation type="unfinished">Default Part colors</translation>
+    </message>
+    <message>
+      <location line="+14"/>
+      <source>Default shape color</source>
+      <translation type="unfinished">Default shape color</translation>
+    </message>
+    <message>
+      <location line="+7"/>
+      <source>The default color for new shapes</source>
+      <translation type="unfinished">The default color for new shapes</translation>
+    </message>
+    <message>
+      <location line="+26"/>
+      <source>Default line color</source>
+      <translation type="unfinished">Defineste culoarea liniei</translation>
+    </message>
+    <message>
+      <location line="+7"/>
+      <location line="+68"/>
+      <source>The default line color for new shapes</source>
+      <translation type="unfinished">The default line color for new shapes</translation>
+    </message>
+    <message>
+      <location line="-42"/>
+      <source>Default line width</source>
+      <translation type="unfinished">Default line width</translation>
+    </message>
+    <message>
+      <location line="+7"/>
+      <location line="+68"/>
+      <source>The default line thickness for new shapes</source>
+      <translation type="unfinished">The default line thickness for new shapes</translation>
+    </message>
+    <message>
+      <location line="-65"/>
+      <location line="+68"/>
+      <source>px</source>
+      <translation type="unfinished">px</translation>
+    </message>
+    <message>
+      <location line="-43"/>
+      <source>Default vertex color</source>
+      <translation type="unfinished">Default vertex color</translation>
+    </message>
+    <message>
+      <location line="+33"/>
+      <source>Default vertex size</source>
+      <translation type="unfinished">Default vertex size</translation>
+    </message>
+    <message>
+      <location line="+35"/>
+      <source>Bounding box color</source>
+      <translation type="unfinished">Bounding box color</translation>
+    </message>
+    <message>
+      <location line="+7"/>
+      <source>The color of bounding boxes in the 3D view</source>
+      <translation type="unfinished">The color of bounding boxes in the 3D view</translation>
     </message>
   </context>
   <context>
     <name>PartGui::FaceColors</name>
     <message>
-      <location filename="../../TaskFaceColors.cpp" line="+226"/>
+      <location filename="../../TaskFaceColors.cpp" line="+394"/>
       <source>Face colors</source>
-      <translation>Face colors</translation>
+      <translation>Culori pentru fata</translation>
     </message>
     <message>
+      <location line="+0"/>
       <source>Do you really want to cancel?</source>
-      <translation>Do you really want to cancel?</translation>
+      <translation>Sunteti sigur ca doriti sa renuntati?</translation>
     </message>
   </context>
   <context>
@@ -1638,13 +2282,15 @@ Please select a valid shape in the drop-down box first.</translation>
     <message>
       <location filename="../../Location.ui" line="+14"/>
       <source>Location</source>
-      <translation>Location</translation>
+      <translation>Locatia</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Position</source>
       <translation>Position</translation>
     </message>
     <message>
+      <location line="+24"/>
       <source>3D View</source>
       <translation>Vizualizare 3D</translation>
     </message>
@@ -1652,25 +2298,43 @@ Please select a valid shape in the drop-down box first.</translation>
   <context>
     <name>PartGui::LoftWidget</name>
     <message>
-      <location filename="../../TaskLoft.cpp" line="+72"/>
       <source>Vertex/Wire</source>
-      <translation>Vertex/Wire</translation>
+      <translation type="obsolete">Vertex/Wire</translation>
     </message>
     <message>
+      <location filename="../../TaskLoft.cpp" line="+72"/>
+      <location line="+131"/>
+      <source>Vertex/Edge/Wire/Face</source>
+      <translation type="unfinished">Vertex/Edge/Wire/Face</translation>
+    </message>
+    <message>
+      <location line="-130"/>
+      <location line="+131"/>
       <source>Loft</source>
-      <translation>Loft</translation>
+      <translation>Pod</translation>
     </message>
     <message>
+      <location line="-63"/>
       <source>Too few elements</source>
-      <translation>Too few elements</translation>
+      <translation>Prea putine elemente</translation>
+    </message>
+    <message>
+      <location line="+0"/>
+      <source>At least two vertices, edges, wires or faces are required.</source>
+      <translation type="unfinished">At least two vertices, edges, wires or faces are required.</translation>
+    </message>
+    <message>
+      <location line="+33"/>
+      <source>Input error</source>
+      <translation type="unfinished">Eroare de intrare</translation>
     </message>
     <message>
       <source>At least two vertices, edges or wires are required.</source>
-      <translation>At least two vertices, edges or wires are required.</translation>
+      <translation type="obsolete">Sunt necesare cel puţin doua varfuri, margini sau polilinii.</translation>
     </message>
     <message>
       <source>At least two vertices or wires are required.</source>
-      <translation>At least two vertices or wires are required.</translation>
+      <translation type="obsolete">At least two vertices or wires are required.</translation>
     </message>
   </context>
   <context>
@@ -1678,58 +2342,68 @@ Please select a valid shape in the drop-down box first.</translation>
     <message>
       <location filename="../../Mirroring.ui" line="+14"/>
       <source>Mirroring</source>
-      <translation>Mirroring</translation>
+      <translation>Oglindire</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>Shapes</source>
-      <translation>Shapes</translation>
+      <translation>Forme</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>Mirror plane:</source>
-      <translation>Mirror plane:</translation>
+      <translation>Plan oglinda:</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>XY plane</source>
-      <translation>XY plane</translation>
+      <translation>Plan XY</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>XZ plane</source>
-      <translation>XZ plane</translation>
+      <translation>Plan XZ</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>YZ plane</source>
-      <translation>YZ plane</translation>
+      <translation>Plan YZ</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>Base point:</source>
-      <translation>Base point:</translation>
+      <translation>Punct baza:</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>x</source>
       <translation>x</translation>
     </message>
     <message>
+      <location line="+20"/>
       <source>y</source>
       <translation>y</translation>
     </message>
     <message>
+      <location line="+20"/>
       <source>z</source>
       <translation>z</translation>
     </message>
     <message>
-      <location filename="../../Mirroring.cpp" line="+117"/>
+      <location filename="../../Mirroring.cpp" line="+121"/>
       <source>Select a shape for mirroring, first.</source>
-      <translation>Select a shape for mirroring, first.</translation>
+      <translation>Selectati mai intai o forma de oglindit.</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>No such document '%1'.</source>
-      <translation>No such document '%1'.</translation>
+      <translation>Nici un astfel de document '%1'.</translation>
     </message>
   </context>
   <context>
     <name>PartGui::OffsetWidget</name>
     <message>
-      <location filename="../../TaskOffset.cpp" line="+163"/>
+      <location filename="../../TaskOffset.cpp" line="+165"/>
       <source>Input error</source>
       <translation>Eroare de intrare</translation>
     </message>
@@ -1737,15 +2411,17 @@ Please select a valid shape in the drop-down box first.</translation>
   <context>
     <name>PartGui::ResultModel</name>
     <message>
-      <location filename="../../TaskCheckGeometry.cpp" line="+229"/>
+      <location filename="../../TaskCheckGeometry.cpp" line="+330"/>
       <source>Name</source>
       <translation>Nume</translation>
     </message>
     <message>
+      <location line="+2"/>
       <source>Type</source>
       <translation>Tip</translation>
     </message>
     <message>
+      <location line="+2"/>
       <source>Error</source>
       <translation>Eroare</translation>
     </message>
@@ -1754,243 +2430,290 @@ Please select a valid shape in the drop-down box first.</translation>
     <name>PartGui::ShapeBuilderWidget</name>
     <message>
       <location filename="../../TaskShapeBuilder.cpp" line="+166"/>
+      <location line="+19"/>
+      <location line="+22"/>
+      <location line="+46"/>
+      <location line="+47"/>
       <source>Wrong selection</source>
       <translation>Selecţie greşită</translation>
     </message>
     <message>
+      <location line="-134"/>
+      <location line="+19"/>
       <source>Select two vertices</source>
-      <translation>Select two vertices</translation>
+      <translation>Selecteaza doua varfuri</translation>
     </message>
     <message>
       <source>Select three or more edges</source>
-      <translation>Select three or more edges</translation>
+      <translation type="obsolete">Select three or more edges</translation>
     </message>
     <message>
+      <location line="+22"/>
       <source>Select one or more edges</source>
-      <translation>Select one or more edges</translation>
+      <translation>Selecteaza unul sau mai multe margini</translation>
     </message>
     <message>
+      <location line="+46"/>
       <source>Select two or more faces</source>
-      <translation>Select two or more faces</translation>
+      <translation>Selectaţi două sau mai multe fete</translation>
     </message>
     <message>
+      <location line="+47"/>
       <source>Select only one part object</source>
-      <translation>Select only one part object</translation>
+      <translation>Selecteaza numai o parte</translation>
     </message>
     <message>
+      <location line="+34"/>
       <source>Select two vertices to create an edge</source>
-      <translation>Select two vertices to create an edge</translation>
+      <translation>Selecteaza doua varfuri pentru a crea o margine</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>Select a closed set of edges</source>
-      <translation>Select a closed set of edges</translation>
+      <translation>Selectati un set inchis de margini</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>Select adjacent faces</source>
-      <translation>Select adjacent faces</translation>
+      <translation>Selectati fete adiacente</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>All shape types can be selected</source>
-      <translation>All shape types can be selected</translation>
+      <translation>Toate tipurile de forme pot fi selectate</translation>
     </message>
   </context>
   <context>
     <name>PartGui::SweepWidget</name>
     <message>
-      <location filename="../../TaskSweep.cpp" line="+73"/>
+      <location filename="../../TaskSweep.cpp" line="+234"/>
       <source>Vertex/Wire</source>
       <translation>Vertex/Wire</translation>
     </message>
     <message>
+      <location line="-160"/>
+      <location line="+161"/>
       <source>Sweep</source>
-      <translation>Sweep</translation>
+      <translation>Matura</translation>
     </message>
     <message>
+      <location line="-162"/>
+      <source>Vertex/Edge/Wire/Face</source>
+      <translation type="unfinished">Vertex/Edge/Wire/Face</translation>
+    </message>
+    <message>
+      <location line="+54"/>
       <source>Sweep path</source>
-      <translation>Sweep path</translation>
+      <translation>Matura calea</translation>
     </message>
     <message>
+      <location line="+0"/>
       <source>Select an edge or wire you want to sweep along.</source>
-      <translation>Select an edge or wire you want to sweep along.</translation>
+      <translation>Selecteaza o margine sau polilinie de-a lungul careia sa matur.</translation>
     </message>
     <message>
+      <location line="+35"/>
       <source>Too few elements</source>
-      <translation>Too few elements</translation>
+      <translation>Prea putine elemente</translation>
     </message>
     <message>
+      <location line="+0"/>
       <source>At least one edge or wire is required.</source>
-      <translation>At least one edge or wire is required.</translation>
+      <translation>Este necesara cel putin o margine sau o polilinie.</translation>
+    </message>
+    <message>
+      <location line="+7"/>
+      <source>Wrong selection</source>
+      <translation type="unfinished">Selecţie greşită</translation>
+    </message>
+    <message>
+      <location line="+0"/>
+      <source>'%1' cannot be used as profile and path.</source>
+      <translation type="unfinished">'%1' cannot be used as profile and path.</translation>
+    </message>
+    <message>
+      <location line="+36"/>
+      <source>Input error</source>
+      <translation type="unfinished">Eroare de intrare</translation>
+    </message>
+  </context>
+  <context>
+    <name>PartGui::TaskCheckGeometryDialog</name>
+    <message>
+      <location filename="../../TaskCheckGeometry.cpp" line="+548"/>
+      <source>Shape Content</source>
+      <translation type="unfinished">Shape Content</translation>
     </message>
   </context>
   <context>
     <name>PartGui::TaskCheckGeometryResults</name>
     <message>
-      <location filename="../../TaskCheckGeometry.cpp" line="+37"/>
+      <location line="-511"/>
       <source>Check Geometry</source>
-      <translation>Check Geometry</translation>
+      <translation>Verifica geometria</translation>
     </message>
   </context>
   <context>
     <name>PartGui::TaskDialogEditDynamic</name>
     <message>
       <source>Hint</source>
-      <translation>Hint</translation>
+      <translation type="obsolete">Hint</translation>
     </message>
     <message>
       <source>Select Control.</source>
-      <translation>Select Control.</translation>
+      <translation type="obsolete">Select Control.</translation>
     </message>
     <message>
       <source>Control</source>
-      <translation>Control</translation>
+      <translation type="obsolete">Control</translation>
     </message>
     <message>
       <source>Dynamic</source>
-      <translation>Dynamic</translation>
+      <translation type="obsolete">Dynamic</translation>
     </message>
     <message>
       <source>Align</source>
-      <translation>Align</translation>
+      <translation type="obsolete">Align</translation>
     </message>
     <message>
       <source>Value</source>
-      <translation>Valoare</translation>
+      <translation type="obsolete">Valoare</translation>
     </message>
     <message>
       <source>Special</source>
-      <translation>Special</translation>
+      <translation type="obsolete">Special</translation>
     </message>
     <message>
       <source>Command</source>
-      <translation>Comanda</translation>
+      <translation type="obsolete">Comanda</translation>
     </message>
     <message>
       <source>Stretch</source>
-      <translation>Stretch</translation>
+      <translation type="obsolete">Stretch</translation>
     </message>
     <message>
       <source>Move</source>
-      <translation>Mută</translation>
+      <translation type="obsolete">Mută</translation>
     </message>
     <message>
       <source>Rotate</source>
-      <translation>Rotire</translation>
+      <translation type="obsolete">Rotire</translation>
     </message>
     <message>
       <source>Offset</source>
-      <translation>Compensare</translation>
+      <translation type="obsolete">Compensare</translation>
     </message>
     <message>
       <source>Orient</source>
-      <translation>Orient</translation>
+      <translation type="obsolete">Orient</translation>
     </message>
     <message>
       <source>Match</source>
-      <translation>Match</translation>
+      <translation type="obsolete">Match</translation>
     </message>
     <message>
       <source>Surround</source>
-      <translation>Surround</translation>
+      <translation type="obsolete">Surround</translation>
     </message>
     <message>
       <source>dummy</source>
-      <translation>dummy</translation>
+      <translation type="obsolete">dummy</translation>
     </message>
     <message>
       <source>X Axis</source>
-      <translation>X Axis</translation>
+      <translation type="obsolete">X Axis</translation>
     </message>
     <message>
       <source>Y Axis</source>
-      <translation>Y Axis</translation>
+      <translation type="obsolete">Y Axis</translation>
     </message>
     <message>
       <source>Z Axis</source>
-      <translation>Z Axis</translation>
+      <translation type="obsolete">Z Axis</translation>
     </message>
     <message>
       <source>Increment</source>
-      <translation>Increment</translation>
+      <translation type="obsolete">Increment</translation>
     </message>
     <message>
       <source>.125</source>
-      <translation>.125</translation>
+      <translation type="obsolete">.125</translation>
     </message>
     <message>
       <source>.500</source>
-      <translation>.500</translation>
+      <translation type="obsolete">.500</translation>
     </message>
     <message>
       <source>1.000</source>
-      <translation>1.000</translation>
+      <translation type="obsolete">1.000</translation>
     </message>
     <message>
       <source>5.000</source>
-      <translation>5.000</translation>
+      <translation type="obsolete">5.000</translation>
     </message>
     <message>
       <source>10.000</source>
-      <translation>10.000</translation>
+      <translation type="obsolete">10.000</translation>
     </message>
     <message>
       <source>Drag arrows to stretch box by increment</source>
-      <translation>Drag arrows to stretch box by increment</translation>
+      <translation type="obsolete">Drag arrows to stretch box by increment</translation>
     </message>
     <message>
       <source>Drag arrows to move box by increment</source>
-      <translation>Drag arrows to move box by increment</translation>
+      <translation type="obsolete">Drag arrows to move box by increment</translation>
     </message>
     <message>
       <source>Not implemented yet</source>
-      <translation>Not implemented yet</translation>
+      <translation type="obsolete">Not implemented yet</translation>
     </message>
     <message>
       <source>Drag arrows to offset checked axes by increment</source>
-      <translation>Drag arrows to offset checked axes by increment</translation>
+      <translation type="obsolete">Drag arrows to offset checked axes by increment</translation>
     </message>
     <message>
       <source>Select dragger for stretch by align</source>
-      <translation>Select dragger for stretch by align</translation>
+      <translation type="obsolete">Select dragger for stretch by align</translation>
     </message>
     <message>
       <source>Select dragger for move by align</source>
-      <translation>Select dragger for move by align</translation>
+      <translation type="obsolete">Select dragger for move by align</translation>
     </message>
     <message>
       <source>Select dragger for stretch by value</source>
-      <translation>Select dragger for stretch by value</translation>
+      <translation type="obsolete">Select dragger for stretch by value</translation>
     </message>
     <message>
       <source>Select dragger for move by value</source>
-      <translation>Select dragger for move by value</translation>
+      <translation type="obsolete">Select dragger for move by value</translation>
     </message>
     <message>
       <source>1.0</source>
-      <translation>1.0</translation>
+      <translation type="obsolete">1.0</translation>
     </message>
     <message>
       <source>Enter Value</source>
-      <translation>Enter Value</translation>
+      <translation type="obsolete">Enter Value</translation>
     </message>
     <message>
       <source>Select box to match</source>
-      <translation>Select box to match</translation>
+      <translation type="obsolete">Select box to match</translation>
     </message>
     <message>
       <source>Select a point</source>
-      <translation>Select a point</translation>
+      <translation type="obsolete">Select a point</translation>
     </message>
     <message>
       <source>0.0</source>
-      <translation>0.0</translation>
+      <translation type="obsolete">0.0</translation>
     </message>
     <message>
       <source>Select dragger to align</source>
-      <translation>Select dragger to align</translation>
+      <translation type="obsolete">Select dragger to align</translation>
     </message>
     <message>
       <source>Select dragger to modify</source>
-      <translation>Select dragger to modify</translation>
+      <translation type="obsolete">Select dragger to modify</translation>
     </message>
   </context>
   <context>
@@ -1998,19 +2721,27 @@ Please select a valid shape in the drop-down box first.</translation>
     <message>
       <location filename="../../TaskFaceColors.ui" line="+14"/>
       <source>Set color per face</source>
-      <translation>Set color per face</translation>
+      <translation>Seteaza culoarea pentru fata</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>Click on the faces in the 3d view to select them.</source>
-      <translation>Click on the faces in the 3d view to select them.</translation>
+      <translation>Fa clic pe fete în vizualizarea 3d pentru a le selecta.</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>Faces:</source>
-      <translation>Faces:</translation>
+      <translation>Fete:</translation>
     </message>
     <message>
+      <location line="+20"/>
       <source>Set to default</source>
-      <translation>Set to default</translation>
+      <translation>Setati la valoarea implicita</translation>
+    </message>
+    <message>
+      <location line="+7"/>
+      <source>Box selection</source>
+      <translation type="unfinished">Selectare cu dreptunghi</translation>
     </message>
   </context>
   <context>
@@ -2018,143 +2749,172 @@ Please select a valid shape in the drop-down box first.</translation>
     <message>
       <location filename="../../TaskLoft.ui" line="+14"/>
       <source>Loft</source>
-      <translation>Loft</translation>
+      <translation>Pod</translation>
     </message>
     <message>
       <source>Vertex/Wire</source>
-      <translation>Vertex/Wire</translation>
+      <translation type="obsolete">Vertex/Wire</translation>
     </message>
     <message>
       <source>Move right</source>
-      <translation>Deplasare spre dreapta</translation>
+      <translation type="obsolete">Deplasare spre dreapta</translation>
     </message>
     <message>
       <source>&lt;b&gt;Move the selected item one level down.&lt;/b&gt;&lt;p&gt;This will also change the level of the parent item.&lt;/p&gt;</source>
-      <translation>&lt;b&gt;Mută elementul selectat cu un nivel mai în jos.&lt;/b&gt;&lt;p&gt;Acest lucru va schimba, de asemenea, și nivelul elementului părinte.&lt;/p&gt;</translation>
+      <translation type="obsolete">&lt;b&gt;Mută elementul selectat cu un nivel mai în jos.&lt;/b&gt;&lt;p&gt;Acest lucru va schimba, de asemenea, și nivelul elementului părinte.&lt;/p&gt;</translation>
     </message>
     <message>
       <source>Move left</source>
-      <translation>Deplasare spre stânga</translation>
+      <translation type="obsolete">Deplasare spre stânga</translation>
     </message>
     <message>
       <source>&lt;b&gt;Move the selected item one level up.&lt;/b&gt;&lt;p&gt;This will also change the level of the parent item.&lt;/p&gt;</source>
-      <translation>&lt;b&gt;Mută elementul selectat cu un nivel mai în sus.&lt;/b&gt;&lt;p&gt;Acest lucru va schimba, de asemenea, și nivelul elementului părinte.&lt;/p&gt;</translation>
+      <translation type="obsolete">&lt;b&gt;Mută elementul selectat cu un nivel mai în sus.&lt;/b&gt;&lt;p&gt;Acest lucru va schimba, de asemenea, și nivelul elementului părinte.&lt;/p&gt;</translation>
     </message>
     <message>
       <source>Move up</source>
-      <translation>Deplasare în sus</translation>
+      <translation type="obsolete">Deplasare în sus</translation>
     </message>
     <message>
       <source>&lt;b&gt;Move the selected item up.&lt;/b&gt;&lt;p&gt;The item will be moved within the hierarchy level.&lt;/p&gt;</source>
-      <translation>&lt;b&gt;Mută elementul selectat în sus.&lt;/b&gt;&lt;p&gt;Elementul va schimba nivelul ierarhic.&lt;/p&gt;</translation>
+      <translation type="obsolete">&lt;b&gt;Mută elementul selectat în sus.&lt;/b&gt;&lt;p&gt;Elementul va schimba nivelul ierarhic.&lt;/p&gt;</translation>
     </message>
     <message>
       <source>Move down</source>
-      <translation>Deplasare în jos</translation>
+      <translation type="obsolete">Deplasare în jos</translation>
     </message>
     <message>
       <source>&lt;b&gt;Move the selected item down.&lt;/b&gt;&lt;p&gt;The item will be moved within the hierarchy level.&lt;/p&gt;</source>
-      <translation>&lt;b&gt;Mută elementul selectat în jos.&lt;/b&gt;&lt;p&gt;Elementul va schimba nivelul ierarhic.&lt;/p&gt;</translation>
+      <translation type="obsolete">&lt;b&gt;Mută elementul selectat în jos.&lt;/b&gt;&lt;p&gt;Elementul va schimba nivelul ierarhic.&lt;/p&gt;</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Create solid</source>
-      <translation>Create solid</translation>
+      <translation>Creare solid</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Ruled surface</source>
-      <translation>Ruled surface</translation>
+      <translation>Suprafata dreapta</translation>
+    </message>
+    <message>
+      <location line="+20"/>
+      <source>Closed</source>
+      <translation type="unfinished">Inchis</translation>
     </message>
   </context>
   <context>
     <name>PartGui::TaskOffset</name>
     <message>
       <location filename="../../TaskOffset.ui" line="+14"/>
+      <location line="+6"/>
       <source>Offset</source>
       <translation>Compensare</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>Mode</source>
-      <translation>Mode</translation>
+      <translation>Mod</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>Skin</source>
-      <translation>Skin</translation>
+      <translation>Piele</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Pipe</source>
-      <translation>Pipe</translation>
+      <translation>Teava</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>RectoVerso</source>
       <translation>RectoVerso</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>Join type</source>
-      <translation>Join type</translation>
+      <translation>Uneste tipul</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>Arc</source>
       <translation>Arc</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Tangent</source>
-      <translation>Tangent</translation>
+      <translation>Tangenta</translation>
     </message>
     <message>
+      <location line="+5"/>
+      <location line="+8"/>
       <source>Intersection</source>
       <translation>Intersecţie</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Self-intersection</source>
-      <translation>Self-intersection</translation>
+      <translation>Auto-intersectie</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Fill offset</source>
-      <translation>Fill offset</translation>
+      <translation>Expandare plina</translation>
     </message>
     <message>
+      <location line="+14"/>
       <source>Faces</source>
-      <translation>Faces</translation>
+      <translation>Fete</translation>
     </message>
     <message>
+      <location line="+27"/>
       <source>Update view</source>
-      <translation>Update view</translation>
+      <translation>Actualizeaza vizualizarea</translation>
     </message>
   </context>
   <context>
     <name>PartGui::TaskShapeBuilder</name>
     <message>
       <location filename="../../TaskShapeBuilder.ui" line="+14"/>
+      <location line="+6"/>
       <source>Create shape</source>
-      <translation>Create shape</translation>
+      <translation>Creaza forma</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>Edge from vertices</source>
-      <translation>Edge from vertices</translation>
+      <translation>Margine din varfuri</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Face from edges</source>
-      <translation>Face from edges</translation>
+      <translation>Fata din margini</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Planar</source>
       <translation>Planar</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Shell from faces</source>
-      <translation>Shell from faces</translation>
+      <translation>Invelis din fete</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Solid from shell</source>
-      <translation>Solid from shell</translation>
+      <translation>Solid din invelis</translation>
     </message>
     <message>
+      <location line="+22"/>
       <source>Create</source>
       <translation>Creează</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>All faces</source>
-      <translation>All faces</translation>
+      <translation>Toate fetele</translation>
     </message>
   </context>
   <context>
@@ -2162,39 +2922,48 @@ Please select a valid shape in the drop-down box first.</translation>
     <message>
       <location filename="../../TaskSweep.ui" line="+14"/>
       <source>Sweep</source>
-      <translation>Sweep</translation>
+      <translation>Matura</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Create solid</source>
-      <translation>Create solid</translation>
+      <translation>Creare solid</translation>
     </message>
     <message>
+      <location line="+20"/>
       <source>Frenet</source>
       <translation>Frenet</translation>
     </message>
     <message>
+      <location line="+7"/>
       <source>Select one or more profiles and select an edge or wire
 in the 3D view for the sweep path.</source>
-      <translation>Select one or more profiles and select an edge or wire
-in the 3D view for the sweep path.</translation>
+      <translation>Selecteaza unul sau mai multe profile apoi 
+selecteaza o margine sau polilinie
+in vizualizarea 3D pentru calea maturarii.</translation>
     </message>
   </context>
   <context>
     <name>PartGui::ThicknessWidget</name>
     <message>
       <location filename="../../TaskThickness.cpp" line="+101"/>
+      <location line="+165"/>
+      <location line="+10"/>
       <source>Thickness</source>
-      <translation>Thickness</translation>
+      <translation>Grosime</translation>
     </message>
     <message>
+      <location line="-119"/>
       <source>Select faces of the source object and press 'Done'</source>
-      <translation>Select faces of the source object and press 'Done'</translation>
+      <translation>Selecteaza fetele obiectului sursa si apasati "Gata"</translation>
     </message>
     <message>
+      <location line="+3"/>
       <source>Done</source>
-      <translation>Done</translation>
+      <translation>Gata</translation>
     </message>
     <message>
+      <location line="+71"/>
       <source>Input error</source>
       <translation>Eroare de intrare</translation>
     </message>
@@ -2202,272 +2971,446 @@ in the 3D view for the sweep path.</translation>
   <context>
     <name>QObject</name>
     <message>
-      <location filename="../../Command.cpp" line="-833"/>
+      <location filename="../../Command.cpp" line="-926"/>
+      <location line="+63"/>
+      <location line="+65"/>
+      <location line="+64"/>
+      <location line="+50"/>
+      <location line="+908"/>
       <source>Wrong selection</source>
       <translation>Selecţie greşită</translation>
     </message>
     <message>
+      <location line="-1149"/>
+      <location line="+242"/>
       <source>Select two shapes please.</source>
-      <translation>Select two shapes please.</translation>
+      <translation>Selectati doua forme.</translation>
     </message>
     <message>
+      <location line="-232"/>
+      <location line="+67"/>
+      <location line="+65"/>
+      <source>Non-solids selected</source>
+      <translation type="unfinished">Non-solids selected</translation>
+    </message>
+    <message>
+      <location line="-131"/>
+      <location line="+67"/>
+      <location line="+65"/>
+      <source>The use of non-solids for boolean operations may lead to unexpected results.
+Do you want to continue?</source>
+      <translation type="unfinished">The use of non-solids for boolean operations may lead to unexpected results.
+Do you want to continue?</translation>
+    </message>
+    <message>
+      <location line="+248"/>
       <source>All CAD Files (*.stp *.step *.igs *.iges *.brp *.brep)</source>
-      <translation>All CAD Files (*.stp *.step *.igs *.iges *.brp *.brep)</translation>
+      <translation>Toate fisierele CAD (*.stp *.step *.igs *.iges *.brp *.brep)</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>STEP (*.stp *.step)</source>
       <translation>STEP (*.stp *.step)</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>IGES (*.igs *.iges)</source>
       <translation>IGES (*.igs *.iges)</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>BREP (*.brp *.brep)</source>
       <translation>BREP (*.brp *.brep)</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>All Files (*.*)</source>
       <translation>Toate fișierele (*.*)</translation>
     </message>
     <message>
-      <location filename="../../CommandSimple.cpp" line="+58"/>
+      <location filename="../../CommandSimple.cpp" line="+59"/>
       <source>Sewing Tolerance</source>
-      <translation>Sewing Tolerance</translation>
+      <translation>Toleranta la coasere</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Enter tolerance for sewing shape:</source>
-      <translation>Enter tolerance for sewing shape:</translation>
+      <translation>Introduceti toleranta la coaserea formei:</translation>
     </message>
     <message>
-      <location filename="../../ViewProviderMirror.cpp" line="+73"/>
+      <location filename="../../ViewProviderMirror.cpp" line="+77"/>
       <source>Edit mirror plane</source>
-      <translation>Edit mirror plane</translation>
+      <translation>Editeaza planul oglinda</translation>
     </message>
     <message>
+      <location line="+299"/>
       <source>Edit chamfer edges</source>
-      <translation>Edit chamfer edges</translation>
+      <translation>Editeaza marginile tesiturii</translation>
     </message>
     <message>
+      <location line="+141"/>
       <source>Edit offset</source>
-      <translation>Edit offset</translation>
+      <translation>Editeaza expandarea</translation>
     </message>
     <message>
+      <location line="+81"/>
       <source>Edit thickness</source>
-      <translation>Edit thickness</translation>
+      <translation>Editeaza grosimea</translation>
     </message>
     <message>
       <source>Transform</source>
-      <translation>Transform</translation>
+      <translation type="obsolete">Transform</translation>
     </message>
     <message>
-      <location filename="../../AppPartGui.cpp" line="+124"/>
+      <location filename="../../AppPartGui.cpp" line="+161"/>
+      <location line="+1"/>
       <source>Part design</source>
       <translation>Design componente</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="-263"/>
+      <location line="+1"/>
+      <source>Display</source>
+      <translation type="unfinished">Afișare</translation>
+    </message>
+    <message>
+      <location filename="../../Command.cpp" line="-332"/>
+      <location line="+65"/>
+      <location line="+64"/>
       <source>Select two shapes or more, please.</source>
-      <translation>Select two shapes or more, please.</translation>
+      <translation>Selectati doua sau mai multe forme.</translation>
     </message>
     <message>
+      <location line="+958"/>
       <source>You have to select either two edges or two wires.</source>
-      <translation>You have to select either two edges or two wires.</translation>
+      <translation>Trebuiesc selectate doua margini sau doua polilinii.</translation>
     </message>
     <message>
-      <location filename="../../ViewProviderMirror.cpp" line="-286"/>
+      <location filename="../../ViewProviderMirror.cpp" line="-325"/>
       <source>Edit fillet edges</source>
-      <translation>Edit fillet edges</translation>
+      <translation>Editeaza merginile in panglica</translation>
     </message>
     <message>
-      <location filename="../../ViewProviderExt.cpp" line="+532"/>
+      <location filename="../../ViewProviderExt.cpp" line="+587"/>
       <source>Set colors...</source>
-      <translation>Set colors...</translation>
+      <translation>Seteaza culorile...</translation>
     </message>
     <message>
-      <location filename="../../TaskCheckGeometry.cpp" line="-214"/>
+      <location filename="../../TaskCheckGeometry.cpp" line="-305"/>
       <source>Compound</source>
-      <translation>Compound</translation>
+      <translation>Compus</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Compound Solid</source>
-      <translation>Compound Solid</translation>
+      <translation>Compus solid</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Solid</source>
       <translation>Solid</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Shell</source>
-      <translation>Shell</translation>
+      <translation>Invelis</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Face</source>
       <translation>Faţă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Wire</source>
-      <translation>Wire</translation>
+      <translation>Polilinie</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Edge</source>
-      <translation>Edge</translation>
+      <translation>Margine</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Vertex</source>
       <translation>Vertex</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Shape</source>
       <translation>Forma</translation>
     </message>
     <message>
+      <location line="+15"/>
       <source>No Error</source>
-      <translation>No Error</translation>
+      <translation>Nici o eroare</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Point On Curve</source>
-      <translation>Invalid Point On Curve</translation>
+      <translation>Punct invalid pe curba</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Point On Curve On Surface</source>
-      <translation>Invalid Point On Curve On Surface</translation>
+      <translation>Punct invalid pe curba pe suprafata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Point On Surface</source>
-      <translation>Invalid Point On Surface</translation>
+      <translation>Punct invalid pe suprafata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>No 3D Curve</source>
-      <translation>No 3D Curve</translation>
+      <translation>Nici o curba 3D</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Multiple 3D Curve</source>
-      <translation>Multiple 3D Curve</translation>
+      <translation>Mai multe curbe 3D</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid 3D Curve</source>
-      <translation>Invalid 3D Curve</translation>
+      <translation>Curba 3D invalida</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>No Curve On Surface</source>
-      <translation>No Curve On Surface</translation>
+      <translation>Nici o curba pe suprafata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Curve On Surface</source>
-      <translation>Invalid Curve On Surface</translation>
+      <translation>Curba invalida pe suprafata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Curve On Closed Surface</source>
-      <translation>Invalid Curve On Closed Surface</translation>
+      <translation>Curba invalida pe suprafata inchisa</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Same Range Flag</source>
-      <translation>Invalid Same Range Flag</translation>
+      <translation>Comutatorul "Aceeasi Arie" invalid</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Same Parameter Flag</source>
-      <translation>Invalid Same Parameter Flag</translation>
+      <translation>Comutatorul "Acelasi parametru" invalid</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Degenerated Flag</source>
-      <translation>Invalid Degenerated Flag</translation>
+      <translation>Comutatorul "Degenerat" invalid</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Free Edge</source>
-      <translation>Free Edge</translation>
+      <translation>Margine libera</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid MultiConnexity</source>
-      <translation>Invalid MultiConnexity</translation>
+      <translation>Conexiune multipla invalida</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Range</source>
-      <translation>Invalid Range</translation>
+      <translation>Interval invalid</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Empty Wire</source>
-      <translation>Empty Wire</translation>
+      <translation>Polilinie goala</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Redundant Edge</source>
-      <translation>Redundant Edge</translation>
+      <translation>Margine redundanta</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Self Intersecting Wire</source>
-      <translation>Self Intersecting Wire</translation>
+      <translation>Polilinie ce se intersecteaza cu sine</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>No Surface</source>
-      <translation>No Surface</translation>
+      <translation>Nici o suprafata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Wire</source>
-      <translation>Invalid Wire</translation>
+      <translation>Polilinie invalida</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Redundant Wire</source>
-      <translation>Redundant Wire</translation>
+      <translation>Polilinie redundanta</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Intersecting Wires</source>
-      <translation>Intersecting Wires</translation>
+      <translation>Poliliniile se intersecteaza</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Imbrication Of Wires</source>
-      <translation>Invalid Imbrication Of Wires</translation>
+      <translation>Polilinii imbricate invalide</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Empty Shell</source>
-      <translation>Empty Shell</translation>
+      <translation>Invelis gol</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Redundant Face</source>
-      <translation>Redundant Face</translation>
+      <translation>Margine redundanta</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Unorientable Shape</source>
-      <translation>Unorientable Shape</translation>
+      <translation>Forma nu poate fi orientata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Not Closed</source>
-      <translation>Not Closed</translation>
+      <translation>Nu este inchisa</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Not Connected</source>
-      <translation>Not Connected</translation>
+      <translation>Nu este conectata</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Sub Shape Not In Shape</source>
-      <translation>Sub Shape Not In Shape</translation>
+      <translation>Forma componenta nu face parte din forma mama</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Bad Orientation</source>
-      <translation>Bad Orientation</translation>
+      <translation>Orientare gresita</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Bad Orientation Of Sub Shape</source>
-      <translation>Bad Orientation Of Sub Shape</translation>
+      <translation>Orientare gresita a sub-formei</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Invalid Tolerance Value</source>
-      <translation>Invalid Tolerance Value</translation>
+      <translation>Valoarea pentru toleranta este invalida</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Check Failed</source>
-      <translation>Check Failed</translation>
+      <translation>Verificarea a esuat</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>No Result</source>
-      <translation>No Result</translation>
+      <translation>Nici un rezultat</translation>
     </message>
     <message>
+      <location line="+4"/>
       <source>Out Of Enum Range: </source>
-      <translation>Out Of Enum Range: </translation>
+      <translation>Valoare invalida: </translation>
     </message>
     <message>
+      <location line="+12"/>
+      <source>BOPAlgo CheckUnknown</source>
+      <translation type="unfinished">BOPAlgo CheckUnknown</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo BadType</source>
+      <translation type="unfinished">BOPAlgo BadType</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo SelfIntersect</source>
+      <translation type="unfinished">BOPAlgo SelfIntersect</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo TooSmallEdge</source>
+      <translation type="unfinished">BOPAlgo TooSmallEdge</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo NonRecoverableFace</source>
+      <translation type="unfinished">BOPAlgo NonRecoverableFace</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo IncompatibilityOfVertex</source>
+      <translation type="unfinished">BOPAlgo IncompatibilityOfVertex</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo IncompatibilityOfEdge</source>
+      <translation type="unfinished">BOPAlgo IncompatibilityOfEdge</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo IncompatibilityOfFace</source>
+      <translation type="unfinished">BOPAlgo IncompatibilityOfFace</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo OperationAborted</source>
+      <translation type="unfinished">BOPAlgo OperationAborted</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo GeomAbs_C0</source>
+      <translation type="unfinished">BOPAlgo GeomAbs_C0</translation>
+    </message>
+    <message>
+      <location line="+1"/>
+      <source>BOPAlgo NotValid</source>
+      <translation type="unfinished">BOPAlgo NotValid</translation>
+    </message>
+    <message>
+      <location line="+284"/>
+      <location line="+162"/>
       <source>Invalid</source>
       <translation>Invalid</translation>
+    </message>
+    <message>
+      <location filename="../../TaskDimension.cpp" line="+546"/>
+      <location line="+1040"/>
+      <source>Selections</source>
+      <translation type="unfinished">Selections</translation>
+    </message>
+    <message>
+      <location line="-1033"/>
+      <location line="+1040"/>
+      <source>Control</source>
+      <translation type="unfinished">Control</translation>
+    </message>
+    <message>
+      <location line="-265"/>
+      <source>Reset Dialog</source>
+      <translation type="unfinished">Reset Dialog</translation>
+    </message>
+    <message>
+      <location line="+4"/>
+      <source>Toggle 3d</source>
+      <translation type="unfinished">Toggle 3d</translation>
+    </message>
+    <message>
+      <location line="+5"/>
+      <source>Toggle Delta</source>
+      <translation type="unfinished">Toggle Delta</translation>
+    </message>
+    <message>
+      <location line="+5"/>
+      <source>Clear All</source>
+      <translation type="unfinished">Clear All</translation>
     </message>
   </context>
   <context>
@@ -2478,22 +3421,27 @@ in the 3D view for the sweep path.</translation>
       <translation>Com&amp;ponentă</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>&amp;Simple</source>
       <translation>&amp;Simplu</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>&amp;Parametric</source>
       <translation>&amp;Parametric</translation>
     </message>
     <message>
+      <location line="+2"/>
       <source>Part tools</source>
       <translation>Instrumente pentru componente</translation>
     </message>
     <message>
+      <location line="-1"/>
       <source>Solids</source>
       <translation>Solide</translation>
     </message>
     <message>
+      <location line="+2"/>
       <source>Boolean</source>
       <translation>Boolean</translation>
     </message>

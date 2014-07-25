@@ -33,6 +33,7 @@
 #include <Base/Vector3D.h>
 #include <Base/Matrix.h>
 #include <Base/Placement.h>
+#include <Base/Quantity.h>
 #include <Base/UnitsApi.h>
 #include <App/PropertyStandard.h>
 #include <Gui/Widgets.h>
@@ -41,6 +42,7 @@ Q_DECLARE_METATYPE(Base::Vector3f)
 Q_DECLARE_METATYPE(Base::Vector3d)
 Q_DECLARE_METATYPE(Base::Matrix4D)
 Q_DECLARE_METATYPE(Base::Placement)
+Q_DECLARE_METATYPE(Base::Quantity)
 
 namespace Gui {
 namespace Dialog { class TaskPlacement; }
@@ -235,9 +237,22 @@ protected:
     virtual QVariant toString(const QVariant&) const;
     virtual QVariant value(const App::Property*) const;
     virtual void setValue(const QVariant&);
-    Base::Unit  _Unit;
 
     PropertyUnitItem();
+};
+
+/**
+ * Change a Unit based floating point number withing constraints.
+ * \author Stefan Troeger
+ */
+class GuiExport PropertyUnitConstraintItem: public PropertyUnitItem
+{
+    TYPESYSTEM_HEADER();
+
+    virtual void setEditorData(QWidget *editor, const QVariant& data) const;
+
+protected:
+    PropertyUnitConstraintItem();
 };
 
 /**
@@ -333,6 +348,43 @@ private:
     PropertyFloatItem* m_x;
     PropertyFloatItem* m_y;
     PropertyFloatItem* m_z;
+};
+
+/**
+ * Edit properties of vector type which hold distances. 
+ * \author Stefan Troeger
+ */
+class PropertyUnitItem;
+class GuiExport PropertyVectorDistanceItem: public PropertyItem
+{
+    Q_OBJECT
+    Q_PROPERTY(Base::Quantity x READ x WRITE setX DESIGNABLE true USER true)
+    Q_PROPERTY(Base::Quantity y READ y WRITE setY DESIGNABLE true USER true)
+    Q_PROPERTY(Base::Quantity z READ z WRITE setZ DESIGNABLE true USER true)
+    TYPESYSTEM_HEADER();
+
+    virtual QWidget* createEditor(QWidget* parent, const QObject* receiver, const char* method) const;
+    virtual void setEditorData(QWidget *editor, const QVariant& data) const;
+    virtual QVariant editorData(QWidget *editor) const;
+
+    Base::Quantity x() const;
+    void setX(Base::Quantity x);
+    Base::Quantity y() const;
+    void setY(Base::Quantity y);
+    Base::Quantity z() const;
+    void setZ(Base::Quantity z);
+
+protected:
+    virtual QVariant toString(const QVariant&) const;
+    virtual QVariant value(const App::Property*) const;
+    virtual void setValue(const QVariant&);
+
+    PropertyVectorDistanceItem();
+
+private:
+    PropertyUnitItem* m_x;
+    PropertyUnitItem* m_y;
+    PropertyUnitItem* m_z;
 };
 
 class GuiExport PropertyMatrixItem: public PropertyItem
@@ -448,7 +500,7 @@ private:
 class GuiExport PropertyPlacementItem: public PropertyItem
 {
     Q_OBJECT
-    Q_PROPERTY(double Angle READ getAngle WRITE setAngle DESIGNABLE true USER true)
+    Q_PROPERTY(Base::Quantity Angle READ getAngle WRITE setAngle DESIGNABLE true USER true)
     Q_PROPERTY(Base::Vector3d Axis READ getAxis WRITE setAxis DESIGNABLE true USER true)
     Q_PROPERTY(Base::Vector3d Position READ getPosition WRITE setPosition DESIGNABLE true USER true)
     TYPESYSTEM_HEADER();
@@ -457,8 +509,8 @@ class GuiExport PropertyPlacementItem: public PropertyItem
     virtual void setEditorData(QWidget *editor, const QVariant& data) const;
     virtual QVariant editorData(QWidget *editor) const;
 
-    double getAngle() const;
-    void setAngle(double);
+    Base::Quantity getAngle() const;
+    void setAngle(Base::Quantity);
     Base::Vector3d getAxis() const;
     void setAxis(const Base::Vector3d&);
     Base::Vector3d getPosition() const;
@@ -475,10 +527,11 @@ protected:
 private:
     bool init_axis;
     bool changed_value;
+    double rot_angle;
     Base::Vector3d rot_axis;
-    PropertyAngleItem * m_a;
+    PropertyUnitItem * m_a;
     PropertyVectorItem* m_d;
-    PropertyVectorItem* m_p;
+    PropertyVectorDistanceItem* m_p;
 };
 
 /**
@@ -607,6 +660,21 @@ protected:
     virtual QVariant toolTip(const App::Property*) const;
 };
 
+class LinkSelection : public QObject
+{
+    Q_OBJECT
+
+public:
+    LinkSelection(const QStringList&);
+    ~LinkSelection();
+
+public Q_SLOTS:
+    void select();
+
+private:
+    QStringList link;
+};
+
 class LinkLabel : public QLabel
 {
     Q_OBJECT
@@ -620,8 +688,11 @@ public:
 protected Q_SLOTS:
     void onLinkActivated(const QString&);
 
+Q_SIGNALS:
+    void linkChanged(const QStringList&);
+
 private:
-    QStringList object;
+    QStringList link;
 };
 
 /**

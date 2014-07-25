@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="zh-TW" sourcelanguage="en">
   <context>
     <name>CmdMeshAddFacet</name>
     <message>
@@ -117,33 +117,33 @@
     <name>CmdMeshExMakeMesh</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make a Box</source>
-      <translation>Make a Box</translation>
+      <translation type="obsolete">Make a Box</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeTool</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make a Tool</source>
-      <translation>Make a Tool</translation>
+      <translation type="obsolete">Make a Tool</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeUnion</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make Union</source>
-      <translation>Make Union</translation>
+      <translation type="obsolete">Make Union</translation>
     </message>
   </context>
   <context>
@@ -219,6 +219,21 @@
     <message>
       <source>Create mesh from the selected geometry</source>
       <translation>由所選幾何建立網格</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeshFromPartShape</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Mesh</translation>
+    </message>
+    <message>
+      <source>Create mesh from shape...</source>
+      <translation type="unfinished">由造型建立網格...</translation>
+    </message>
+    <message>
+      <source>Tessellate shape</source>
+      <translation type="unfinished">格紋造型</translation>
     </message>
   </context>
   <context>
@@ -405,11 +420,11 @@
     </message>
     <message>
       <source>Segment by tool mesh</source>
-      <translation>Segment by tool mesh</translation>
+      <translation>由工具網格分段</translation>
     </message>
     <message>
       <source>Creates a segment from a given tool mesh</source>
-      <translation>Creates a segment from a given tool mesh</translation>
+      <translation>由給定的工具網格建立分段</translation>
     </message>
   </context>
   <context>
@@ -420,11 +435,26 @@
     </message>
     <message>
       <source>Transform mesh</source>
-      <translation>Transform mesh</translation>
+      <translation>轉換網格</translation>
     </message>
     <message>
       <source>Rotate or move a mesh</source>
       <translation>旋轉或移除網格</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeshTrimByPlane</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Mesh</translation>
+    </message>
+    <message>
+      <source>Trim mesh with a plane</source>
+      <translation type="unfinished">以平面修剪網格</translation>
+    </message>
+    <message>
+      <source>Trims a mesh with a plane</source>
+      <translation type="unfinished">以平面修剪網格</translation>
     </message>
   </context>
   <context>
@@ -472,19 +502,19 @@
     <name>MeshGui::DlgEvaluateMesh</name>
     <message>
       <source>&amp;Help</source>
-      <translation>説明(＆H)</translation>
+      <translation type="obsolete">説明(＆H)</translation>
     </message>
     <message>
       <source>F1</source>
-      <translation>F1</translation>
+      <translation type="obsolete">F1</translation>
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>關閉(&amp;C)</translation>
+      <translation type="obsolete">關閉(&amp;C)</translation>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt+C</translation>
+      <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
       <source>Mesh information</source>
@@ -520,11 +550,11 @@
     </message>
     <message>
       <source>Degenerated faces</source>
-      <translation>Degenerated faces</translation>
+      <translation>簡化面</translation>
     </message>
     <message>
       <source>Face indices</source>
-      <translation>Face indices</translation>
+      <translation>面索引</translation>
     </message>
     <message>
       <source>Number of faces:</source>
@@ -540,11 +570,11 @@
     </message>
     <message>
       <source>Non-manifolds</source>
-      <translation>Non-manifolds</translation>
+      <translation>非流形</translation>
     </message>
     <message>
       <source>Self-intersections</source>
-      <translation>Self-intersections</translation>
+      <translation>自我交錯</translation>
     </message>
     <message>
       <source>All above tests together</source>
@@ -560,7 +590,7 @@
     </message>
     <message>
       <source>Folds on surface</source>
-      <translation>Folds on surface</translation>
+      <translation>於面上有重疊</translation>
     </message>
   </context>
   <context>
@@ -571,27 +601,27 @@
     </message>
     <message>
       <source>Invalid neighbour indices</source>
-      <translation>Invalid neighbour indices</translation>
+      <translation>錯誤之相鄰索引</translation>
     </message>
     <message>
       <source>Invalid face indices</source>
-      <translation>Invalid face indices</translation>
+      <translation>錯誤之面索引</translation>
     </message>
     <message>
       <source>Invalid point indices</source>
-      <translation>Invalid point indices</translation>
+      <translation>錯誤之點索引</translation>
     </message>
     <message>
       <source>Multiple point indices</source>
-      <translation>Multiple point indices</translation>
+      <translation>多點索引</translation>
     </message>
     <message>
       <source>Non-manifolds</source>
-      <translation>Non-manifolds</translation>
+      <translation>非流形</translation>
     </message>
     <message>
       <source>Cannot remove non-manifolds</source>
-      <translation>Cannot remove non-manifolds</translation>
+      <translation>無法移除非流形</translation>
     </message>
     <message>
       <source>No selection</source>
@@ -599,35 +629,35 @@
     </message>
     <message>
       <source>No flipped normals</source>
-      <translation>No flipped normals</translation>
+      <translation>無旋轉法線</translation>
     </message>
     <message>
       <source>%1 flipped normals</source>
-      <translation>%1 flipped normals</translation>
+      <translation>%1無旋轉法線</translation>
     </message>
     <message>
       <source>No non-manifolds</source>
-      <translation>No non-manifolds</translation>
+      <translation>無非流形</translation>
     </message>
     <message>
       <source>%1 non-manifolds</source>
-      <translation>%1 non-manifolds</translation>
+      <translation>%1非流形</translation>
     </message>
     <message>
       <source>No invalid indices</source>
-      <translation>No invalid indices</translation>
+      <translation>無錯誤索引</translation>
     </message>
     <message>
       <source>No degenerations</source>
-      <translation>No degenerations</translation>
+      <translation>無簡化</translation>
     </message>
     <message>
       <source>%1 degenerated faces</source>
-      <translation>%1 degenerated faces</translation>
+      <translation>%1簡化面</translation>
     </message>
     <message>
       <source>No duplicated faces</source>
-      <translation>No duplicated faces</translation>
+      <translation>無重疊面</translation>
     </message>
     <message>
       <source>%1 duplicated faces</source>
@@ -651,7 +681,7 @@
     </message>
     <message>
       <source>Degenerations</source>
-      <translation>Degenerations</translation>
+      <translation>簡化</translation>
     </message>
     <message>
       <source>Duplicated faces</source>
@@ -663,7 +693,7 @@
     </message>
     <message>
       <source>Self-intersections</source>
-      <translation>Self-intersections</translation>
+      <translation>自我交錯</translation>
     </message>
     <message>
       <source>Mesh repair</source>
@@ -676,16 +706,15 @@
     <message>
       <source>Check failed due to folds on the surface.
 Please run the command to repair folds first</source>
-      <translation>Check failed due to folds on the surface.
-Please run the command to repair folds first</translation>
+      <translation>檢查顯示面有重疊所產生之錯誤,請先執行修復重疊指令</translation>
     </message>
     <message>
       <source>No folds on surface</source>
-      <translation>No folds on surface</translation>
+      <translation>於面上無重疊</translation>
     </message>
     <message>
       <source>%1 folds on surface</source>
-      <translation>%1 folds on surface</translation>
+      <translation>於面上有%1的重疊</translation>
     </message>
     <message>
       <source>Folds</source>
@@ -810,7 +839,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;This is the smallest angle between two faces where normals get calculated to do flat shading.&lt;/p&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;If the angle between the normals of two neighbouring faces is less than the crease angle, the faces will be smoothshaded around their common edge.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;This is the smallest angle between two faces where normals get calculated to do flat shading.&lt;/p&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;If the angle between the normals of two neighbouring faces is less than the crease angle, the faces will be smoothshaded around their common edge.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;這是介於兩個面法線間計算平面陰影的最小角&lt;/p&gt;&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;若介於兩個相鄰面法線間之夾角小於界限角度,將會使其共用邊平滑化陰影&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Crease angle</source>
@@ -824,7 +853,7 @@ Please run the command to repair folds first</translation>
       <source>Define normal per vertex</source>
       <translation>定義每個頂點法線</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source> °</source>
       <translation>°</translation>
     </message>
@@ -891,6 +920,10 @@ Please run the command to repair folds first</translation>
       <source>Mu:</source>
       <translation>Mu:</translation>
     </message>
+    <message>
+      <source>Only selection</source>
+      <translation type="unfinished">僅有選取部份</translation>
+    </message>
   </context>
   <context>
     <name>MeshGui::MeshFaceAddition</name>
@@ -909,6 +942,13 @@ Please run the command to repair folds first</translation>
     <message>
       <source>Finish</source>
       <translation>完成</translation>
+    </message>
+  </context>
+  <context>
+    <name>MeshGui::MeshFillHole</name>
+    <message>
+      <source>Finish</source>
+      <translation type="unfinished">完成</translation>
     </message>
   </context>
   <context>
@@ -1018,6 +1058,37 @@ Please run the command to repair folds first</translation>
     </message>
   </context>
   <context>
+    <name>MeshGui::Selection</name>
+    <message>
+      <source>Selection</source>
+      <translation type="unfinished">選擇</translation>
+    </message>
+    <message>
+      <source>Add</source>
+      <translation type="unfinished">新增</translation>
+    </message>
+    <message>
+      <source>Clear</source>
+      <translation type="unfinished">清除</translation>
+    </message>
+    <message>
+      <source>Respect only visible triangles</source>
+      <translation type="unfinished">僅就可見的三角形</translation>
+    </message>
+    <message>
+      <source>Respect only triangles with normals facing screen</source>
+      <translation type="unfinished">僅就法線正對畫面的三角形</translation>
+    </message>
+    <message>
+      <source>Use a brush tool to select the area</source>
+      <translation type="unfinished">使用刷子工具來選取範圍</translation>
+    </message>
+    <message>
+      <source>Clears completely the selected area</source>
+      <translation type="unfinished">完全清除所有範圍</translation>
+    </message>
+  </context>
+  <context>
     <name>MeshGui::TaskRemoveComponents</name>
     <message>
       <source>Delete</source>
@@ -1026,6 +1097,34 @@ Please run the command to repair folds first</translation>
     <message>
       <source>Invert</source>
       <translation>反轉</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_TrimByPlane</name>
+    <message>
+      <source>Select plane</source>
+      <translation type="unfinished">選取平面</translation>
+    </message>
+    <message>
+      <source>Please select a plane at which you trim the mesh.</source>
+      <translation type="unfinished">請選取一個您修剪網格的平面</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_Union</name>
+    <message>
+      <source>OpenSCAD</source>
+      <translation type="unfinished">OpenSCAD</translation>
+    </message>
+    <message>
+      <source>Unknwon error occured while running OpenSCAD.</source>
+      <translation type="unfinished">執行OpenSCAD時發生未知錯誤</translation>
+    </message>
+    <message>
+      <source>OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</source>
+      <translation type="unfinished">於您的系統上未發現OpenSCAD
+請至http://www.openscad.org/index.html來安裝</translation>
     </message>
   </context>
   <context>
@@ -1151,7 +1250,7 @@ Max=&lt;%4,%5,%6&gt;</source>
     </message>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</source>
-      <translation>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
+      <translation type="obsolete">All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
     </message>
     <message>
       <source>Stanford Polygon (*.ply)</source>
@@ -1180,6 +1279,10 @@ Max=&lt;%4,%5,%6&gt;</source>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.off *.ply)</source>
       <translation>所有網格檔案(*.stl *.ast *.bms *.obj *.off *.ply)</translation>
+    </message>
+    <message>
+      <source>X3D Extensible 3D(*.x3d)</source>
+      <translation type="unfinished">X3D 可擴充 3D(*.x3d)</translation>
     </message>
   </context>
   <context>

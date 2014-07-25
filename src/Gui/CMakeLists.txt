@@ -147,7 +147,9 @@ set(Gui_MOC_HDRS
     DlgOnlineHelpImp.h
     DlgParameterImp.h
     DlgPreferencesImp.h
+    DlgProjectInformationImp.h
     DlgProjectUtility.h
+    DlgPropertyLink.h
     DlgReportViewImp.h
     DlgSettings3DViewImp.h
     DlgSettingsViewColor.h
@@ -165,6 +167,7 @@ set(Gui_MOC_HDRS
     EditorView.h
     FileDialog.h
     Flag.h
+    GraphvizView.h
     GuiApplicationNativeEventAware.h
     HelpView.h
     InputVector.h
@@ -182,6 +185,7 @@ set(Gui_MOC_HDRS
     PythonConsole.h
     PythonDebugger.h
     PythonEditor.h
+    QuantitySpinBox.h
     ReportView.h
     SceneInspector.h
     SelectionView.h
@@ -239,6 +243,7 @@ SET(Gui_UIC_SRCS
     DlgPreferences.ui
     DlgProjectInformation.ui
     DlgProjectUtility.ui
+    DlgPropertyLink.ui
     DlgReportView.ui
     DlgSettings3DView.ui
     DlgSettingsUnits.ui
@@ -308,6 +313,7 @@ SET(Dialog_CPP_SRCS
     DlgParameterImp.cpp
     DlgProjectInformationImp.cpp
     DlgProjectUtility.cpp
+    DlgPropertyLink.cpp
     DlgTipOfTheDayImp.cpp
     TaskDlgRelocation.cpp
     DlgUndoRedo.cpp
@@ -337,6 +343,7 @@ SET(Dialog_HPP_SRCS
     DlgParameterImp.h
     DlgProjectInformationImp.h
     DlgProjectUtility.h
+    DlgPropertyLink.h
     DlgTipOfTheDayImp.h
     TaskDlgRelocation.h
     DlgUndoRedo.h
@@ -371,6 +378,7 @@ SET(Dialog_SRCS
     DlgParameter.ui
     DlgProjectInformation.ui
     DlgProjectUtility.ui
+    DlgPropertyLink.ui
     DlgTipOfTheDay.ui
     DlgTreeWidget.ui
     DownloadManager.ui
@@ -742,10 +750,10 @@ SOURCE_GROUP("View3D\\Inventor" FILES ${Inventor_SRCS})
 SET(Widget_CPP_SRCS
     FileDialog.cpp
     MainWindow.cpp
-    MDIView.cpp
     PrefWidgets.cpp
     InputField.cpp
     ProgressBar.cpp
+    QuantitySpinBox.cpp
     SpinBox.cpp
     Splashscreen.cpp
     WidgetFactory.cpp
@@ -755,10 +763,10 @@ SET(Widget_CPP_SRCS
 SET(Widget_HPP_SRCS
     FileDialog.h
     MainWindow.h
-    MDIView.h
     PrefWidgets.h
     InputField.h
     ProgressBar.h
+    QuantitySpinBox.h
     SpinBox.h
     Splashscreen.h
     WidgetFactory.h
@@ -770,6 +778,21 @@ SET(Widget_SRCS
     ${Widget_HPP_SRCS}
 )
 SOURCE_GROUP("Widget" FILES ${Widget_SRCS})
+
+# The view sources
+SET(View_CPP_SRCS
+    MDIView.cpp
+    GraphvizView.cpp
+)
+SET(View_HPP_SRCS
+    MDIView.h
+    GraphvizView.h
+)
+SET(View_SRCS
+    ${View_CPP_SRCS}
+    ${View_HPP_SRCS}
+)
+SOURCE_GROUP("View" FILES ${View_SRCS})
 
 # The workbench sources
 SET(Workbench_CPP_SRCS
@@ -873,6 +896,7 @@ SET(FreeCADGui_SRCS
     ${View3D_SRCS}
     ${Viewprovider_SRCS}
     ${Widget_SRCS}
+    ${View_SRCS}
     ${Workbench_SRCS}
     ${Selection_SRCS}
     ${FreeCADGui_SRCS}
@@ -904,35 +928,23 @@ if(MSVC)
         ${Workbench_CPP_SRCS}
         ${FreeCADGui_CPP_SRCS}
     )
-    ADD_MSVC_PRECOMPILED_HEADER("PreCompiled.h" "PreCompiled.cpp" FreeCADGui_CPP_SRCS)
+    ADD_MSVC_PRECOMPILED_HEADER(FreeCADGui PreCompiled.h PreCompiled.cpp FreeCADGui_CPP_SRCS)
 endif(MSVC)
 
 add_library(FreeCADGui SHARED ${FreeCADGui_SRCS})
 
 target_link_libraries(FreeCADGui ${FreeCADGui_LIBS})
 
-# Note this is IDE specific, not necessarily platform specific
-if(MSVC)
-    set_target_properties(FreeCADGui PROPERTIES DEBUG_OUTPUT_NAME "FreeCADGuiD")
-    set_target_properties(FreeCADGui PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    # dirty hack to avoid Debug/Release subdirectory
-    set_target_properties(FreeCADGui PROPERTIES PREFIX "../")
-elseif(MINGW)
-    set_target_properties(FreeCADGui PROPERTIES DEBUG_OUTPUT_NAME "FreeCADGuiD")
-    set_target_properties(FreeCADGui PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-else(MSVC)
-    set_target_properties(FreeCADGui PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-    set_target_properties(FreeCADGui PROPERTIES INSTALL_RPATH ${INSTALL_RPATH})
-endif(MSVC)
+SET_BIN_DIR(FreeCADGui FreeCADGui)
 
 if(WIN32)
     INSTALL(TARGETS FreeCADGui
         RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     )
 else(WIN32)
     INSTALL(TARGETS FreeCADGui
-        LIBRARY DESTINATION lib
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     )
     INSTALL(FILES Icons/freecad.xpm
         Icons/freecad-icon-16.png

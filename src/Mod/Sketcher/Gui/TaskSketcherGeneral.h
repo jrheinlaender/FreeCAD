@@ -37,7 +37,39 @@ namespace SketcherGui {
 
 class ViewProviderSketch;
 
-class TaskSketcherGeneral : public Gui::TaskView::TaskBox, public Gui::SelectionSingleton::ObserverType
+class SketcherGeneralWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    SketcherGeneralWidget(QWidget *parent=0);
+    ~SketcherGeneralWidget();
+
+    void saveSettings();
+    void loadSettings();
+	void setInitGridSize(double val);
+
+Q_SIGNALS:
+    void setGridSnap(int Type);
+    void emitToggleGridView(bool);
+    void emitToggleGridSnap(int);
+    void emitSetGridSize(double);
+    void emitToggleAutoconstraints(int);
+
+public Q_SLOTS:
+    void toggleGridView(bool on);
+    void setGridSize(double val);
+    void toggleGridSnap(int state);
+
+protected:
+    void changeEvent(QEvent *e);
+
+private:
+    Ui_TaskSketcherGeneral* ui;
+};
+
+class TaskSketcherGeneral : public Gui::TaskView::TaskBox,
+                            public Gui::SelectionSingleton::ObserverType
 {
     Q_OBJECT
 
@@ -53,19 +85,13 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     void toggleGridView(bool on);
-    void setGridSize(const QString& val);
+    void setGridSize(double val);
     void toggleGridSnap(int state);
     void toggleAutoconstraints(int state);
 
-protected:
-    void changeEvent(QEvent *e);
-
-    ViewProviderSketch *sketchView;
-    void fillGridCombo(void);
-
 private:
-    QWidget* proxy;
-    Ui_TaskSketcherGeneral* ui;
+    ViewProviderSketch *sketchView;
+    SketcherGeneralWidget* widget;
 };
 
 } //namespace SketcherGui

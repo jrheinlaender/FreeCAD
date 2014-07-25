@@ -89,6 +89,13 @@ bool PropertyModel::setData(const QModelIndex& index, const QVariant & value, in
             if (fabs(d-v) > FLT_EPSILON)
                 return item->setData(value);
         }
+        // Special case handling for quantities
+        else if (data.canConvert<Base::Quantity>() && value.canConvert<Base::Quantity>()) {
+            const Base::Quantity& val1 = data.value<Base::Quantity>();
+            const Base::Quantity& val2 = value.value<Base::Quantity>();
+            if (!(val1 == val2))
+                return item->setData(value);
+        }
         else if (data != value)
             return item->setData(value);
     }
@@ -199,15 +206,14 @@ QModelIndex PropertyModel::propertyIndexFromPath(const QStringList& path) const
     return parent;
 }
 
-void PropertyModel::buildUp(const std::map<std::string, std::vector<App::Property*> >& props)
+void PropertyModel::buildUp(const PropertyModel::PropertyList& props)
 {
     // fill up the listview with the properties
     rootItem->reset();
 
     // sort the properties into their groups
     std::map<std::string, std::vector<std::vector<App::Property*> > > propGroup;
-    std::map<std::string, std::vector<App::Property*> >
-        ::const_iterator jt;
+    PropertyModel::PropertyList::const_iterator jt;
     for (jt = props.begin(); jt != props.end(); ++jt) {
         App::Property* prop = jt->second.front();
         const char* group = prop->getGroup();

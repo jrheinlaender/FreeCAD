@@ -67,6 +67,16 @@ void ViewProviderGroove::setupContextMenu(QMenu* menu, QObject* receiver, const 
 bool ViewProviderGroove::setEdit(int ModNum)
 {
     if (ModNum == ViewProvider::Default ) {
+        PartDesign::Groove* pcGroove = static_cast<PartDesign::Groove*>(getObject());
+        if (pcGroove->getSketchAxisCount() < 0) {
+            QMessageBox msgBox;
+            msgBox.setIcon(QMessageBox::Critical);
+            msgBox.setWindowTitle(QObject::tr("Lost link to base sketch"));
+            msgBox.setText(QObject::tr("The object can't be edited because the link to the the base sketch is lost."));
+            msgBox.setStandardButtons(QMessageBox::Ok);
+            msgBox.exec();
+            return false;
+        }
         // When double-clicking on the item for this pad the
         // object unsets and sets its edit mode without closing
         // the task panel
@@ -82,7 +92,7 @@ bool ViewProviderGroove::setEdit(int ModNum)
             msgBox.setDefaultButton(QMessageBox::Yes);
             int ret = msgBox.exec();
             if (ret == QMessageBox::Yes)
-                Gui::Control().closeDialog();
+                Gui::Control().reject();
             else
                 return false;
         }

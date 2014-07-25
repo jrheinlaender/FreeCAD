@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="it" sourcelanguage="en">
   <context>
     <name>AssemblyGui::Workbench</name>
     <message>
@@ -17,10 +17,12 @@
       <translation>Assembly</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Constraint Axle...</source>
       <translation>Vincolo assiale...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>set a axle constraint between two objects</source>
       <translation>Imposta un vincolo assiale tra due oggetti</translation>
     </message>
@@ -29,7 +31,7 @@
     <name>Workbench</name>
     <message>
       <source>Assembly</source>
-      <translation>Assembly</translation>
+      <translation type="obsolete">Assembly</translation>
     </message>
   </context>
 </TS>

@@ -1,15 +1,10 @@
 project(FreeCAD_trunk)
-set(FREECAD_VERSION "0.13")
-
-# Needed for salomesmesh
-if(CMAKE_COMPILER_IS_GNUCXX)
-ENABLE_LANGUAGE(Fortran)
-endif(CMAKE_COMPILER_IS_GNUCXX)
+set(FREECAD_VERSION "0.14")
 
 set(PACKAGE_NAME "FreeCAD")
 set(PACKAGE_VERSION_MAJOR "0")
-set(PACKAGE_VERSION_MINOR "12")
-set(PACKAGE_VERSION_PATCH "2237")
+set(PACKAGE_VERSION_MINOR "14")
+set(PACKAGE_VERSION_PATCH "3700")
 set(PACKAGE_VERSION "${PACKAGE_VERSION_MAJOR}.${PACKAGE_VERSION_MINOR}.${PACKAGE_VERSION_PATCH}")
 set(PACKAGE_STRING "${PACKAGE_NAME} ${PACKAGE_VERSION}")
 
@@ -45,7 +40,14 @@ endif(WIN32)
 
 # ================================================================================
 
-if(CMAKE_COMPILER_IS_GNUCXX)
+if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+    set(CMAKE_COMPILER_IS_CLANGXX TRUE)
+endif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
+    # Needed for salomesmesh
+    ENABLE_LANGUAGE(Fortran)
+
     include(cMake/ConfigureChecks.cmake)
     configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
     add_definitions(-DHAVE_CONFIG_H)
@@ -55,7 +57,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     if(UNIX)
     #    SET(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
     endif(UNIX)
-endif(CMAKE_COMPILER_IS_GNUCXX)
+endif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
 
 
 # ================================================================================
@@ -65,13 +67,20 @@ if(WIN32)
     SET(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install CACHE PATH "Installation root directory")
 else(WIN32)
     SET(CMAKE_INSTALL_PREFIX "/usr/lib${LIB_SUFFIX}/freecad" CACHE PATH "Installation root directory")
-    SET(INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 endif(WIN32)
 
 SET(CMAKE_INSTALL_DATADIR data CACHE PATH "Output directory for data and resource files")
 SET(CMAKE_INSTALL_INCLUDEDIR include CACHE PATH "Output directory for header files")
 SET(CMAKE_INSTALL_DOCDIR doc CACHE PATH "Output directory for documentation and license files")
- 
+# Don't set it without manual adaption of LibDir variable in src/App/FreeCADInit.py
+SET(CMAKE_INSTALL_LIBDIR lib CACHE PATH "Output directory for libraries")
+
+if(NOT WIN32)
+    if(NOT IS_ABSOLUTE ${CMAKE_INSTALL_LIBDIR})
+	    SET(CMAKE_INSTALL_LIBDIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+    endif(NOT IS_ABSOLUTE ${CMAKE_INSTALL_LIBDIR})
+endif(NOT WIN32)
+
 SET(PYCXX_INCLUDE_DIR
     "${CMAKE_SOURCE_DIR}/src" CACHE PATH
     "Path to the directory containing PyCXX's CXX/Config.hxx include file")
@@ -87,11 +96,14 @@ MESSAGE(STATUS "prefix: ${CMAKE_INSTALL_PREFIX}")
 MESSAGE(STATUS "datadir: ${CMAKE_INSTALL_DATADIR}")
 MESSAGE(STATUS "docdir: ${CMAKE_INSTALL_DOCDIR}")
 MESSAGE(STATUS "includedir: ${CMAKE_INSTALL_INCLUDEDIR}")
+MESSAGE(STATUS "libdir: ${CMAKE_INSTALL_LIBDIR}")
 
 # ==============================================================================
 # == Win32 is default behaviour use the LibPack copied in Source tree ==========
 if(MSVC)
+    OPTION(FREECAD_RELEASE_PDB "Create PDB file for Release version." OFF)
     OPTION(FREECAD_LIBPACK_USE "Use the LibPack to Build FreeCAD (only Win32 so far)." ON)
+    OPTION(FREECAD_LIBPACK_USEPYSIDE "Use PySide in LibPack rather to PyQt and Swig." ON)
     set(FREECAD_LIBPACK_DIR ${CMAKE_SOURCE_DIR} CACHE PATH  "Directory of the FreeCAD LibPack")
 else(MSVC)
     OPTION(FREECAD_LIBPACK_USE "Use the LibPack to Build FreeCAD (only Win32 so far)." OFF)
@@ -124,10 +136,10 @@ OPTION(FREECAD_BUILD_JTREADER "Build the FreeCAD jt reader module" OFF)
 OPTION(FREECAD_BUILD_MATERIAL "Build the FreeCAD material module" ON)
 OPTION(FREECAD_BUILD_MESH "Build the FreeCAD mesh module" ON)
 OPTION(FREECAD_BUILD_MESH_PART "Build the FreeCAD mesh part module" ON)
-OPTION(FREECAD_BUILD_OPENSCAD "Build the FreeCAD mesh openscad module" ON)
-OPTION(FREECAD_BUILD_PART "Build the FreeCAD mesh part module" ON)
-OPTION(FREECAD_BUILD_PART_DESIGN "Build the FreeCAD mesh part design module" ON)
-OPTION(FREECAD_BUILD_PLOT "Build the FreeCAD mesh plot module" ON)
+OPTION(FREECAD_BUILD_OPENSCAD "Build the FreeCAD openscad module" ON)
+OPTION(FREECAD_BUILD_PART "Build the FreeCAD part module" ON)
+OPTION(FREECAD_BUILD_PART_DESIGN "Build the FreeCAD part design module" ON)
+OPTION(FREECAD_BUILD_PLOT "Build the FreeCAD plot module" ON)
 OPTION(FREECAD_BUILD_POINTS "Build the FreeCAD points module" ON)
 OPTION(FREECAD_BUILD_RAYTRACING "Build the FreeCAD ray tracing module" ON)
 OPTION(FREECAD_BUILD_REVERSEENGINEERING "Build the FreeCAD reverse engineering module" ON)
@@ -154,6 +166,139 @@ if (FREECAD_BUILD_DEBIAN)
     set(FREECAD_USE_EXTERNAL_ZIPIOS ON)
     set(FREECAD_USE_EXTERNAL_PIVY ON)
 endif (FREECAD_BUILD_DEBIAN)
+
+# ==============================================================================
+#inter-module dependencies
+
+#took these from Mod/Complete/App/AppComplete.cpp. appears to be working.
+if(FREECAD_BUILD_COMPLETE)
+  set(FREECAD_BUILD_MESH ON)
+  set(FREECAD_BUILD_POINTS ON)
+  set(FREECAD_BUILD_DRAWING ON)
+  set(FREECAD_BUILD_RAYTRACING ON)
+  set(FREECAD_BUILD_PART_DESIGN ON)
+  set(FREECAD_BUILD_IMAGE ON)
+  set(FREECAD_BUILD_DRAFT ON)
+endif(FREECAD_BUILD_COMPLETE)
+
+#inferred from .py files. appears to be working.
+if(FREECAD_BUILD_ARCH)
+  set(FREECAD_BUILD_PART ON)
+  set(FREECAD_BUILD_MESH ON)
+  set(FREECAD_BUILD_DRAFT ON)
+endif(FREECAD_BUILD_ARCH)
+
+#inferred from .py files. appears to be working.
+if(FREECAD_BUILD_OPENSCAD)
+  set(FREECAD_BUILD_MESH_PART ON)
+  set(FREECAD_BUILD_DRAFT ON)
+endif(FREECAD_BUILD_OPENSCAD)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_INSPECTION)
+  set(FREECAD_BUILD_MESH ON)
+  set(FREECAD_BUILD_POINTS ON)
+  set(FREECAD_BUILD_PART ON)
+endif(FREECAD_BUILD_INSPECTION)
+
+#inferred from .py files. appears to be working.
+if(FREECAD_BUILD_SHIP)
+  set(FREECAD_BUILD_PART ON)
+  set(FREECAD_BUILD_PLOT ON)
+  set(FREECAD_BUILD_IMAGE ON)
+endif(FREECAD_BUILD_SHIP)
+
+#inferred from .py files. appears to be working.
+if(FREECAD_BUILD_SPREADSHEET)
+  set(FREECAD_BUILD_DRAFT ON)
+endif(FREECAD_BUILD_SPREADSHEET)
+
+#this has been tested. appears to be working.
+if(FREECAD_BUILD_DRAFT)
+  set(FREECAD_BUILD_SKETCHER ON)
+endif(FREECAD_BUILD_DRAFT)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_PART_DESIGN)
+  set(FREECAD_BUILD_SKETCHER ON)
+endif(FREECAD_BUILD_PART_DESIGN)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_REVERSEENGINEERING)
+  set(FREECAD_BUILD_PART ON)
+  set(FREECAD_BUILD_MESH ON)
+endif(FREECAD_BUILD_REVERSEENGINEERING)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_MESH_PART)
+  set(FREECAD_BUILD_PART ON)
+  set(FREECAD_BUILD_MESH ON)
+  set(FREECAD_BUILD_SMESH ON)
+endif(FREECAD_BUILD_MESH_PART)
+
+#inferred from cmakelists.txt. build errors. obsolete?
+if(FREECAD_BUILD_CAM)
+  set(FREECAD_BUILD_PART ON)
+  set(FREECAD_BUILD_MESH ON)
+endif(FREECAD_BUILD_CAM)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_RAYTRACING)
+  set(FREECAD_BUILD_PART ON)
+endif(FREECAD_BUILD_RAYTRACING)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_DRAWING)
+  set(FREECAD_BUILD_PART ON)
+endif(FREECAD_BUILD_DRAWING)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_ROBOT)
+  set(FREECAD_BUILD_PART ON)
+endif(FREECAD_BUILD_ROBOT)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_SKETCHER)
+  set(FREECAD_BUILD_PART ON)
+endif(FREECAD_BUILD_SKETCHER)
+
+#inferred from .py files. built, but not sure how to test.
+if(FREECAD_BUILD_IDF)
+  set(FREECAD_BUILD_PART ON)
+endif(FREECAD_BUILD_IDF)
+
+#inferred from cmakelists.txt. built, but not sure how to test.
+if(FREECAD_BUILD_IMPORT)
+  set(FREECAD_BUILD_PART ON)
+endif(FREECAD_BUILD_IMPORT)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_FEM)
+  set(FREECAD_BUILD_PART ON)
+  set(FREECAD_BUILD_SMESH ON)
+endif(FREECAD_BUILD_FEM)
+
+#inferred from cmakelists.txt. appears to be working.
+if(FREECAD_BUILD_SANDBOX)
+  set(FREECAD_BUILD_PART ON)
+  set(FREECAD_BUILD_MESH ON)
+endif(FREECAD_BUILD_SANDBOX)
+
+#inferred from header includes. not tested.
+if(FREECAD_BUILD_JTREADER)
+  set(FREECAD_BUILD_MESH ON)
+endif(FREECAD_BUILD_JTREADER)
+
+#leaving test module for someone else.
+#image has none. as far as I can tell.
+#mesh has none. as far as I can tell.
+#part has none. as far as I can tell.
+#material has none. as far as I can tell.
+#web has none. as far as I can tell.
+#start has none. as far as I can tell.
+#assembly has none. as far as I can tell.
+#plot has none. as far as I can tell.
+#points has none. as far as I can tell
 
 # ==============================================================================
 
@@ -310,7 +455,6 @@ else(FREECAD_LIBPACK_USE)
             TKXDESTEP
             TKXDEIGES
             TKMeshVS
-            TKAdvTools
         )
         set(OCC_INCLUDE_DIR ${OCE_INCLUDE_DIRS})
         set(OCC_FOUND ${OCE_FOUND})
@@ -514,7 +658,7 @@ ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 8)
 
 IF(MSVC)
 	# set default compiler settings
-	#SET (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /GF /GY")
+	SET (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /EHa")
 	SET (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DFC_DEBUG")
 	# set default libs
 	SET (CMAKE_C_STANDARD_LIBRARIES "kernel32.lib user32.lib gdi32.lib winspool.lib SHFolder.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib ")
@@ -522,6 +666,10 @@ IF(MSVC)
 	# set linker flag /nodefaultlib
 	set (CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /NODEFAULTLIB")
 	SET (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB")
+	IF(FREECAD_RELEASE_PDB)
+		set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
+		set (CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG")
+	ENDIF(FREECAD_RELEASE_PDB)
 
 	# Mark 32 bit executables large address aware so they can use > 2GB address space
 	# NOTE: This setting only has an effect on machines with at least 3GB of RAM, although it sets the linker option it doesn't set the the linker switch 'Enable Large Addresses'
@@ -539,6 +687,8 @@ IF(MINGW)
 	SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mthreads")
 	SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mthreads -Wl,--export-all-symbols")
 	SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -mthreads -Wl,--export-all-symbols")
+	# http://stackoverflow.com/questions/8375310/warning-auto-importing-has-been-activated-without-enable-auto-import-specifie
+	# SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-libgcc -static-libstdc++")
 	LINK_LIBRARIES(-lgdi32)
 ENDIF(MINGW)
 # 0000661: cmake build on Mac OS: dealing with dylib versus so

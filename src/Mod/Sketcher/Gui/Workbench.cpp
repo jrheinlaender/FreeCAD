@@ -55,17 +55,30 @@ Gui::MenuItem* Workbench::setupMenuBar() const
     Gui::MenuItem* root = StdWorkbench::setupMenuBar();
     Gui::MenuItem* item = root->findItem("&Windows");
 
+// == Profile menu ==========================================
+    Gui::MenuItem* profile = new Gui::MenuItem;
+    root->insertItem(item, profile);
+    profile->setCommand("P&rofiles");
+
+    *profile << "Sketcher_ProfilesHexagon1";
+
+// == Sketcher menu ==========================================
+
     Gui::MenuItem* sketch = new Gui::MenuItem;
-    root->insertItem(item, sketch);
+    root->insertItem(profile, sketch);
     sketch->setCommand("S&ketch");
     Gui::MenuItem* geom = new Gui::MenuItem();
     geom->setCommand("Sketcher geometries");
     *geom << "Sketcher_CreatePoint"
-          << "Sketcher_CreateArc"
-          << "Sketcher_CreateCircle"
           << "Sketcher_CreateLine"
+          << "Sketcher_CreateArc"
+          << "Sketcher_Create3PointArc"
+          << "Sketcher_CreateCircle"
+          << "Sketcher_Create3PointCircle"
+          << "Separator"
           << "Sketcher_CreatePolyline"
           << "Sketcher_CreateRectangle"
+          << "Sketcher_CreateSlot"
           << "Separator"
           << "Sketcher_CreateFillet"
           << "Sketcher_Trimming"
@@ -95,6 +108,7 @@ Gui::MenuItem* Workbench::setupMenuBar() const
 
     *sketch
         << "Sketcher_NewSketch"
+        << "Sketcher_EditSketch"
         << "Sketcher_LeaveSketch"
         << "Sketcher_ViewSketch"
         << "Sketcher_MapSketch"
@@ -121,11 +135,13 @@ Gui::ToolBarItem* Workbench::setupToolBars() const
     Gui::ToolBarItem* geom = new Gui::ToolBarItem(root);
     geom->setCommand("Sketcher geometries");
     *geom << "Sketcher_CreatePoint"
-          << "Sketcher_CreateArc"
-          << "Sketcher_CreateCircle"
           << "Sketcher_CreateLine"
+          << "Sketcher_CompCreateArc"
+          << "Sketcher_CompCreateCircle"
+          << "Separator"
           << "Sketcher_CreatePolyline"
           << "Sketcher_CreateRectangle"
+          << "Sketcher_CreateSlot"
           << "Separator"
           << "Sketcher_CreateFillet"
           << "Sketcher_Trimming"

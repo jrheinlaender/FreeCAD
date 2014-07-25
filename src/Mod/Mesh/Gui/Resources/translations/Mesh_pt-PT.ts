@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="pt-PT" sourcelanguage="en">
   <context>
     <name>CmdMeshAddFacet</name>
     <message>
@@ -117,33 +117,33 @@
     <name>CmdMeshExMakeMesh</name>
     <message>
       <source>Mesh</source>
-      <translation>Malha</translation>
+      <translation type="obsolete">Malha</translation>
     </message>
     <message>
       <source>Make a Box</source>
-      <translation>Criar uma Caixa</translation>
+      <translation type="obsolete">Criar uma Caixa</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeTool</name>
     <message>
       <source>Mesh</source>
-      <translation>Malha</translation>
+      <translation type="obsolete">Malha</translation>
     </message>
     <message>
       <source>Make a Tool</source>
-      <translation>Criar um Ferramenta</translation>
+      <translation type="obsolete">Criar um Ferramenta</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeUnion</name>
     <message>
       <source>Mesh</source>
-      <translation>Malha</translation>
+      <translation type="obsolete">Malha</translation>
     </message>
     <message>
       <source>Make Union</source>
-      <translation>Criar União</translation>
+      <translation type="obsolete">Criar União</translation>
     </message>
   </context>
   <context>
@@ -219,6 +219,21 @@
     <message>
       <source>Create mesh from the selected geometry</source>
       <translation>Criar uma malha da geometria selecionada</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeshFromPartShape</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Malha</translation>
+    </message>
+    <message>
+      <source>Create mesh from shape...</source>
+      <translation type="unfinished">Criar Malha a Partir da Forma ...</translation>
+    </message>
+    <message>
+      <source>Tessellate shape</source>
+      <translation type="unfinished">Forma Tessellate</translation>
     </message>
   </context>
   <context>
@@ -428,6 +443,21 @@
     </message>
   </context>
   <context>
+    <name>CmdMeshTrimByPlane</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Malha</translation>
+    </message>
+    <message>
+      <source>Trim mesh with a plane</source>
+      <translation type="unfinished">Trim mesh with a plane</translation>
+    </message>
+    <message>
+      <source>Trims a mesh with a plane</source>
+      <translation type="unfinished">Trims a mesh with a plane</translation>
+    </message>
+  </context>
+  <context>
     <name>CmdMeshUnion</name>
     <message>
       <source>Mesh</source>
@@ -472,19 +502,19 @@
     <name>MeshGui::DlgEvaluateMesh</name>
     <message>
       <source>&amp;Help</source>
-      <translation>&amp;Ajuda</translation>
+      <translation type="obsolete">&amp;Ajuda</translation>
     </message>
     <message>
       <source>F1</source>
-      <translation>F1</translation>
+      <translation type="obsolete">F1</translation>
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>&amp;Fechar</translation>
+      <translation type="obsolete">&amp;Fechar</translation>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt + C</translation>
+      <translation type="obsolete">Alt + C</translation>
     </message>
     <message>
       <source>Mesh information</source>
@@ -716,11 +746,11 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Solid:</source>
-      <translation>Solid:</translation>
+      <translation> Sólido: </translation>
     </message>
     <message>
       <source>Cube</source>
-      <translation>Cube</translation>
+      <translation>Cubo</translation>
     </message>
     <message>
       <source>Cylinder</source>
@@ -760,11 +790,11 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Closed</source>
-      <translation>Closed</translation>
+      <translation>Fechado</translation>
     </message>
     <message>
       <source>Sampling:</source>
-      <translation>Sampling:</translation>
+      <translation>Amostragem:</translation>
     </message>
     <message>
       <source>Edge length:</source>
@@ -824,7 +854,7 @@ Please run the command to repair folds first</translation>
       <source>Define normal per vertex</source>
       <translation>Define normal per vertex</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source> °</source>
       <translation> °</translation>
     </message>
@@ -891,6 +921,10 @@ Please run the command to repair folds first</translation>
       <source>Mu:</source>
       <translation>Mu:</translation>
     </message>
+    <message>
+      <source>Only selection</source>
+      <translation type="unfinished">Only selection</translation>
+    </message>
   </context>
   <context>
     <name>MeshGui::MeshFaceAddition</name>
@@ -909,6 +943,13 @@ Please run the command to repair folds first</translation>
     <message>
       <source>Finish</source>
       <translation>Terminar</translation>
+    </message>
+  </context>
+  <context>
+    <name>MeshGui::MeshFillHole</name>
+    <message>
+      <source>Finish</source>
+      <translation type="unfinished">Terminar</translation>
     </message>
   </context>
   <context>
@@ -1018,6 +1059,37 @@ Please run the command to repair folds first</translation>
     </message>
   </context>
   <context>
+    <name>MeshGui::Selection</name>
+    <message>
+      <source>Selection</source>
+      <translation type="unfinished">Seleção</translation>
+    </message>
+    <message>
+      <source>Add</source>
+      <translation type="unfinished">Adicionar</translation>
+    </message>
+    <message>
+      <source>Clear</source>
+      <translation type="unfinished">Limpar</translation>
+    </message>
+    <message>
+      <source>Respect only visible triangles</source>
+      <translation type="unfinished">Respect only visible triangles</translation>
+    </message>
+    <message>
+      <source>Respect only triangles with normals facing screen</source>
+      <translation type="unfinished">Respect only triangles with normals facing screen</translation>
+    </message>
+    <message>
+      <source>Use a brush tool to select the area</source>
+      <translation type="unfinished">Use a brush tool to select the area</translation>
+    </message>
+    <message>
+      <source>Clears completely the selected area</source>
+      <translation type="unfinished">Clears completely the selected area</translation>
+    </message>
+  </context>
+  <context>
     <name>MeshGui::TaskRemoveComponents</name>
     <message>
       <source>Delete</source>
@@ -1026,6 +1098,34 @@ Please run the command to repair folds first</translation>
     <message>
       <source>Invert</source>
       <translation>Invert</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_TrimByPlane</name>
+    <message>
+      <source>Select plane</source>
+      <translation type="unfinished">Select plane</translation>
+    </message>
+    <message>
+      <source>Please select a plane at which you trim the mesh.</source>
+      <translation type="unfinished">Please select a plane at which you trim the mesh.</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_Union</name>
+    <message>
+      <source>OpenSCAD</source>
+      <translation type="unfinished">OpenSCAD</translation>
+    </message>
+    <message>
+      <source>Unknwon error occured while running OpenSCAD.</source>
+      <translation type="unfinished">Unknwon error occured while running OpenSCAD.</translation>
+    </message>
+    <message>
+      <source>OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</source>
+      <translation type="unfinished">OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</translation>
     </message>
   </context>
   <context>
@@ -1083,7 +1183,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>All Files (*.*)</source>
-      <translation>All Files (*.*)</translation>
+      <translation>Todos os Ficheiros (*. *)</translation>
     </message>
     <message>
       <source>ASCII STL (*.stl)</source>
@@ -1151,7 +1251,7 @@ Max=&lt;%4,%5,%6&gt;</translation>
     </message>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</source>
-      <translation>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
+      <translation type="obsolete">All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
     </message>
     <message>
       <source>Stanford Polygon (*.ply)</source>
@@ -1180,6 +1280,10 @@ Max=&lt;%4,%5,%6&gt;</translation>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.off *.ply)</source>
       <translation>Todos os arquivos de malha (*.stl *.ast *.bms *.obj *.off * .ply)</translation>
+    </message>
+    <message>
+      <source>X3D Extensible 3D(*.x3d)</source>
+      <translation type="unfinished">X3D Extensible 3D(*.x3d)</translation>
     </message>
   </context>
   <context>

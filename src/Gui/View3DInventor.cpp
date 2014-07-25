@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (c) 2004 Jürgen Riegel <juergen.riegel@web.de>              *
+ *   Copyright (c) 2004 JÃ¼rgen Riegel <juergen.riegel@web.de>              *
  *                                                                         *
  *   This file is part of the FreeCAD CAx development system.              *
  *                                                                         *
@@ -123,6 +123,12 @@ View3DInventor::View3DInventor(Gui::Document* pcDocument, QWidget* parent, Qt::W
 #endif
     _viewer->setDocument(this->_pcDocument);
     stack->addWidget(_viewer->getWidget());
+    // http://forum.freecadweb.org/viewtopic.php?f=3&t=6055&sid=150ed90cbefba50f1e2ad4b4e6684eba
+    // describes a minor error but trying to fix it leads to a major issue
+    // http://forum.freecadweb.org/viewtopic.php?f=3&t=6085&sid=3f4bcab8007b96aaf31928b564190fd7
+    // so the change is commented out
+    // By default, the wheel events are processed by the 3d view AND the mdi area.
+    //_viewer->getGLWidget()->setAttribute(Qt::WA_NoMousePropagation);
     setCentralWidget(stack);
 #else
     _viewer = new View3DInventorViewer(this);
@@ -138,7 +144,7 @@ View3DInventor::View3DInventor(Gui::Document* pcDocument, QWidget* parent, Qt::W
     OnChange(*hGrp,"BackgroundColor3");
     OnChange(*hGrp,"BackgroundColor4");
     OnChange(*hGrp,"UseBackgroundColorMid");
-    OnChange(*hGrp,"UseAntialiasing");
+    OnChange(*hGrp,"AntiAliasing");
     OnChange(*hGrp,"ShowFPS");
     OnChange(*hGrp,"Orthographic");
     OnChange(*hGrp,"HeadlightColor");
@@ -165,7 +171,7 @@ View3DInventor::~View3DInventor()
     hGrp->Detach(this);
 
     //If we destroy this viewer by calling 'delete' directly the focus proxy widget which is defined 
-    //by a widget in SoQtViewer isn't resetted. This widget becomes to a dangling pointer and makes
+    //by a widget in SoQtViewer isn't reset. This widget becomes a dangling pointer and makes
     //the application crash. (Probably it's better to destroy this viewer by calling close().)
     //See also Gui::Document::~Document().
     QWidget* foc = qApp->focusWidget();
@@ -327,31 +333,8 @@ void View3DInventor::OnChange(ParameterGrp::SubjectType &rCaller,ParameterGrp::M
     else if (strcmp(Reason,"Gradient") == 0) {
         _viewer->setGradientBackground((rGrp.GetBool("Gradient",true)));
     }
-    else if (strcmp(Reason,"UseAntialiasing") == 0) {
-        _viewer->getGLRenderAction()->setSmoothing(rGrp.GetBool("UseAntialiasing",false));
-    }
-    else if (strcmp(Reason,"SampleBuffers") == 0) {
-#if SOQT_MAJOR_VERSION > 1 || (SOQT_MAJOR_VERSION == 1 && SOQT_MINOR_VERSION >= 5)
-        _viewer->setSampleBuffers(rGrp.GetInt("SampleBuffers",4));
-#else
-        // http://stackoverflow.com/questions/4207506/where-is-gl-multisample-defined
-        //int sb = rGrp.GetInt("SampleBuffers",4);
-        //QGLWidget* gl = static_cast<QGLWidget*>(_viewer->getGLWidget());
-        //QGLFormat fmt = gl->format();
-        //if (sb > 0) {
-        //    fmt.setSampleBuffers(true);
-        //    fmt.setSamples(sb);
-        //    gl->setFormat(fmt);
-        //    gl->makeCurrent();
-        //    //glEnable(GL_MULTISAMPLE);
-        //}
-        //else {
-        //    fmt.setSampleBuffers(false);
-        //    gl->setFormat(fmt);
-        //    gl->makeCurrent();
-        //    //glDisable(GL_MULTISAMPLE);
-        //}
-#endif
+    else if (strcmp(Reason,"AntiAliasing") == 0) {
+        _viewer->setAntiAliasingMode(View3DInventorViewer::AntiAliasing(rGrp.GetInt("AntiAliasing",0)));
     }
     else if (strcmp(Reason,"ShowFPS") == 0) {
         _viewer->setEnabledFPSCounter(rGrp.GetBool("ShowFPS",false));

@@ -34,14 +34,17 @@ __title__="FreeCAD Site"
 __author__ = "Yorik van Havre"
 __url__ = "http://www.freecadweb.org"
 
-def makeSite(objectslist=None,name=translate("Arch","Site")):
+def makeSite(objectslist=None,baseobj=None,name=translate("Arch","Site")):
     '''makeBuilding(objectslist): creates a site including the
     objects from the given list.'''
     obj = FreeCAD.ActiveDocument.addObject("App::DocumentObjectGroupPython",name)
     _Site(obj)
-    _ViewProviderSite(obj.ViewObject)
+    if FreeCAD.GuiUp:
+        _ViewProviderSite(obj.ViewObject)
     if objectslist:
         obj.Group = objectslist
+    if baseobj:
+        obj.Terrain = baseobj
     return obj
 
 class _CommandSite:
@@ -51,6 +54,9 @@ class _CommandSite:
                 'MenuText': QtCore.QT_TRANSLATE_NOOP("Arch_Site","Site"),
                 'Accel': "S, I",
                 'ToolTip': QtCore.QT_TRANSLATE_NOOP("Arch_Site","Creates a site object including selected objects.")}
+
+    def IsActive(self):
+        return not FreeCAD.ActiveDocument is None
         
     def Activated(self):
         sel = FreeCADGui.Selection.getSelection()
@@ -85,14 +91,10 @@ class _Site(ArchFloor._Floor):
     "The Site object"
     def __init__(self,obj):
         ArchFloor._Floor.__init__(self,obj)
-        obj.addProperty("App::PropertyLink","Terrain","Arch",
-                        translate("Arch","The terrain of this site"))
-        obj.addProperty("App::PropertyString","Address","Arch",
-                        translate("Arch","The address of this site"))
-        obj.addProperty("App::PropertyString","Coordinates","Arch",
-                        translate("Arch","The geographic coordinates of this site"))
-        obj.addProperty("App::PropertyString","Url","Arch",
-                        translate("Arch","An url that shows this site in a mapping website"))
+        obj.addProperty("App::PropertyLink","Terrain","Arch",translate("Arch","The terrain of this site"))
+        obj.addProperty("App::PropertyString","Address","Arch",translate("Arch","The address of this site"))
+        obj.addProperty("App::PropertyString","Coordinates","Arch",translate("Arch","The geographic coordinates of this site"))
+        obj.addProperty("App::PropertyString","Url","Arch",translate("Arch","An url that shows this site in a mapping website"))
         self.Type = "Site"
         obj.setEditorMode('Height',2)
                 

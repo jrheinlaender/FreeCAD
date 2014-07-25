@@ -24,6 +24,8 @@
 #include "PreCompiled.h"
 
 #ifndef _PreComp_
+# include <QApplication>
+# include <QDebug>
 # include <QDockWidget>
 # include <QPointer>
 #endif
@@ -93,8 +95,18 @@ void ControlSingleton::showModelView()
 
 void ControlSingleton::showDialog(Gui::TaskView::TaskDialog *dlg)
 {
-    // only one dialog at a time
-    assert(!ActiveDialog || ActiveDialog==dlg);
+    // only one dialog at a time, print a warning instead of raising an assert
+    if (ActiveDialog && ActiveDialog != dlg) {
+        if (dlg) {
+            qWarning() << "ControlSingleton::showDialog: Can't show "
+                       << dlg->metaObject()->className()
+                       << " since there is already an active task dialog";
+        }
+        else {
+            qWarning() << "ControlSingleton::showDialog: Task dialog is null";
+        }
+        return;
+    }
     Gui::DockWnd::CombiView* pcCombiView = qobject_cast<Gui::DockWnd::CombiView*>
         (Gui::DockWindowManager::instance()->getDockWindow("Combo View"));
     // should return the pointer to combo view
@@ -149,6 +161,37 @@ QTabWidget* ControlSingleton::tabPanel() const
 Gui::TaskView::TaskDialog* ControlSingleton::activeDialog() const
 {
     return ActiveDialog;
+}
+
+Gui::TaskView::TaskView* ControlSingleton::getTaskPanel()
+{
+    // should return the pointer to combo view
+    Gui::DockWnd::CombiView* pcCombiView = qobject_cast<Gui::DockWnd::CombiView*>
+        (Gui::DockWindowManager::instance()->getDockWindow("Combo View"));
+    if (pcCombiView)
+        return pcCombiView->getTaskPanel();
+    else
+        return _taskPanel;
+}
+
+void ControlSingleton::accept()
+{
+    Gui::TaskView::TaskView* taskPanel = getTaskPanel();
+    if (taskPanel) {
+        taskPanel->accept();
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents |
+                            QEventLoop::ExcludeSocketNotifiers);
+    }
+}
+
+void ControlSingleton::reject()
+{
+    Gui::TaskView::TaskView* taskPanel = getTaskPanel();
+    if (taskPanel) {
+        taskPanel->reject();
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents |
+                            QEventLoop::ExcludeSocketNotifiers);
+    }
 }
 
 void ControlSingleton::closeDialog()

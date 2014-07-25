@@ -42,7 +42,8 @@ def makeRoof(baseobj=None,facenr=1,angle=45,name=translate("Arch","Roof")):
     = roof).'''
     obj = FreeCAD.ActiveDocument.addObject("Part::FeaturePython",name)
     _Roof(obj)
-    _ViewProviderRoof(obj.ViewObject)
+    if FreeCAD.GuiUp:
+        _ViewProviderRoof(obj.ViewObject)
     if baseobj:
         obj.Base = baseobj
     obj.Face = facenr
@@ -56,6 +57,9 @@ class _CommandRoof:
                 'MenuText': QtCore.QT_TRANSLATE_NOOP("Arch_Roof","Roof"),
                 'Accel': "R, F",
                 'ToolTip': QtCore.QT_TRANSLATE_NOOP("Arch_Roof","Creates a roof object from the selected face of an object")}
+
+    def IsActive(self):
+        return not FreeCAD.ActiveDocument is None
 
     def Activated(self):
         sel = FreeCADGui.Selection.getSelectionEx()
@@ -93,10 +97,8 @@ class _Roof(ArchComponent.Component):
 
     def __init__(self,obj):
         ArchComponent.Component.__init__(self,obj)
-        obj.addProperty("App::PropertyAngle","Angle","Base",
-                        translate("Arch","The angle of this roof"))
-        obj.addProperty("App::PropertyInteger","Face","Base",
-                        translate("Arch","The face number of the base object used to build this roof"))
+        obj.addProperty("App::PropertyAngle","Angle","Base",translate("Arch","The angle of this roof"))
+        obj.addProperty("App::PropertyInteger","Face","Base",translate("Arch","The face number of the base object used to build this roof"))
         self.Type = "Roof"
         
     def execute(self,obj):

@@ -9,6 +9,7 @@
         <file>edit_remove.svg</file>
         <file>add.svg</file>
         <file>freecad.svg</file>
+        <file>freecad-doc.png</file>
         <file>bulb.svg</file>
         <file>button_down.svg</file>
         <file>button_left.svg</file>
@@ -21,6 +22,7 @@
         <file>macro-stop.svg</file>
         <file>preferences-display.svg</file>
         <file>preferences-general.svg</file>
+        <file>preferences-import-export.svg</file>
         <file>utilities-terminal.svg</file>
         <file>ClassBrowser/const_member.png</file>
         <file>ClassBrowser/member.png</file>

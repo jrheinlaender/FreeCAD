@@ -1,626 +1,719 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="ro" sourcelanguage="en">
   <context>
     <name>Angle</name>
     <message>
       <source>Form</source>
-      <translation>Form</translation>
+      <translation type="unfinished">Formular</translation>
     </message>
     <message>
       <source>A:</source>
-      <translation>A:</translation>
+      <translation type="unfinished">A:</translation>
     </message>
     <message>
       <source>B:</source>
-      <translation>B:</translation>
+      <translation type="unfinished">B:</translation>
     </message>
     <message>
       <source>C:</source>
-      <translation>C:</translation>
+      <translation type="unfinished">C:</translation>
     </message>
     <message>
       <source>Angle Snap</source>
-      <translation>Angle Snap</translation>
+      <translation type="unfinished">Ancora la unghi</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>1 °</source>
-      <translation>1 °</translation>
+      <translation type="unfinished">1 °</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>2 °</source>
-      <translation>2 °</translation>
+      <translation type="unfinished">2 °</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>5 °</source>
-      <translation>5 °</translation>
+      <translation type="unfinished">5 °</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>10 °</source>
-      <translation>10 °</translation>
+      <translation type="unfinished">10 °</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>20 °</source>
-      <translation>20 °</translation>
+      <translation type="unfinished">20 °</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>45 °</source>
-      <translation>45 °</translation>
+      <translation type="unfinished">45 °</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>90 °</source>
-      <translation>90 °</translation>
+      <translation type="unfinished">90 °</translation>
+    </message>
+    <message utf8="true">
+      <source>180 °</source>
+      <translation type="unfinished">180 °</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdViewMeasureClearAll</name>
+    <message>
+      <source>Measure</source>
+      <translation type="unfinished">Measure</translation>
     </message>
     <message>
-      <source>180 °</source>
-      <translation>180 °</translation>
+      <source>Clear measurement</source>
+      <translation type="unfinished">Clear measurement</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdViewMeasureToggleAll</name>
+    <message>
+      <source>Measure</source>
+      <translation type="unfinished">Measure</translation>
+    </message>
+    <message>
+      <source>Toggle measurement</source>
+      <translation type="unfinished">Toggle measurement</translation>
     </message>
   </context>
   <context>
     <name>DlgCustomizeSpNavSettings</name>
     <message>
       <source>Spaceball Motion</source>
-      <translation>Spaceball Motion</translation>
+      <translation type="unfinished">Miscare Spaceball</translation>
     </message>
     <message>
       <source>Global Sensitivity:  </source>
-      <translation>Global Sensitivity:  </translation>
+      <translation type="unfinished">Sensibilitate globala:  </translation>
     </message>
     <message>
       <source>Dominant Mode</source>
-      <translation>Dominant Mode</translation>
+      <translation type="unfinished">Mod predominant</translation>
     </message>
     <message>
       <source>Flip Y/Z</source>
-      <translation>Flip Y/Z</translation>
+      <translation type="unfinished">Schimba Y/Z</translation>
     </message>
     <message>
       <source>Enable Translations</source>
-      <translation>Enable Translations</translation>
+      <translation type="unfinished">Activeaza traducerile</translation>
     </message>
     <message>
       <source>Enable Rotations</source>
-      <translation>Enable Rotations</translation>
+      <translation type="unfinished">Activeaza rotatiile</translation>
     </message>
     <message>
       <source>Calibrate</source>
-      <translation>Calibrate</translation>
+      <translation type="unfinished">Calibreaza</translation>
     </message>
     <message>
       <source>Default</source>
-      <translation>Default</translation>
+      <translation type="unfinished">Implicit</translation>
     </message>
     <message>
       <source>Enable</source>
-      <translation>Enable</translation>
+      <translation type="unfinished">Activeaza</translation>
     </message>
     <message>
       <source>Reverse</source>
-      <translation>Invers</translation>
+      <translation type="unfinished">Invers</translation>
+    </message>
+  </context>
+  <context>
+    <name>DlgUnitCalculator</name>
+    <message>
+      <source>Units calculator</source>
+      <translation type="unfinished">Units calculator</translation>
+    </message>
+    <message>
+      <source>as:</source>
+      <translation type="unfinished">as:</translation>
+    </message>
+    <message>
+      <source>=&gt;</source>
+      <translation type="unfinished">=&gt;</translation>
+    </message>
+    <message>
+      <source>Help</source>
+      <translation type="unfinished">Ajutor</translation>
+    </message>
+    <message>
+      <source>Copy</source>
+      <translation type="unfinished">Copiere</translation>
+    </message>
+    <message>
+      <source>Close</source>
+      <translation type="unfinished">Închide</translation>
+    </message>
+  </context>
+  <context>
+    <name>DownloadItem</name>
+    <message>
+      <source>Form</source>
+      <translation type="unfinished">Formular</translation>
+    </message>
+    <message>
+      <source>Ico</source>
+      <translation type="unfinished">Ico</translation>
+    </message>
+    <message>
+      <source>Filename</source>
+      <translation type="unfinished">Filename</translation>
     </message>
   </context>
   <context>
     <name>Gui::AccelLineEdit</name>
     <message>
       <source>none</source>
-      <translation>niciunul</translation>
+      <translation type="unfinished">niciunul</translation>
     </message>
   </context>
   <context>
     <name>Gui::ActionSelector</name>
     <message>
       <source>Available:</source>
-      <translation>Available:</translation>
+      <translation type="unfinished">Disponibil:</translation>
     </message>
     <message>
       <source>Selected:</source>
-      <translation>Selected:</translation>
+      <translation type="unfinished">Selectat:</translation>
     </message>
     <message>
       <source>Add</source>
-      <translation>Adaugă</translation>
+      <translation type="unfinished">Adaugă</translation>
     </message>
     <message>
       <source>Remove</source>
-      <translation>Elimină</translation>
+      <translation type="unfinished">Elimină</translation>
     </message>
     <message>
       <source>Move up</source>
-      <translation>Deplasare în sus</translation>
+      <translation type="unfinished">Deplasare în sus</translation>
     </message>
     <message>
       <source>Move down</source>
-      <translation>Deplasare în jos</translation>
+      <translation type="unfinished">Deplasare în jos</translation>
     </message>
   </context>
   <context>
     <name>Gui::AlignmentView</name>
     <message>
       <source>Movable object</source>
-      <translation>Movable object</translation>
+      <translation type="unfinished">Obiect liber</translation>
     </message>
     <message>
       <source>Fixed object</source>
-      <translation>Fixed object</translation>
+      <translation type="unfinished">Obiect fixat</translation>
     </message>
   </context>
   <context>
     <name>Gui::BlenderNavigationStyle</name>
     <message>
       <source>Press left mouse button</source>
-      <translation>Press left mouse button</translation>
+      <translation type="unfinished">Apăsa butonul dreapta al mouse-ului</translation>
     </message>
     <message>
       <source>Press SHIFT and middle mouse button</source>
-      <translation>Press SHIFT and middle mouse button</translation>
+      <translation type="unfinished">Apasa SHIFT si butonul din mijloc al mouse-ului</translation>
     </message>
     <message>
       <source>Press middle mouse button</source>
-      <translation>Press middle mouse button</translation>
+      <translation type="unfinished">Apasati butonul din mijloc al mouse-ului</translation>
     </message>
     <message>
       <source>Scroll middle mouse button</source>
-      <translation>Scroll middle mouse button</translation>
+      <translation type="unfinished">Deruleaza folosind butonul din mijloc al mouse-ului</translation>
     </message>
   </context>
   <context>
     <name>Gui::CADNavigationStyle</name>
     <message>
       <source>Press left mouse button</source>
-      <translation>Press left mouse button</translation>
+      <translation type="unfinished">Apăsa butonul dreapta al mouse-ului</translation>
     </message>
     <message>
       <source>Press middle mouse button</source>
-      <translation>Press middle mouse button</translation>
+      <translation type="unfinished">Apasati butonul din mijloc al mouse-ului</translation>
     </message>
     <message>
-      <source>Press left and middle mouse button</source>
-      <translation>Press left and middle mouse button</translation>
+      <source>Press middle and left or right mouse button</source>
+      <translation type="unfinished">Press middle and left or right mouse button</translation>
     </message>
     <message>
-      <source>Scroll middle mouse button</source>
-      <translation>Scroll middle mouse button</translation>
+      <source>Scroll middle mouse button or keep middle button pressed
+while doing a left or right click and move the mouse up or down</source>
+      <translation type="unfinished">Scroll middle mouse button or keep middle button pressed
+while doing a left or right click and move the mouse up or down</translation>
     </message>
   </context>
   <context>
     <name>Gui::Command</name>
     <message>
       <source>Standard</source>
-      <translation>Standard</translation>
+      <translation type="unfinished">Standard</translation>
     </message>
   </context>
   <context>
     <name>Gui::ContainerDialog</name>
     <message>
       <source>&amp;OK</source>
-      <translation>&amp;OK</translation>
+      <translation type="unfinished">&amp;OK</translation>
     </message>
     <message>
       <source>&amp;Cancel</source>
-      <translation>&amp;Revocare</translation>
+      <translation type="unfinished">&amp;Revocare</translation>
     </message>
   </context>
   <context>
     <name>Gui::ControlSingleton</name>
     <message>
       <source>Task panel</source>
-      <translation>Task panel</translation>
+      <translation type="unfinished">Panoul de activitate</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::AboutApplication</name>
     <message>
       <source>About</source>
-      <translation>Despre</translation>
+      <translation type="unfinished">Despre</translation>
     </message>
     <message>
       <source>Revision number</source>
-      <translation>Revizia numărul</translation>
+      <translation type="unfinished">Revizia numărul</translation>
     </message>
     <message>
       <source>Version</source>
-      <translation>Versiunea</translation>
+      <translation type="unfinished">Versiunea</translation>
     </message>
     <message>
       <source>OK</source>
-      <translation>OK</translation>
+      <translation type="unfinished">OK</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
     <message>
       <source>Release date</source>
-      <translation>Data publicării</translation>
-    </message>
-    <message>
-      <source>Platform</source>
-      <translation>Platform</translation>
+      <translation type="unfinished">Data publicării</translation>
     </message>
     <message>
       <source>License...</source>
-      <translation>License...</translation>
+      <translation type="unfinished">Licenta...</translation>
     </message>
     <message>
       <source>Copy to clipboard</source>
-      <translation>Copy to clipboard</translation>
+      <translation type="unfinished">Copiaţi în clipboard</translation>
     </message>
     <message>
       <source>Operating system</source>
-      <translation>Operating system</translation>
+      <translation type="unfinished">Sistem de operare</translation>
+    </message>
+    <message>
+      <source>Word size</source>
+      <translation type="unfinished">Word size</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::ButtonModel</name>
     <message>
       <source>Button %1</source>
-      <translation>Button %1</translation>
+      <translation type="unfinished">Buton %1</translation>
     </message>
     <message>
       <source>Out Of Range</source>
-      <translation>Out Of Range</translation>
+      <translation type="unfinished">Valoare incorecta</translation>
+    </message>
+  </context>
+  <context>
+    <name>Gui::Dialog::Clipping</name>
+    <message>
+      <source>Clipping</source>
+      <translation type="unfinished">Clipping</translation>
+    </message>
+    <message>
+      <source>Clipping X</source>
+      <translation type="unfinished">Clipping X</translation>
+    </message>
+    <message>
+      <source>Flip</source>
+      <translation type="unfinished">Flip</translation>
+    </message>
+    <message>
+      <source>Offset</source>
+      <translation type="unfinished">Compensare</translation>
+    </message>
+    <message>
+      <source>Clipping Y</source>
+      <translation type="unfinished">Clipping Y</translation>
+    </message>
+    <message>
+      <source>Clipping Z</source>
+      <translation type="unfinished">Clipping Z</translation>
+    </message>
+    <message>
+      <source>Clipping custom direction</source>
+      <translation type="unfinished">Clipping custom direction</translation>
+    </message>
+    <message>
+      <source>View</source>
+      <translation type="unfinished">Vizualizare</translation>
+    </message>
+    <message>
+      <source>Adjust to view direction</source>
+      <translation type="unfinished">Adjust to view direction</translation>
+    </message>
+    <message>
+      <source>Direction</source>
+      <translation type="unfinished">Direcţia</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::CommandModel</name>
     <message>
       <source>Commands</source>
-      <translation>Comenzi</translation>
+      <translation type="unfinished">Comenzi</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DemoMode</name>
     <message>
       <source>View Turntable</source>
-      <translation>View Turntable</translation>
+      <translation type="unfinished">Vezi panou</translation>
     </message>
     <message>
       <source>Speed</source>
-      <translation>Speed</translation>
+      <translation type="unfinished">Viteza</translation>
     </message>
     <message>
       <source>Maximum</source>
-      <translation>Maximum</translation>
+      <translation type="unfinished">Maxim</translation>
     </message>
     <message>
       <source>Minimum</source>
-      <translation>Minimum</translation>
+      <translation type="unfinished">Minim</translation>
     </message>
     <message>
       <source>Fullscreen</source>
-      <translation>Ecran complet</translation>
+      <translation type="unfinished">Ecran complet</translation>
     </message>
     <message>
       <source>Enable timer</source>
-      <translation>Enable timer</translation>
+      <translation type="unfinished">Activeaza cronometru</translation>
     </message>
     <message>
       <source> s</source>
-      <translation> s</translation>
+      <translation type="unfinished"> s</translation>
     </message>
     <message>
       <source>Angle</source>
-      <translation>Angle</translation>
+      <translation type="unfinished">Unghi</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>90°</source>
-      <translation>90°</translation>
+      <translation type="unfinished">90°</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>-90°</source>
-      <translation>-90°</translation>
+      <translation type="unfinished">-90°</translation>
     </message>
     <message>
       <source>Play</source>
-      <translation>Play</translation>
+      <translation type="unfinished">Redă</translation>
     </message>
     <message>
       <source>Stop</source>
-      <translation>Stop</translation>
+      <translation type="unfinished">Stop</translation>
     </message>
     <message>
       <source>Close</source>
-      <translation>Închide</translation>
+      <translation type="unfinished">Închide</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgActivateWindow</name>
     <message>
       <source>Choose Window</source>
-      <translation>Alegeţi fereastra</translation>
+      <translation type="unfinished">Alegeţi fereastra</translation>
     </message>
     <message>
       <source>&amp;Activate</source>
-      <translation>&amp;Activează</translation>
+      <translation type="unfinished">&amp;Activează</translation>
     </message>
     <message>
-      <source>Alt+A</source>
-      <translation>Alt + A</translation>
-    </message>
-    <message>
-      <source>&amp;Cancel</source>
-      <translation>&amp;Revocare</translation>
-    </message>
-    <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgActivateWindowImp</name>
     <message>
       <source>Windows</source>
-      <translation>Ferestre</translation>
+      <translation type="unfinished">Ferestre</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgAuthorization</name>
     <message>
       <source>Authorization</source>
-      <translation>Autorizație</translation>
-    </message>
-    <message>
-      <source>&amp;OK</source>
-      <translation>&amp;OK</translation>
-    </message>
-    <message>
-      <source>&amp;Cancel</source>
-      <translation>&amp;Revocare</translation>
+      <translation type="unfinished">Autorizație</translation>
     </message>
     <message>
       <source>Password:</source>
-      <translation>Parola:</translation>
+      <translation type="unfinished">Parola:</translation>
     </message>
     <message>
-      <source>User name:</source>
-      <translation>Nume de utilizator:</translation>
+      <source/>
+      <translation> </translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source>Username:</source>
+      <translation type="unfinished">Username:</translation>
+    </message>
+    <message>
+      <source>Site:</source>
+      <translation type="unfinished">Site:</translation>
+    </message>
+    <message>
+      <source>%1 at %2</source>
+      <translation type="unfinished">%1 at %2</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgChooseIcon</name>
     <message>
       <source>Choose Icon</source>
-      <translation>Alege iconiţa</translation>
-    </message>
-    <message>
-      <source>OK</source>
-      <translation>OK</translation>
-    </message>
-    <message>
-      <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="unfinished">Alege iconiţa</translation>
     </message>
     <message>
       <source>Add icons...</source>
-      <translation>Add icons...</translation>
+      <translation type="unfinished">Adauga icon-uri...</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomActions</name>
     <message>
       <source>Macros</source>
-      <translation>Macro-uri</translation>
+      <translation type="unfinished">Macro-uri</translation>
     </message>
     <message>
       <source>Setup Custom Macros</source>
-      <translation>Configurează marco-uri personalizate</translation>
+      <translation type="unfinished">Configurează marco-uri personalizate</translation>
     </message>
     <message>
       <source>Macro:</source>
-      <translation>Macro:</translation>
+      <translation type="unfinished">Macro:</translation>
     </message>
     <message>
       <source>...</source>
-      <translation>...</translation>
+      <translation type="unfinished">...</translation>
     </message>
     <message>
       <source>Pixmap</source>
-      <translation>Pixmap</translation>
+      <translation type="unfinished">Pixmap</translation>
     </message>
     <message>
       <source>Accelerator:</source>
-      <translation>Accelerator:</translation>
+      <translation type="unfinished">Accelerator:</translation>
     </message>
     <message>
       <source>What's this:</source>
-      <translation>Ce este asta:</translation>
+      <translation type="unfinished">Ce este asta:</translation>
     </message>
     <message>
       <source>Status text:</source>
-      <translation>Text de stare:</translation>
+      <translation type="unfinished">Text de stare:</translation>
     </message>
     <message>
       <source>Tool tip:</source>
-      <translation>Sfat:</translation>
+      <translation type="unfinished">Sfat:</translation>
     </message>
     <message>
       <source>Menu text:</source>
-      <translation>Textul meniului:</translation>
+      <translation type="unfinished">Textul meniului:</translation>
     </message>
     <message>
       <source>Add</source>
-      <translation>Adaugă</translation>
+      <translation type="unfinished">Adaugă</translation>
     </message>
     <message>
       <source>Remove</source>
-      <translation>Elimină</translation>
+      <translation type="unfinished">Elimină</translation>
     </message>
     <message>
       <source>Replace</source>
-      <translation>Înlocuieşte</translation>
+      <translation type="unfinished">Înlocuieşte</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomActionsImp</name>
     <message>
       <source>Icons</source>
-      <translation>Iconiţe</translation>
+      <translation type="unfinished">Iconiţe</translation>
     </message>
     <message>
       <source>Macros</source>
-      <translation>Macro-uri</translation>
+      <translation type="unfinished">Macro-uri</translation>
     </message>
     <message>
       <source>No macro</source>
-      <translation>Niciun macro</translation>
+      <translation type="unfinished">Niciun macro</translation>
     </message>
     <message>
       <source>No macros found.</source>
-      <translation>Nu a fost găsit niciun macro.</translation>
+      <translation type="unfinished">Nu a fost găsit niciun macro.</translation>
     </message>
     <message>
       <source>Macro not found</source>
-      <translation>Macro-ul nu a fost găsit</translation>
+      <translation type="unfinished">Macro-ul nu a fost găsit</translation>
     </message>
     <message>
       <source>Sorry, couldn't find macro file '%1'.</source>
-      <translation>Nu am putut găsi fişierul macro '%1'.</translation>
+      <translation type="unfinished">Nu am putut găsi fişierul macro '%1'.</translation>
     </message>
     <message>
       <source>Empty macro</source>
-      <translation>Macro gol</translation>
+      <translation type="unfinished">Macro gol</translation>
     </message>
     <message>
       <source>Please specify the macro first.</source>
-      <translation>Vă rugăm specificaţi macro-ul mai întâi.</translation>
+      <translation type="unfinished">Vă rugăm specificaţi macro-ul mai întâi.</translation>
     </message>
     <message>
       <source>Empty text</source>
-      <translation>Text gol</translation>
+      <translation type="unfinished">Text gol</translation>
     </message>
     <message>
       <source>Please specify the menu text first.</source>
-      <translation>Specificați prima dată textul meniului.</translation>
+      <translation type="unfinished">Specificați prima dată textul meniului.</translation>
     </message>
     <message>
       <source>No item selected</source>
-      <translation>Nici un element selectat</translation>
+      <translation type="unfinished">Nici un element selectat</translation>
     </message>
     <message>
       <source>Please select a macro item first.</source>
-      <translation>Vă rugăm să selectaţi mai întâi un element de macrocomandă.</translation>
+      <translation type="unfinished">Vă rugăm să selectaţi mai întâi un element de macrocomandă.</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomCommands</name>
     <message>
       <source>Commands</source>
-      <translation>Comenzi</translation>
+      <translation type="unfinished">Comenzi</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomCommandsImp</name>
     <message>
       <source>Category</source>
-      <translation>Categorie</translation>
+      <translation type="unfinished">Categorie</translation>
     </message>
     <message>
       <source>Icon</source>
-      <translation>Pictograma</translation>
+      <translation type="unfinished">Pictograma</translation>
     </message>
     <message>
       <source>Command</source>
-      <translation>Comanda</translation>
+      <translation type="unfinished">Comanda</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomKeyboard</name>
     <message>
       <source>Keyboard</source>
-      <translation>Tastatură</translation>
+      <translation type="unfinished">Tastatură</translation>
     </message>
     <message>
       <source>Description:</source>
-      <translation>Descriere:</translation>
+      <translation type="unfinished">Descriere:</translation>
     </message>
     <message>
       <source>&amp;Category:</source>
-      <translation>&amp;Categoria:</translation>
+      <translation type="unfinished">&amp;Categoria:</translation>
     </message>
     <message>
       <source>C&amp;ommands:</source>
-      <translation>C&amp;omenzi:</translation>
+      <translation type="unfinished">C&amp;omenzi:</translation>
     </message>
     <message>
       <source>Current shortcut:</source>
-      <translation>Comandă rapidă curentă:</translation>
+      <translation type="unfinished">Comandă rapidă curentă:</translation>
     </message>
     <message>
       <source>Press &amp;new shortcut:</source>
-      <translation>Apăsați comandă rapidă &amp;nouă:</translation>
+      <translation type="unfinished">Apăsați comandă rapidă &amp;nouă:</translation>
     </message>
     <message>
       <source>Currently assigned to:</source>
-      <translation>În prezent atribuit:</translation>
+      <translation type="unfinished">În prezent atribuit:</translation>
     </message>
     <message>
       <source>&amp;Assign</source>
-      <translation>&amp;Asociază</translation>
+      <translation type="unfinished">&amp;Asociază</translation>
     </message>
     <message>
       <source>Alt+A</source>
-      <translation>Alt + A</translation>
+      <translation type="unfinished">Alt + A</translation>
     </message>
     <message>
       <source>&amp;Reset</source>
-      <translation>&amp;Reset</translation>
+      <translation type="unfinished">&amp;Reset</translation>
     </message>
     <message>
       <source>Alt+R</source>
-      <translation>Alt+R</translation>
+      <translation type="unfinished">Alt+R</translation>
     </message>
     <message>
       <source>Re&amp;set All</source>
-      <translation>Re&amp;setează tot</translation>
+      <translation type="unfinished">Re&amp;setează tot</translation>
     </message>
     <message>
       <source>Alt+S</source>
-      <translation>Alt + S</translation>
+      <translation type="unfinished">Alt + S</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomKeyboardImp</name>
     <message>
       <source>Icon</source>
-      <translation>Pictograma</translation>
+      <translation type="unfinished">Pictograma</translation>
     </message>
     <message>
       <source>Command</source>
-      <translation>Comanda</translation>
+      <translation type="unfinished">Comanda</translation>
     </message>
     <message>
       <source>none</source>
-      <translation>niciunul</translation>
+      <translation type="unfinished">niciunul</translation>
     </message>
     <message>
       <source>Multiple defined shortcut</source>
-      <translation>Comandă rapidă definită de mai multe ori</translation>
+      <translation type="unfinished">Comandă rapidă definită de mai multe ori</translation>
     </message>
     <message>
       <source>The shortcut '%1' is defined more than once. This could result into unexpected behaviour.</source>
-      <translation>Comanda rapidă '%1' este definită de mai multe ori. Aceasta ar putea rezulta într-un comportament imprevizibil.</translation>
+      <translation type="unfinished">Comanda rapidă '%1' este definită de mai multe ori. Aceasta ar putea rezulta într-un comportament imprevizibil.</translation>
     </message>
     <message>
       <source>Already defined shortcut</source>
-      <translation>Comanda rapidă este deja definită</translation>
+      <translation type="unfinished">Comanda rapidă este deja definită</translation>
     </message>
     <message>
       <source>The shortcut '%1' is already assigned to '%2'.
 
 Please define another shortcut.</source>
-      <translation>Comanda rapidă '%1' este deja asociată cu '%2'.
+      <translation type="unfinished">Comanda rapidă '%1' este deja asociată cu '%2'.
 
 Vă rugăm definiți o altă comandă rapidă.</translation>
     </message>
@@ -629,1629 +722,1584 @@ Vă rugăm definiți o altă comandă rapidă.</translation>
     <name>Gui::Dialog::DlgCustomToolBoxbarsImp</name>
     <message>
       <source>Toolbox bars</source>
-      <translation>Bare de instrumente</translation>
+      <translation type="unfinished">Bare de instrumente</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomToolbars</name>
     <message>
       <source>Toolbars</source>
-      <translation>Bare de instrumente</translation>
+      <translation type="unfinished">Bare de instrumente</translation>
     </message>
     <message>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Note:&lt;/span&gt; The changes become active the next time you load the appropriate workbench&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt; &lt;body style="white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt; &lt;p style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;-qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt; &lt;span style="font-weight:600;"&gt; Notă:&lt;/span&gt; Modificările vor deveni active, data viitoare când încărcaţi bancul de lucru corespunzător&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt; &lt;body style="white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt; &lt;p style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;-qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt; &lt;span style="font-weight:600;"&gt; Notă:&lt;/span&gt; Modificările vor deveni active, data viitoare când încărcaţi bancul de lucru corespunzător&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Move right</source>
-      <translation>Deplasare spre dreapta</translation>
+      <translation type="unfinished">Deplasare spre dreapta</translation>
     </message>
     <message>
       <source>&lt;b&gt;Move the selected item one level down.&lt;/b&gt;&lt;p&gt;This will also change the level of the parent item.&lt;/p&gt;</source>
-      <translation>&lt;b&gt;Mută elementul selectat cu un nivel mai în jos.&lt;/b&gt;&lt;p&gt;Acest lucru va schimba, de asemenea, și nivelul elementului părinte.&lt;/p&gt;</translation>
+      <translation type="unfinished">&lt;b&gt;Mută elementul selectat cu un nivel mai în jos.&lt;/b&gt;&lt;p&gt;Acest lucru va schimba, de asemenea, și nivelul elementului părinte.&lt;/p&gt;</translation>
     </message>
     <message>
       <source>Move left</source>
-      <translation>Deplasare spre stânga</translation>
+      <translation type="unfinished">Deplasare spre stânga</translation>
     </message>
     <message>
       <source>&lt;b&gt;Move the selected item one level up.&lt;/b&gt;&lt;p&gt;This will also change the level of the parent item.&lt;/p&gt;</source>
-      <translation>&lt;b&gt;Mută elementul selectat cu un nivel mai în sus.&lt;/b&gt;&lt;p&gt;Acest lucru va schimba, de asemenea, și nivelul elementului părinte.&lt;/p&gt;</translation>
+      <translation type="unfinished">&lt;b&gt;Mută elementul selectat cu un nivel mai în sus.&lt;/b&gt;&lt;p&gt;Acest lucru va schimba, de asemenea, și nivelul elementului părinte.&lt;/p&gt;</translation>
     </message>
     <message>
       <source>Move down</source>
-      <translation>Deplasare în jos</translation>
+      <translation type="unfinished">Deplasare în jos</translation>
     </message>
     <message>
       <source>&lt;b&gt;Move the selected item down.&lt;/b&gt;&lt;p&gt;The item will be moved within the hierarchy level.&lt;/p&gt;</source>
-      <translation>&lt;b&gt;Mută elementul selectat în jos.&lt;/b&gt;&lt;p&gt;Elementul va schimba nivelul ierarhic.&lt;/p&gt;</translation>
+      <translation type="unfinished">&lt;b&gt;Mută elementul selectat în jos.&lt;/b&gt;&lt;p&gt;Elementul va schimba nivelul ierarhic.&lt;/p&gt;</translation>
     </message>
     <message>
       <source>Move up</source>
-      <translation>Deplasare în sus</translation>
+      <translation type="unfinished">Deplasare în sus</translation>
     </message>
     <message>
       <source>&lt;b&gt;Move the selected item up.&lt;/b&gt;&lt;p&gt;The item will be moved within the hierarchy level.&lt;/p&gt;</source>
-      <translation>&lt;b&gt;Mută elementul selectat în sus.&lt;/b&gt;&lt;p&gt;Elementul va schimba nivelul ierarhic.&lt;/p&gt;</translation>
+      <translation type="unfinished">&lt;b&gt;Mută elementul selectat în sus.&lt;/b&gt;&lt;p&gt;Elementul va schimba nivelul ierarhic.&lt;/p&gt;</translation>
     </message>
     <message>
       <source>New...</source>
-      <translation>Nou...</translation>
+      <translation type="unfinished">Nou...</translation>
     </message>
     <message>
       <source>Rename...</source>
-      <translation>Redenumire...</translation>
+      <translation type="unfinished">Redenumire...</translation>
     </message>
     <message>
       <source>Delete</source>
-      <translation>Ştergeţi</translation>
+      <translation type="unfinished">Ştergeţi</translation>
     </message>
     <message>
       <source>Icon</source>
-      <translation>Pictograma</translation>
+      <translation type="unfinished">Pictograma</translation>
     </message>
     <message>
       <source>Command</source>
-      <translation>Comanda</translation>
+      <translation type="unfinished">Comanda</translation>
     </message>
     <message>
       <source>&lt;Separator&gt;</source>
-      <translation>&lt;Separator&gt;</translation>
+      <translation type="unfinished">&lt;Separator&gt;</translation>
     </message>
     <message>
       <source>New toolbar</source>
-      <translation>Bară de instrumente nouă</translation>
+      <translation type="unfinished">Bară de instrumente nouă</translation>
     </message>
     <message>
       <source>Toolbar name:</source>
-      <translation>Numele barei de instrumente:</translation>
+      <translation type="unfinished">Numele barei de instrumente:</translation>
     </message>
     <message>
       <source>Duplicated name</source>
-      <translation>Numele este dublură</translation>
+      <translation type="unfinished">Numele este dublură</translation>
     </message>
     <message>
       <source>The toolbar name '%1' is already used</source>
-      <translation>Numele barei de instrumente '%1' este deja utilizat</translation>
+      <translation type="unfinished">Numele barei de instrumente '%1' este deja utilizat</translation>
     </message>
     <message>
       <source>Rename toolbar</source>
-      <translation>Redenumiţi bara de instrumente</translation>
+      <translation type="unfinished">Redenumiţi bara de instrumente</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomizeImp</name>
     <message>
       <source>Customize</source>
-      <translation>Personalizare</translation>
+      <translation type="unfinished">Personalizare</translation>
     </message>
     <message>
       <source>&amp;Help</source>
-      <translation>&amp;Ajutor</translation>
+      <translation type="unfinished">&amp;Ajutor</translation>
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>&amp;Inchide</translation>
+      <translation type="unfinished">&amp;Inchide</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomizeSpNavSettings</name>
     <message>
       <source>Spaceball Motion</source>
-      <translation>Spaceball Motion</translation>
+      <translation type="unfinished">Miscare Spaceball</translation>
     </message>
     <message>
       <source>No Spaceball Present</source>
-      <translation>No Spaceball Present</translation>
+      <translation type="unfinished">Nici un Spaceball prezent</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgCustomizeSpaceball</name>
     <message>
       <source>No Spaceball Present</source>
-      <translation>No Spaceball Present</translation>
+      <translation type="unfinished">Nici un Spaceball prezent</translation>
     </message>
     <message>
       <source>Buttons</source>
-      <translation>Buttons</translation>
+      <translation type="unfinished">Butoane</translation>
     </message>
     <message>
       <source>Clear</source>
-      <translation>Eliberează</translation>
+      <translation type="unfinished">Eliberează</translation>
     </message>
     <message>
       <source>Print Reference</source>
-      <translation>Print Reference</translation>
+      <translation type="unfinished">Imprimare - referinta</translation>
     </message>
     <message>
       <source>Spaceball Buttons</source>
-      <translation>Spaceball Buttons</translation>
+      <translation type="unfinished">Butoane Spaceball</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgDisplayProperties</name>
     <message>
       <source>Display properties</source>
-      <translation>Afișare proprietăți</translation>
+      <translation type="unfinished">Afișare proprietăți</translation>
     </message>
     <message>
       <source>Display</source>
-      <translation>Afișare</translation>
+      <translation type="unfinished">Afișare</translation>
     </message>
     <message>
       <source>Transparency:</source>
-      <translation>Transparenţă:</translation>
+      <translation type="unfinished">Transparenţă:</translation>
     </message>
     <message>
       <source>Line width:</source>
-      <translation>Lățimea liniei:</translation>
+      <translation type="unfinished">Lățimea liniei:</translation>
     </message>
     <message>
       <source>Point size:</source>
-      <translation>Dimensiunea punctelor:</translation>
+      <translation type="unfinished">Dimensiunea punctelor:</translation>
     </message>
     <message>
       <source>Material</source>
-      <translation>Materialul</translation>
+      <translation type="unfinished">Materialul</translation>
     </message>
     <message>
       <source>...</source>
-      <translation>...</translation>
-    </message>
-    <message>
-      <source>Close</source>
-      <translation>Închide</translation>
+      <translation type="unfinished">...</translation>
     </message>
     <message>
       <source>Viewing mode</source>
-      <translation>Mod de vizualizare</translation>
+      <translation type="unfinished">Mod de vizualizare</translation>
     </message>
     <message>
       <source>Plot mode:</source>
-      <translation>Mod de tipărire:</translation>
+      <translation type="unfinished">Mod de tipărire:</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
     <message>
       <source>Line transparency:</source>
-      <translation>Line transparency:</translation>
+      <translation type="unfinished">Transparenta liniei:</translation>
     </message>
     <message>
       <source>Line color:</source>
-      <translation>Line color:</translation>
+      <translation type="unfinished">Culoarea liniei:</translation>
     </message>
     <message>
       <source>Shape color:</source>
-      <translation>Shape color:</translation>
+      <translation type="unfinished">Culoarea formei:</translation>
     </message>
     <message>
       <source>Color plot:</source>
-      <translation>Color plot:</translation>
+      <translation type="unfinished">Grafic color:</translation>
     </message>
     <message>
       <source>Document window:</source>
-      <translation>Document window:</translation>
+      <translation type="unfinished">Fereastra documentului:</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgEditorSettings</name>
     <message>
       <source>Editor</source>
-      <translation>Editor</translation>
+      <translation type="unfinished">Editor</translation>
     </message>
     <message>
       <source>Options</source>
-      <translation>Opţiuni</translation>
+      <translation type="unfinished">Opţiuni</translation>
     </message>
     <message>
       <source>Enable line numbers</source>
-      <translation>Activează numerele liniilor</translation>
+      <translation type="unfinished">Activează numerele liniilor</translation>
     </message>
     <message>
       <source>Enable folding</source>
-      <translation>Activează plierea</translation>
+      <translation type="unfinished">Activează plierea</translation>
     </message>
     <message>
       <source>Indentation</source>
-      <translation>Indentare</translation>
+      <translation type="unfinished">Indentare</translation>
     </message>
     <message>
       <source>Insert spaces</source>
-      <translation>Inseraţi spaţii</translation>
+      <translation type="unfinished">Inseraţi spaţii</translation>
     </message>
     <message>
       <source>Tab size:</source>
-      <translation>Mărime tabulator:</translation>
+      <translation type="unfinished">Mărime tabulator:</translation>
     </message>
     <message>
       <source>Indent size:</source>
-      <translation>Distanță indentare:</translation>
+      <translation type="unfinished">Distanță indentare:</translation>
     </message>
     <message>
       <source>Keep tabs</source>
-      <translation>Păstrează tabulatorii</translation>
+      <translation type="unfinished">Păstrează tabulatorii</translation>
     </message>
     <message>
       <source>Display Items</source>
-      <translation>Afişare elemente</translation>
+      <translation type="unfinished">Afişare elemente</translation>
     </message>
     <message>
       <source>Family:</source>
-      <translation>Familie:</translation>
+      <translation type="unfinished">Familie:</translation>
     </message>
     <message>
       <source>Size:</source>
-      <translation>Dimensiune:</translation>
+      <translation type="unfinished">Dimensiune:</translation>
     </message>
     <message>
       <source>Preview:</source>
-      <translation>Previzualizare:</translation>
+      <translation type="unfinished">Previzualizare:</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgGeneral</name>
     <message>
       <source>General</source>
-      <translation>General</translation>
+      <translation type="unfinished">General</translation>
     </message>
     <message>
       <source>Start up</source>
-      <translation>Pornire</translation>
+      <translation type="unfinished">Pornire</translation>
     </message>
     <message>
       <source>Enable splash screen at start up</source>
-      <translation>Activează ecran de pornire</translation>
+      <translation type="unfinished">Activează ecran de pornire</translation>
     </message>
     <message>
       <source>Switch to tab of report window:</source>
-      <translation>Comută pe fila din fereastra Raport:</translation>
+      <translation type="unfinished">Comută pe fila din fereastra Raport:</translation>
     </message>
     <message>
       <source>Auto load module after start up:</source>
-      <translation>Încarcă automat modulele la pornire:</translation>
+      <translation type="unfinished">Încarcă automat modulele la pornire:</translation>
     </message>
     <message>
       <source>Language</source>
-      <translation>Limba</translation>
+      <translation type="unfinished">Limba</translation>
     </message>
     <message>
       <source>Change language:</source>
-      <translation>Schimbare limbă:</translation>
+      <translation type="unfinished">Schimbare limbă:</translation>
     </message>
     <message>
       <source>Main window</source>
-      <translation>Fereastra principală</translation>
+      <translation type="unfinished">Fereastra principală</translation>
     </message>
     <message>
       <source>Size of recent file list</source>
-      <translation>Dimensiunea listei de fişiere recente</translation>
+      <translation type="unfinished">Dimensiunea listei de fişiere recente</translation>
     </message>
     <message>
       <source>Window style:</source>
-      <translation>Stilul ferestrei:</translation>
+      <translation type="unfinished">Stilul ferestrei:</translation>
     </message>
     <message>
       <source>Size of toolbar icons:</source>
-      <translation>Size of toolbar icons:</translation>
+      <translation type="unfinished">Dimensiunea icon-urilor in toolbar:</translation>
+    </message>
+    <message>
+      <source>Enable tiled background</source>
+      <translation type="unfinished">Enable tiled background</translation>
+    </message>
+    <message>
+      <source>Style sheet:</source>
+      <translation type="unfinished">Style sheet:</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgGeneralImp</name>
     <message>
       <source>Default (%1 x %1)</source>
-      <translation>Default (%1 x %1)</translation>
+      <translation type="unfinished">Implicit (%1 x %1)</translation>
     </message>
     <message>
       <source>Small (%1 x %1)</source>
-      <translation>Small (%1 x %1)</translation>
+      <translation type="unfinished">Mic (%1 x %1)</translation>
     </message>
     <message>
       <source>Large (%1 x %1)</source>
-      <translation>Large (%1 x %1)</translation>
+      <translation type="unfinished">Mare (%1 x %1)</translation>
     </message>
     <message>
       <source>Extra large (%1 x %1)</source>
-      <translation>Extra large (%1 x %1)</translation>
+      <translation type="unfinished">Foarte mare(%1 x %1)</translation>
+    </message>
+    <message>
+      <source>No style sheet</source>
+      <translation type="unfinished">No style sheet</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgInputDialog</name>
     <message>
       <source>Input</source>
-      <translation>Intrare</translation>
+      <translation type="unfinished">Intrare</translation>
     </message>
     <message>
-      <source>OK</source>
-      <translation>OK</translation>
-    </message>
-    <message>
-      <source>Cancel</source>
-      <translation>Renunţă</translation>
-    </message>
-    <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgInspector</name>
     <message>
       <source>Scene Inspector</source>
-      <translation>Inspector Scenă</translation>
+      <translation type="unfinished">Inspector Scenă</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgMacroExecute</name>
     <message>
       <source>Execute macro</source>
-      <translation>Executare macrocomandă</translation>
+      <translation type="unfinished">Executare macrocomandă</translation>
     </message>
     <message>
       <source>Macro name:</source>
-      <translation>Nume macrocomandă:</translation>
+      <translation type="unfinished">Nume macrocomandă:</translation>
     </message>
     <message>
       <source>Macro destination:</source>
-      <translation>Destinație de macrocomandă:</translation>
+      <translation type="unfinished">Destinație de macrocomandă:</translation>
     </message>
     <message>
       <source>Execute</source>
-      <translation>Execută</translation>
+      <translation type="unfinished">Execută</translation>
     </message>
     <message>
       <source>Close</source>
-      <translation>Închide</translation>
+      <translation type="unfinished">Închide</translation>
     </message>
     <message>
       <source>Create</source>
-      <translation>Creează</translation>
+      <translation type="unfinished">Creează</translation>
     </message>
     <message>
       <source>Delete</source>
-      <translation>Ştergeţi</translation>
+      <translation type="unfinished">Ştergeţi</translation>
     </message>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgMacroExecuteImp</name>
     <message>
       <source>Macros</source>
-      <translation>Macro-uri</translation>
+      <translation type="unfinished">Macro-uri</translation>
     </message>
     <message>
       <source>Macro file</source>
-      <translation>Fişier macro</translation>
+      <translation type="unfinished">Fişier macro</translation>
     </message>
     <message>
       <source>Enter a file name, please:</source>
-      <translation>Vă rugăm să introduceți un nume de fişier:</translation>
+      <translation type="unfinished">Vă rugăm să introduceți un nume de fişier:</translation>
     </message>
     <message>
       <source>Existing file</source>
-      <translation>Fișier existent</translation>
+      <translation type="unfinished">Fișier existent</translation>
     </message>
     <message>
       <source>'%1'.
 This file already exists.</source>
-      <translation>'%1'.
+      <translation type="unfinished">'%1'.
 Acest fişier există deja.</translation>
     </message>
     <message>
       <source>Delete macro</source>
-      <translation>Ştergeţi macrocomanda</translation>
+      <translation type="unfinished">Ştergeţi macrocomanda</translation>
     </message>
     <message>
       <source>Do you really want to delete the macro '%1'?</source>
-      <translation>Într-adevăr doriţi să ştergeţi macrocomanda '%1'?</translation>
+      <translation type="unfinished">Într-adevăr doriţi să ştergeţi macrocomanda '%1'?</translation>
     </message>
     <message>
       <source>Cannot create file</source>
-      <translation>Cannot create file</translation>
+      <translation type="unfinished">Imposibil de creat fisierul</translation>
     </message>
     <message>
       <source>Creation of file '%1' failed.</source>
-      <translation>Creation of file '%1' failed.</translation>
+      <translation type="unfinished">Crearea fisierului '%1' nu a reusit.</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgMacroRecord</name>
     <message>
       <source>Macro recording</source>
-      <translation>Înregistrare macrocomandă</translation>
+      <translation type="unfinished">Înregistrare macrocomandă</translation>
     </message>
     <message>
       <source>Macro name:</source>
-      <translation>Nume macrocomandă:</translation>
+      <translation type="unfinished">Nume macrocomandă:</translation>
     </message>
     <message>
       <source>Stop</source>
-      <translation>Stop</translation>
+      <translation type="unfinished">Stop</translation>
     </message>
     <message>
       <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="unfinished">Renunţă</translation>
     </message>
     <message>
       <source>Macro path:</source>
-      <translation>Macro path:</translation>
+      <translation type="unfinished">Calea macrocomenzii:</translation>
     </message>
     <message>
       <source>...</source>
-      <translation>...</translation>
+      <translation type="unfinished">...</translation>
     </message>
     <message>
       <source>Record</source>
-      <translation>Record</translation>
+      <translation type="unfinished">Înregistrare</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgMacroRecordImp</name>
     <message>
       <source>Macro recorder</source>
-      <translation>Înregistratorul de macrocomenzi</translation>
+      <translation type="unfinished">Înregistratorul de macrocomenzi</translation>
     </message>
     <message>
       <source>Specify first a place to save.</source>
-      <translation>Specificaţi mai întâi un loc pentru a salva.</translation>
+      <translation type="unfinished">Specificaţi mai întâi un loc pentru a salva.</translation>
     </message>
     <message>
       <source>Existing macro</source>
-      <translation>Macrocomanda existentă</translation>
+      <translation type="unfinished">Macrocomanda existentă</translation>
     </message>
     <message>
       <source>The macro '%1' already exists. Do you want to overwrite?</source>
-      <translation>Macrocomanda '%1' există deja. Doriţi să suprascrieţi?</translation>
+      <translation type="unfinished">Macrocomanda '%1' există deja. Doriţi să suprascrieţi?</translation>
     </message>
     <message>
       <source>The macro directory doesn't exist. Please, choose another one.</source>
-      <translation>The macro directory doesn't exist. Please, choose another one.</translation>
+      <translation type="unfinished">Directorul pentru macroinstructiuni nu exista; alege altul.</translation>
     </message>
     <message>
       <source>Choose macro directory</source>
-      <translation>Choose macro directory</translation>
+      <translation type="unfinished">Selecteaza directorul pentru macroinstructiuni</translation>
+    </message>
+    <message>
+      <source>You have no write permission for the directory. Please, choose another one.</source>
+      <translation type="unfinished">You have no write permission for the directory. Please, choose another one.</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgMaterialProperties</name>
     <message>
       <source>Material properties</source>
-      <translation>Proprietăţile materialelor</translation>
-    </message>
-    <message>
-      <source>&amp;Close</source>
-      <translation>&amp;Inchide</translation>
-    </message>
-    <message>
-      <source>Alt+C</source>
-      <translation>Alt + C</translation>
+      <translation type="unfinished">Proprietăţile materialelor</translation>
     </message>
     <message>
       <source>Material</source>
-      <translation>Materialul</translation>
+      <translation type="unfinished">Materialul</translation>
     </message>
     <message>
       <source>Diffuse color:</source>
-      <translation>Culoare difuză:</translation>
+      <translation type="unfinished">Culoare difuză:</translation>
     </message>
     <message>
       <source>Specular color:</source>
-      <translation>Culoare speculară:</translation>
+      <translation type="unfinished">Culoare speculară:</translation>
     </message>
     <message>
       <source>Shininess:</source>
-      <translation>Strălucirea:</translation>
+      <translation type="unfinished">Strălucirea:</translation>
     </message>
     <message>
       <source>%</source>
-      <translation>%</translation>
+      <translation type="unfinished">%</translation>
     </message>
     <message>
       <source>Ambient color:</source>
-      <translation>Culoarea ambientală:</translation>
+      <translation type="unfinished">Culoarea ambientală:</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
     <message>
       <source>Emissive color:</source>
-      <translation>Emissive color:</translation>
+      <translation type="unfinished">Culoare emisiva:</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgOnlineHelp</name>
     <message>
       <source>On-line help</source>
-      <translation>Ajutor on-line</translation>
+      <translation type="unfinished">Ajutor on-line</translation>
     </message>
     <message>
       <source>Help viewer</source>
-      <translation>Vizualizatorul Ajutor</translation>
+      <translation type="unfinished">Vizualizatorul Ajutor</translation>
     </message>
     <message>
       <source>Location of start page</source>
-      <translation>Locaţia paginii de start</translation>
+      <translation type="unfinished">Locaţia paginii de start</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgOnlineHelpImp</name>
     <message>
       <source>HTML files (*.html *.htm)</source>
-      <translation>Fişiere HTML (*.html *.htm)</translation>
+      <translation type="unfinished">Fişiere HTML (*.html *.htm)</translation>
     </message>
     <message>
       <source>Access denied</source>
-      <translation>Acces nepermis</translation>
+      <translation type="unfinished">Acces nepermis</translation>
     </message>
     <message>
       <source>Access denied to '%1'
 
 Specify another directory, please.</source>
-      <translation>Acces nepermis '%1' vă rugăm specificați un alt director.</translation>
+      <translation type="unfinished">Acces nepermis '%1' vă rugăm specificați un alt director.</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgParameter</name>
     <message>
       <source>Parameter Editor</source>
-      <translation>Editor de Parametrii</translation>
+      <translation type="unfinished">Editor de Parametrii</translation>
     </message>
     <message>
       <source>Save to disk</source>
-      <translation>Salvează pe disc</translation>
+      <translation type="unfinished">Salvează pe disc</translation>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt + C</translation>
+      <translation type="unfinished">Alt + C</translation>
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>&amp;Inchide</translation>
+      <translation type="unfinished">&amp;Inchide</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgParameterImp</name>
     <message>
       <source>Group</source>
-      <translation>Grup</translation>
+      <translation type="unfinished">Grup</translation>
     </message>
     <message>
       <source>Name</source>
-      <translation>Nume</translation>
+      <translation type="unfinished">Nume</translation>
     </message>
     <message>
       <source>Type</source>
-      <translation>Tip</translation>
+      <translation type="unfinished">Tip</translation>
     </message>
     <message>
       <source>Value</source>
-      <translation>Valoare</translation>
+      <translation type="unfinished">Valoare</translation>
     </message>
     <message>
       <source>User parameter</source>
-      <translation>Parametrul al utilizatorului</translation>
+      <translation type="unfinished">Parametrul al utilizatorului</translation>
     </message>
     <message>
       <source>Invalid input</source>
-      <translation>Intrare nevalidă</translation>
+      <translation type="unfinished">Intrare nevalidă</translation>
     </message>
     <message>
       <source>Invalid key name '%1'</source>
-      <translation>Nume tastă nevalid '%1'</translation>
+      <translation type="unfinished">Nume tastă nevalid '%1'</translation>
     </message>
     <message>
       <source>System parameter</source>
-      <translation>Parametru de sistem</translation>
+      <translation type="unfinished">Parametru de sistem</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgPreferences</name>
     <message>
       <source>Preferences</source>
-      <translation>Preferinţe</translation>
+      <translation type="unfinished">Preferinţe</translation>
     </message>
     <message>
-      <source>&amp;Help</source>
-      <translation>&amp;Ajutor</translation>
-    </message>
-    <message>
-      <source>Alt+H</source>
-      <translation>Alt + H</translation>
-    </message>
-    <message>
-      <source>&amp;OK</source>
-      <translation>&amp;OK</translation>
-    </message>
-    <message>
-      <source>&amp;Apply</source>
-      <translation>&amp;Aplica</translation>
-    </message>
-    <message>
-      <source>Alt+A</source>
-      <translation>Alt + A</translation>
-    </message>
-    <message>
-      <source>&amp;Cancel</source>
-      <translation>&amp;Revocare</translation>
-    </message>
-    <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgPreferencesImp</name>
     <message>
       <source>Wrong parameter</source>
-      <translation>Parametru greşit</translation>
+      <translation type="unfinished">Parametru greşit</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgProjectInformation</name>
     <message>
       <source>Project information</source>
-      <translation>Informații de proiect</translation>
+      <translation type="unfinished">Informații de proiect</translation>
     </message>
     <message>
       <source>Information</source>
-      <translation>Informaţii</translation>
+      <translation type="unfinished">Informaţii</translation>
     </message>
     <message>
       <source>&amp;Name:</source>
-      <translation>&amp;Nume:</translation>
+      <translation type="unfinished">&amp;Nume:</translation>
     </message>
     <message>
       <source>Commen&amp;t:</source>
-      <translation>Comen&amp;tariu:</translation>
+      <translation type="unfinished">Comen&amp;tariu:</translation>
     </message>
     <message>
       <source>Path:</source>
-      <translation>Cale:</translation>
+      <translation type="unfinished">Cale:</translation>
     </message>
     <message>
       <source>&amp;Last modified by:</source>
-      <translation>U&amp;ltima modificare de către:</translation>
+      <translation type="unfinished">U&amp;ltima modificare de către:</translation>
     </message>
     <message>
       <source>Created &amp;by:</source>
-      <translation>Creat &amp;de:</translation>
+      <translation type="unfinished">Creat &amp;de:</translation>
     </message>
     <message>
       <source>Com&amp;pany:</source>
-      <translation>Com&amp;panie:</translation>
+      <translation type="unfinished">Com&amp;panie:</translation>
     </message>
     <message>
       <source>Last &amp;modification date:</source>
-      <translation>Data ultimei &amp;modificări:</translation>
+      <translation type="unfinished">Data ultimei &amp;modificări:</translation>
     </message>
     <message>
       <source>Creation &amp;date:</source>
-      <translation>&amp;Data creeări:</translation>
+      <translation type="unfinished">&amp;Data creeări:</translation>
     </message>
     <message>
-      <source>&amp;OK</source>
-      <translation>&amp;OK</translation>
+      <source/>
+      <translation> </translation>
     </message>
     <message>
-      <source>&amp;Cancel</source>
-      <translation>&amp;Revocare</translation>
+      <source>UUID:</source>
+      <translation type="unfinished">UUID:</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source>License information:</source>
+      <translation type="unfinished">License information:</translation>
+    </message>
+    <message>
+      <source>License URL</source>
+      <translation type="unfinished">License URL</translation>
+    </message>
+    <message>
+      <source>Open in browser</source>
+      <translation type="unfinished">Open in browser</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgProjectUtility</name>
     <message>
       <source>Project utility</source>
-      <translation>Project utility</translation>
+      <translation type="unfinished">Utilitar pentru proiect</translation>
     </message>
     <message>
       <source>Extract project</source>
-      <translation>Extract project</translation>
+      <translation type="unfinished">Extrage proiectul</translation>
     </message>
     <message>
       <source>Source</source>
-      <translation>Source</translation>
+      <translation type="unfinished">Sursa</translation>
     </message>
     <message>
       <source>Project file (*.fcstd)</source>
-      <translation>Project file (*.fcstd)</translation>
+      <translation type="unfinished">Fisiere proiect (*.fcstd)</translation>
     </message>
     <message>
       <source>Destination</source>
-      <translation>Destination</translation>
+      <translation type="unfinished">Destinaţie</translation>
     </message>
     <message>
       <source>Extract</source>
-      <translation>Extract</translation>
+      <translation type="unfinished">Extrage</translation>
     </message>
     <message>
       <source>Create project</source>
-      <translation>Create project</translation>
+      <translation type="unfinished">Creare proiect</translation>
     </message>
     <message>
       <source>Document.xml</source>
-      <translation>Document.xml</translation>
+      <translation type="unfinished">Document.xml</translation>
     </message>
     <message>
       <source>Create</source>
-      <translation>Creează</translation>
+      <translation type="unfinished">Creează</translation>
     </message>
     <message>
       <source>Load project file after creation</source>
-      <translation>Load project file after creation</translation>
+      <translation type="unfinished">Incarca proiectul dupa crearea fisierului</translation>
     </message>
     <message>
       <source>Empty source</source>
-      <translation>Empty source</translation>
+      <translation type="unfinished">Sursa goala</translation>
     </message>
     <message>
       <source>No source is defined.</source>
-      <translation>No source is defined.</translation>
+      <translation type="unfinished">Nici o sursa nu a fost definita.</translation>
     </message>
     <message>
       <source>Empty destination</source>
-      <translation>Empty destination</translation>
+      <translation type="unfinished">Destinatie goala</translation>
     </message>
     <message>
       <source>No destination is defined.</source>
-      <translation>No destination is defined.</translation>
+      <translation type="unfinished">Nici o destinatie nu a fost definita.</translation>
+    </message>
+  </context>
+  <context>
+    <name>Gui::Dialog::DlgPropertyLink</name>
+    <message>
+      <source>Link</source>
+      <translation type="unfinished">Link</translation>
+    </message>
+    <message>
+      <source>Show all object types</source>
+      <translation type="unfinished">Show all object types</translation>
+    </message>
+    <message>
+      <source>No selection</source>
+      <translation type="unfinished">Nici o selecţie</translation>
+    </message>
+    <message>
+      <source>Please select an object of the list</source>
+      <translation type="unfinished">Please select an object of the list</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgReportView</name>
     <message>
       <source>Output window</source>
-      <translation>Fereastra de ieşire</translation>
+      <translation type="unfinished">Fereastra de ieşire</translation>
     </message>
     <message>
       <source>Output</source>
-      <translation>Ieşire</translation>
+      <translation type="unfinished">Ieşire</translation>
     </message>
     <message>
       <source>Record log messages</source>
-      <translation>Înregistrare mesaje în jurnal</translation>
+      <translation type="unfinished">Înregistrare mesaje în jurnal</translation>
     </message>
     <message>
       <source>Record warnings</source>
-      <translation>Înregistrează avertismente</translation>
+      <translation type="unfinished">Înregistrează avertismente</translation>
     </message>
     <message>
       <source>Record error messages</source>
-      <translation>Înregistrează mesajele de eroare</translation>
+      <translation type="unfinished">Înregistrează mesajele de eroare</translation>
     </message>
     <message>
       <source>Colors</source>
-      <translation>Culori</translation>
+      <translation type="unfinished">Culori</translation>
     </message>
     <message>
       <source>Normal messages:</source>
-      <translation>Mesaje normale:</translation>
+      <translation type="unfinished">Mesaje normale:</translation>
     </message>
     <message>
       <source>Log messages:</source>
-      <translation>Mesaje de jurnal:</translation>
+      <translation type="unfinished">Mesaje de jurnal:</translation>
     </message>
     <message>
       <source>Warnings:</source>
-      <translation>Avertismente:</translation>
+      <translation type="unfinished">Avertismente:</translation>
     </message>
     <message>
       <source>Errors:</source>
-      <translation>Erori:</translation>
+      <translation type="unfinished">Erori:</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
     <message>
       <source>Redirect internal Python errors to report view</source>
-      <translation>Redirect internal Python errors to report view</translation>
+      <translation type="unfinished">Redirectioneaza erorile interne generate de Python catre panoul de raportare</translation>
     </message>
     <message>
       <source>Redirect internal Python output to report view</source>
-      <translation>Redirect internal Python output to report view</translation>
+      <translation type="unfinished">Redirectioneaza textele generate de Python catre panoul de raportare</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgRunExternal</name>
     <message>
       <source>Running external program</source>
-      <translation>Running external program</translation>
+      <translation type="unfinished">Programul extern ce ruleaza</translation>
     </message>
     <message>
       <source>TextLabel</source>
-      <translation>TextLabel</translation>
+      <translation type="unfinished">TextLabel</translation>
     </message>
     <message>
       <source>Advanced &gt;&gt;</source>
-      <translation>Advanced &gt;&gt;</translation>
+      <translation type="unfinished">Avansat&gt;&gt;</translation>
     </message>
     <message>
       <source>...</source>
-      <translation>...</translation>
+      <translation type="unfinished">...</translation>
     </message>
     <message>
       <source>Accept changes</source>
-      <translation>Accept changes</translation>
+      <translation type="unfinished">Accepta schimbarile</translation>
     </message>
     <message>
       <source>Discard changes</source>
-      <translation>Discard changes</translation>
+      <translation type="unfinished">Renunta la modificari</translation>
     </message>
     <message>
       <source>Abort program</source>
-      <translation>Abort program</translation>
+      <translation type="unfinished">Inchide programul</translation>
     </message>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>Select a file</source>
-      <translation>Selectaţi un fişier</translation>
+      <translation type="unfinished">Selectaţi un fişier</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettings3DView</name>
     <message>
       <source>3D View</source>
-      <translation>Vizualizare 3D</translation>
+      <translation type="unfinished">Vizualizare 3D</translation>
     </message>
     <message>
       <source>3D View settings</source>
-      <translation>Setările de vizualizării 3D</translation>
+      <translation type="unfinished">Setările de vizualizării 3D</translation>
     </message>
     <message>
       <source>Show coordinate system in the corner</source>
-      <translation>Arată sistemul de coordonate în colţ</translation>
+      <translation type="unfinished">Arată sistemul de coordonate în colţ</translation>
     </message>
     <message>
       <source>Show counter of frames per second</source>
-      <translation>Arată contorul de cadre pe secundă</translation>
+      <translation type="unfinished">Arată contorul de cadre pe secundă</translation>
     </message>
     <message>
       <source>Enable animation</source>
-      <translation>Activează animaţia</translation>
-    </message>
-    <message>
-      <source>Enable anti-aliasing (slower)</source>
-      <translation>Activează anti-aliasing (mai încet)</translation>
+      <translation type="unfinished">Activează animaţia</translation>
     </message>
     <message>
       <source>Eye to eye distance for stereo modes:</source>
-      <translation>Distanţa dintre ochi pentru modurile stereo:</translation>
+      <translation type="unfinished">Distanţa dintre ochi pentru modurile stereo:</translation>
     </message>
     <message>
       <source>Camera type</source>
-      <translation>Tipul de camerei</translation>
+      <translation type="unfinished">Tipul de camerei</translation>
     </message>
     <message>
       <source>Orthographic rendering</source>
-      <translation>Redare ortografică</translation>
+      <translation type="unfinished">Redare ortografică</translation>
     </message>
     <message>
       <source>Perspective rendering</source>
-      <translation>Redare din perspectivă</translation>
+      <translation type="unfinished">Redare din perspectivă</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
     <message>
       <source>3D Navigation</source>
-      <translation>3D Navigation</translation>
+      <translation type="unfinished">Navigare 3D</translation>
     </message>
     <message>
       <source>Mouse...</source>
-      <translation>Mouse...</translation>
+      <translation type="unfinished">Mouse...</translation>
     </message>
     <message>
       <source>Intensity of backlight</source>
-      <translation>Intensity of backlight</translation>
+      <translation type="unfinished">Intensitatea luminii de fundal</translation>
     </message>
     <message>
       <source>Enable backlight color</source>
-      <translation>Enable backlight color</translation>
+      <translation type="unfinished">Activeaza lumina de fundal</translation>
     </message>
     <message>
       <source>Orbit style</source>
-      <translation>Orbit style</translation>
+      <translation type="unfinished">Mod de orbitare</translation>
     </message>
     <message>
       <source>Turntable</source>
-      <translation>Turntable</translation>
+      <translation type="unfinished">Placa</translation>
     </message>
     <message>
       <source>Trackball</source>
-      <translation>Trackball</translation>
+      <translation type="unfinished">Trackball</translation>
     </message>
     <message>
       <source>Invert zoom</source>
-      <translation>Invert zoom</translation>
+      <translation type="unfinished">Inverseaza zoom-ul</translation>
     </message>
     <message>
       <source>Zoom at cursor</source>
-      <translation>Zoom at cursor</translation>
+      <translation type="unfinished">Mareste la pozitia cursorului</translation>
     </message>
     <message>
       <source>Zoom step</source>
-      <translation>Zoom step</translation>
+      <translation type="unfinished">Factor de marire</translation>
+    </message>
+    <message>
+      <source>Anti-Aliasing</source>
+      <translation type="unfinished">Anti-Aliasing</translation>
+    </message>
+    <message>
+      <source>None</source>
+      <translation type="unfinished">Niciunul</translation>
+    </message>
+    <message>
+      <source>Line Smoothing</source>
+      <translation type="unfinished">Line Smoothing</translation>
+    </message>
+    <message>
+      <source>MSAA 2x</source>
+      <translation type="unfinished">MSAA 2x</translation>
+    </message>
+    <message>
+      <source>MSAA 4x</source>
+      <translation type="unfinished">MSAA 4x</translation>
+    </message>
+    <message>
+      <source>MSAA 8x</source>
+      <translation type="unfinished">MSAA 8x</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettings3DViewImp</name>
     <message>
       <source>%1 navigation</source>
-      <translation>%1 navigation</translation>
+      <translation type="unfinished">Navigare %1</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettingsColorGradient</name>
     <message>
       <source>Color model</source>
-      <translation>Modelul de culoare</translation>
+      <translation type="unfinished">Modelul de culoare</translation>
     </message>
     <message>
       <source>&amp;Gradient:</source>
-      <translation>&amp;Gradientul:</translation>
+      <translation type="unfinished">&amp;Gradientul:</translation>
     </message>
     <message>
       <source>red-yellow-green-cyan-blue</source>
-      <translation>roşu-galben-verde-cyan-albastru</translation>
+      <translation type="unfinished">roşu-galben-verde-cyan-albastru</translation>
     </message>
     <message>
       <source>blue-cyan-green-yellow-red</source>
-      <translation>albastru-cyan-verde-galben-roşu</translation>
+      <translation type="unfinished">albastru-cyan-verde-galben-roşu</translation>
     </message>
     <message>
       <source>white-black</source>
-      <translation>alb-negru</translation>
+      <translation type="unfinished">alb-negru</translation>
     </message>
     <message>
       <source>black-white</source>
-      <translation>negru-alb</translation>
+      <translation type="unfinished">negru-alb</translation>
     </message>
     <message>
       <source>Visibility</source>
-      <translation>Vizibilitate</translation>
+      <translation type="unfinished">Vizibilitate</translation>
     </message>
     <message>
       <source>Out g&amp;rayed</source>
-      <translation>Elimină tot ce e g&amp;ri</translation>
+      <translation type="unfinished">Elimină tot ce e g&amp;ri</translation>
     </message>
     <message>
       <source>Alt+R</source>
-      <translation>Alt+R</translation>
+      <translation type="unfinished">Alt+R</translation>
     </message>
     <message>
       <source>Out &amp;invisible</source>
-      <translation>Elimină tot ce e &amp;invizibil</translation>
+      <translation type="unfinished">Elimină tot ce e &amp;invizibil</translation>
     </message>
     <message>
       <source>Alt+I</source>
-      <translation>Alt+I</translation>
+      <translation type="unfinished">Alt+I</translation>
     </message>
     <message>
       <source>Style</source>
-      <translation>Stil</translation>
+      <translation type="unfinished">Stil</translation>
     </message>
     <message>
       <source>&amp;Zero</source>
-      <translation>&amp;Zero</translation>
+      <translation type="unfinished">&amp;Zero</translation>
     </message>
     <message>
       <source>Alt+Z</source>
-      <translation>Alt+Z</translation>
+      <translation type="unfinished">Alt+Z</translation>
     </message>
     <message>
       <source>&amp;Flow</source>
-      <translation>&amp;Flux</translation>
+      <translation type="unfinished">&amp;Flux</translation>
     </message>
     <message>
       <source>Alt+F</source>
-      <translation>Alt+F</translation>
-    </message>
-    <message>
-      <source>&amp;OK</source>
-      <translation>&amp;OK</translation>
-    </message>
-    <message>
-      <source>&amp;Cancel</source>
-      <translation>&amp;Revocare</translation>
+      <translation type="unfinished">Alt+F</translation>
     </message>
     <message>
       <source>Parameter range</source>
-      <translation>Intervalul parametrului</translation>
+      <translation type="unfinished">Intervalul parametrului</translation>
     </message>
     <message>
       <source>Mi&amp;nimum:</source>
-      <translation>Mi&amp;nimul:</translation>
+      <translation type="unfinished">Mi&amp;nimul:</translation>
     </message>
     <message>
       <source>Ma&amp;ximum:</source>
-      <translation>Ma&amp;ximul:</translation>
+      <translation type="unfinished">Ma&amp;ximul:</translation>
     </message>
     <message>
       <source>&amp;Labels:</source>
-      <translation>&amp;Etichete:</translation>
+      <translation type="unfinished">&amp;Etichete:</translation>
     </message>
     <message>
       <source>&amp;Decimals:</source>
-      <translation>&amp;Zecimale:</translation>
+      <translation type="unfinished">&amp;Zecimale:</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
     <message>
       <source>Color-gradient settings</source>
-      <translation>Color-gradient settings</translation>
+      <translation type="unfinished">Setarile gradientului de culoare</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettingsColorGradientImp</name>
     <message>
       <source>Wrong parameter</source>
-      <translation>Parametru greşit</translation>
+      <translation type="unfinished">Parametru greşit</translation>
     </message>
     <message>
       <source>The maximum value must be higher than the minimum value.</source>
-      <translation>Valoarea maximă trebuie să fie mai mare decât valoarea minimă.</translation>
+      <translation type="unfinished">Valoarea maximă trebuie să fie mai mare decât valoarea minimă.</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettingsDocument</name>
     <message>
       <source>Document</source>
-      <translation>Documentul</translation>
+      <translation type="unfinished">Documentul</translation>
     </message>
     <message>
       <source>General</source>
-      <translation>General</translation>
+      <translation type="unfinished">General</translation>
     </message>
     <message>
       <source>Document save compression level
 (0 = none, 9 = highest, 3 = default)</source>
-      <translation>nivelul de comprimare al documentului
+      <translation type="unfinished">nivelul de comprimare al documentului
 (0=deloc, 9=cel mai mare, 3=implicit)</translation>
     </message>
     <message>
       <source>Create new document at start up</source>
-      <translation>Creează un document nou la pornire</translation>
+      <translation type="unfinished">Creează un document nou la pornire</translation>
     </message>
     <message>
       <source>Storage</source>
-      <translation>Stocare</translation>
+      <translation type="unfinished">Stocare</translation>
     </message>
     <message>
       <source>Saving transactions (Auto-save)</source>
-      <translation>Salvare tranzacţii (Autosave)</translation>
+      <translation type="unfinished">Salvare tranzacţii (Autosave)</translation>
     </message>
     <message>
       <source>Discard saved transaction after saving document</source>
-      <translation>Renunțați la tranzacţia salvată după salvarea documentului</translation>
+      <translation type="unfinished">Renunțați la tranzacţia salvată după salvarea documentului</translation>
     </message>
     <message>
       <source>Save thumbnail into project file when saving document</source>
-      <translation>Salvaţi pictograma în fişierul proiect la salvarea documentului</translation>
+      <translation type="unfinished">Salvaţi pictograma în fişierul proiect la salvarea documentului</translation>
     </message>
     <message>
       <source>Create up to backup files when resaving document</source>
-      <translation>Create up to backup files when resaving document</translation>
+      <translation type="unfinished">Creaza fisiere de rezerva cand se resalveaza fisierul</translation>
     </message>
     <message>
       <source>Document objects</source>
-      <translation>Document objects</translation>
+      <translation type="unfinished">Obiecte din document</translation>
     </message>
     <message>
       <source>Allow duplicate object labels in one document</source>
-      <translation>Allow duplicate object labels in one document</translation>
+      <translation type="unfinished">Permite nume de obiecte duplicate in document</translation>
     </message>
     <message>
       <source>Maximum Undo/Redo steps</source>
-      <translation>Maximum Undo/Redo steps</translation>
+      <translation type="unfinished">Numar maxim de pasi in Undo/Redo</translation>
     </message>
     <message>
       <source>Using Undo/Redo on documents</source>
-      <translation>Using Undo/Redo on documents</translation>
+      <translation type="unfinished">Folosire Undo/Redo in documente</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettingsEditorImp</name>
     <message>
       <source>Text</source>
-      <translation>Text</translation>
+      <translation type="unfinished">Text</translation>
     </message>
     <message>
       <source>Bookmark</source>
-      <translation>Semn de carte</translation>
+      <translation type="unfinished">Semn de carte</translation>
     </message>
     <message>
       <source>Breakpoint</source>
-      <translation>Punct de întrerupere</translation>
+      <translation type="unfinished">Punct de întrerupere</translation>
     </message>
     <message>
       <source>Keyword</source>
-      <translation>Cuvânt cheie</translation>
+      <translation type="unfinished">Cuvânt cheie</translation>
     </message>
     <message>
       <source>Comment</source>
-      <translation>Comentariu</translation>
+      <translation type="unfinished">Comentariu</translation>
     </message>
     <message>
       <source>Block comment</source>
-      <translation>Comentariu de bloc</translation>
+      <translation type="unfinished">Comentariu de bloc</translation>
     </message>
     <message>
       <source>Number</source>
-      <translation>Număr</translation>
+      <translation type="unfinished">Număr</translation>
     </message>
     <message>
       <source>String</source>
-      <translation>Şir</translation>
+      <translation type="unfinished">Şir</translation>
     </message>
     <message>
       <source>Character</source>
-      <translation>Caracter</translation>
+      <translation type="unfinished">Caracter</translation>
     </message>
     <message>
       <source>Class name</source>
-      <translation>Numele clasei</translation>
+      <translation type="unfinished">Numele clasei</translation>
     </message>
     <message>
       <source>Define name</source>
-      <translation>Definiți numele</translation>
+      <translation type="unfinished">Definiți numele</translation>
     </message>
     <message>
       <source>Operator</source>
-      <translation>Operator</translation>
+      <translation type="unfinished">Operator</translation>
     </message>
     <message>
       <source>Python output</source>
-      <translation>Ieşire Python</translation>
+      <translation type="unfinished">Ieşire Python</translation>
     </message>
     <message>
       <source>Python error</source>
-      <translation>Eroare Python</translation>
+      <translation type="unfinished">Eroare Python</translation>
     </message>
     <message>
       <source>Items</source>
-      <translation>Elemente</translation>
+      <translation type="unfinished">Elemente</translation>
     </message>
     <message>
       <source>Current line highlight</source>
-      <translation>Current line highlight</translation>
+      <translation type="unfinished">Evidentiere linie curenta</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettingsImage</name>
     <message>
       <source>Image settings</source>
-      <translation>Setările de imagine</translation>
+      <translation type="unfinished">Setările de imagine</translation>
     </message>
     <message>
       <source>Image properties</source>
-      <translation>Proprietăţile imaginii</translation>
+      <translation type="unfinished">Proprietăţile imaginii</translation>
     </message>
     <message>
       <source>Back&amp;ground:</source>
-      <translation>&amp;Fundal:</translation>
+      <translation type="unfinished">&amp;Fundal:</translation>
     </message>
     <message>
       <source>Current</source>
-      <translation>Curent</translation>
+      <translation type="unfinished">Curent</translation>
     </message>
     <message>
       <source>White</source>
-      <translation>Alb</translation>
+      <translation type="unfinished">Alb</translation>
     </message>
     <message>
       <source>Black</source>
-      <translation>Negru</translation>
+      <translation type="unfinished">Negru</translation>
     </message>
     <message>
       <source>Transparent</source>
-      <translation>Transparent</translation>
+      <translation type="unfinished">Transparent</translation>
     </message>
     <message>
       <source>Image dimensions</source>
-      <translation>Dimensiunile imaginii</translation>
+      <translation type="unfinished">Dimensiunile imaginii</translation>
     </message>
     <message>
       <source>Pixel</source>
-      <translation>Pixel</translation>
+      <translation type="unfinished">Pixel</translation>
     </message>
     <message>
       <source>&amp;Width:</source>
-      <translation>&amp;Lăţime:</translation>
+      <translation type="unfinished">&amp;Lăţime:</translation>
     </message>
     <message>
       <source>Current screen</source>
-      <translation>Ecranul curent</translation>
+      <translation type="unfinished">Ecranul curent</translation>
     </message>
     <message>
       <source>Icon       32  x 32</source>
-      <translation>Pictograma 32 x 32</translation>
+      <translation type="unfinished">Pictograma 32 x 32</translation>
     </message>
     <message>
       <source>Icon       64 x 64</source>
-      <translation>Pictograma 64 x 64</translation>
+      <translation type="unfinished">Pictograma 64 x 64</translation>
     </message>
     <message>
       <source>Icon       128 x 128</source>
-      <translation>Pictograma 128 x 128</translation>
+      <translation type="unfinished">Pictograma 128 x 128</translation>
     </message>
     <message>
       <source>CGA       320 x 200</source>
-      <translation>CGA 320 x 200</translation>
+      <translation type="unfinished">CGA 320 x 200</translation>
     </message>
     <message>
       <source>QVGA     320 x 240</source>
-      <translation>QVGA 320 x 240</translation>
+      <translation type="unfinished">QVGA 320 x 240</translation>
     </message>
     <message>
       <source>VGA       640 x 480</source>
-      <translation>VGA 640 x 480</translation>
+      <translation type="unfinished">VGA 640 x 480</translation>
     </message>
     <message>
       <source>NTSC     720 x 480</source>
-      <translation>NTSC 720 x 480</translation>
+      <translation type="unfinished">NTSC 720 x 480</translation>
     </message>
     <message>
       <source>PAL        768 x 578</source>
-      <translation>PAL 768 x 578</translation>
+      <translation type="unfinished">PAL 768 x 578</translation>
     </message>
     <message>
       <source>SVGA     800 x 600</source>
-      <translation>SVGA 800 x 600</translation>
+      <translation type="unfinished">SVGA 800 x 600</translation>
     </message>
     <message>
       <source>XGA       1024 x 768</source>
-      <translation>XGA 1024 x 768</translation>
+      <translation type="unfinished">XGA 1024 x 768</translation>
     </message>
     <message>
       <source>HD720   1280 x 720</source>
-      <translation>HD720 1280 x 720</translation>
+      <translation type="unfinished">HD720 1280 x 720</translation>
     </message>
     <message>
       <source>SXGA     1280 x 1024</source>
-      <translation>SXGA 1280 x 1024</translation>
+      <translation type="unfinished">SXGA 1280 x 1024</translation>
     </message>
     <message>
       <source>SXGA+   1400 x 1050</source>
-      <translation>SXGA + 1400 x 1050</translation>
+      <translation type="unfinished">SXGA + 1400 x 1050</translation>
     </message>
     <message>
       <source>UXGA     1600 x 1200</source>
-      <translation>UXGA 1600 x 1200</translation>
+      <translation type="unfinished">UXGA 1600 x 1200</translation>
     </message>
     <message>
       <source>HD1080 1920 x 1080</source>
-      <translation>HD1080 1920 x 1080</translation>
+      <translation type="unfinished">HD1080 1920 x 1080</translation>
     </message>
     <message>
       <source>WUXGA  1920 x 1200</source>
-      <translation>WUXGA 1920 x 1200</translation>
+      <translation type="unfinished">WUXGA 1920 x 1200</translation>
     </message>
     <message>
       <source>QXGA     2048 x 1538</source>
-      <translation>QXGA 2048 x 1538</translation>
+      <translation type="unfinished">QXGA 2048 x 1538</translation>
     </message>
     <message>
       <source>WQXGA  2560 x 1600</source>
-      <translation>WQXGA 2560 x 1600</translation>
+      <translation type="unfinished">WQXGA 2560 x 1600</translation>
     </message>
     <message>
       <source>QSXGA   2560 x 2048</source>
-      <translation>QSXGA 2560 x 2048</translation>
+      <translation type="unfinished">QSXGA 2560 x 2048</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>QUXGA   3200 × 2400</source>
-      <translation>QUXGA 3200 X 2400</translation>
+      <translation type="unfinished">QUXGA 3200 X 2400</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source>HUXGA   6400 × 4800</source>
-      <translation>HUXGA 6400 × 4800</translation>
+      <translation type="unfinished">HUXGA 6400 × 4800</translation>
     </message>
     <message>
       <source>!!!          10000 x 10000</source>
-      <translation>!!! 10 000 x 10000</translation>
+      <translation type="unfinished">!!! 10 000 x 10000</translation>
     </message>
     <message>
       <source>Standard sizes:</source>
-      <translation>Dimensiuni standard:</translation>
+      <translation type="unfinished">Dimensiuni standard:</translation>
     </message>
     <message>
       <source>&amp;Height:</source>
-      <translation>&amp;Înălţime:</translation>
+      <translation type="unfinished">&amp;Înălţime:</translation>
     </message>
     <message>
       <source>Aspect ratio:</source>
-      <translation>Raportul de aspect:</translation>
+      <translation type="unfinished">Raportul de aspect:</translation>
     </message>
     <message>
       <source>&amp;Screen</source>
-      <translation>&amp;Ecran</translation>
+      <translation type="unfinished">&amp;Ecran</translation>
     </message>
     <message>
       <source>Alt+S</source>
-      <translation>Alt + S</translation>
+      <translation type="unfinished">Alt + S</translation>
     </message>
     <message>
       <source>&amp;4:3</source>
-      <translation>&amp;4:3</translation>
+      <translation type="unfinished">&amp;4:3</translation>
     </message>
     <message>
       <source>Alt+4</source>
-      <translation>Alt + 4</translation>
+      <translation type="unfinished">Alt + 4</translation>
     </message>
     <message>
       <source>1&amp;6:9</source>
-      <translation>1&amp;6:9</translation>
+      <translation type="unfinished">1&amp;6:9</translation>
     </message>
     <message>
       <source>Alt+6</source>
-      <translation>Alt + 6</translation>
+      <translation type="unfinished">Alt + 6</translation>
     </message>
     <message>
       <source>&amp;1:1</source>
-      <translation>&amp;1:1</translation>
+      <translation type="unfinished">&amp;1:1</translation>
     </message>
     <message>
       <source>Alt+1</source>
-      <translation>Alt + 1</translation>
+      <translation type="unfinished">Alt + 1</translation>
     </message>
     <message>
       <source>Image comment</source>
-      <translation>Comentariul imaginii</translation>
+      <translation type="unfinished">Comentariul imaginii</translation>
     </message>
     <message>
       <source>Insert MIBA</source>
-      <translation>Inserare MIBA</translation>
+      <translation type="unfinished">Inserare MIBA</translation>
     </message>
     <message>
       <source>Insert comment</source>
-      <translation>Inserare comentariu</translation>
+      <translation type="unfinished">Inserare comentariu</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettingsMacro</name>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
     <message>
       <source>Macro recording settings</source>
-      <translation>Setările de înregistrare macrocomandă</translation>
+      <translation type="unfinished">Setările de înregistrare macrocomandă</translation>
     </message>
     <message>
       <source>Logging Commands</source>
-      <translation>Comenzi pentru jurnal</translation>
+      <translation type="unfinished">Comenzi pentru jurnal</translation>
     </message>
     <message>
       <source>Show script commands in python console</source>
-      <translation>Arată comenzile script-ului în consola python</translation>
+      <translation type="unfinished">Arată comenzile script-ului în consola python</translation>
     </message>
     <message>
       <source>Log all commands issued by menus to file:</source>
-      <translation>Salvează toate comenzile inițiate de meniuri în fișierul:</translation>
+      <translation type="unfinished">Salvează toate comenzile inițiate de meniuri în fișierul:</translation>
     </message>
     <message>
       <source>FullScript.FCScript</source>
-      <translation>FullScript.FCScript</translation>
+      <translation type="unfinished">FullScript.FCScript</translation>
     </message>
     <message>
       <source>Gui commands</source>
-      <translation>Comenzi GUI</translation>
+      <translation type="unfinished">Comenzi GUI</translation>
     </message>
     <message>
       <source>Recording GUI commands</source>
-      <translation>Înregistrare comenzi GUI</translation>
+      <translation type="unfinished">Înregistrare comenzi GUI</translation>
     </message>
     <message>
       <source>Record as comment</source>
-      <translation>Înregistrează ca și comentariu</translation>
+      <translation type="unfinished">Înregistrează ca și comentariu</translation>
     </message>
     <message>
       <source>Macro path</source>
-      <translation>Calea macrocomenzii</translation>
+      <translation type="unfinished">Calea macrocomenzii</translation>
     </message>
     <message>
       <source>General macro settings</source>
-      <translation>General macro settings</translation>
+      <translation type="unfinished">Setari generale pentru macroinstructiuni</translation>
     </message>
     <message>
       <source>Run macros in local environment</source>
-      <translation>Run macros in local environment</translation>
+      <translation type="unfinished">Ruleaza macroinstructiuni in mediul curent</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettingsUnits</name>
     <message>
       <source>Units</source>
-      <translation>Units</translation>
+      <translation type="unfinished">unitati</translation>
     </message>
     <message>
       <source>Units settings</source>
-      <translation>Units settings</translation>
+      <translation type="unfinished">Setari pentru unitati</translation>
     </message>
     <message>
       <source>Standard (mm/kg/s/degree)</source>
-      <translation>Standard (mm/kg/s/degree)</translation>
+      <translation type="unfinished">Standard (mm/kg/s/grad)</translation>
     </message>
     <message>
       <source>MKS (m/kg/s/degree)</source>
-      <translation>MKS (m/kg/s/degree)</translation>
+      <translation type="unfinished">MKS (m/kg/s/grad)</translation>
     </message>
     <message>
       <source>Magnitude</source>
-      <translation>Magnitude</translation>
+      <translation type="unfinished">Marime</translation>
     </message>
     <message>
       <source>Unit</source>
-      <translation>Unit</translation>
+      <translation type="unfinished">Unitate</translation>
     </message>
     <message>
       <source>User system:</source>
-      <translation>User system:</translation>
+      <translation type="unfinished">Sistemul utilizatorului:</translation>
     </message>
     <message>
-      <source>Imperial (in/lb)</source>
-      <translation>Imperial (in/lb)</translation>
+      <source>US customary (in/lb)</source>
+      <translation type="unfinished">US customary (in/lb)</translation>
+    </message>
+    <message>
+      <source>Number of decimals:</source>
+      <translation type="unfinished">Number of decimals:</translation>
+    </message>
+    <message>
+      <source>Imperial decimal (in/lb)</source>
+      <translation type="unfinished">Imperial decimal (in/lb)</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgSettingsViewColor</name>
     <message>
       <source>Colors</source>
-      <translation>Culori</translation>
+      <translation type="unfinished">Culori</translation>
     </message>
     <message>
       <source>Selection</source>
-      <translation>Selecţie</translation>
+      <translation type="unfinished">Selecţie</translation>
     </message>
     <message>
       <source>Enable selection highlighting</source>
-      <translation>Activează evidenţierea selecţiei</translation>
+      <translation type="unfinished">Activează evidenţierea selecţiei</translation>
     </message>
     <message>
       <source>Enable preselection highlighting</source>
-      <translation>Enable preselection highlighting</translation>
+      <translation type="unfinished">Activeaza evidentierea preselectiei</translation>
     </message>
     <message>
       <source>Background color</source>
-      <translation>Culoarea de fundal</translation>
+      <translation type="unfinished">Culoarea de fundal</translation>
     </message>
     <message>
       <source>Middle color</source>
-      <translation>Culoarea de mijloc</translation>
+      <translation type="unfinished">Culoarea de mijloc</translation>
     </message>
     <message>
       <source>Color gradient</source>
-      <translation>Gradientul culorii</translation>
+      <translation type="unfinished">Gradientul culorii</translation>
     </message>
     <message>
       <source>Simple color</source>
-      <translation>Culoare simplă</translation>
-    </message>
-    <message>
-      <source>Default colors</source>
-      <translation>Default colors</translation>
-    </message>
-    <message>
-      <source>Edited edge color</source>
-      <translation>Edited edge color</translation>
-    </message>
-    <message>
-      <source>Edited vertex color</source>
-      <translation>Edited vertex color</translation>
-    </message>
-    <message>
-      <source>Construction geometry</source>
-      <translation>Construction geometry</translation>
-    </message>
-    <message>
-      <source>Fully constrained geometry</source>
-      <translation>Fully constrained geometry</translation>
-    </message>
-    <message>
-      <source>The color of vertices being edited</source>
-      <translation>The color of vertices being edited</translation>
-    </message>
-    <message>
-      <source>The color of edges being edited</source>
-      <translation>The color of edges being edited</translation>
-    </message>
-    <message>
-      <source>The color of construction geometry in edit mode</source>
-      <translation>Culoarea obiectelor geometrice de construcţie în modul de editare</translation>
-    </message>
-    <message>
-      <source>The color of fully constrained geometry in edit mode</source>
-      <translation>Culoarea unei forme geometrice deplin constrânsă în modul de editare</translation>
-    </message>
-    <message>
-      <source>Cursor text color</source>
-      <translation>Cursor text color</translation>
-    </message>
-    <message>
-      <source>Default shape color</source>
-      <translation>Default shape color</translation>
-    </message>
-    <message>
-      <source>The default color for new shapes</source>
-      <translation>The default color for new shapes</translation>
-    </message>
-    <message>
-      <source>Default line width and color</source>
-      <translation>Default line width and color</translation>
-    </message>
-    <message>
-      <source>The default line color for new shapes</source>
-      <translation>The default line color for new shapes</translation>
-    </message>
-    <message>
-      <source>The default line thickness for new shapes</source>
-      <translation>The default line thickness for new shapes</translation>
-    </message>
-    <message>
-      <source>px</source>
-      <translation>px</translation>
+      <translation type="unfinished">Culoare simplă</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DlgTipOfTheDay</name>
     <message>
       <source>Tip of the day</source>
-      <translation>Sfatul zilei</translation>
+      <translation type="unfinished">Sfatul zilei</translation>
     </message>
     <message>
       <source>&lt;b&gt;&lt;font face="Times New Roman"&gt;&lt;font size="+3"&gt;Did you know...&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;</source>
-      <translation>&lt;b&gt;&lt;font face="Times New Roman"&gt;&lt;font size="+3"&gt;Ştiaţi că...&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;</translation>
+      <translation type="unfinished">&lt;b&gt;&lt;font face="Times New Roman"&gt;&lt;font size="+3"&gt;Ştiaţi că...&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;</translation>
     </message>
     <message>
       <source>&amp;Show tips at start up</source>
-      <translation>Arată &amp;sfaturi la pornire</translation>
+      <translation type="unfinished">Arată &amp;sfaturi la pornire</translation>
     </message>
     <message>
       <source>Alt+S</source>
-      <translation>Alt + S</translation>
+      <translation type="unfinished">Alt + S</translation>
     </message>
     <message>
       <source>&amp;Next Tip</source>
-      <translation>Ur&amp;mătorul sfat</translation>
+      <translation type="unfinished">Ur&amp;mătorul sfat</translation>
     </message>
     <message>
       <source>Alt+N</source>
-      <translation>Alt+N</translation>
+      <translation type="unfinished">Alt+N</translation>
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>&amp;Inchide</translation>
+      <translation type="unfinished">&amp;Inchide</translation>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt + C</translation>
+      <translation type="unfinished">Alt + C</translation>
     </message>
     <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
@@ -2259,919 +2307,1072 @@ Specify another directory, please.</source>
     <message>
       <source>Download failed: %1
 </source>
-      <translation>Descărcare nereuşită: %1 </translation>
+      <translation type="unfinished">Descărcare nereuşită: %1 </translation>
     </message>
     <message>
       <source>If you want to learn more about FreeCAD you must go to %1 or press the Help item in the Help menu.</source>
-      <translation>Dacă doriţi să aflaţi mai multe despre FreeCAD trebuie să mergeți la %1 sau să apăsați comanda Ajutor din meniul Ajutor.</translation>
+      <translation type="unfinished">Dacă doriţi să aflaţi mai multe despre FreeCAD trebuie să mergeți la %1 sau să apăsați comanda Ajutor din meniul Ajutor.</translation>
+    </message>
+  </context>
+  <context>
+    <name>Gui::Dialog::DlgUnitsCalculator</name>
+    <message>
+      <source>Unit mismatch</source>
+      <translation type="unfinished">Unit mismatch</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DockablePlacement</name>
     <message>
       <source>Placement</source>
-      <translation>Amplasare</translation>
+      <translation type="unfinished">Amplasare</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::DownloadDialog</name>
     <message>
       <source>Download</source>
-      <translation>Download</translation>
+      <translation type="unfinished">Descarca</translation>
     </message>
     <message>
       <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="unfinished">Renunţă</translation>
     </message>
     <message>
       <source>Close</source>
-      <translation>Închide</translation>
+      <translation type="unfinished">Închide</translation>
     </message>
     <message>
       <source>There already exists a file called %1 in the current directory. Overwrite?</source>
-      <translation>There already exists a file called %1 in the current directory. Overwrite?</translation>
+      <translation type="unfinished">Exista deja un fisier denumit %1 in directorul curent. Suprascrieti?</translation>
     </message>
     <message>
       <source>Unable to save the file %1: %2.</source>
-      <translation>Unable to save the file %1: %2.</translation>
+      <translation type="unfinished">Imposibil de salvat fisierul %1: %2.</translation>
     </message>
     <message>
       <source>Downloading %1.</source>
-      <translation>Downloading %1.</translation>
+      <translation type="unfinished">Descarca %1.</translation>
     </message>
     <message>
       <source>Download canceled.</source>
-      <translation>Download canceled.</translation>
+      <translation type="unfinished">Descarcare abandonata.</translation>
     </message>
     <message>
       <source>Download failed: %1.</source>
-      <translation>Descărcare nereuşită: %1.</translation>
+      <translation type="unfinished">Descărcare nereuşită: %1.</translation>
     </message>
     <message>
       <source>Downloaded %1 to current directory.</source>
-      <translation>Downloaded %1 to current directory.</translation>
+      <translation type="unfinished">Descarca %1 in directorul curent.</translation>
+    </message>
+    <message>
+      <source>%1 at %2</source>
+      <translation type="unfinished">%1 at %2</translation>
+    </message>
+  </context>
+  <context>
+    <name>Gui::Dialog::DownloadItem</name>
+    <message>
+      <source>Save File</source>
+      <translation type="unfinished">Save File</translation>
+    </message>
+    <message>
+      <source>Download canceled: %1</source>
+      <translation type="unfinished">Download canceled: %1</translation>
+    </message>
+    <message>
+      <source>Open containing folder</source>
+      <translation type="unfinished">Open containing folder</translation>
+    </message>
+    <message>
+      <source>Error opening save file: %1</source>
+      <translation type="unfinished">Error opening save file: %1</translation>
+    </message>
+    <message>
+      <source>Error saving: %1</source>
+      <translation type="unfinished">Error saving: %1</translation>
+    </message>
+    <message>
+      <source>Network Error: %1</source>
+      <translation type="unfinished">Network Error: %1</translation>
+    </message>
+    <message>
+      <source>seconds</source>
+      <translation type="unfinished">seconds</translation>
+    </message>
+    <message>
+      <source>minutes</source>
+      <translation type="unfinished">minutes</translation>
+    </message>
+    <message>
+      <source>- %4 %5 remaining</source>
+      <translation type="unfinished">- %4 %5 remaining</translation>
+    </message>
+    <message>
+      <source>%1 of %2 (%3/sec) %4</source>
+      <translation type="unfinished">%1 of %2 (%3/sec) %4</translation>
+    </message>
+    <message>
+      <source>?</source>
+      <translation type="unfinished">?</translation>
+    </message>
+    <message>
+      <source>%1 of %2 - Stopped</source>
+      <translation type="unfinished">%1 of %2 - Stopped</translation>
+    </message>
+    <message>
+      <source>bytes</source>
+      <translation type="unfinished">bytes</translation>
+    </message>
+    <message>
+      <source>kB</source>
+      <translation type="unfinished">kB</translation>
+    </message>
+    <message>
+      <source>MB</source>
+      <translation type="unfinished">MB</translation>
+    </message>
+  </context>
+  <context>
+    <name>Gui::Dialog::DownloadManager</name>
+    <message>
+      <source>Downloads</source>
+      <translation type="unfinished">Downloads</translation>
+    </message>
+    <message>
+      <source>Clean up</source>
+      <translation type="unfinished">Clean up</translation>
+    </message>
+    <message>
+      <source>0 Items</source>
+      <translation type="unfinished">0 Items</translation>
+    </message>
+    <message>
+      <source>Download Manager</source>
+      <translation type="unfinished">Download Manager</translation>
+    </message>
+    <message>
+      <source>1 Download</source>
+      <translation type="unfinished">1 Download</translation>
+    </message>
+    <message>
+      <source>%1 Downloads</source>
+      <translation type="unfinished">%1 Downloads</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::IconDialog</name>
     <message>
       <source>Add icon</source>
-      <translation>Add icon</translation>
+      <translation type="unfinished">Adauga pictograma</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::InputVector</name>
     <message>
       <source>Input vector</source>
-      <translation>Vectorul de intrare</translation>
+      <translation type="unfinished">Vectorul de intrare</translation>
     </message>
     <message>
       <source>Vector</source>
-      <translation>Vector</translation>
+      <translation type="unfinished">Vector</translation>
     </message>
     <message>
       <source>Z:</source>
-      <translation>Z:</translation>
+      <translation type="unfinished">Z:</translation>
     </message>
     <message>
       <source>Y:</source>
-      <translation>Y:</translation>
+      <translation type="unfinished">Y:</translation>
     </message>
     <message>
       <source>X:</source>
-      <translation>X:</translation>
-    </message>
-    <message>
-      <source>OK</source>
-      <translation>OK</translation>
+      <translation type="unfinished">X:</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::LicenseDialog</name>
     <message>
       <source>Copyright</source>
-      <translation>Copyright</translation>
+      <translation type="unfinished">Drepturile de autor</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::MouseButtons</name>
     <message>
       <source>Mouse buttons</source>
-      <translation>Mouse buttons</translation>
+      <translation type="unfinished">Butoanele mouse-ului</translation>
     </message>
     <message>
       <source>Configuration</source>
-      <translation>Configuration</translation>
+      <translation type="unfinished">Configurare</translation>
     </message>
     <message>
       <source>Selection:</source>
-      <translation>Selecţie:</translation>
+      <translation type="unfinished">Selecţie:</translation>
     </message>
     <message>
       <source>Panning</source>
-      <translation>Panning</translation>
+      <translation type="unfinished">Panoramare</translation>
     </message>
     <message>
       <source>Rotation:</source>
-      <translation>Rotaţie:</translation>
+      <translation type="unfinished">Rotaţie:</translation>
     </message>
     <message>
       <source>Zooming:</source>
-      <translation>Zooming:</translation>
+      <translation type="unfinished">Zoom:</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::ParameterGroup</name>
     <message>
       <source>Expand</source>
-      <translation>Extinde</translation>
+      <translation type="unfinished">Extinde</translation>
     </message>
     <message>
       <source>Add sub-group</source>
-      <translation>Adaugă subgrup</translation>
+      <translation type="unfinished">Adaugă subgrup</translation>
     </message>
     <message>
       <source>Remove group</source>
-      <translation>Elimină grupul</translation>
+      <translation type="unfinished">Elimină grupul</translation>
     </message>
     <message>
       <source>Rename group</source>
-      <translation>Redenumire grup</translation>
+      <translation type="unfinished">Redenumire grup</translation>
     </message>
     <message>
       <source>Export parameter</source>
-      <translation>Parametru de export</translation>
+      <translation type="unfinished">Parametru de export</translation>
     </message>
     <message>
       <source>Import parameter</source>
-      <translation>Parametru de import</translation>
+      <translation type="unfinished">Parametru de import</translation>
     </message>
     <message>
       <source>Collapse</source>
-      <translation>Restrângere</translation>
+      <translation type="unfinished">Restrângere</translation>
     </message>
     <message>
       <source>Do really want to remove this parameter group?</source>
-      <translation>Chiar doriți să eliminaţi acest grup de parametrii?</translation>
+      <translation type="unfinished">Chiar doriți să eliminaţi acest grup de parametrii?</translation>
     </message>
     <message>
       <source>Existing sub-group</source>
-      <translation>Subgrup existent</translation>
+      <translation type="unfinished">Subgrup existent</translation>
     </message>
     <message>
       <source>The sub-group '%1' already exists.</source>
-      <translation>Subgroupul '%1' există deja.</translation>
+      <translation type="unfinished">Subgroupul '%1' există deja.</translation>
     </message>
     <message>
       <source>Export parameter to file</source>
-      <translation>Exportă parametru într-un fişier</translation>
+      <translation type="unfinished">Exportă parametru într-un fişier</translation>
     </message>
     <message>
       <source>XML (*.FCParam)</source>
-      <translation>XML (*.FCParam)</translation>
+      <translation type="unfinished">XML (*.FCParam)</translation>
     </message>
     <message>
       <source>Import parameter from file</source>
-      <translation>Importă parametrul din fişier</translation>
+      <translation type="unfinished">Importă parametrul din fişier</translation>
     </message>
     <message>
       <source>Import Error</source>
-      <translation>Eroare de import</translation>
+      <translation type="unfinished">Eroare de import</translation>
     </message>
     <message>
       <source>Reading from '%1' failed.</source>
-      <translation>Citirea din '%1' nu a reușit.</translation>
+      <translation type="unfinished">Citirea din '%1' nu a reușit.</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::ParameterValue</name>
     <message>
       <source>Change value</source>
-      <translation>Modificaţi valoarea</translation>
+      <translation type="unfinished">Modificaţi valoarea</translation>
     </message>
     <message>
       <source>Remove key</source>
-      <translation>Eliminați cheie</translation>
+      <translation type="unfinished">Eliminați cheie</translation>
     </message>
     <message>
       <source>Rename key</source>
-      <translation>Redenumiţi cheie</translation>
+      <translation type="unfinished">Redenumiţi cheie</translation>
     </message>
     <message>
       <source>New</source>
-      <translation>Nou</translation>
+      <translation type="unfinished">Nou</translation>
     </message>
     <message>
       <source>New string item</source>
-      <translation>Element şir nou</translation>
+      <translation type="unfinished">Element şir nou</translation>
     </message>
     <message>
       <source>New float item</source>
-      <translation>Element float nou</translation>
+      <translation type="unfinished">Element float nou</translation>
     </message>
     <message>
       <source>New integer item</source>
-      <translation>Element întreg nou</translation>
+      <translation type="unfinished">Element întreg nou</translation>
     </message>
     <message>
       <source>New unsigned item</source>
-      <translation>Element unsigned nou</translation>
+      <translation type="unfinished">Element unsigned nou</translation>
     </message>
     <message>
       <source>New Boolean item</source>
-      <translation>Element Boolean nou</translation>
+      <translation type="unfinished">Element Boolean nou</translation>
     </message>
     <message>
       <source>Existing item</source>
-      <translation>Element existent</translation>
+      <translation type="unfinished">Element existent</translation>
     </message>
     <message>
       <source>The item '%1' already exists.</source>
-      <translation>Elementul '%1' există deja.</translation>
+      <translation type="unfinished">Elementul '%1' există deja.</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::Placement</name>
     <message>
       <source>Placement</source>
-      <translation>Amplasare</translation>
+      <translation type="unfinished">Amplasare</translation>
     </message>
     <message>
       <source>OK</source>
-      <translation>OK</translation>
+      <translation type="unfinished">OK</translation>
     </message>
     <message>
       <source>Translation:</source>
-      <translation>Traducere:</translation>
+      <translation type="unfinished">Traducere:</translation>
     </message>
     <message>
       <source>Z:</source>
-      <translation>Z:</translation>
+      <translation type="unfinished">Z:</translation>
     </message>
     <message>
       <source>Y:</source>
-      <translation>Y:</translation>
+      <translation type="unfinished">Y:</translation>
     </message>
     <message>
       <source>X:</source>
-      <translation>X:</translation>
+      <translation type="unfinished">X:</translation>
     </message>
     <message>
       <source>Rotation:</source>
-      <translation>Rotaţie:</translation>
+      <translation type="unfinished">Rotaţie:</translation>
     </message>
     <message>
       <source>Angle:</source>
-      <translation>Unghiul:</translation>
+      <translation type="unfinished">Unghiul:</translation>
     </message>
     <message>
       <source>Axis:</source>
-      <translation>Axa:</translation>
+      <translation type="unfinished">Axa:</translation>
     </message>
     <message>
       <source>Center:</source>
-      <translation>Center:</translation>
+      <translation type="unfinished">Centru:</translation>
     </message>
     <message>
       <source>Pitch:</source>
-      <translation>Pitch:</translation>
+      <translation type="unfinished">Tonalitate:</translation>
     </message>
     <message>
       <source>Roll:</source>
-      <translation>Roll:</translation>
+      <translation type="unfinished">Rostogolire:</translation>
     </message>
     <message>
       <source>Yaw:</source>
-      <translation>Yaw:</translation>
+      <translation type="unfinished">Giratie:</translation>
     </message>
     <message>
       <source>Rotation axis with angle</source>
-      <translation>Rotation axis with angle</translation>
+      <translation type="unfinished">Axa de rotatie cu unghi</translation>
     </message>
     <message>
       <source>Euler angles</source>
-      <translation>Euler angles</translation>
+      <translation type="unfinished">Unghiurile Euler</translation>
     </message>
     <message>
       <source>Apply placement changes immediately</source>
-      <translation>Apply placement changes immediately</translation>
+      <translation type="unfinished">Aplica modificarile de pozitie imediat</translation>
     </message>
     <message>
       <source>Apply incremental changes to object placement</source>
-      <translation>Apply incremental changes to object placement</translation>
+      <translation type="unfinished">Aplica modificarile de pozitie in pasi</translation>
     </message>
     <message>
       <source>Apply</source>
-      <translation>Aplică</translation>
+      <translation type="unfinished">Aplică</translation>
     </message>
     <message>
       <source>Reset</source>
-      <translation>Reset</translation>
+      <translation type="unfinished">Resetare</translation>
     </message>
     <message>
       <source>Close</source>
-      <translation>Închide</translation>
+      <translation type="unfinished">Închide</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::PrintModel</name>
     <message>
       <source>Button</source>
-      <translation>Button</translation>
+      <translation type="unfinished">Buton</translation>
     </message>
     <message>
       <source>Command</source>
-      <translation>Comanda</translation>
+      <translation type="unfinished">Comanda</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::SceneInspector</name>
     <message>
       <source>Dialog</source>
-      <translation>Dialog</translation>
+      <translation type="unfinished">Dialog</translation>
     </message>
     <message>
       <source>Close</source>
-      <translation>Închide</translation>
+      <translation type="unfinished">Închide</translation>
     </message>
     <message>
       <source>Refresh</source>
-      <translation>Reîmprospătare</translation>
+      <translation type="unfinished">Reîmprospătare</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::SceneModel</name>
     <message>
       <source>Inventor Tree</source>
-      <translation>Arbore tip Inventor</translation>
+      <translation type="unfinished">Arbore tip Inventor</translation>
     </message>
     <message>
       <source>Nodes</source>
-      <translation>Noduri</translation>
+      <translation type="unfinished">Noduri</translation>
+    </message>
+    <message>
+      <source>Name</source>
+      <translation type="unfinished">Nume</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::TextureMapping</name>
     <message>
       <source>Texture</source>
-      <translation>Texture</translation>
+      <translation type="unfinished">Textura</translation>
     </message>
     <message>
       <source>Texture mapping</source>
-      <translation>Texture mapping</translation>
+      <translation type="unfinished">Aplicare textura</translation>
     </message>
     <message>
       <source>Global</source>
-      <translation>Global</translation>
+      <translation type="unfinished">Global</translation>
     </message>
     <message>
       <source>Environment</source>
-      <translation>Environment</translation>
+      <translation type="unfinished">Mediu</translation>
     </message>
     <message>
       <source>Image files (%1)</source>
-      <translation>Image files (%1)</translation>
+      <translation type="unfinished">Fişierele de imagine (%1)</translation>
     </message>
     <message>
       <source>No image</source>
-      <translation>No image</translation>
+      <translation type="unfinished">Nici o imagine</translation>
     </message>
     <message>
       <source>The specified file is not a valid image file.</source>
-      <translation>The specified file is not a valid image file.</translation>
+      <translation type="unfinished">Fisierul specificat nu e o imagine valida.</translation>
     </message>
     <message>
       <source>No 3d view</source>
-      <translation>No 3d view</translation>
+      <translation type="unfinished">Nici o vizualizare 3d</translation>
     </message>
     <message>
       <source>No active 3d view found.</source>
-      <translation>No active 3d view found.</translation>
+      <translation type="unfinished">Nici o vizualizare 3d activa gasita.</translation>
     </message>
   </context>
   <context>
     <name>Gui::Dialog::Transform</name>
     <message>
       <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="unfinished">Renunţă</translation>
     </message>
     <message>
       <source>Transform</source>
-      <translation>Transform</translation>
+      <translation type="unfinished">Transform</translation>
     </message>
   </context>
   <context>
     <name>Gui::DlgTreeWidget</name>
     <message>
       <source>Dialog</source>
-      <translation>Dialog</translation>
+      <translation type="unfinished">Dialog</translation>
     </message>
     <message>
       <source>Items</source>
-      <translation>Elemente</translation>
+      <translation type="unfinished">Elemente</translation>
     </message>
     <message>
-      <source>OK</source>
-      <translation>OK</translation>
-    </message>
-    <message>
-      <source>Cancel</source>
-      <translation>Renunţă</translation>
-    </message>
-    <message>
-      <source></source>
-      <translation type="unfinished"/>
+      <source/>
+      <translation> </translation>
     </message>
   </context>
   <context>
     <name>Gui::DockWnd::CombiView</name>
     <message>
       <source>CombiView</source>
-      <translation>Vedere combi</translation>
+      <translation type="unfinished">Vedere combi</translation>
     </message>
     <message>
       <source>Project</source>
-      <translation>Proiect</translation>
+      <translation type="unfinished">Proiect</translation>
     </message>
     <message>
       <source>Tasks</source>
-      <translation>Sarcini</translation>
+      <translation type="unfinished">Sarcini</translation>
+    </message>
+    <message>
+      <source>Model</source>
+      <translation type="unfinished">Model</translation>
     </message>
   </context>
   <context>
     <name>Gui::DockWnd::HelpView</name>
     <message>
       <source>Previous</source>
-      <translation>Anterior</translation>
+      <translation type="unfinished">Anterior</translation>
     </message>
     <message>
       <source>Next</source>
-      <translation>Următor</translation>
+      <translation type="unfinished">Următor</translation>
     </message>
     <message>
       <source>Home</source>
-      <translation>Acasă</translation>
+      <translation type="unfinished">Acasă</translation>
     </message>
     <message>
       <source>Open</source>
-      <translation>Deschide</translation>
+      <translation type="unfinished">Deschide</translation>
     </message>
     <message>
       <source>Open file</source>
-      <translation>Deschide fişier</translation>
+      <translation type="unfinished">Deschide fişier</translation>
     </message>
     <message>
       <source>All HTML files (*.html *.htm)</source>
-      <translation>Toate fişierele HTML (*.html *.htm)</translation>
+      <translation type="unfinished">Toate fişierele HTML (*.html *.htm)</translation>
     </message>
     <message>
       <source>External browser</source>
-      <translation>Browser-ul extern</translation>
+      <translation type="unfinished">Browser-ul extern</translation>
     </message>
     <message>
       <source>No external browser found. Specify in preferences, please</source>
-      <translation>Nici un browser extern găsit. Vă rugăm să specificaţi unul în Preferinţe</translation>
+      <translation type="unfinished">Nici un browser extern găsit. Vă rugăm să specificaţi unul în Preferinţe</translation>
     </message>
     <message>
       <source>Starting of %1 failed</source>
-      <translation>Inceputul %1 nu a reușit</translation>
+      <translation type="unfinished">Inceputul %1 nu a reușit</translation>
     </message>
   </context>
   <context>
     <name>Gui::DockWnd::PropertyDockView</name>
     <message>
       <source>Property View</source>
-      <translation>Vizualizare proprietăţi</translation>
+      <translation type="unfinished">Vizualizare proprietăţi</translation>
     </message>
   </context>
   <context>
     <name>Gui::DockWnd::ReportOutput</name>
     <message>
       <source>Logging</source>
-      <translation>Logare</translation>
+      <translation type="unfinished">Logare</translation>
     </message>
     <message>
       <source>Warning</source>
-      <translation>Avertizare</translation>
+      <translation type="unfinished">Avertizare</translation>
     </message>
     <message>
       <source>Error</source>
-      <translation>Eroare</translation>
+      <translation type="unfinished">Eroare</translation>
     </message>
     <message>
       <source>Options</source>
-      <translation>Opţiuni</translation>
+      <translation type="unfinished">Opţiuni</translation>
     </message>
     <message>
       <source>Clear</source>
-      <translation>Eliberează</translation>
+      <translation type="unfinished">Eliberează</translation>
     </message>
     <message>
       <source>Save As...</source>
-      <translation>Salvare ca...</translation>
+      <translation type="unfinished">Salvare ca...</translation>
     </message>
     <message>
       <source>Save Report Output</source>
-      <translation>Salvaţi raportul de ieşire</translation>
+      <translation type="unfinished">Salvaţi raportul de ieşire</translation>
     </message>
     <message>
       <source>Plain Text Files (*.txt *.log)</source>
-      <translation>Fișierele Text (*.txt * .log)</translation>
+      <translation type="unfinished">Fișierele Text (*.txt * .log)</translation>
     </message>
     <message>
       <source>Go to end</source>
-      <translation>Go to end</translation>
+      <translation type="unfinished">Mergi la sfarsit</translation>
     </message>
     <message>
       <source>Redirect Python output</source>
-      <translation>Redirect Python output</translation>
+      <translation type="unfinished">Redirectioneaza textul din Python</translation>
     </message>
     <message>
       <source>Redirect Python errors</source>
-      <translation>Redirect Python errors</translation>
+      <translation type="unfinished">Redirectioneaza erorile din Python</translation>
     </message>
   </context>
   <context>
     <name>Gui::DockWnd::ReportView</name>
     <message>
       <source>Output</source>
-      <translation>Ieşire</translation>
+      <translation type="unfinished">Ieşire</translation>
     </message>
     <message>
       <source>Python console</source>
-      <translation>Consola Python</translation>
+      <translation type="unfinished">Consola Python</translation>
     </message>
   </context>
   <context>
     <name>Gui::DockWnd::SelectionView</name>
     <message>
       <source>Property View</source>
-      <translation>Vizualizare proprietăţi</translation>
+      <translation type="unfinished">Vizualizare proprietăţi</translation>
     </message>
   </context>
   <context>
     <name>Gui::DockWnd::TaskPanelView</name>
     <message>
       <source>Task View</source>
-      <translation>Vizualizare activitate</translation>
+      <translation type="unfinished">Vizualizare activitate</translation>
     </message>
   </context>
   <context>
     <name>Gui::DockWnd::TextBrowser</name>
     <message>
       <source>Could not open file.</source>
-      <translation>Imposibil de deschis fișierul.</translation>
+      <translation type="unfinished">Imposibil de deschis fișierul.</translation>
     </message>
     <message>
       <source>You tried to access the address %1 which is currently unavailable. Please make sure that the URL exists and try reloading the page.</source>
-      <translation>Aţi încercat să accesaţi adresa %1 care este momentan indisponibilă. Vă rugăm să asiguraţi-vă că URL-ul există şi încercaţi reîncărcarea paginii.</translation>
+      <translation type="unfinished">Aţi încercat să accesaţi adresa %1 care este momentan indisponibilă. Vă rugăm să asiguraţi-vă că URL-ul există şi încercaţi reîncărcarea paginii.</translation>
     </message>
     <message>
       <source>Connecting to %1</source>
-      <translation>Conectare la %1</translation>
+      <translation type="unfinished">Conectare la %1</translation>
     </message>
     <message>
       <source>Sending to %1</source>
-      <translation>Se trimite la %1</translation>
+      <translation type="unfinished">Se trimite la %1</translation>
     </message>
     <message>
       <source>Reading from %1</source>
-      <translation>Se citeşte din %1</translation>
+      <translation type="unfinished">Se citeşte din %1</translation>
     </message>
     <message>
       <source>Download failed: %1.</source>
-      <translation>Descărcare nereuşită: %1.</translation>
+      <translation type="unfinished">Descărcare nereuşită: %1.</translation>
     </message>
     <message>
       <source>Previous</source>
-      <translation>Anterior</translation>
+      <translation type="unfinished">Anterior</translation>
     </message>
     <message>
       <source>Forward</source>
-      <translation>Înainte</translation>
+      <translation type="unfinished">Înainte</translation>
     </message>
     <message>
       <source>Home</source>
-      <translation>Acasă</translation>
+      <translation type="unfinished">Acasă</translation>
     </message>
     <message>
       <source>Refresh</source>
-      <translation>Reîmprospătare</translation>
+      <translation type="unfinished">Reîmprospătare</translation>
     </message>
     <message>
       <source>Copy</source>
-      <translation>Copiere</translation>
+      <translation type="unfinished">Copiere</translation>
     </message>
     <message>
       <source>Select all</source>
-      <translation>Selectează tot</translation>
+      <translation type="unfinished">Selectează tot</translation>
     </message>
     <message>
       <source>No description for</source>
-      <translation>Nici o descriere pentru</translation>
+      <translation type="unfinished">Nici o descriere pentru</translation>
     </message>
   </context>
   <context>
     <name>Gui::DocumentModel</name>
     <message>
       <source>Application</source>
-      <translation>Aplicație</translation>
+      <translation type="unfinished">Aplicație</translation>
     </message>
     <message>
       <source>Labels &amp; Attributes</source>
-      <translation>Etichete &amp; Atribute</translation>
+      <translation type="unfinished">Etichete &amp; Atribute</translation>
     </message>
   </context>
   <context>
     <name>Gui::EditorView</name>
     <message>
       <source>Modified file</source>
-      <translation>Fişier modificat</translation>
+      <translation type="unfinished">Fişier modificat</translation>
     </message>
     <message>
       <source>%1.
 
 This has been modified outside of the source editor. Do you want to reload it?</source>
-      <translation>%1.
+      <translation type="unfinished">%1.
 A fost modificat în afara editorului. Vrei să-l reîncărcaţi?</translation>
     </message>
     <message>
       <source>Unsaved document</source>
-      <translation>Document nesalvat</translation>
+      <translation type="unfinished">Document nesalvat</translation>
     </message>
     <message>
       <source>The document has been modified.
 Do you want to save your changes?</source>
-      <translation>Documentul a fost modificat.
+      <translation type="unfinished">Documentul a fost modificat.
 Doriți să salvați modificările?</translation>
     </message>
     <message>
       <source>FreeCAD macro (*.FCMacro);;Python (*.py)</source>
-      <translation>Macrocomandă FreeCAD (*.FCMacro);;Python (*.py)</translation>
+      <translation type="unfinished">Macrocomandă FreeCAD (*.FCMacro);;Python (*.py)</translation>
     </message>
     <message>
       <source>Export PDF</source>
-      <translation>Exportă PDF</translation>
+      <translation type="unfinished">Exportă PDF</translation>
     </message>
     <message>
       <source>PDF file (*.pdf)</source>
-      <translation>Fişier PDF (*.pdf)</translation>
+      <translation type="unfinished">Fişier PDF (*.pdf)</translation>
     </message>
     <message>
       <source>untitled[*]</source>
-      <translation>fără titlu [*]</translation>
+      <translation type="unfinished">fără titlu [*]</translation>
     </message>
     <message>
       <source> - Editor</source>
-      <translation> - Editor</translation>
+      <translation type="unfinished"> - Editor</translation>
     </message>
     <message>
       <source>%1 chars removed</source>
-      <translation>%1 caractere eliminate</translation>
+      <translation type="unfinished">%1 caractere eliminate</translation>
     </message>
     <message>
       <source>%1 chars added</source>
-      <translation>%1 caractere adăugate</translation>
+      <translation type="unfinished">%1 caractere adăugate</translation>
     </message>
     <message>
       <source>Formatted</source>
-      <translation>Formatat</translation>
+      <translation type="unfinished">Formatat</translation>
     </message>
   </context>
   <context>
     <name>Gui::FileChooser</name>
     <message>
       <source>Select a file</source>
-      <translation>Selectaţi un fişier</translation>
+      <translation type="unfinished">Selectaţi un fişier</translation>
     </message>
     <message>
       <source>Select a directory</source>
-      <translation>Selectaţi un director</translation>
+      <translation type="unfinished">Selectaţi un director</translation>
     </message>
   </context>
   <context>
     <name>Gui::FileDialog</name>
     <message>
       <source>Save as</source>
-      <translation>Salvare ca</translation>
+      <translation type="unfinished">Salvare ca</translation>
     </message>
     <message>
       <source>Open</source>
-      <translation>Deschide</translation>
+      <translation type="unfinished">Deschide</translation>
     </message>
   </context>
   <context>
     <name>Gui::FileOptionsDialog</name>
     <message>
       <source>Extended</source>
-      <translation>Extins</translation>
+      <translation type="unfinished">Extins</translation>
     </message>
     <message>
       <source>All files (*.*)</source>
-      <translation>Toate fişierele (*.*)</translation>
+      <translation type="unfinished">Toate fişierele (*.*)</translation>
     </message>
   </context>
   <context>
     <name>Gui::Flag</name>
     <message>
       <source>Top left</source>
-      <translation>Stânga sus</translation>
+      <translation type="unfinished">Stânga sus</translation>
     </message>
     <message>
       <source>Bottom left</source>
-      <translation>Stânga jos</translation>
+      <translation type="unfinished">Stânga jos</translation>
     </message>
     <message>
       <source>Top right</source>
-      <translation>Dreapta sus</translation>
+      <translation type="unfinished">Dreapta sus</translation>
     </message>
     <message>
       <source>Bottom right</source>
-      <translation>Dreapta jos</translation>
+      <translation type="unfinished">Dreapta jos</translation>
     </message>
     <message>
       <source>Remove</source>
-      <translation>Elimină</translation>
+      <translation type="unfinished">Elimină</translation>
+    </message>
+  </context>
+  <context>
+    <name>Gui::GraphvizView</name>
+    <message>
+      <source>PNG format (*.png)</source>
+      <translation type="unfinished">PNG format (*.png)</translation>
+    </message>
+    <message>
+      <source>Bitmap format (*.bmp)</source>
+      <translation type="unfinished">Bitmap format (*.bmp)</translation>
+    </message>
+    <message>
+      <source>GIF format (*.gif)</source>
+      <translation type="unfinished">GIF format (*.gif)</translation>
+    </message>
+    <message>
+      <source>JPG format (*.jpg)</source>
+      <translation type="unfinished">JPG format (*.jpg)</translation>
+    </message>
+    <message>
+      <source>SVG format (*.svg)</source>
+      <translation type="unfinished">SVG format (*.svg)</translation>
+    </message>
+    <message>
+      <source>PDF format (*.pdf)</source>
+      <translation type="unfinished">PDF format (*.pdf)</translation>
+    </message>
+    <message>
+      <source>Export graph</source>
+      <translation type="unfinished">Export graph</translation>
+    </message>
+  </context>
+  <context>
+    <name>Gui::InputField</name>
+    <message>
+      <source>Edit</source>
+      <translation type="unfinished">Editare</translation>
+    </message>
+    <message>
+      <source>Save value</source>
+      <translation type="unfinished">Save value</translation>
     </message>
   </context>
   <context>
     <name>Gui::InventorNavigationStyle</name>
     <message>
       <source>Press CTRL and left mouse button</source>
-      <translation>Press CTRL and left mouse button</translation>
+      <translation type="unfinished">Apasati CTRL si butonul stanga al mouse-ului</translation>
     </message>
     <message>
       <source>Press middle mouse button</source>
-      <translation>Press middle mouse button</translation>
+      <translation type="unfinished">Apasati butonul din mijloc al mouse-ului</translation>
     </message>
     <message>
       <source>Press left mouse button</source>
-      <translation>Press left mouse button</translation>
+      <translation type="unfinished">Apăsa butonul dreapta al mouse-ului</translation>
     </message>
     <message>
       <source>Scroll middle mouse button</source>
-      <translation>Scroll middle mouse button</translation>
+      <translation type="unfinished">Deruleaza folosind butonul din mijloc al mouse-ului</translation>
     </message>
   </context>
   <context>
     <name>Gui::LocationDialog</name>
     <message>
       <source>Wrong direction</source>
-      <translation>Direcţie greşită</translation>
+      <translation type="unfinished">Direcţie greşită</translation>
     </message>
     <message>
       <source>Direction must not be the null vector</source>
-      <translation>Direcţia nu trebuie să fie vectorul nul</translation>
+      <translation type="unfinished">Direcţia nu trebuie să fie vectorul nul</translation>
     </message>
     <message>
       <source>X</source>
-      <translation>X</translation>
+      <translation type="unfinished">X</translation>
     </message>
     <message>
       <source>Y</source>
-      <translation>Y</translation>
+      <translation type="unfinished">Y</translation>
     </message>
     <message>
       <source>Z</source>
-      <translation>Z</translation>
+      <translation type="unfinished">Z</translation>
     </message>
     <message>
       <source>User defined...</source>
-      <translation>Definit de utilizator...</translation>
+      <translation type="unfinished">Definit de utilizator...</translation>
     </message>
   </context>
   <context>
     <name>Gui::LocationWidget</name>
     <message>
       <source>X:</source>
-      <translation>X:</translation>
+      <translation type="unfinished">X:</translation>
     </message>
     <message>
       <source>Y:</source>
-      <translation>Y:</translation>
+      <translation type="unfinished">Y:</translation>
     </message>
     <message>
       <source>Z:</source>
-      <translation>Z:</translation>
+      <translation type="unfinished">Z:</translation>
     </message>
     <message>
       <source>Direction:</source>
-      <translation>Direction:</translation>
+      <translation type="unfinished">Direction:</translation>
     </message>
   </context>
   <context>
     <name>Gui::MacroCommand</name>
     <message>
       <source>Macros</source>
-      <translation>Macro-uri</translation>
+      <translation type="unfinished">Macro-uri</translation>
     </message>
   </context>
   <context>
     <name>Gui::MainWindow</name>
     <message>
       <source>Dimension</source>
-      <translation>Dimensiune</translation>
+      <translation type="unfinished">Dimensiune</translation>
     </message>
     <message>
       <source>Ready</source>
-      <translation>Gata</translation>
+      <translation type="unfinished">Gata</translation>
     </message>
     <message>
       <source>Toggles this toolbar</source>
-      <translation>Comută această bară de instrumente</translation>
+      <translation type="unfinished">Comută această bară de instrumente</translation>
     </message>
     <message>
       <source>Toggles this dockable window</source>
-      <translation>Comută această fereastră fixabilă</translation>
+      <translation type="unfinished">Comută această fereastră fixabilă</translation>
     </message>
     <message>
       <source>Close All</source>
-      <translation>Close All</translation>
+      <translation type="unfinished">Inchide toate</translation>
+    </message>
+    <message>
+      <source>Object dependencies</source>
+      <translation type="unfinished">Object dependencies</translation>
+    </message>
+    <message>
+      <source>The selected objects have a dependency to unselected objects.
+Do you want to copy them, too?</source>
+      <translation type="unfinished">The selected objects have a dependency to unselected objects.
+Do you want to copy them, too?</translation>
     </message>
   </context>
   <context>
     <name>Gui::ManualAlignment</name>
     <message>
       <source>Manual alignment</source>
-      <translation>Manual alignment</translation>
+      <translation type="unfinished">Aliniere manuala</translation>
     </message>
     <message>
       <source>The alignment is already in progress.</source>
-      <translation>The alignment is already in progress.</translation>
+      <translation type="unfinished">Alinierea este deja in curs.</translation>
     </message>
     <message>
       <source>Alignment[*]</source>
-      <translation>Alignment[*]</translation>
+      <translation type="unfinished">Aliniere[*]</translation>
     </message>
     <message>
       <source>Please, select at least one point in the left and the right view</source>
-      <translation>Please, select at least one point in the left and the right view</translation>
+      <translation type="unfinished">Selectati cel putin cate un punct in vizualizarea stanga si dreapta</translation>
     </message>
     <message>
       <source>Please, select at least %1 points in the left and the right view</source>
-      <translation>Please, select at least %1 points in the left and the right view</translation>
+      <translation type="unfinished">Selectati cel putin %1 puncte in vizualizarea stanga si dreapta</translation>
     </message>
     <message>
       <source>Please pick points in the left and right view</source>
-      <translation>Please pick points in the left and right view</translation>
+      <translation type="unfinished">Selectati puncte in vizualizarea stanga si dreapta</translation>
     </message>
     <message>
       <source>The alignment has finished</source>
-      <translation>The alignment has finished</translation>
+      <translation type="unfinished">Alinierea s-a incheiat</translation>
     </message>
     <message>
       <source>The alignment has been canceled</source>
-      <translation>The alignment has been canceled</translation>
+      <translation type="unfinished">Alinierea a fost anulata</translation>
     </message>
     <message>
       <source>Too few points picked in the left view. At least %1 points are needed.</source>
-      <translation>Too few points picked in the left view. At least %1 points are needed.</translation>
+      <translation type="unfinished">Prea putine puncte selectate in vizualizarea din stanga. Cel putin %1 puncte sunt necesare.</translation>
     </message>
     <message>
       <source>Too few points picked in the right view. At least %1 points are needed.</source>
-      <translation>Too few points picked in the right view. At least %1 points are needed.</translation>
+      <translation type="unfinished">Prea putine puncte selectate in vizualizarea din dreapta. Cel putin %1 puncte sunt necesare.</translation>
     </message>
     <message>
       <source>Different number of points picked in left and right view.
 On the left view %1 points are picked,
 on the right view %2 points are picked.</source>
-      <translation>Different number of points picked in left and right view.
-On the left view %1 points are picked,
-on the right view %2 points are picked.</translation>
+      <translation type="unfinished">Numar diferit de puncte in vizualizarea din stanga si dreapta.
+In stanga au fost alese %1 puncte,
+in dreapta au fost alese %2 puncte.</translation>
     </message>
     <message>
       <source>Try to align group of views</source>
-      <translation>Try to align group of views</translation>
+      <translation type="unfinished">Incearca sa aliniezi grupuri de vizualizari</translation>
     </message>
     <message>
       <source>The alignment failed.
 How do you want to proceed?</source>
-      <translation>The alignment failed.
-How do you want to proceed?</translation>
+      <translation type="unfinished">Alinierea a esuat.
+Cum doresti sa continuam?</translation>
     </message>
     <message>
       <source>Retry</source>
-      <translation>Retry</translation>
+      <translation type="unfinished">Reincearca</translation>
     </message>
     <message>
       <source>Ignore</source>
-      <translation>Ignoră</translation>
+      <translation type="unfinished">Ignoră</translation>
     </message>
     <message>
       <source>Abort</source>
-      <translation>Abort</translation>
+      <translation type="unfinished">Renunta</translation>
     </message>
     <message>
       <source>Different number of points picked in left and right view. On the left view %1 points are picked, on the right view %2 points are picked.</source>
-      <translation>Different number of points picked in left and right view. On the left view %1 points are picked, on the right view %2 points are picked.</translation>
+      <translation type="unfinished">Numar diferit de puncte in vizualizarea din stanga si dreapta. In stanga au fost alese %1 puncte, in dreapta au fost alese %2 puncte.</translation>
     </message>
     <message>
       <source>Point picked at (%1,%2,%3)</source>
-      <translation>Point picked at (%1,%2,%3)</translation>
+      <translation type="unfinished">Punct ales (%1,%2,%3)</translation>
     </message>
     <message>
       <source>No point was picked</source>
-      <translation>No point was picked</translation>
+      <translation type="unfinished">Nu a fost ales nici un punct</translation>
+    </message>
+    <message>
+      <source>No point was found on model</source>
+      <translation type="unfinished">No point was found on model</translation>
     </message>
   </context>
   <context>
@@ -3179,2713 +3380,2857 @@ How do you want to proceed?</translation>
     <message>
       <source>Download started...
 </source>
-      <translation>Descărcarea a început... </translation>
+      <translation type="unfinished">Descărcarea a început... </translation>
     </message>
   </context>
   <context>
     <name>Gui::ProgressBar</name>
     <message>
       <source>Remaining: %1</source>
-      <translation>Rămas:%1</translation>
+      <translation type="unfinished">Rămas:%1</translation>
     </message>
     <message>
       <source>Aborting</source>
-      <translation>Se anulează</translation>
+      <translation type="unfinished">Se anulează</translation>
     </message>
     <message>
       <source>Do you really want to abort the operation?</source>
-      <translation>Chiar doriţi abandonarea operațiunii?</translation>
+      <translation type="unfinished">Chiar doriţi abandonarea operațiunii?</translation>
     </message>
   </context>
   <context>
     <name>Gui::ProgressDialog</name>
     <message>
       <source>Remaining: %1</source>
-      <translation>Rămas:%1</translation>
+      <translation type="unfinished">Rămas:%1</translation>
     </message>
     <message>
       <source>Aborting</source>
-      <translation>Se anulează</translation>
+      <translation type="unfinished">Se anulează</translation>
     </message>
     <message>
       <source>Do you really want to abort the operation?</source>
-      <translation>Chiar doriţi abandonarea operațiunii?</translation>
+      <translation type="unfinished">Chiar doriţi abandonarea operațiunii?</translation>
+    </message>
+  </context>
+  <context>
+    <name>Gui::PropertyEditor::LinkLabel</name>
+    <message>
+      <source>Edit...</source>
+      <translation type="unfinished">Edit...</translation>
     </message>
   </context>
   <context>
     <name>Gui::PropertyEditor::PropertyModel</name>
     <message>
       <source>Property</source>
-      <translation>Proprietate</translation>
+      <translation type="unfinished">Proprietate</translation>
     </message>
     <message>
       <source>Value</source>
-      <translation>Valoare</translation>
+      <translation type="unfinished">Valoare</translation>
     </message>
   </context>
   <context>
     <name>Gui::PropertyView</name>
     <message>
       <source>View</source>
-      <translation>Vizualizare</translation>
+      <translation type="unfinished">Vizualizare</translation>
     </message>
     <message>
       <source>Data</source>
-      <translation>Date</translation>
+      <translation type="unfinished">Date</translation>
     </message>
   </context>
   <context>
     <name>Gui::PythonConsole</name>
     <message>
       <source>System exit</source>
-      <translation>Ieşire din sistem</translation>
+      <translation type="unfinished">Ieşire din sistem</translation>
     </message>
     <message>
       <source>The application is still running.
 Do you want to exit without saving your data?</source>
-      <translation>Aplicaţia încă rulează.
+      <translation type="unfinished">Aplicaţia încă rulează.
 Doriți să ieşiți fără a salva datele dumneavoastră?</translation>
     </message>
     <message>
       <source>Python console</source>
-      <translation>Consola Python</translation>
+      <translation type="unfinished">Consola Python</translation>
     </message>
     <message>
       <source>Unhandled PyCXX exception.</source>
-      <translation>Excepție netratată PyCXX.</translation>
+      <translation type="unfinished">Excepție netratată PyCXX.</translation>
     </message>
     <message>
       <source>Unhandled FreeCAD exception.</source>
-      <translation>Excepție netratată FreeCAD.</translation>
+      <translation type="unfinished">Excepție netratată FreeCAD.</translation>
     </message>
     <message>
       <source>Unhandled unknown C++ exception.</source>
-      <translation>Excepție netratată necunoscută C++.</translation>
+      <translation type="unfinished">Excepție netratată necunoscută C++.</translation>
     </message>
     <message>
       <source>&amp;Copy command</source>
-      <translation>&amp;Copiaţi comanda</translation>
+      <translation type="unfinished">&amp;Copiaţi comanda</translation>
     </message>
     <message>
       <source>&amp;Copy history</source>
-      <translation>&amp;Copiaţi istoria</translation>
+      <translation type="unfinished">&amp;Copiaţi istoria</translation>
     </message>
     <message>
       <source>Save history as...</source>
-      <translation>Salvaţi istoria ca...</translation>
+      <translation type="unfinished">Salvaţi istoria ca...</translation>
     </message>
     <message>
       <source>Insert file name...</source>
-      <translation>Introduceţi nume fişier...</translation>
+      <translation type="unfinished">Introduceţi nume fişier...</translation>
     </message>
     <message>
       <source>Save History</source>
-      <translation>Salvează Istoria</translation>
+      <translation type="unfinished">Salvează Istoria</translation>
     </message>
     <message>
       <source>Macro Files (*.FCMacro *.py)</source>
-      <translation>Fișiere de macrocomenzi (*.FCMacro *.py)</translation>
+      <translation type="unfinished">Fișiere de macrocomenzi (*.FCMacro *.py)</translation>
     </message>
     <message>
       <source>Insert file name</source>
-      <translation>Inserați nume fişier</translation>
+      <translation type="unfinished">Inserați nume fişier</translation>
     </message>
     <message>
       <source>All Files (*.*)</source>
-      <translation>Toate fișierele (*.*)</translation>
-    </message>
-    <message>
-      <source>Python Input Dialog</source>
-      <translation>Dialog de intrare Python</translation>
+      <translation type="unfinished">Toate fișierele (*.*)</translation>
     </message>
     <message>
       <source>Unhandled std C++ exception.</source>
-      <translation>Unhandled std C++ exception.</translation>
+      <translation type="unfinished">Exceptie std C++ netratata.</translation>
     </message>
     <message>
       <source>Word wrap</source>
-      <translation>Word wrap</translation>
+      <translation type="unfinished">Distribuie cuvintele</translation>
     </message>
     <message>
       <source>&amp;Copy</source>
-      <translation>&amp;Copie</translation>
+      <translation type="unfinished">&amp;Copie</translation>
     </message>
     <message>
       <source>&amp;Paste</source>
-      <translation>&amp;Lipire</translation>
+      <translation type="unfinished">&amp;Lipire</translation>
     </message>
     <message>
       <source>Select All</source>
-      <translation>Selectaţi tot</translation>
+      <translation type="unfinished">Selectaţi tot</translation>
     </message>
     <message>
       <source>Clear console</source>
-      <translation>Clear console</translation>
+      <translation type="unfinished">Curata consola</translation>
     </message>
   </context>
   <context>
     <name>Gui::PythonEditor</name>
     <message>
       <source>Comment</source>
-      <translation>Comentariu</translation>
+      <translation type="unfinished">Comentariu</translation>
     </message>
     <message>
       <source>Uncomment</source>
-      <translation>Decomentaţi</translation>
-    </message>
-  </context>
-  <context>
-    <name>Gui::PythonInputField</name>
-    <message>
-      <source>OK</source>
-      <translation>OK</translation>
-    </message>
-    <message>
-      <source>Clear</source>
-      <translation>Eliberează</translation>
+      <translation type="unfinished">Decomentaţi</translation>
     </message>
   </context>
   <context>
     <name>Gui::RecentFilesAction</name>
     <message>
       <source>Open file %1</source>
-      <translation>Deschide fişierul %1</translation>
+      <translation type="unfinished">Deschide fişierul %1</translation>
     </message>
     <message>
       <source>File not found</source>
-      <translation>Fișier nu a fost găsit</translation>
+      <translation type="unfinished">Fișier nu a fost găsit</translation>
     </message>
     <message>
       <source>The file '%1' cannot be opened.</source>
-      <translation>Fișierul '%1' nu poate fi deschis.</translation>
+      <translation type="unfinished">Fișierul '%1' nu poate fi deschis.</translation>
     </message>
   </context>
   <context>
     <name>Gui::SelectModule</name>
     <message>
       <source>Select module</source>
-      <translation>Selectaţi modulul</translation>
+      <translation type="unfinished">Selectaţi modulul</translation>
     </message>
     <message>
       <source>Open %1 as</source>
-      <translation>Deschide '%1' ca</translation>
+      <translation type="unfinished">Deschide '%1' ca</translation>
     </message>
     <message>
       <source>Select</source>
-      <translation>Selectaţi</translation>
+      <translation type="unfinished">Selectaţi</translation>
     </message>
   </context>
   <context>
     <name>Gui::StdCmdDescription</name>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>Des&amp;cription</source>
-      <translation>Des&amp;criere</translation>
+      <translation type="unfinished">Des&amp;criere</translation>
     </message>
     <message>
       <source>Long description of commands</source>
-      <translation>Descrierea exstinsă a comenzilor</translation>
+      <translation type="unfinished">Descrierea exstinsă a comenzilor</translation>
     </message>
   </context>
   <context>
     <name>Gui::StdCmdDownloadOnlineHelp</name>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>Download online help</source>
-      <translation>Descărcaţi ajutorul online</translation>
+      <translation type="unfinished">Descărcaţi ajutorul online</translation>
     </message>
     <message>
       <source>Download %1's online help</source>
-      <translation>Descarcă %1 din ajutorul online</translation>
+      <translation type="unfinished">Descarcă %1 din ajutorul online</translation>
     </message>
     <message>
       <source>Non-existing directory</source>
-      <translation>Director inexistent</translation>
+      <translation type="unfinished">Director inexistent</translation>
     </message>
     <message>
       <source>The directory '%1' does not exist.
 
 Do you want to specify an existing directory?</source>
-      <translation>Directorul '%1' nu există.
+      <translation type="unfinished">Directorul '%1' nu există.
 Doriţi să specificaţi un director existent?</translation>
     </message>
     <message>
       <source>Missing permission</source>
-      <translation>Permisiunea lipsă</translation>
+      <translation type="unfinished">Permisiunea lipsă</translation>
     </message>
     <message>
       <source>You don't have write permission to '%1'
 
 Do you want to specify another directory?</source>
-      <translation>Nu aveţi permisiunea de a scrie în '%1'
+      <translation type="unfinished">Nu aveţi permisiunea de a scrie în '%1'
 Doriţi să specificaţi un alt director?</translation>
     </message>
     <message>
       <source>Stop downloading</source>
-      <translation>Opriţi descărcarea</translation>
+      <translation type="unfinished">Opriţi descărcarea</translation>
     </message>
   </context>
   <context>
     <name>Gui::StdCmdPythonHelp</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
-      <source>Python Modules</source>
-      <translation>Module Python</translation>
+      <source>Automatic python modules documentation</source>
+      <translation type="unfinished">Automatic python modules documentation</translation>
     </message>
     <message>
-      <source>Opens a browser to show the Python modules</source>
-      <translation>Se deschide un browser pentru a afișa modulele Python</translation>
+      <source>Opens a browser to show the Python modules documentation</source>
+      <translation type="unfinished">Opens a browser to show the Python modules documentation</translation>
     </message>
   </context>
   <context>
     <name>Gui::TaskBoxAngle</name>
     <message>
       <source>Angle</source>
-      <translation>Angle</translation>
+      <translation type="unfinished">Unghi</translation>
     </message>
   </context>
   <context>
     <name>Gui::TaskBoxPosition</name>
     <message>
       <source>Position</source>
-      <translation>Position</translation>
+      <translation type="unfinished">Position</translation>
     </message>
   </context>
   <context>
     <name>Gui::TaskView::TaskAppearance</name>
     <message>
       <source>Plot mode:</source>
-      <translation>Mod de tipărire:</translation>
+      <translation type="unfinished">Mod de tipărire:</translation>
     </message>
     <message>
       <source>Point size:</source>
-      <translation>Dimensiunea punctelor:</translation>
+      <translation type="unfinished">Dimensiunea punctelor:</translation>
     </message>
     <message>
       <source>Line width:</source>
-      <translation>Lățimea liniei:</translation>
+      <translation type="unfinished">Lățimea liniei:</translation>
     </message>
     <message>
       <source>Transparency:</source>
-      <translation>Transparenţă:</translation>
+      <translation type="unfinished">Transparenţă:</translation>
     </message>
     <message>
       <source>Appearance</source>
-      <translation>Aspect</translation>
+      <translation type="unfinished">Aspect</translation>
     </message>
     <message>
       <source>Document window:</source>
-      <translation>Document window:</translation>
+      <translation type="unfinished">Fereastra documentului:</translation>
     </message>
   </context>
   <context>
     <name>Gui::TaskView::TaskDialog</name>
     <message>
       <source>A dialog is already open in the task panel</source>
-      <translation>A dialog is already open in the task panel</translation>
+      <translation type="unfinished">O fereastra de dialog este deja deschisa in fereastra de sarcini</translation>
     </message>
   </context>
   <context>
     <name>Gui::TaskView::TaskEditControl</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
   </context>
   <context>
     <name>Gui::TaskView::TaskSelectLinkProperty</name>
     <message>
       <source>Appearance</source>
-      <translation>Aspect</translation>
+      <translation type="unfinished">Aspect</translation>
     </message>
     <message>
       <source>...</source>
-      <translation>...</translation>
+      <translation type="unfinished">...</translation>
     </message>
     <message>
       <source>edit selection</source>
-      <translation>edit selection</translation>
+      <translation type="unfinished">Editare selectie</translation>
     </message>
   </context>
   <context>
     <name>Gui::TouchpadNavigationStyle</name>
     <message>
       <source>Press left mouse button</source>
-      <translation>Press left mouse button</translation>
+      <translation type="unfinished">Apăsa butonul dreapta al mouse-ului</translation>
     </message>
     <message>
       <source>Press SHIFT button</source>
-      <translation>Press SHIFT button</translation>
+      <translation type="unfinished">Apasa butonul SHIFT</translation>
     </message>
     <message>
       <source>Press ALT button</source>
-      <translation>Press ALT button</translation>
+      <translation type="unfinished">Apasa butonul ALT</translation>
     </message>
     <message>
-      <source>Press PgUp/PgDown button</source>
-      <translation>Press PgUp/PgDown button</translation>
+      <source>Press CTRL and SHIFT buttons</source>
+      <translation type="unfinished">Press CTRL and SHIFT buttons</translation>
     </message>
   </context>
   <context>
     <name>Gui::TreeDockWidget</name>
     <message>
       <source>Tree view</source>
-      <translation>Vizualizare arborescentă</translation>
+      <translation type="unfinished">Vizualizare arborescentă</translation>
     </message>
   </context>
   <context>
     <name>Gui::TreeWidget</name>
     <message>
       <source>Create group...</source>
-      <translation>Creazã grup...</translation>
+      <translation type="unfinished">Creazã grup...</translation>
     </message>
     <message>
       <source>Create a group</source>
-      <translation>Creează un grup</translation>
+      <translation type="unfinished">Creează un grup</translation>
     </message>
     <message>
       <source>Group</source>
-      <translation>Grup</translation>
+      <translation type="unfinished">Grup</translation>
     </message>
     <message>
       <source>Rename</source>
-      <translation>Redenumire</translation>
+      <translation type="unfinished">Redenumire</translation>
     </message>
     <message>
       <source>Rename object</source>
-      <translation>Redenumire obiect</translation>
+      <translation type="unfinished">Redenumire obiect</translation>
     </message>
     <message>
       <source>Labels &amp; Attributes</source>
-      <translation>Etichete &amp; Atribute</translation>
+      <translation type="unfinished">Etichete &amp; Atribute</translation>
     </message>
     <message>
       <source>Application</source>
-      <translation>Aplicație</translation>
+      <translation type="unfinished">Aplicație</translation>
     </message>
     <message>
       <source>Finish editing</source>
-      <translation>Finish editing</translation>
+      <translation type="unfinished">Termina editarea</translation>
     </message>
     <message>
       <source>Finish editing object</source>
-      <translation>Finish editing object</translation>
+      <translation type="unfinished">Editarea obiectului incheiata</translation>
     </message>
     <message>
       <source>Activate document</source>
-      <translation>Activate document</translation>
+      <translation type="unfinished">Activeaza documentul</translation>
     </message>
     <message>
       <source>Activate document %1</source>
-      <translation>Activate document %1</translation>
+      <translation type="unfinished">Activeaza documentul %1</translation>
     </message>
   </context>
   <context>
     <name>Gui::View3DInventor</name>
     <message>
       <source>Export PDF</source>
-      <translation>Exportă PDF</translation>
+      <translation type="unfinished">Exportă PDF</translation>
     </message>
     <message>
       <source>PDF file (*.pdf)</source>
-      <translation>Fişier PDF (*.pdf)</translation>
+      <translation type="unfinished">Fişier PDF (*.pdf)</translation>
     </message>
   </context>
   <context>
     <name>Gui::WorkbenchGroup</name>
     <message>
       <source>Select the '%1' workbench</source>
-      <translation>Selectaţi bancul de lucru '%1'</translation>
+      <translation type="unfinished">Selectaţi bancul de lucru '%1'</translation>
+    </message>
+  </context>
+  <context>
+    <name>NetworkAccessManager</name>
+    <message>
+      <source>&lt;qt&gt;Enter username and password for "%1" at %2&lt;/qt&gt;</source>
+      <translation type="unfinished">&lt;qt&gt;Enter username and password for "%1" at %2&lt;/qt&gt;</translation>
+    </message>
+    <message>
+      <source>&lt;qt&gt;Connect to proxy "%1" using:&lt;/qt&gt;</source>
+      <translation type="unfinished">&lt;qt&gt;Connect to proxy "%1" using:&lt;/qt&gt;</translation>
     </message>
   </context>
   <context>
     <name>Position</name>
     <message>
       <source>Form</source>
-      <translation>Form</translation>
+      <translation type="unfinished">Formular</translation>
     </message>
     <message>
       <source>X:</source>
-      <translation>X:</translation>
+      <translation type="unfinished">X:</translation>
     </message>
     <message>
       <source>Y:</source>
-      <translation>Y:</translation>
+      <translation type="unfinished">Y:</translation>
     </message>
     <message>
       <source>Z:</source>
-      <translation>Z:</translation>
+      <translation type="unfinished">Z:</translation>
     </message>
     <message>
       <source>0.1 mm</source>
-      <translation>0.1 mm</translation>
+      <translation type="unfinished">0.1 mm</translation>
     </message>
     <message>
       <source>0.5 mm</source>
-      <translation>0.5 mm</translation>
+      <translation type="unfinished">0.5 mm</translation>
     </message>
     <message>
       <source>1 mm</source>
-      <translation>1 mm</translation>
+      <translation type="unfinished">1 mm</translation>
     </message>
     <message>
       <source>2 mm</source>
-      <translation>2 mm</translation>
+      <translation type="unfinished">2 mm</translation>
     </message>
     <message>
       <source>5 mm</source>
-      <translation>5 mm</translation>
+      <translation type="unfinished">5 mm</translation>
     </message>
     <message>
       <source>10 mm</source>
-      <translation>10 mm</translation>
+      <translation type="unfinished">10 mm</translation>
     </message>
     <message>
       <source>20 mm</source>
-      <translation>20 mm</translation>
+      <translation type="unfinished">20 mm</translation>
     </message>
     <message>
       <source>50 mm</source>
-      <translation>50 mm</translation>
+      <translation type="unfinished">50 mm</translation>
     </message>
     <message>
       <source>100 mm</source>
-      <translation>100 mm</translation>
+      <translation type="unfinished">100 mm</translation>
     </message>
     <message>
       <source>200 mm</source>
-      <translation>200 mm</translation>
+      <translation type="unfinished">200 mm</translation>
     </message>
     <message>
       <source>500 mm</source>
-      <translation>500 mm</translation>
+      <translation type="unfinished">500 mm</translation>
     </message>
     <message>
       <source>1 m</source>
-      <translation>1 m</translation>
+      <translation type="unfinished">1 m</translation>
     </message>
     <message>
       <source>2 m</source>
-      <translation>2 m</translation>
+      <translation type="unfinished">2 m</translation>
     </message>
     <message>
       <source>5 m </source>
-      <translation>5 m </translation>
+      <translation type="unfinished">5 m </translation>
     </message>
     <message>
       <source>Grid Snap in</source>
-      <translation>Grid Snap in</translation>
+      <translation type="unfinished">Ancorare la grila</translation>
     </message>
   </context>
   <context>
     <name>QDockWidget</name>
     <message>
       <source>Tree view</source>
-      <translation>Vizualizare arborescentă</translation>
+      <translation type="unfinished">Vizualizare arborescentă</translation>
     </message>
     <message>
       <source>Property view</source>
-      <translation>Vizualizare proprietăţi</translation>
+      <translation type="unfinished">Vizualizare proprietăţi</translation>
     </message>
     <message>
       <source>Selection view</source>
-      <translation>Vizualizare selecție</translation>
+      <translation type="unfinished">Vizualizare selecție</translation>
     </message>
     <message>
       <source>Report view</source>
-      <translation>Vezualizare raport</translation>
+      <translation type="unfinished">Vezualizare raport</translation>
     </message>
     <message>
       <source>Task View</source>
-      <translation>Vizualizare activitate</translation>
+      <translation type="unfinished">Vizualizare activitate</translation>
     </message>
     <message>
       <source>Combo View</source>
-      <translation>Vizualizare combo</translation>
+      <translation type="unfinished">Vizualizare combo</translation>
     </message>
     <message>
       <source>Toolbox</source>
-      <translation>Toolbox</translation>
+      <translation type="unfinished">Caseta de instrumente</translation>
     </message>
     <message>
       <source>Python console</source>
-      <translation>Consola Python</translation>
+      <translation type="unfinished">Consola Python</translation>
     </message>
     <message>
       <source>Display properties</source>
-      <translation>Afișare proprietăți</translation>
+      <translation type="unfinished">Afișare proprietăți</translation>
     </message>
   </context>
   <context>
     <name>QObject</name>
     <message>
       <source>General</source>
-      <translation>General</translation>
+      <translation type="unfinished">General</translation>
     </message>
     <message>
       <source>Display</source>
-      <translation>Afișare</translation>
+      <translation type="unfinished">Afișare</translation>
     </message>
     <message>
       <source>Unknown filetype</source>
-      <translation>Tip de fișier necunoscut</translation>
+      <translation type="unfinished">Tip de fișier necunoscut</translation>
     </message>
     <message>
       <source>Cannot open unknown filetype: %1</source>
-      <translation>Imposibil de deschis fişierul în format necunoscut:%1</translation>
+      <translation type="unfinished">Imposibil de deschis fişierul în format necunoscut:%1</translation>
     </message>
     <message>
       <source>Cannot save to unknown filetype: %1</source>
-      <translation>Nu se poate salva într-un format de fişier necunoscut:%1</translation>
+      <translation type="unfinished">Nu se poate salva într-un format de fişier necunoscut:%1</translation>
     </message>
     <message>
       <source>Workbench failure</source>
-      <translation>Bancul de lucru a eşuat</translation>
+      <translation type="unfinished">Bancul de lucru a eşuat</translation>
     </message>
     <message>
       <source>%1</source>
-      <translation>%1</translation>
+      <translation type="unfinished">%1</translation>
     </message>
     <message>
       <source>Unable to launch Qt Assistant (%1)</source>
-      <translation>Nu se poate lansa Asistentul Qt (%1)</translation>
+      <translation type="unfinished">Nu se poate lansa Asistentul Qt (%1)</translation>
     </message>
     <message>
       <source>Exception</source>
-      <translation>Excepţie</translation>
+      <translation type="unfinished">Excepţie</translation>
     </message>
     <message>
       <source>Open document</source>
-      <translation>Deschidere document</translation>
+      <translation type="unfinished">Deschidere document</translation>
     </message>
     <message>
       <source>Import file</source>
-      <translation>Importă fişier</translation>
+      <translation type="unfinished">Importă fişier</translation>
     </message>
     <message>
       <source>Export file</source>
-      <translation>Exportă fişier</translation>
+      <translation type="unfinished">Exportă fişier</translation>
     </message>
     <message>
       <source>Printing...</source>
-      <translation>Imprimare...</translation>
+      <translation type="unfinished">Imprimare...</translation>
     </message>
     <message>
       <source>Cannot load workbench</source>
-      <translation>Imposibil de încărcat bancul de lucru</translation>
+      <translation type="unfinished">Imposibil de încărcat bancul de lucru</translation>
     </message>
     <message>
       <source>A general error occurred while loading the workbench</source>
-      <translation>O eroare generală a apărut în timpul încărcării bancului de lucru</translation>
+      <translation type="unfinished">O eroare generală a apărut în timpul încărcării bancului de lucru</translation>
     </message>
     <message>
       <source>Save views...</source>
-      <translation>Salvare vederi...</translation>
+      <translation type="unfinished">Salvare vederi...</translation>
     </message>
     <message>
       <source>Load views...</source>
-      <translation>Încarcă vederi...</translation>
+      <translation type="unfinished">Încarcă vederi...</translation>
     </message>
     <message>
       <source>Freeze view</source>
-      <translation>Îngheaţă vederi</translation>
+      <translation type="unfinished">Îngheaţă vederi</translation>
     </message>
     <message>
       <source>Clear views</source>
-      <translation>Eliberează vederile</translation>
+      <translation type="unfinished">Eliberează vederile</translation>
     </message>
     <message>
       <source>Restore view &amp;%1</source>
-      <translation>Restaurează vederile &amp;%1</translation>
+      <translation type="unfinished">Restaurează vederile &amp;%1</translation>
     </message>
     <message>
       <source>Save frozen views</source>
-      <translation>Salvează vederile îngheţate</translation>
+      <translation type="unfinished">Salvează vederile îngheţate</translation>
     </message>
     <message>
       <source>Frozen views (*.cam)</source>
-      <translation>Vederile îngheţate (*.cam)</translation>
+      <translation type="unfinished">Vederile îngheţate (*.cam)</translation>
     </message>
     <message>
       <source>Restore views</source>
-      <translation>Restaurează vederile</translation>
+      <translation type="unfinished">Restaurează vederile</translation>
     </message>
     <message>
       <source>Importing the restored views would clear the already stored views.
 Do you want to continue?</source>
-      <translation>Importul vederilor restaurate ar elimina vederile deja salvate.
+      <translation type="unfinished">Importul vederilor restaurate ar elimina vederile deja salvate.
 Doriţi să continuaţi?</translation>
     </message>
     <message>
       <source>Restore frozen views</source>
-      <translation>Restaurează vederile îngheţate</translation>
+      <translation type="unfinished">Restaurează vederile îngheţate</translation>
     </message>
     <message>
       <source>Cannot open file '%1'.</source>
-      <translation>Imposibil de deschis fișierul '%1'.</translation>
+      <translation type="unfinished">Imposibil de deschis fișierul '%1'.</translation>
     </message>
     <message>
       <source>Docked</source>
-      <translation>Fixat</translation>
+      <translation type="unfinished">Fixat</translation>
     </message>
     <message>
       <source>Undocked</source>
-      <translation>Nefixată</translation>
+      <translation type="unfinished">Nefixată</translation>
     </message>
     <message>
       <source>Fullscreen</source>
-      <translation>Ecran complet</translation>
+      <translation type="unfinished">Ecran complet</translation>
     </message>
     <message>
       <source>files</source>
-      <translation>fişiere</translation>
+      <translation type="unfinished">fişiere</translation>
     </message>
     <message>
       <source>Save picture</source>
-      <translation>Salvează imaginea</translation>
+      <translation type="unfinished">Salvează imaginea</translation>
     </message>
     <message>
       <source>New sub-group</source>
-      <translation>Subgrup noi</translation>
+      <translation type="unfinished">Subgrup noi</translation>
     </message>
     <message>
       <source>Enter the name:</source>
-      <translation>Introduceți numele:</translation>
+      <translation type="unfinished">Introduceți numele:</translation>
     </message>
     <message>
       <source>New text item</source>
-      <translation>Text nou</translation>
+      <translation type="unfinished">Text nou</translation>
     </message>
     <message>
       <source>Enter your text:</source>
-      <translation>Introduceţi textul:</translation>
+      <translation type="unfinished">Introduceţi textul:</translation>
     </message>
     <message>
       <source>New integer item</source>
-      <translation>Element întreg nou</translation>
+      <translation type="unfinished">Element întreg nou</translation>
     </message>
     <message>
       <source>Enter your number:</source>
-      <translation>Introduceți numărul:</translation>
+      <translation type="unfinished">Introduceți numărul:</translation>
     </message>
     <message>
       <source>New unsigned item</source>
-      <translation>Element unsigned nou</translation>
+      <translation type="unfinished">Element unsigned nou</translation>
     </message>
     <message>
       <source>New float item</source>
-      <translation>Element float nou</translation>
+      <translation type="unfinished">Element float nou</translation>
     </message>
     <message>
       <source>New Boolean item</source>
-      <translation>Element Boolean nou</translation>
+      <translation type="unfinished">Element Boolean nou</translation>
     </message>
     <message>
       <source>Choose an item:</source>
-      <translation>Alegeţi un element:</translation>
+      <translation type="unfinished">Alegeţi un element:</translation>
     </message>
     <message>
       <source>Rename group</source>
-      <translation>Redenumire grup</translation>
+      <translation type="unfinished">Redenumire grup</translation>
     </message>
     <message>
       <source>The group '%1' cannot be renamed.</source>
-      <translation>Grupul '%1' nu poate fi redenumit.</translation>
+      <translation type="unfinished">Grupul '%1' nu poate fi redenumit.</translation>
     </message>
     <message>
       <source>Existing group</source>
-      <translation>Grup existent</translation>
+      <translation type="unfinished">Grup existent</translation>
     </message>
     <message>
       <source>The group '%1' already exists.</source>
-      <translation>Grupul '%1' există deja.</translation>
+      <translation type="unfinished">Grupul '%1' există deja.</translation>
     </message>
     <message>
       <source>Change value</source>
-      <translation>Modificaţi valoarea</translation>
+      <translation type="unfinished">Modificaţi valoarea</translation>
     </message>
     <message>
       <source>Save document under new filename...</source>
-      <translation>Salvaţi documentul sub un nume nou...</translation>
+      <translation type="unfinished">Salvaţi documentul sub un nume nou...</translation>
     </message>
     <message>
       <source>Saving aborted</source>
-      <translation>Salvarea a fost anulată</translation>
+      <translation type="unfinished">Salvarea a fost anulată</translation>
     </message>
     <message>
       <source>Unsaved document</source>
-      <translation>Document nesalvat</translation>
+      <translation type="unfinished">Document nesalvat</translation>
     </message>
     <message>
       <source>Save document before close?</source>
-      <translation>Salvați documentul înainte de a închide?</translation>
+      <translation type="unfinished">Salvați documentul înainte de a închide?</translation>
     </message>
     <message>
       <source>Save Macro</source>
-      <translation>Salvaţi macrocomanda</translation>
+      <translation type="unfinished">Salvaţi macrocomanda</translation>
     </message>
     <message>
       <source>Finish</source>
-      <translation>Terminare</translation>
+      <translation type="unfinished">Terminare</translation>
     </message>
     <message>
       <source>Clear</source>
-      <translation>Eliberează</translation>
+      <translation type="unfinished">Eliberează</translation>
     </message>
     <message>
       <source>Cancel</source>
-      <translation>Renunţă</translation>
+      <translation type="unfinished">Renunţă</translation>
     </message>
     <message>
       <source>Inner</source>
-      <translation>Interior</translation>
+      <translation type="unfinished">Interior</translation>
     </message>
     <message>
       <source>Outer</source>
-      <translation>Exterior</translation>
+      <translation type="unfinished">Exterior</translation>
     </message>
     <message>
       <source>No Browser</source>
-      <translation>Nici un Browser</translation>
+      <translation type="unfinished">Nici un Browser</translation>
     </message>
     <message>
       <source>Unable to open your browser.
 
 Please open a browser window and type in: http://localhost:%1.</source>
-      <translation>Imposibil de deschis browser-ul dumneavoastră.  Vă rugăm să deschideţi o fereastră de browser şi tastaţi: http://localhost:%1.</translation>
+      <translation type="unfinished">Imposibil de deschis browser-ul dumneavoastră.  Vă rugăm să deschideţi o fereastră de browser şi tastaţi: http://localhost:%1.</translation>
     </message>
     <message>
       <source>No Server</source>
-      <translation>Nici un server</translation>
+      <translation type="unfinished">Nici un server</translation>
     </message>
     <message>
       <source>Unable to start the server to port %1: %2.</source>
-      <translation>Imposibil de pornit serverul pentru pe portul %1:%2.</translation>
+      <translation type="unfinished">Imposibil de pornit serverul pentru pe portul %1:%2.</translation>
     </message>
     <message>
       <source>Unable to open your system browser.</source>
-      <translation>Imposibil de deschis browser-ul de sistem.</translation>
+      <translation type="unfinished">Imposibil de deschis browser-ul de sistem.</translation>
     </message>
     <message>
       <source>Options...</source>
-      <translation>Opţiuni...</translation>
+      <translation type="unfinished">Opţiuni...</translation>
     </message>
     <message>
       <source>Out of memory</source>
-      <translation>Memorie insuficientă</translation>
+      <translation type="unfinished">Memorie insuficientă</translation>
     </message>
     <message>
       <source>Not enough memory available to display the data.</source>
-      <translation>Insuficientă memorie disponibilă pentru a afişa datele.</translation>
+      <translation type="unfinished">Insuficientă memorie disponibilă pentru a afişa datele.</translation>
     </message>
     <message>
       <source>Cannot find file %1</source>
-      <translation>Imposibil de găsit fișierul %1</translation>
+      <translation type="unfinished">Imposibil de găsit fișierul %1</translation>
     </message>
     <message>
       <source>Cannot find file %1 neither in %2 nor in %3</source>
-      <translation>Imposibil de găsit fișierul %1 la %2 nici în %3</translation>
+      <translation type="unfinished">Imposibil de găsit fișierul %1 la %2 nici în %3</translation>
     </message>
     <message>
       <source>Save %1 Document</source>
-      <translation>Salvaţi documentul %1</translation>
+      <translation type="unfinished">Salvaţi documentul %1</translation>
     </message>
     <message>
       <source>%1 document (*.FCStd)</source>
-      <translation>Documentul %1 (*.FCStd)</translation>
-    </message>
-    <message>
-      <source>Save As</source>
-      <translation>Salvaţi ca</translation>
-    </message>
-    <message>
-      <source>%1 already exists.
-Do you want to replace it?</source>
-      <translation>%1 există deja.
-Doriţi să-l înlocuiţi?</translation>
+      <translation type="unfinished">Documentul %1 (*.FCStd)</translation>
     </message>
     <message>
       <source>Document not closable</source>
-      <translation>Documentul nu se poate închide</translation>
+      <translation type="unfinished">Documentul nu se poate închide</translation>
     </message>
     <message>
       <source>The document is not closable for the moment.</source>
-      <translation>Documentul nu se poate închide momentan.</translation>
+      <translation type="unfinished">Documentul nu se poate închide momentan.</translation>
     </message>
     <message>
       <source>No OpenGL</source>
-      <translation>No OpenGL</translation>
+      <translation type="unfinished">Fara OpenGL</translation>
     </message>
     <message>
       <source>This system does not support OpenGL</source>
-      <translation>This system does not support OpenGL</translation>
+      <translation type="unfinished">Acest sistem nu suporta OpenGL</translation>
     </message>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>Unable to load documentation.
 In order to load it Qt 4.4 or higher is required.</source>
-      <translation>Unable to load documentation.
-In order to load it Qt 4.4 or higher is required.</translation>
+      <translation type="unfinished">Documentatia nu a putut fi incarcata.
+Pentru a o putea accesa Qt 4.4 trebuie sa fie instalat.</translation>
     </message>
     <message>
       <source>%1 Help</source>
-      <translation>%1 Help</translation>
+      <translation type="unfinished">%1 Ajutor</translation>
     </message>
     <message>
       <source>Exporting PDF...</source>
-      <translation>Exporting PDF...</translation>
+      <translation type="unfinished">Export PDF...</translation>
     </message>
     <message>
       <source>Wrong selection</source>
-      <translation>Selecţie greşită</translation>
+      <translation type="unfinished">Selecţie greşită</translation>
     </message>
     <message>
       <source>Only one object selected. Please select two objects.
 Be aware the point where you click matters.</source>
-      <translation>Only one object selected. Please select two objects.
-Be aware the point where you click matters.</translation>
+      <translation type="unfinished">Doar un singur obiect selectat. Va rugam sa selectaţi două obiecte. Retineti: locul unde faceti click conteaza.</translation>
     </message>
     <message>
       <source>Please select two objects.
 Be aware the point where you click matters.</source>
-      <translation>Please select two objects.
-Be aware the point where you click matters.</translation>
+      <translation type="unfinished">Selectati doua obiecte.
+Retineti: locul unde faceti click conteaza.</translation>
     </message>
     <message>
       <source>New boolean item</source>
-      <translation>New boolean item</translation>
+      <translation type="unfinished">Element logic nou</translation>
     </message>
     <message>
       <source>Navigation styles</source>
-      <translation>Navigation styles</translation>
+      <translation type="unfinished">Stiluri de navigare</translation>
     </message>
     <message>
       <source>%1 navigation</source>
-      <translation>%1 navigation</translation>
+      <translation type="unfinished">Navigare %1</translation>
     </message>
     <message>
       <source>Move annotation</source>
-      <translation>Move annotation</translation>
+      <translation type="unfinished">Muta adnotarea</translation>
     </message>
     <message>
       <source>Transform</source>
-      <translation>Transform</translation>
+      <translation type="unfinished">Transform</translation>
     </message>
     <message>
       <source>The document is in editing mode and thus cannot be closed for the moment.
 You either have to finish or cancel the editing in the task panel.</source>
-      <translation>Documentul este în modul de editare şi astfel nu poate fi închis pentru moment. 
+      <translation type="unfinished">Documentul este în modul de editare şi astfel nu poate fi închis pentru moment. 
 Trebuie fie să terminaţi sau să anulaţi editarea în panoul de activitate.</translation>
     </message>
     <message>
       <source>Do you want to close this dialog?</source>
-      <translation>Do you want to close this dialog?</translation>
+      <translation type="unfinished">Doriti sa inchideti aceasta fereastra de dialog?</translation>
     </message>
   </context>
   <context>
     <name>StdBoxSelection</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Box selection</source>
-      <translation>Box selection</translation>
+      <translation type="unfinished">Selectare cu dreptunghi</translation>
     </message>
   </context>
   <context>
     <name>StdCmdAbout</name>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>&amp;About %1</source>
-      <translation>&amp;Despre %1</translation>
+      <translation type="unfinished">&amp;Despre %1</translation>
     </message>
     <message>
       <source>About %1</source>
-      <translation>Despre %1</translation>
+      <translation type="unfinished">Despre %1</translation>
     </message>
   </context>
   <context>
     <name>StdCmdAboutQt</name>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>About &amp;Qt</source>
-      <translation>Despre &amp;Qt</translation>
+      <translation type="unfinished">Despre &amp;Qt</translation>
     </message>
     <message>
       <source>About Qt</source>
-      <translation>Despre Qt</translation>
+      <translation type="unfinished">Despre Qt</translation>
     </message>
   </context>
   <context>
     <name>StdCmdActivateNextWindow</name>
     <message>
       <source>Window</source>
-      <translation>Fereastră</translation>
+      <translation type="unfinished">Fereastră</translation>
     </message>
     <message>
       <source>Ne&amp;xt</source>
-      <translation>&amp;Următor</translation>
+      <translation type="unfinished">&amp;Următor</translation>
     </message>
     <message>
       <source>Activate next window</source>
-      <translation>Activaţi fereastra următoare</translation>
+      <translation type="unfinished">Activaţi fereastra următoare</translation>
     </message>
   </context>
   <context>
     <name>StdCmdActivatePrevWindow</name>
     <message>
       <source>Window</source>
-      <translation>Fereastră</translation>
+      <translation type="unfinished">Fereastră</translation>
     </message>
     <message>
       <source>Pre&amp;vious</source>
-      <translation>&amp;Anterior</translation>
+      <translation type="unfinished">&amp;Anterior</translation>
     </message>
     <message>
       <source>Activate previous window</source>
-      <translation>Activaţi fereastra anterioară</translation>
+      <translation type="unfinished">Activaţi fereastra anterioară</translation>
     </message>
   </context>
   <context>
     <name>StdCmdAlignment</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>Alignment...</source>
-      <translation>Alignment...</translation>
+      <translation type="unfinished">Aliniament...</translation>
     </message>
     <message>
       <source>Align the selected objects</source>
-      <translation>Align the selected objects</translation>
+      <translation type="unfinished">Aliniati obiectele selectate</translation>
     </message>
   </context>
   <context>
     <name>StdCmdArrangeIcons</name>
     <message>
       <source>Window</source>
-      <translation>Fereastră</translation>
+      <translation type="unfinished">Fereastră</translation>
     </message>
     <message>
       <source>Arrange &amp;Icons</source>
-      <translation>Aranjare p&amp;ictograme</translation>
+      <translation type="unfinished">Aranjare p&amp;ictograme</translation>
     </message>
     <message>
       <source>Arrange Icons</source>
-      <translation>Aranjare pictograme</translation>
+      <translation type="unfinished">Aranjare pictograme</translation>
     </message>
   </context>
   <context>
     <name>StdCmdAxisCross</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Toggle axis cross</source>
-      <translation>Toggle axis cross</translation>
+      <translation type="unfinished">Comuta sistemul cartezian</translation>
     </message>
   </context>
   <context>
     <name>StdCmdCascadeWindows</name>
     <message>
       <source>Window</source>
-      <translation>Fereastră</translation>
+      <translation type="unfinished">Fereastră</translation>
     </message>
     <message>
       <source>&amp;Cascade</source>
-      <translation>&amp;Cascadă</translation>
+      <translation type="unfinished">&amp;Cascadă</translation>
     </message>
     <message>
       <source>Tile pragmatic</source>
-      <translation>Tile pragmatic</translation>
+      <translation type="unfinished">Carou pragmatic</translation>
     </message>
   </context>
   <context>
     <name>StdCmdCloseActiveWindow</name>
     <message>
       <source>Window</source>
-      <translation>Fereastră</translation>
+      <translation type="unfinished">Fereastră</translation>
     </message>
     <message>
       <source>Cl&amp;ose</source>
-      <translation>În&amp;chide</translation>
+      <translation type="unfinished">În&amp;chide</translation>
     </message>
     <message>
       <source>Close active window</source>
-      <translation>Închidere fereastră activă</translation>
+      <translation type="unfinished">Închidere fereastră activă</translation>
     </message>
   </context>
   <context>
     <name>StdCmdCloseAllWindows</name>
     <message>
       <source>Window</source>
-      <translation>Fereastră</translation>
+      <translation type="unfinished">Fereastră</translation>
     </message>
     <message>
       <source>Close Al&amp;l</source>
-      <translation>Închidere Al&amp;l</translation>
+      <translation type="unfinished">Închidere Al&amp;l</translation>
     </message>
     <message>
       <source>Close all windows</source>
-      <translation>Închideţi toate ferestrele</translation>
+      <translation type="unfinished">Închideţi toate ferestrele</translation>
     </message>
   </context>
   <context>
     <name>StdCmdCommandLine</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
       <source>Start command &amp;line...</source>
-      <translation>Pornire &amp;liniei de comandă...</translation>
+      <translation type="unfinished">Pornire &amp;liniei de comandă...</translation>
     </message>
     <message>
       <source>Opens the command line in the console</source>
-      <translation>Deschide linia de comandă în consolă</translation>
+      <translation type="unfinished">Deschide linia de comandă în consolă</translation>
     </message>
   </context>
   <context>
     <name>StdCmdCopy</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>C&amp;opy</source>
-      <translation>C&amp;opiază</translation>
+      <translation type="unfinished">C&amp;opiază</translation>
     </message>
     <message>
       <source>Copy operation</source>
-      <translation>Operația de copiere</translation>
+      <translation type="unfinished">Operația de copiere</translation>
     </message>
   </context>
   <context>
     <name>StdCmdCut</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>&amp;Cut</source>
-      <translation>&amp;Taiere</translation>
+      <translation type="unfinished">&amp;Taiere</translation>
     </message>
     <message>
       <source>Cut out</source>
-      <translation>Decupare</translation>
+      <translation type="unfinished">Decupare</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDelete</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>&amp;Delete</source>
-      <translation>Ş&amp;tergeţi</translation>
+      <translation type="unfinished">Ş&amp;tergeţi</translation>
     </message>
     <message>
       <source>Deletes the selected objects</source>
-      <translation>Ştergeţi obiectele selectate</translation>
+      <translation type="unfinished">Ştergeţi obiectele selectate</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDemoMode</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>View turntable...</source>
-      <translation>View turntable...</translation>
+      <translation type="unfinished">Vezi panou...</translation>
     </message>
     <message>
       <source>View turntable</source>
-      <translation>View turntable</translation>
+      <translation type="unfinished">Vezi panou</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDlgCustomize</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
       <source>Cu&amp;stomize...</source>
-      <translation>&amp;Particularizare...</translation>
+      <translation type="unfinished">&amp;Particularizare...</translation>
     </message>
     <message>
       <source>Customize toolbars and command bars</source>
-      <translation>Particularizează barele de instrumente şi barele de comandă</translation>
+      <translation type="unfinished">Particularizează barele de instrumente şi barele de comandă</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDlgMacroExecute</name>
     <message>
       <source>Macros ...</source>
-      <translation>Macro-uri ...</translation>
+      <translation type="unfinished">Macro-uri ...</translation>
     </message>
     <message>
       <source>Opens a dialog to let you execute a recorded macro</source>
-      <translation>Deschide oferestră care vă permite execuţia unui macro înregistrat</translation>
+      <translation type="unfinished">Deschide oferestră care vă permite execuţia unui macro înregistrat</translation>
     </message>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDlgMacroExecuteDirect</name>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
     <message>
       <source>Execute macro</source>
-      <translation>Executare macrocomandă</translation>
+      <translation type="unfinished">Executare macrocomandă</translation>
     </message>
     <message>
       <source>Execute the macro in the editor</source>
-      <translation>Execute the macro in the editor</translation>
+      <translation type="unfinished">Executa macrocomanda in editor</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDlgMacroRecord</name>
     <message>
       <source>&amp;Macro recording ...</source>
-      <translation>Înregistrare &amp;macro...</translation>
+      <translation type="unfinished">Înregistrare &amp;macro...</translation>
     </message>
     <message>
       <source>Opens a dialog to record a macro</source>
-      <translation>Deschide o fereastră care vă permite înregistrarea unui macro</translation>
+      <translation type="unfinished">Deschide o fereastră care vă permite înregistrarea unui macro</translation>
     </message>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDlgParameter</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
       <source>E&amp;dit parameters ...</source>
-      <translation>E&amp;ditare parametrii...</translation>
+      <translation type="unfinished">E&amp;ditare parametrii...</translation>
     </message>
     <message>
       <source>Opens a Dialog to edit the parameters</source>
-      <translation>Deschide o fereastră care vă permite editarea parametrilor</translation>
+      <translation type="unfinished">Deschide o fereastră care vă permite editarea parametrilor</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDlgPreferences</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
       <source>&amp;Preferences ...</source>
-      <translation>&amp;Preferinţe...</translation>
+      <translation type="unfinished">&amp;Preferinţe...</translation>
     </message>
     <message>
       <source>Opens a Dialog to edit the preferences</source>
-      <translation>Deschide o fereastră care vă permite editarea preferinţelor</translation>
+      <translation type="unfinished">Deschide o fereastră care vă permite editarea preferinţelor</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDockViewMenu</name>
     <message>
       <source>View</source>
-      <translation>Vizualizare</translation>
+      <translation type="unfinished">Vizualizare</translation>
     </message>
     <message>
       <source>Vie&amp;ws</source>
-      <translation>Vi&amp;zualizări</translation>
+      <translation type="unfinished">Vi&amp;zualizări</translation>
     </message>
     <message>
       <source>Toggles this window</source>
-      <translation>Comută această fereastră</translation>
+      <translation type="unfinished">Comută această fereastră</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDrawStyle</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Draw style</source>
-      <translation>Draw style</translation>
+      <translation type="unfinished">Stil de desenare</translation>
     </message>
   </context>
   <context>
     <name>StdCmdDuplicateSelection</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>Duplicate selection</source>
-      <translation>Duplicate selection</translation>
+      <translation type="unfinished">Cloneaza selectia</translation>
     </message>
     <message>
       <source>Put duplicates of the selected objects to the active document</source>
-      <translation>Put duplicates of the selected objects to the active document</translation>
+      <translation type="unfinished">Cloneaza obiectele selectate in documentul curent</translation>
     </message>
   </context>
   <context>
     <name>StdCmdEdit</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>Toggle &amp;Edit mode</source>
-      <translation>Comută modul de &amp;editare</translation>
+      <translation type="unfinished">Comută modul de &amp;editare</translation>
     </message>
     <message>
       <source>Toggles the selected object's edit mode</source>
-      <translation>Comută modul de editare pentru obiectul selectat</translation>
+      <translation type="unfinished">Comută modul de editare pentru obiectul selectat</translation>
     </message>
     <message>
       <source>Enters or leaves the selected object's edit mode</source>
-      <translation>Intră sau iese din modul de editare pentru obiectul selectat</translation>
+      <translation type="unfinished">Intră sau iese din modul de editare pentru obiectul selectat</translation>
     </message>
   </context>
   <context>
     <name>StdCmdExport</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>&amp;Export...</source>
-      <translation>&amp;Export...</translation>
+      <translation type="unfinished">&amp;Export...</translation>
     </message>
     <message>
       <source>Export an object in the active document</source>
-      <translation>Exportați un obiect din documentul activ</translation>
+      <translation type="unfinished">Exportați un obiect din documentul activ</translation>
     </message>
     <message>
       <source>No selection</source>
-      <translation>Nici o selecţie</translation>
+      <translation type="unfinished">Nici o selecţie</translation>
     </message>
     <message>
       <source>Please select first the objects you want to export.</source>
-      <translation>Please select first the objects you want to export.</translation>
+      <translation type="unfinished">Mai intai selectati obiectele pe care doriti să le exportati.</translation>
     </message>
   </context>
   <context>
     <name>StdCmdExportGraphviz</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
       <source>Dependency graph...</source>
-      <translation>Dependency graph...</translation>
+      <translation type="unfinished">Graficul de dependenta...</translation>
     </message>
     <message>
       <source>Show the dependency graph of the objects in the active document</source>
-      <translation>Show the dependency graph of the objects in the active document</translation>
+      <translation type="unfinished">Arata graficul de dependenta pentru obiecte din documentul activ</translation>
     </message>
   </context>
   <context>
     <name>StdCmdFeatRecompute</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>&amp;Recompute</source>
-      <translation>&amp;Recalculare</translation>
+      <translation type="unfinished">&amp;Recalculare</translation>
     </message>
     <message>
       <source>Recompute feature or document</source>
-      <translation>Recalculare caracteristică sau document</translation>
+      <translation type="unfinished">Recalculare caracteristică sau document</translation>
+    </message>
+  </context>
+  <context>
+    <name>StdCmdFreeCADFAQ</name>
+    <message>
+      <source>Help</source>
+      <translation type="unfinished">Ajutor</translation>
+    </message>
+    <message>
+      <source>FreeCAD FAQ</source>
+      <translation type="unfinished">FreeCAD FAQ</translation>
+    </message>
+    <message>
+      <source>Frequently Asked Questions on the FreeCAD website</source>
+      <translation type="unfinished">Frequently Asked Questions on the FreeCAD website</translation>
+    </message>
+    <message>
+      <source>Frequently Asked Questions</source>
+      <translation type="unfinished">Frequently Asked Questions</translation>
+    </message>
+  </context>
+  <context>
+    <name>StdCmdFreeCADForum</name>
+    <message>
+      <source>Help</source>
+      <translation type="unfinished">Ajutor</translation>
+    </message>
+    <message>
+      <source>FreeCAD Forum</source>
+      <translation type="unfinished">FreeCAD Forum</translation>
+    </message>
+    <message>
+      <source>The FreeCAD forum, where you can find help from other users</source>
+      <translation type="unfinished">The FreeCAD forum, where you can find help from other users</translation>
+    </message>
+    <message>
+      <source>The FreeCAD Forum</source>
+      <translation type="unfinished">The FreeCAD Forum</translation>
+    </message>
+  </context>
+  <context>
+    <name>StdCmdFreeCADPowerUserHub</name>
+    <message>
+      <source>Help</source>
+      <translation type="unfinished">Ajutor</translation>
+    </message>
+    <message>
+      <source>Python scripting documentation</source>
+      <translation type="unfinished">Python scripting documentation</translation>
+    </message>
+    <message>
+      <source>Python scripting documentation on the FreeCAD website</source>
+      <translation type="unfinished">Python scripting documentation on the FreeCAD website</translation>
+    </message>
+    <message>
+      <source>PowerUsers documentation</source>
+      <translation type="unfinished">PowerUsers documentation</translation>
+    </message>
+  </context>
+  <context>
+    <name>StdCmdFreeCADUserHub</name>
+    <message>
+      <source>Help</source>
+      <translation type="unfinished">Ajutor</translation>
+    </message>
+    <message>
+      <source>Users documentation</source>
+      <translation type="unfinished">Users documentation</translation>
+    </message>
+    <message>
+      <source>Documentation for users on the FreeCAD website</source>
+      <translation type="unfinished">Documentation for users on the FreeCAD website</translation>
     </message>
   </context>
   <context>
     <name>StdCmdFreeCADWebsite</name>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>FreeCAD Website</source>
-      <translation>Site-ul FreeCAD</translation>
+      <translation type="unfinished">Site-ul FreeCAD</translation>
     </message>
     <message>
       <source>The FreeCAD website</source>
-      <translation>Site-ul FreeCAD</translation>
+      <translation type="unfinished">Site-ul FreeCAD</translation>
     </message>
   </context>
   <context>
     <name>StdCmdFreezeViews</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Freeze display</source>
-      <translation>Îngheaţă ecranul</translation>
+      <translation type="unfinished">Îngheaţă ecranul</translation>
     </message>
     <message>
       <source>Freezes the current view position</source>
-      <translation>Îngheaţă poziţia curentă a vederii</translation>
+      <translation type="unfinished">Îngheaţă poziţia curentă a vederii</translation>
     </message>
   </context>
   <context>
     <name>StdCmdHideObjects</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Hide all objects</source>
-      <translation>Ascunde toate obiectele</translation>
+      <translation type="unfinished">Ascunde toate obiectele</translation>
     </message>
     <message>
       <source>Hide all objects in the document</source>
-      <translation>Ascunde toate obiectele din document</translation>
+      <translation type="unfinished">Ascunde toate obiectele din document</translation>
     </message>
   </context>
   <context>
     <name>StdCmdHideSelection</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Hide selection</source>
-      <translation>Ascunde selecţia</translation>
+      <translation type="unfinished">Ascunde selecţia</translation>
     </message>
     <message>
       <source>Hide all selected objects</source>
-      <translation>Ascunde toate obiectele selectate</translation>
+      <translation type="unfinished">Ascunde toate obiectele selectate</translation>
     </message>
   </context>
   <context>
     <name>StdCmdImport</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>&amp;Import...</source>
-      <translation>&amp;Import...</translation>
+      <translation type="unfinished">&amp;Import...</translation>
     </message>
     <message>
       <source>Import a file in the active document</source>
-      <translation>Importă un fişier în documentul activ</translation>
+      <translation type="unfinished">Importă un fişier în documentul activ</translation>
     </message>
     <message>
       <source>Supported formats</source>
-      <translation>Formate acceptate</translation>
+      <translation type="unfinished">Formate acceptate</translation>
     </message>
     <message>
       <source>All files (*.*)</source>
-      <translation>Toate fişierele (*.*)</translation>
+      <translation type="unfinished">Toate fişierele (*.*)</translation>
     </message>
   </context>
   <context>
     <name>StdCmdMacroStartDebug</name>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
     <message>
       <source>Debug macro</source>
-      <translation>Debug macro</translation>
+      <translation type="unfinished">Depanare macrocomanda</translation>
     </message>
     <message>
       <source>Start debugging of macro</source>
-      <translation>Start debugging of macro</translation>
+      <translation type="unfinished">Începe depanarea macrocomenzii</translation>
+    </message>
+  </context>
+  <context>
+    <name>StdCmdMacroStepInto</name>
+    <message>
+      <source>Macro</source>
+      <translation type="unfinished">Macrocomandă</translation>
+    </message>
+    <message>
+      <source>Step into</source>
+      <translation type="unfinished">Step into</translation>
     </message>
   </context>
   <context>
     <name>StdCmdMacroStepOver</name>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
     <message>
       <source>Step over</source>
-      <translation>Step over</translation>
+      <translation type="unfinished">Pas peste</translation>
     </message>
   </context>
   <context>
     <name>StdCmdMacroStopDebug</name>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
     <message>
       <source>Stop debugging</source>
-      <translation>Stop debugging</translation>
+      <translation type="unfinished">Opreste depanarea</translation>
     </message>
     <message>
       <source>Stop debugging of macro</source>
-      <translation>Stop debugging of macro</translation>
+      <translation type="unfinished">Opreste depanara macrocomenzii</translation>
     </message>
   </context>
   <context>
     <name>StdCmdMacroStopRecord</name>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
     <message>
       <source>S&amp;top macro recording</source>
-      <translation>Opreşte înregistrarea macrocomenzii</translation>
+      <translation type="unfinished">Opreşte înregistrarea macrocomenzii</translation>
     </message>
     <message>
       <source>Stop the macro recording session</source>
-      <translation>Opriţi sesiunea de înregistrare macrocomenzi</translation>
+      <translation type="unfinished">Opriţi sesiunea de înregistrare macrocomenzi</translation>
     </message>
   </context>
   <context>
     <name>StdCmdMeasureDistance</name>
     <message>
       <source>View</source>
-      <translation>Vizualizare</translation>
+      <translation type="unfinished">Vizualizare</translation>
     </message>
     <message>
       <source>Measure distance</source>
-      <translation>Măsoară distanţa</translation>
+      <translation type="unfinished">Măsoară distanţa</translation>
     </message>
   </context>
   <context>
     <name>StdCmdMeasurementSimple</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
       <source>Measures distance between two selected objects</source>
-      <translation>Measures distance between two selected objects</translation>
+      <translation type="unfinished">Masoara distanta dintre doua obiecte slectate</translation>
     </message>
     <message>
       <source>Measure distance</source>
-      <translation>Măsoară distanţa</translation>
+      <translation type="unfinished">Măsoară distanţa</translation>
     </message>
   </context>
   <context>
     <name>StdCmdMergeProjects</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>Merge project...</source>
-      <translation>Merge project...</translation>
+      <translation type="unfinished">Imbina proiect...</translation>
     </message>
     <message>
       <source>Merge project</source>
-      <translation>Merge project</translation>
+      <translation type="unfinished">Imbina proiect</translation>
     </message>
     <message>
       <source>%1 document (*.fcstd)</source>
-      <translation>%1 document (*.fcstd)</translation>
+      <translation type="unfinished">document %1 (*.fcstd)</translation>
     </message>
     <message>
       <source>Cannot merge project with itself.</source>
-      <translation>Cannot merge project with itself.</translation>
+      <translation type="unfinished">Imposibil de imbinat proiectul cu el insusi.</translation>
     </message>
   </context>
   <context>
     <name>StdCmdNew</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>&amp;New</source>
-      <translation>&amp;Nou</translation>
+      <translation type="unfinished">&amp;Nou</translation>
     </message>
     <message>
       <source>Create a new empty document</source>
-      <translation>Creaţi un nou document gol</translation>
+      <translation type="unfinished">Creaţi un nou document gol</translation>
+    </message>
+    <message>
+      <source>Unnamed</source>
+      <translation type="unfinished">Unnamed</translation>
     </message>
   </context>
   <context>
     <name>StdCmdOnlineHelp</name>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>Show help to the application</source>
-      <translation>Arată ghidul de Ajutor al aplicaţiei</translation>
+      <translation type="unfinished">Arată ghidul de Ajutor al aplicaţiei</translation>
     </message>
   </context>
   <context>
     <name>StdCmdOnlineHelpWebsite</name>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>Help Website</source>
-      <translation>Site-ul de ajutor</translation>
+      <translation type="unfinished">Site-ul de ajutor</translation>
     </message>
     <message>
       <source>The website where the help is maintained</source>
-      <translation>Site-ul unde este întreţinut ghidul de ajutor</translation>
+      <translation type="unfinished">Site-ul unde este întreţinut ghidul de ajutor</translation>
     </message>
   </context>
   <context>
     <name>StdCmdOpen</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>&amp;Open...</source>
-      <translation>&amp;Deschideţi...</translation>
+      <translation type="unfinished">&amp;Deschideţi...</translation>
     </message>
     <message>
       <source>Open a document or import files</source>
-      <translation>Deschideţi un document sau importaţi fişiere</translation>
+      <translation type="unfinished">Deschideţi un document sau importaţi fişiere</translation>
     </message>
     <message>
       <source>Supported formats</source>
-      <translation>Formate acceptate</translation>
+      <translation type="unfinished">Formate acceptate</translation>
     </message>
     <message>
       <source>All files (*.*)</source>
-      <translation>Toate fişierele (*.*)</translation>
+      <translation type="unfinished">Toate fişierele (*.*)</translation>
     </message>
   </context>
   <context>
     <name>StdCmdPaste</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>&amp;Paste</source>
-      <translation>&amp;Lipire</translation>
+      <translation type="unfinished">&amp;Lipire</translation>
     </message>
     <message>
       <source>Paste operation</source>
-      <translation>Lipiţi operaţia</translation>
+      <translation type="unfinished">Lipiţi operaţia</translation>
     </message>
   </context>
   <context>
     <name>StdCmdPlacement</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>Placement...</source>
-      <translation>Placement...</translation>
+      <translation type="unfinished">Amplasare...</translation>
     </message>
     <message>
       <source>Place the selected objects</source>
-      <translation>Place the selected objects</translation>
+      <translation type="unfinished">Plasati obiectele selectate</translation>
     </message>
   </context>
   <context>
     <name>StdCmdPrint</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>&amp;Print...</source>
-      <translation>Im&amp;primare...</translation>
+      <translation type="unfinished">Im&amp;primare...</translation>
     </message>
     <message>
       <source>Print the document</source>
-      <translation>Imprimaţi documentul</translation>
+      <translation type="unfinished">Imprimaţi documentul</translation>
     </message>
   </context>
   <context>
     <name>StdCmdPrintPdf</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>&amp;Export PDF...</source>
-      <translation>&amp;Exportaţi PDF...</translation>
+      <translation type="unfinished">&amp;Exportaţi PDF...</translation>
     </message>
     <message>
       <source>Export the document as PDF</source>
-      <translation>Exportaţi documentul ca PDF</translation>
+      <translation type="unfinished">Exportaţi documentul ca PDF</translation>
     </message>
   </context>
   <context>
     <name>StdCmdPrintPreview</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>&amp;Print preview...</source>
-      <translation>&amp;Print preview...</translation>
+      <translation type="unfinished">Examinare înaintea im&amp;primarii...</translation>
     </message>
     <message>
       <source>Print the document</source>
-      <translation>Imprimaţi documentul</translation>
+      <translation type="unfinished">Imprimaţi documentul</translation>
     </message>
     <message>
       <source>Print preview</source>
-      <translation>Print preview</translation>
+      <translation type="unfinished">Examinare înaintea imprimarii</translation>
     </message>
   </context>
   <context>
     <name>StdCmdProjectInfo</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>Project i&amp;nformation...</source>
-      <translation>&amp;Informații de proiect...</translation>
+      <translation type="unfinished">&amp;Informații de proiect...</translation>
     </message>
     <message>
       <source>Show details of the currently active project</source>
-      <translation>Afişează detaliile proiectului activ</translation>
+      <translation type="unfinished">Afişează detaliile proiectului activ</translation>
     </message>
   </context>
   <context>
     <name>StdCmdProjectUtil</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
       <source>Project utility...</source>
-      <translation>Project utility...</translation>
+      <translation type="unfinished">Utilitar pentru proiect...</translation>
     </message>
     <message>
       <source>Utility to extract or create project files</source>
-      <translation>Utility to extract or create project files</translation>
+      <translation type="unfinished">Utilitar pentru extragerea sau crearea fisierelor din proiect</translation>
     </message>
   </context>
   <context>
     <name>StdCmdPythonWebsite</name>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>Python Website</source>
-      <translation>Site-ul Python</translation>
+      <translation type="unfinished">Site-ul Python</translation>
     </message>
     <message>
       <source>The official Python website</source>
-      <translation>Site-ul oficial Python</translation>
+      <translation type="unfinished">Site-ul oficial Python</translation>
     </message>
   </context>
   <context>
     <name>StdCmdQuit</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>E&amp;xit</source>
-      <translation>&amp;Ieşire</translation>
+      <translation type="unfinished">&amp;Ieşire</translation>
     </message>
     <message>
       <source>Quits the application</source>
-      <translation>Închide aplicaţia</translation>
+      <translation type="unfinished">Închide aplicaţia</translation>
     </message>
   </context>
   <context>
     <name>StdCmdRandomColor</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>Random color</source>
-      <translation>Culoare aleatorie</translation>
+      <translation type="unfinished">Culoare aleatorie</translation>
     </message>
   </context>
   <context>
     <name>StdCmdRecentFiles</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>Recent files</source>
-      <translation>Fişiere recente</translation>
+      <translation type="unfinished">Fişiere recente</translation>
     </message>
     <message>
       <source>Recent file list</source>
-      <translation>Lista de fişiere recente</translation>
+      <translation type="unfinished">Lista de fişiere recente</translation>
     </message>
   </context>
   <context>
     <name>StdCmdRedo</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>&amp;Redo</source>
-      <translation>&amp;Refacere</translation>
+      <translation type="unfinished">&amp;Refacere</translation>
     </message>
     <message>
       <source>Redoes a previously undone action</source>
-      <translation>Reface o acţiune anulată anterior</translation>
+      <translation type="unfinished">Reface o acţiune anulată anterior</translation>
     </message>
   </context>
   <context>
     <name>StdCmdRefresh</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>&amp;Refresh</source>
-      <translation>&amp;Reîmprospătare</translation>
+      <translation type="unfinished">&amp;Reîmprospătare</translation>
     </message>
     <message>
       <source>Recomputes the current active document</source>
-      <translation>Recalculează documentul activ</translation>
+      <translation type="unfinished">Recalculează documentul activ</translation>
     </message>
   </context>
   <context>
     <name>StdCmdSave</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>&amp;Save</source>
-      <translation>&amp;Salvaţi</translation>
+      <translation type="unfinished">&amp;Salvaţi</translation>
     </message>
     <message>
       <source>Save the active document</source>
-      <translation>Salvaţi documentul activ</translation>
+      <translation type="unfinished">Salvaţi documentul activ</translation>
     </message>
   </context>
   <context>
     <name>StdCmdSaveAs</name>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>Save &amp;As...</source>
-      <translation>S&amp;alvaţi ca...</translation>
+      <translation type="unfinished">S&amp;alvaţi ca...</translation>
     </message>
     <message>
       <source>Save the active document under a new file name</source>
-      <translation>Salvare documentul activ sub un nou nume de fişier</translation>
+      <translation type="unfinished">Salvare documentul activ sub un nou nume de fişier</translation>
     </message>
   </context>
   <context>
     <name>StdCmdSceneInspector</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
       <source>Scene inspector...</source>
-      <translation>Inspectorul de scena...</translation>
+      <translation type="unfinished">Inspectorul de scena...</translation>
     </message>
     <message>
       <source>Scene inspector</source>
-      <translation>Inspectorul de scena</translation>
+      <translation type="unfinished">Inspectorul de scena</translation>
     </message>
   </context>
   <context>
     <name>StdCmdSelectAll</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>Select &amp;All</source>
-      <translation>Select&amp;aţi tot</translation>
+      <translation type="unfinished">Select&amp;aţi tot</translation>
     </message>
     <message>
       <source>Select all</source>
-      <translation>Selectează tot</translation>
+      <translation type="unfinished">Selectează tot</translation>
     </message>
   </context>
   <context>
     <name>StdCmdSetAppearance</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Appearance...</source>
-      <translation>Aspect...</translation>
+      <translation type="unfinished">Aspect...</translation>
     </message>
     <message>
       <source>Sets the display properties of the selected object</source>
-      <translation>Defineşte proprietăţile de afişare a obiectului selectat</translation>
+      <translation type="unfinished">Defineşte proprietăţile de afişare a obiectului selectat</translation>
     </message>
   </context>
   <context>
     <name>StdCmdShowObjects</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Show all objects</source>
-      <translation>Arată toate obiectele</translation>
+      <translation type="unfinished">Arată toate obiectele</translation>
     </message>
     <message>
       <source>Show all objects in the document</source>
-      <translation>Arată toate obiectele din document</translation>
+      <translation type="unfinished">Arată toate obiectele din document</translation>
     </message>
   </context>
   <context>
     <name>StdCmdShowSelection</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Show selection</source>
-      <translation>Arăta de selecţia</translation>
+      <translation type="unfinished">Arăta de selecţia</translation>
     </message>
     <message>
       <source>Show all selected objects</source>
-      <translation>Arată toate obiectele selectate</translation>
+      <translation type="unfinished">Arată toate obiectele selectate</translation>
     </message>
   </context>
   <context>
     <name>StdCmdStatusBar</name>
     <message>
       <source>View</source>
-      <translation>Vizualizare</translation>
+      <translation type="unfinished">Vizualizare</translation>
     </message>
     <message>
       <source>Status bar</source>
-      <translation>Bara de stare</translation>
+      <translation type="unfinished">Bara de stare</translation>
     </message>
     <message>
       <source>Toggles the status bar</source>
-      <translation>Comută bara de stare</translation>
+      <translation type="unfinished">Comută bara de stare</translation>
     </message>
   </context>
   <context>
     <name>StdCmdTextureMapping</name>
     <message>
       <source>Tools</source>
-      <translation>Instrumente</translation>
+      <translation type="unfinished">Instrumente</translation>
     </message>
     <message>
       <source>Texture mapping...</source>
-      <translation>Texture mapping...</translation>
+      <translation type="unfinished">Aplicare textura...</translation>
     </message>
     <message>
       <source>Texture mapping</source>
-      <translation>Texture mapping</translation>
+      <translation type="unfinished">Aplicare textura</translation>
     </message>
   </context>
   <context>
     <name>StdCmdTileWindows</name>
     <message>
       <source>Window</source>
-      <translation>Fereastră</translation>
+      <translation type="unfinished">Fereastră</translation>
     </message>
     <message>
       <source>&amp;Tile</source>
-      <translation>&amp;Tile</translation>
+      <translation type="unfinished">&amp;Carou</translation>
     </message>
     <message>
       <source>Tile the windows</source>
-      <translation>Tile the windows</translation>
+      <translation type="unfinished">Aranjeaza ferestrele intr-un mod regulat</translation>
     </message>
   </context>
   <context>
     <name>StdCmdToggleBreakpoint</name>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
     <message>
       <source>Toggle breakpoint</source>
-      <translation>Toggle breakpoint</translation>
+      <translation type="unfinished">Comuta punct de oprire</translation>
     </message>
   </context>
   <context>
     <name>StdCmdToggleClipPlane</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Clipping plane</source>
-      <translation>Planul de tăiere</translation>
+      <translation type="unfinished">Planul de tăiere</translation>
     </message>
     <message>
       <source>Toggles clipping plane for active view</source>
-      <translation>Comută planul de tăiere pentru vederea activă</translation>
+      <translation type="unfinished">Comută planul de tăiere pentru vederea activă</translation>
     </message>
   </context>
   <context>
     <name>StdCmdToggleNavigation</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Toggle navigation/Edit mode</source>
-      <translation>Comutare mod de navigare/editare</translation>
+      <translation type="unfinished">Comutare mod de navigare/editare</translation>
     </message>
     <message>
       <source>Toggle between navigation and edit mode</source>
-      <translation>Comuta între modul de editare şi modul de navigare</translation>
+      <translation type="unfinished">Comuta între modul de editare şi modul de navigare</translation>
     </message>
   </context>
   <context>
     <name>StdCmdToggleObjects</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Toggle all objects</source>
-      <translation>Comutare toate obiectele</translation>
+      <translation type="unfinished">Comutare toate obiectele</translation>
     </message>
     <message>
       <source>Toggles visibility of all objects in the active document</source>
-      <translation>Comută vizibilitatea tuturor obiectelor din documentul activ</translation>
+      <translation type="unfinished">Comută vizibilitatea tuturor obiectelor din documentul activ</translation>
     </message>
   </context>
   <context>
     <name>StdCmdToggleSelectability</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Toggle selectability</source>
-      <translation>Toggle selectability</translation>
+      <translation type="unfinished">Comuta selectabilitatea</translation>
     </message>
     <message>
       <source>Toggles the property of the objects to get selected in the 3D-View</source>
-      <translation>Toggles the property of the objects to get selected in the 3D-View</translation>
+      <translation type="unfinished">Schimba abilitatea obiectelor de a fi selectate in 3D</translation>
     </message>
   </context>
   <context>
     <name>StdCmdToggleVisibility</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Toggle visibility</source>
-      <translation>Comutare vizibilitate</translation>
+      <translation type="unfinished">Comutare vizibilitate</translation>
     </message>
     <message>
       <source>Toggles visibility</source>
-      <translation>Comută vizibilitatea</translation>
+      <translation type="unfinished">Comută vizibilitatea</translation>
     </message>
   </context>
   <context>
     <name>StdCmdToolBarMenu</name>
     <message>
       <source>View</source>
-      <translation>Vizualizare</translation>
+      <translation type="unfinished">Vizualizare</translation>
     </message>
     <message>
       <source>Tool&amp;bars</source>
-      <translation>&amp;Bare de instrumente</translation>
+      <translation type="unfinished">&amp;Bare de instrumente</translation>
     </message>
     <message>
       <source>Toggles this window</source>
-      <translation>Comută această fereastră</translation>
+      <translation type="unfinished">Comută această fereastră</translation>
     </message>
   </context>
   <context>
     <name>StdCmdTransform</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>Transform...</source>
-      <translation>Transform...</translation>
+      <translation type="unfinished">Transformare...</translation>
     </message>
     <message>
       <source>Transform the geometry of selected objects</source>
-      <translation>Transform the geometry of selected objects</translation>
+      <translation type="unfinished">Transforma geometria obiectelor selectate</translation>
     </message>
   </context>
   <context>
     <name>StdCmdTransformManip</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>Transform</source>
-      <translation>Transform</translation>
+      <translation type="unfinished">Transform</translation>
     </message>
     <message>
       <source>Transform the selected object in the 3d view</source>
-      <translation>Transform the selected object in the 3d view</translation>
+      <translation type="unfinished">Transforma obiectul selectat în vizualizarea 3D</translation>
     </message>
   </context>
   <context>
     <name>StdCmdTreeSelection</name>
     <message>
       <source>View</source>
-      <translation>Vizualizare</translation>
+      <translation type="unfinished">Vizualizare</translation>
     </message>
     <message>
       <source>Go to selection</source>
-      <translation>Du-te la selecție</translation>
+      <translation type="unfinished">Du-te la selecție</translation>
     </message>
     <message>
       <source>Scroll to first selected item</source>
-      <translation>Scroll to first selected item</translation>
+      <translation type="unfinished">Mergi la primul obiect selectat</translation>
     </message>
   </context>
   <context>
     <name>StdCmdUndo</name>
     <message>
       <source>Edit</source>
-      <translation>Editare</translation>
+      <translation type="unfinished">Editare</translation>
     </message>
     <message>
       <source>&amp;Undo</source>
-      <translation>&amp;Anulare</translation>
+      <translation type="unfinished">&amp;Anulare</translation>
     </message>
     <message>
       <source>Undo exactly one action</source>
-      <translation>Undo exactly one action</translation>
+      <translation type="unfinished">Anuleaza o actiune</translation>
+    </message>
+  </context>
+  <context>
+    <name>StdCmdUnitsCalculator</name>
+    <message>
+      <source>Tools</source>
+      <translation type="unfinished">Instrumente</translation>
+    </message>
+    <message>
+      <source>&amp;Units calculator...</source>
+      <translation type="unfinished">&amp;Units calculator...</translation>
+    </message>
+    <message>
+      <source>Start the units calculator</source>
+      <translation type="unfinished">Start the units calculator</translation>
     </message>
   </context>
   <context>
     <name>StdCmdUserInterface</name>
     <message>
       <source>View</source>
-      <translation>Vizualizare</translation>
+      <translation type="unfinished">Vizualizare</translation>
     </message>
     <message>
       <source>Dock views</source>
-      <translation>Dock views</translation>
+      <translation type="unfinished">Andocare vizualizari</translation>
     </message>
     <message>
       <source>Dock all top-level views</source>
-      <translation>Dock all top-level views</translation>
+      <translation type="unfinished">Andocarea tuturor vizualizarilor</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewAxo</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Axometric</source>
-      <translation>Axometric</translation>
+      <translation type="unfinished">Axometric</translation>
     </message>
     <message>
       <source>Set to axometric view</source>
-      <translation>Set to axometric view</translation>
+      <translation type="unfinished">Vizualizare axometrica</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewBottom</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Bottom</source>
-      <translation>Bottom</translation>
+      <translation type="unfinished">Partea de jos</translation>
     </message>
     <message>
       <source>Set to bottom view</source>
-      <translation>Set to bottom view</translation>
+      <translation type="unfinished">Vedere de dedesubt</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewCreate</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Create new view</source>
-      <translation>Create new view</translation>
+      <translation type="unfinished">Creaza vizualizare noua</translation>
     </message>
     <message>
       <source>Creates a new  view window for the active document</source>
-      <translation>Creates a new  view window for the active document</translation>
+      <translation type="unfinished">Creaza o noua fereastra pentru documentul activ</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewExample1</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Inventor example #1</source>
-      <translation>Inventor example #1</translation>
+      <translation type="unfinished">Inventor - Exemplu #1</translation>
     </message>
     <message>
       <source>Shows a 3D texture with manipulator</source>
-      <translation>Shows a 3D texture with manipulator</translation>
+      <translation type="unfinished">Prezinta o textura 3D cu manipulator</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewExample2</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Inventor example #2</source>
-      <translation>Inventor example #2</translation>
+      <translation type="unfinished">Inventor - Exemplu #2</translation>
     </message>
     <message>
       <source>Shows spheres and drag-lights</source>
-      <translation>Shows spheres and drag-lights</translation>
+      <translation type="unfinished">Prezinta sfere si lumini mobile</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewExample3</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Inventor example #3</source>
-      <translation>Inventor example #3</translation>
+      <translation type="unfinished">Inventor - Exemplu #3</translation>
     </message>
     <message>
       <source>Shows a animated texture</source>
-      <translation>Shows a animated texture</translation>
+      <translation type="unfinished">Prezinta o textura animata</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewFitAll</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Fit all</source>
-      <translation>Fit all</translation>
+      <translation type="unfinished">Incadreaza toate</translation>
     </message>
     <message>
       <source>Fits the whole content on the screen</source>
-      <translation>Fits the whole content on the screen</translation>
+      <translation type="unfinished">Incadreaza intreg continutul in ecran</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewFitSelection</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Fit selection</source>
-      <translation>Fit selection</translation>
+      <translation type="unfinished">Incadreaza selectia</translation>
     </message>
     <message>
       <source>Fits the selected content on the screen</source>
-      <translation>Fits the selected content on the screen</translation>
+      <translation type="unfinished">Incadreaza continutul selectat in ecran</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewFront</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Front</source>
-      <translation>Front</translation>
+      <translation type="unfinished">Fata</translation>
     </message>
     <message>
       <source>Set to front view</source>
-      <translation>Set to front view</translation>
+      <translation type="unfinished">Seteaza vederea din fata</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewIvIssueCamPos</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Issue camera position</source>
-      <translation>Issue camera position</translation>
+      <translation type="unfinished">Seteaza pozitia camerei</translation>
     </message>
     <message>
       <source>Issue the camera position to the console and to a macro, to easily recall this position</source>
-      <translation>Issue the camera position to the console and to a macro, to easily recall this position</translation>
+      <translation type="unfinished">Seteaza pozitia camerei la consola si pentru macronstructiune, pentru a putea fi usor reamintita</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewIvStereoInterleavedColumns</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Stereo Interleaved Columns</source>
-      <translation>Stereo Interleaved Columns</translation>
+      <translation type="unfinished">Coloane stereo intercalate</translation>
     </message>
     <message>
       <source>Switch stereo viewing to Interleaved Columns</source>
-      <translation>Switch stereo viewing to Interleaved Columns</translation>
+      <translation type="unfinished">Schimba vizualizarea stereo in coloane intercalate</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewIvStereoInterleavedRows</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Stereo Interleaved Rows</source>
-      <translation>Stereo Interleaved Rows</translation>
+      <translation type="unfinished">Randuri stereo intercalate</translation>
     </message>
     <message>
       <source>Switch stereo viewing to Interleaved Rows</source>
-      <translation>Switch stereo viewing to Interleaved Rows</translation>
+      <translation type="unfinished">Schimba vizualizarea stereo in randuri intercalate</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewIvStereoOff</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Stereo Off</source>
-      <translation>Stereo Off</translation>
+      <translation type="unfinished">Inchide stereo</translation>
     </message>
     <message>
       <source>Switch stereo viewing off</source>
-      <translation>Switch stereo viewing off</translation>
+      <translation type="unfinished">Opreste vizualizarea stereo</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewIvStereoQuadBuff</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Stereo quad buffer</source>
-      <translation>Stereo quad buffer</translation>
+      <translation type="unfinished">Stereo quad buffer</translation>
     </message>
     <message>
       <source>Switch stereo viewing to quad buffer</source>
-      <translation>Switch stereo viewing to quad buffer</translation>
+      <translation type="unfinished">Schimba vizualizarea stereo in quad buffer</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewIvStereoRedGreen</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Stereo red/green</source>
-      <translation>Stereo red/green</translation>
+      <translation type="unfinished">Stereo rosu/verde</translation>
     </message>
     <message>
       <source>Switch stereo viewing to red/green</source>
-      <translation>Switch stereo viewing to red/green</translation>
+      <translation type="unfinished">Schimba vizualizarea stereo in rosu/verde</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewLeft</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Left</source>
-      <translation>Left</translation>
+      <translation type="unfinished">Stanga</translation>
     </message>
     <message>
       <source>Set to left view</source>
-      <translation>Set to left view</translation>
+      <translation type="unfinished">Seteaza vederea din stanga</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewRear</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Rear</source>
-      <translation>Rear</translation>
+      <translation type="unfinished">Spate</translation>
     </message>
     <message>
       <source>Set to rear view</source>
-      <translation>Set to rear view</translation>
+      <translation type="unfinished">Seteaza vederea din spate</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewRight</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Right</source>
-      <translation>Right</translation>
+      <translation type="unfinished">Dreapta</translation>
     </message>
     <message>
       <source>Set to right view</source>
-      <translation>Set to right view</translation>
+      <translation type="unfinished">Seteaza vederea din dreapta</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewRotateLeft</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Rotate Left</source>
-      <translation>Rotate Left</translation>
+      <translation type="unfinished">Rotire la stanga</translation>
     </message>
     <message>
       <source>Rotate the view by 90Â° counter-clockwise</source>
-      <translation>Rotate the view by 90Â° counter-clockwise</translation>
+      <translation type="unfinished">Rotire in sensul acelor de ceasornic cu 90°</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewRotateRight</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Rotate Right</source>
-      <translation>Rotate Right</translation>
+      <translation type="unfinished">Rotire la dreapta</translation>
     </message>
     <message>
       <source>Rotate the view by 90Â° clockwise</source>
-      <translation>Rotate the view by 90Â° clockwise</translation>
+      <translation type="unfinished">Rotire cu 90° în sens orar</translation>
     </message>
   </context>
   <context>
     <name>StdCmdViewTop</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Top</source>
-      <translation>Top</translation>
+      <translation type="unfinished">Partea de sus</translation>
     </message>
     <message>
       <source>Set to top view</source>
-      <translation>Set to top view</translation>
+      <translation type="unfinished">Seteaza vederea de sus</translation>
     </message>
   </context>
   <context>
     <name>StdCmdWhatsThis</name>
     <message>
       <source>Help</source>
-      <translation>Ajutor</translation>
+      <translation type="unfinished">Ajutor</translation>
     </message>
     <message>
       <source>&amp;What's This?</source>
-      <translation>&amp;What's This?</translation>
+      <translation type="unfinished">&amp;Ce-i asta?</translation>
     </message>
     <message>
       <source>What's This</source>
-      <translation>What's This</translation>
+      <translation type="unfinished">Ce-i asta</translation>
     </message>
   </context>
   <context>
     <name>StdCmdWindows</name>
     <message>
       <source>Window</source>
-      <translation>Fereastră</translation>
+      <translation type="unfinished">Fereastră</translation>
     </message>
     <message>
       <source>&amp;Windows...</source>
-      <translation>&amp;Windows...</translation>
+      <translation type="unfinished">Ferestre...</translation>
     </message>
     <message>
       <source>Windows list</source>
-      <translation>Windows list</translation>
+      <translation type="unfinished">Lista ferestrelor</translation>
     </message>
   </context>
   <context>
     <name>StdCmdWindowsMenu</name>
     <message>
       <source>Window</source>
-      <translation>Fereastră</translation>
+      <translation type="unfinished">Fereastră</translation>
     </message>
     <message>
       <source>Activates this window</source>
-      <translation>Activates this window</translation>
+      <translation type="unfinished">Activeaza aceasta fereastra</translation>
     </message>
   </context>
   <context>
     <name>StdCmdWorkbench</name>
     <message>
       <source>View</source>
-      <translation>Vizualizare</translation>
+      <translation type="unfinished">Vizualizare</translation>
     </message>
     <message>
       <source>Workbench</source>
-      <translation>Banc de lucru</translation>
+      <translation type="unfinished">Banc de lucru</translation>
     </message>
     <message>
       <source>Switch between workbenches</source>
-      <translation>Comută între bancurile de lucru</translation>
+      <translation type="unfinished">Comută între bancurile de lucru</translation>
     </message>
   </context>
   <context>
     <name>StdOrthographicCamera</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Orthographic view</source>
-      <translation>Orthographic view</translation>
+      <translation type="unfinished">Vedere ortografica</translation>
     </message>
     <message>
       <source>Switches to orthographic view mode</source>
-      <translation>Switches to orthographic view mode</translation>
+      <translation type="unfinished">Comuta in modul vizualizare ortografica</translation>
     </message>
   </context>
   <context>
     <name>StdPerspectiveCamera</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Perspective view</source>
-      <translation>Perspective view</translation>
+      <translation type="unfinished">Perspectiva</translation>
     </message>
     <message>
       <source>Switches to perspective view mode</source>
-      <translation>Switches to perspective view mode</translation>
+      <translation type="unfinished">Comuta in modul vizualizare perspectiva</translation>
     </message>
   </context>
   <context>
     <name>StdViewBoxZoom</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Box zoom</source>
-      <translation>Box zoom</translation>
+      <translation type="unfinished">Marire cu dreptunghi</translation>
     </message>
   </context>
   <context>
     <name>StdViewDockUndockFullscreen</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Document window</source>
-      <translation>Document window</translation>
+      <translation type="unfinished">Fereastra dcoumentului</translation>
     </message>
     <message>
       <source>Display the active view either in fullscreen, in undocked or docked mode</source>
-      <translation>Display the active view either in fullscreen, in undocked or docked mode</translation>
+      <translation type="unfinished">Afiseaza vizualizarea activa in ecran complet, in mod detasat sau andocat</translation>
     </message>
   </context>
   <context>
     <name>StdViewScreenShot</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Save picture...</source>
-      <translation>Save picture...</translation>
+      <translation type="unfinished">Salveaza imaginea...</translation>
     </message>
     <message>
       <source>Creates a screenshot of the active view</source>
-      <translation>Creates a screenshot of the active view</translation>
+      <translation type="unfinished">Creaza o imagine din vizualizarea activa</translation>
     </message>
   </context>
   <context>
     <name>StdViewZoomIn</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Zoom In</source>
-      <translation>Zoom In</translation>
+      <translation type="unfinished">Marire</translation>
     </message>
   </context>
   <context>
     <name>StdViewZoomOut</name>
     <message>
       <source>Standard-View</source>
-      <translation>Vedere standard</translation>
+      <translation type="unfinished">Vedere standard</translation>
     </message>
     <message>
       <source>Zoom Out</source>
-      <translation>Zoom Out</translation>
+      <translation type="unfinished">Micsorare</translation>
+    </message>
+  </context>
+  <context>
+    <name>Std_Delete</name>
+    <message>
+      <source>Object dependencies</source>
+      <translation type="unfinished">Object dependencies</translation>
+    </message>
+    <message>
+      <source>This object is referenced by other objects and thus these objects might get broken.
+Are you sure to continue?</source>
+      <translation type="unfinished">This object is referenced by other objects and thus these objects might get broken.
+Are you sure to continue?</translation>
     </message>
   </context>
   <context>
     <name>Std_DrawStyle</name>
     <message>
       <source>As is</source>
-      <translation>As is</translation>
+      <translation type="unfinished">Asa cum este</translation>
     </message>
     <message>
       <source>Normal mode</source>
-      <translation>Normal mode</translation>
+      <translation type="unfinished">Modul normal</translation>
     </message>
     <message>
       <source>Wireframe</source>
-      <translation>Wireframe</translation>
+      <translation type="unfinished">Wireframe</translation>
     </message>
     <message>
       <source>Wireframe mode</source>
-      <translation>Modul wireframe</translation>
+      <translation type="unfinished">Modul wireframe</translation>
+    </message>
+    <message>
+      <source>Flat lines</source>
+      <translation type="unfinished">Flat lines</translation>
+    </message>
+    <message>
+      <source>Flat lines mode</source>
+      <translation type="unfinished">Flat lines mode</translation>
+    </message>
+    <message>
+      <source>Shaded</source>
+      <translation type="unfinished">Shaded</translation>
+    </message>
+    <message>
+      <source>Shaded mode</source>
+      <translation type="unfinished">Shaded mode</translation>
+    </message>
+    <message>
+      <source>Points</source>
+      <translation type="unfinished">Puncte</translation>
+    </message>
+    <message>
+      <source>Points mode</source>
+      <translation type="unfinished">Points mode</translation>
+    </message>
+  </context>
+  <context>
+    <name>Std_DuplicateSelection</name>
+    <message>
+      <source>Object dependencies</source>
+      <translation type="unfinished">Object dependencies</translation>
+    </message>
+    <message>
+      <source>The selected objects have a dependency to unselected objects.
+Do you want to duplicate them, too?</source>
+      <translation type="unfinished">The selected objects have a dependency to unselected objects.
+Do you want to duplicate them, too?</translation>
     </message>
   </context>
   <context>
     <name>Std_ExportGraphviz</name>
     <message>
       <source>Graphviz not found</source>
-      <translation>Graphviz not found</translation>
+      <translation type="unfinished">Pachetul Graphviz nu a fost gasit</translation>
     </message>
     <message>
       <source>Graphviz couldn't be found on your system.
 Do you want to specify its installation path if it's already installed?</source>
-      <translation>Graphviz couldn't be found on your system.
-Do you want to specify its installation path if it's already installed?</translation>
+      <translation type="unfinished">Pachetul Graphviz nu a putut fi gasit pe sistemul dvs. 
+Doriti să specificati calea de instalare (daca este deja instalat)?</translation>
     </message>
     <message>
       <source>Graphviz installation path</source>
-      <translation>Graphviz installation path</translation>
+      <translation type="unfinished">Calea pachetului Graphviz</translation>
     </message>
     <message>
       <source>Dependency graph</source>
-      <translation>Dependency graph</translation>
+      <translation type="unfinished">Graficul de dependenta</translation>
     </message>
     <message>
       <source>Graphviz failed</source>
-      <translation>Graphviz failed</translation>
+      <translation type="unfinished">Graphviz a esuat</translation>
     </message>
     <message>
       <source>Graphviz failed to create an image file</source>
-      <translation>Graphviz failed to create an image file</translation>
+      <translation type="unfinished">Graphviz nu a reusit sa creeze un fisier de imagine</translation>
     </message>
   </context>
   <context>
     <name>Workbench</name>
     <message>
       <source>&amp;File</source>
-      <translation>&amp;Fişier</translation>
+      <translation type="unfinished">&amp;Fişier</translation>
     </message>
     <message>
       <source>&amp;Edit</source>
-      <translation>&amp;Editare</translation>
+      <translation type="unfinished">&amp;Editare</translation>
     </message>
     <message>
       <source>Standard views</source>
-      <translation>Vederi standard</translation>
+      <translation type="unfinished">Vederi standard</translation>
     </message>
     <message>
       <source>&amp;Stereo</source>
-      <translation>&amp;Stereo</translation>
+      <translation type="unfinished">&amp;Stereo</translation>
     </message>
     <message>
       <source>&amp;Zoom</source>
-      <translation>&amp;Zoom</translation>
+      <translation type="unfinished">&amp;Zoom</translation>
     </message>
     <message>
       <source>Visibility</source>
-      <translation>Vizibilitate</translation>
+      <translation type="unfinished">Vizibilitate</translation>
     </message>
     <message>
       <source>&amp;View</source>
-      <translation>&amp;Vedere</translation>
+      <translation type="unfinished">&amp;Vedere</translation>
     </message>
     <message>
       <source>&amp;Tools</source>
-      <translation>Ins&amp;trumente</translation>
+      <translation type="unfinished">Ins&amp;trumente</translation>
     </message>
     <message>
       <source>&amp;Macro</source>
-      <translation>&amp;Macro</translation>
+      <translation type="unfinished">&amp;Macro</translation>
     </message>
     <message>
       <source>&amp;Windows</source>
-      <translation>&amp;Ferestre</translation>
+      <translation type="unfinished">&amp;Ferestre</translation>
     </message>
     <message>
       <source>&amp;On-line help</source>
-      <translation>Ajut&amp;or on-line</translation>
+      <translation type="unfinished">Ajut&amp;or on-line</translation>
     </message>
     <message>
       <source>&amp;Help</source>
-      <translation>&amp;Ajutor</translation>
+      <translation type="unfinished">&amp;Ajutor</translation>
     </message>
     <message>
       <source>File</source>
-      <translation>Fişier</translation>
+      <translation type="unfinished">Fişier</translation>
     </message>
     <message>
       <source>Macro</source>
-      <translation>Macrocomandă</translation>
+      <translation type="unfinished">Macrocomandă</translation>
     </message>
     <message>
       <source>View</source>
-      <translation>Vizualizare</translation>
+      <translation type="unfinished">Vizualizare</translation>
     </message>
     <message>
       <source>Special Ops</source>
-      <translation>Operaţii speciale</translation>
+      <translation type="unfinished">Operaţii speciale</translation>
     </message>
   </context>
   <context>
     <name>testClass</name>
     <message>
       <source>test</source>
-      <translation>test</translation>
+      <translation type="unfinished">test</translation>
     </message>
     <message>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -5896,7 +6241,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:600;"&gt;&lt;span style=" font-size:12pt;"&gt;Created for Qt 4.3.x&lt;/span&gt;&lt;/p&gt;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;"&gt;www.ii-system.com&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+      <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-size:20pt; font-weight:600;"&gt;iisTaskPanel&lt;/span&gt;&lt;/p&gt;
@@ -5907,15 +6252,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
       <source>Choose the style of the Task Panel</source>
-      <translation>Choose the style of the Task Panel</translation>
+      <translation type="unfinished">Alege stilul pentru panoul de activitate</translation>
     </message>
     <message>
       <source>Default</source>
-      <translation>Default</translation>
+      <translation type="unfinished">Implicit</translation>
     </message>
     <message>
       <source>Windows XP</source>
-      <translation>Windows XP</translation>
+      <translation type="unfinished">Windows XP</translation>
     </message>
   </context>
 </TS>

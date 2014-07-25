@@ -42,6 +42,7 @@
 # include <QVBoxLayout>
 # include <QItemSelection>
 # include <QItemSelectionModel>
+# include <QTimer>
 # include <boost/signal.hpp>
 # include <boost/bind.hpp>
 # include <Inventor/actions/SoSearchAction.h>
@@ -58,6 +59,7 @@
 #include "../App/PartFeature.h"
 #include "../App/FeatureFillet.h"
 #include "../App/FeatureChamfer.h"
+#include <Base/UnitsApi.h>
 #include <App/Application.h>
 #include <App/Document.h>
 #include <App/DocumentObject.h>
@@ -84,6 +86,7 @@ QWidget *FilletRadiusDelegate::createEditor(QWidget *parent, const QStyleOptionV
         return 0;
 
     QDoubleSpinBox *editor = new QDoubleSpinBox(parent);
+    editor->setDecimals(Base::UnitsApi::getDecimals());
     editor->setMinimum(0.0);
     editor->setMaximum(INT_MAX);
     editor->setSingleStep(0.1);
@@ -106,7 +109,7 @@ void FilletRadiusDelegate::setModelData(QWidget *editor, QAbstractItemModel *mod
     spinBox->interpretText();
     //double value = spinBox->value();
     //QString value = QString::fromAscii("%1").arg(spinBox->value(),0,'f',2);
-    QString value = QLocale::system().toString(spinBox->value(),'f',2);
+    QString value = QLocale::system().toString(spinBox->value(),'f',Base::UnitsApi::getDecimals());
 
     model->setData(index, value, Qt::EditRole);
 }
@@ -121,6 +124,12 @@ void FilletRadiusDelegate::updateEditorGeometry(QWidget *editor, const QStyleOpt
 
 FilletRadiusModel::FilletRadiusModel(QObject * parent) : QStandardItemModel(parent)
 {
+}
+
+void FilletRadiusModel::updateCheckStates()
+{
+    // See http://www.qtcentre.org/threads/18856-Checkboxes-in-Treeview-do-not-get-refreshed?s=b0fea2bfc66da1098413ae9f2a651a68&p=93201#post93201
+    /*emit*/ layoutChanged();
 }
 
 Qt::ItemFlags FilletRadiusModel::flags (const QModelIndex & index) const
@@ -179,6 +188,7 @@ namespace PartGui {
         App::DocumentObject* object;
         EdgeFaceSelection* selection;
         Part::FilletBase* fillet;
+        QTimer* highlighttimer;
         FilletType filletType;
         std::vector<int> edge_ids;
         TopTools_IndexedMapOfShape all_edges;
@@ -197,6 +207,8 @@ DlgFilletEdges::DlgFilletEdges(FilletType type, Part::FilletBase* fillet, QWidge
     ui->setupUi(this);
     ui->filletStartRadius->setMaximum(INT_MAX);
     ui->filletEndRadius->setMaximum(INT_MAX);
+    ui->filletStartRadius->setDecimals(Base::UnitsApi::getDecimals());
+    ui->filletEndRadius->setDecimals(Base::UnitsApi::getDecimals());
 
     d->object = 0;
     d->selection = new EdgeFaceSelection(d->object);
@@ -212,6 +224,12 @@ DlgFilletEdges::DlgFilletEdges(FilletType type, Part::FilletBase* fillet, QWidge
     connect(model, SIGNAL(toggleCheckState(const QModelIndex&)),
             this, SLOT(toggleCheckState(const QModelIndex&)));
     model->insertColumns(0,3);
+
+    // timer for highlighting
+    d->highlighttimer = new QTimer(this);
+    d->highlighttimer->setSingleShot(true);
+    connect(d->highlighttimer,SIGNAL(timeout()),
+            this, SLOT(onHighlightEdges()));
 
     d->filletType = type;
     if (d->filletType == DlgFilletEdges::CHAMFER) {
@@ -278,7 +296,7 @@ void DlgFilletEdges::onSelectionChanged(const Gui::SelectionChanges& msg)
 
     if (msg.Type != Gui::SelectionChanges::SetPreselect &&
         msg.Type != Gui::SelectionChanges::RmvPreselect)
-        QTimer::singleShot(20, this, SLOT(onHighlightEdges()));
+        d->highlighttimer->start(20);
 }
 
 void DlgFilletEdges::onHighlightEdges()
@@ -528,16 +546,30 @@ void DlgFilletEdges::setupFillet(const std::vector<App::DocumentObject*>& objs)
         ui->shapeObject->setCurrentIndex(current_index);
         on_shapeObject_activated(current_index);
         ui->shapeObject->setEnabled(false);
+
+        std::vector<std::string> subElements;
         QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->treeView->model());
+        bool block = model->blockSignals(true); // do not call toggleCheckState
         for (std::vector<Part::FilletElement>::const_iterator et = e.begin(); et != e.end(); ++et) {
             std::vector<int>::iterator it = std::find(d->edge_ids.begin(), d->edge_ids.end(), et->edgeid);
             if (it != d->edge_ids.end()) {
                 int index = it - d->edge_ids.begin();
                 model->setData(model->index(index, 0), Qt::Checked, Qt::CheckStateRole);
-                model->setData(model->index(index, 1), QVariant(QLocale::system().toString(et->radius1,'f',2)));
-                model->setData(model->index(index, 2), QVariant(QLocale::system().toString(et->radius2,'f',2)));
+                model->setData(model->index(index, 1), QVariant(QLocale::system().toString(et->radius1,'f',Base::UnitsApi::getDecimals())));
+                model->setData(model->index(index, 2), QVariant(QLocale::system().toString(et->radius2,'f',Base::UnitsApi::getDecimals())));
+
+                int id = model->index(index, 0).data(Qt::UserRole).toInt();
+                std::stringstream str;
+                str << "Edge" << id;
+                subElements.push_back(str.str());
             }
         }
+        model->blockSignals(block);
+
+        App::Document* doc = d->object->getDocument();
+        Gui::Selection().addSelection(doc->getName(),
+            d->object->getNameInDocument(),
+            subElements);
     }
 }
 
@@ -630,8 +662,8 @@ void DlgFilletEdges::on_shapeObject_activated(int index)
         for (std::vector<int>::iterator it = d->edge_ids.begin(); it != d->edge_ids.end(); ++it) {
             model->setData(model->index(index, 0), QVariant(tr("Edge%1").arg(*it)));
             model->setData(model->index(index, 0), QVariant(*it), Qt::UserRole);
-            model->setData(model->index(index, 1), QVariant(QLocale::system().toString(1.0,'f',2)));
-            model->setData(model->index(index, 2), QVariant(QLocale::system().toString(1.0,'f',2)));
+            model->setData(model->index(index, 1), QVariant(QLocale::system().toString(1.0,'f',Base::UnitsApi::getDecimals())));
+            model->setData(model->index(index, 2), QVariant(QLocale::system().toString(1.0,'f',Base::UnitsApi::getDecimals())));
             std::stringstream element;
             element << "Edge" << *it;
             if (Gui::Selection().isSelected(part, element.str().c_str()))
@@ -655,22 +687,49 @@ void DlgFilletEdges::on_selectFaces_toggled(bool on)
 
 void DlgFilletEdges::on_selectAllButton_clicked()
 {
-    QAbstractItemModel* model = ui->treeView->model();
+    std::vector<std::string> subElements;
+    FilletRadiusModel* model = static_cast<FilletRadiusModel*>(ui->treeView->model());
+    bool block = model->blockSignals(true); // do not call toggleCheckState
     for (int i=0; i<model->rowCount(); ++i) {
+        QModelIndex index = model->index(i,0);
+
+        // is not yet checked?
+        QVariant check = index.data(Qt::CheckStateRole);
+        Qt::CheckState state = static_cast<Qt::CheckState>(check.toInt());
+        if (state == Qt::Unchecked) {
+            int id = index.data(Qt::UserRole).toInt();
+            std::stringstream str;
+            str << "Edge" << id;
+            subElements.push_back(str.str());
+        }
+
         Qt::CheckState checkState = Qt::Checked;
         QVariant value(static_cast<int>(checkState));
-        model->setData(model->index(i,0), value, Qt::CheckStateRole);
+        model->setData(index, value, Qt::CheckStateRole);
     }
+    model->blockSignals(block);
+    model->updateCheckStates();
+
+    App::Document* doc = d->object->getDocument();
+    Gui::Selection().addSelection(doc->getName(),
+        d->object->getNameInDocument(),
+        subElements);
 }
 
 void DlgFilletEdges::on_selectNoneButton_clicked()
 {
-    QAbstractItemModel* model = ui->treeView->model();
+    FilletRadiusModel* model = static_cast<FilletRadiusModel*>(ui->treeView->model());
+    bool block = model->blockSignals(true); // do not call toggleCheckState
     for (int i=0; i<model->rowCount(); ++i) {
         Qt::CheckState checkState = Qt::Unchecked;
         QVariant value(static_cast<int>(checkState));
         model->setData(model->index(i,0), value, Qt::CheckStateRole);
     }
+    model->blockSignals(block);
+    model->updateCheckStates();
+
+    App::Document* doc = d->object->getDocument();
+    Gui::Selection().clearSelection(doc->getName());
 }
 
 void DlgFilletEdges::on_filletType_activated(int index)
@@ -701,7 +760,7 @@ void DlgFilletEdges::on_filletType_activated(int index)
 void DlgFilletEdges::on_filletStartRadius_valueChanged(double radius)
 {
     QAbstractItemModel* model = ui->treeView->model();
-    QString text = QLocale::system().toString(radius,'f',2);
+    QString text = QLocale::system().toString(radius,'f',Base::UnitsApi::getDecimals());
     for (int i=0; i<model->rowCount(); ++i) {
         QVariant value = model->index(i,0).data(Qt::CheckStateRole);
         Qt::CheckState checkState = static_cast<Qt::CheckState>(value.toInt());
@@ -716,7 +775,7 @@ void DlgFilletEdges::on_filletStartRadius_valueChanged(double radius)
 void DlgFilletEdges::on_filletEndRadius_valueChanged(double radius)
 {
     QAbstractItemModel* model = ui->treeView->model();
-    QString text = QLocale::system().toString(radius,'f',2);
+    QString text = QLocale::system().toString(radius,'f',Base::UnitsApi::getDecimals());
     for (int i=0; i<model->rowCount(); ++i) {
         QVariant value = model->index(i,0).data(Qt::CheckStateRole);
         Qt::CheckState checkState = static_cast<Qt::CheckState>(value.toInt());
@@ -780,7 +839,7 @@ bool DlgFilletEdges::accept()
                 r2 = model->index(i,2).data().toDouble();
             code += QString::fromAscii(
                 "__fillets__.append((%1,%2,%3))\n")
-                .arg(id).arg(r1,0,'f',2).arg(r2,0,'f',2);
+                .arg(id).arg(r1,0,'f',Base::UnitsApi::getDecimals()).arg(r2,0,'f',Base::UnitsApi::getDecimals());
             todo = true;
         }
     }

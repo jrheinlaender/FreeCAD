@@ -28,6 +28,7 @@
 
 #include "ui_TaskFilletParameters.h"
 #include "TaskFilletParameters.h"
+#include <Base/UnitsApi.h>
 #include <App/Application.h>
 #include <App/Document.h>
 #include <Gui/Application.h>
@@ -56,7 +57,7 @@ TaskFilletParameters::TaskFilletParameters(ViewProviderFillet *FilletView,QWidge
     ui->setupUi(proxy);
     QMetaObject::connectSlotsByName(this);
 
-    connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)),
+    connect(ui->filletRadius, SIGNAL(valueChanged(double)),
             this, SLOT(onLengthChanged(double)));
 
     this->groupLayout()->addWidget(proxy);
@@ -64,10 +65,11 @@ TaskFilletParameters::TaskFilletParameters(ViewProviderFillet *FilletView,QWidge
     PartDesign::Fillet* pcFillet = static_cast<PartDesign::Fillet*>(FilletView->getObject());
     double r = pcFillet->Radius.getValue();
 
-    ui->doubleSpinBox->setMaximum(INT_MAX);
-    ui->doubleSpinBox->setValue(r);
-    ui->doubleSpinBox->selectAll();
-    QMetaObject::invokeMethod(ui->doubleSpinBox, "setFocus", Qt::QueuedConnection);
+    ui->filletRadius->setUnit(Base::Unit::Length);
+    ui->filletRadius->setValue(r);
+    ui->filletRadius->setMinimum(0);
+    ui->filletRadius->selectNumber();
+    QMetaObject::invokeMethod(ui->filletRadius, "setFocus", Qt::QueuedConnection);
 }
 
 void TaskFilletParameters::onLengthChanged(double len)
@@ -79,9 +81,8 @@ void TaskFilletParameters::onLengthChanged(double len)
 
 double TaskFilletParameters::getLength(void) const
 {
-    return ui->doubleSpinBox->value();
+    return ui->filletRadius->getQuantity().getValue();
 }
-
 
 TaskFilletParameters::~TaskFilletParameters()
 {
@@ -120,12 +121,16 @@ TaskDlgFilletParameters::~TaskDlgFilletParameters()
 
 void TaskDlgFilletParameters::open()
 {
-    
+    // a transaction is already open at creation time of the fillet
+    if (!Gui::Command::hasPendingCommand()) {
+        QString msg = tr("Edit fillet");
+        Gui::Command::openCommand((const char*)msg.toUtf8());
+    }
 }
 
 void TaskDlgFilletParameters::clicked(int)
 {
-    
+
 }
 
 bool TaskDlgFilletParameters::accept()

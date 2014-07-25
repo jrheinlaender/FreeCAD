@@ -49,20 +49,7 @@ fc_target_copy_resource(SandboxGui
     ${CMAKE_BINARY_DIR}/Mod/Sandbox
     InitGui.py)
 
-if(MSVC)
-    set_target_properties(SandboxGui PROPERTIES SUFFIX ".pyd")
-    set_target_properties(SandboxGui PROPERTIES DEBUG_OUTPUT_NAME "SandboxGui_d")
-    set_target_properties(SandboxGui PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/Sandbox)
-    set_target_properties(SandboxGui PROPERTIES PREFIX "../")
-elseif(MINGW)
-    set_target_properties(SandboxGui PROPERTIES SUFFIX ".pyd")
-    set_target_properties(SandboxGui PROPERTIES DEBUG_OUTPUT_NAME "SandboxGui_d")
-    set_target_properties(SandboxGui PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/Sandbox)
-    set_target_properties(SandboxGui PROPERTIES PREFIX "")
-else(MSVC)
-    set_target_properties(SandboxGui PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/Sandbox)
-    set_target_properties(SandboxGui PROPERTIES PREFIX "")
-    set_target_properties(SandboxGui PROPERTIES INSTALL_RPATH ${INSTALL_RPATH})
-endif(MSVC)
+SET_BIN_DIR(SandboxGui SandboxGui /Mod/Sandbox)
+SET_PYTHON_PREFIX_SUFFIX(SandboxGui)
 
-INSTALL(TARGETS SandboxGui DESTINATION lib)
+INSTALL(TARGETS SandboxGui DESTINATION ${CMAKE_INSTALL_LIBDIR})

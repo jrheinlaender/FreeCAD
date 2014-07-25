@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="tr" sourcelanguage="en">
   <context>
     <name>CmdMeshAddFacet</name>
     <message>
@@ -117,33 +117,33 @@
     <name>CmdMeshExMakeMesh</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make a Box</source>
-      <translation>Kutu yap</translation>
+      <translation type="obsolete">Kutu yap</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeTool</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make a Tool</source>
-      <translation>Araç yap</translation>
+      <translation type="obsolete">Araç yap</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeUnion</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make Union</source>
-      <translation>Birleştir</translation>
+      <translation type="obsolete">Birleştir</translation>
     </message>
   </context>
   <context>
@@ -219,6 +219,21 @@
     <message>
       <source>Create mesh from the selected geometry</source>
       <translation>Create mesh from the selected geometry</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeshFromPartShape</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Mesh</translation>
+    </message>
+    <message>
+      <source>Create mesh from shape...</source>
+      <translation type="unfinished">Parçacıktan şekil oluştur</translation>
+    </message>
+    <message>
+      <source>Tessellate shape</source>
+      <translation type="unfinished">Şekili mozaik döşe</translation>
     </message>
   </context>
   <context>
@@ -428,6 +443,21 @@
     </message>
   </context>
   <context>
+    <name>CmdMeshTrimByPlane</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Mesh</translation>
+    </message>
+    <message>
+      <source>Trim mesh with a plane</source>
+      <translation type="unfinished">Trim mesh with a plane</translation>
+    </message>
+    <message>
+      <source>Trims a mesh with a plane</source>
+      <translation type="unfinished">Trims a mesh with a plane</translation>
+    </message>
+  </context>
+  <context>
     <name>CmdMeshUnion</name>
     <message>
       <source>Mesh</source>
@@ -472,19 +502,19 @@
     <name>MeshGui::DlgEvaluateMesh</name>
     <message>
       <source>&amp;Help</source>
-      <translation>&amp;Yardım</translation>
+      <translation type="obsolete">&amp;Yardım</translation>
     </message>
     <message>
       <source>F1</source>
-      <translation>F1</translation>
+      <translation type="obsolete">F1</translation>
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>&amp;Kapat</translation>
+      <translation type="obsolete">&amp;Kapat</translation>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt + C</translation>
+      <translation type="obsolete">Alt + C</translation>
     </message>
     <message>
       <source>Mesh information</source>
@@ -824,7 +854,7 @@ Please run the command to repair folds first</translation>
       <source>Define normal per vertex</source>
       <translation>Define normal per vertex</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source> °</source>
       <translation> °</translation>
     </message>
@@ -891,6 +921,10 @@ Please run the command to repair folds first</translation>
       <source>Mu:</source>
       <translation>Mü:</translation>
     </message>
+    <message>
+      <source>Only selection</source>
+      <translation type="unfinished">Only selection</translation>
+    </message>
   </context>
   <context>
     <name>MeshGui::MeshFaceAddition</name>
@@ -909,6 +943,13 @@ Please run the command to repair folds first</translation>
     <message>
       <source>Finish</source>
       <translation>Bitir</translation>
+    </message>
+  </context>
+  <context>
+    <name>MeshGui::MeshFillHole</name>
+    <message>
+      <source>Finish</source>
+      <translation type="unfinished">Bitir</translation>
     </message>
   </context>
   <context>
@@ -1018,6 +1059,37 @@ Please run the command to repair folds first</translation>
     </message>
   </context>
   <context>
+    <name>MeshGui::Selection</name>
+    <message>
+      <source>Selection</source>
+      <translation type="unfinished">seçim</translation>
+    </message>
+    <message>
+      <source>Add</source>
+      <translation type="unfinished">Ekle</translation>
+    </message>
+    <message>
+      <source>Clear</source>
+      <translation type="unfinished">Temizle</translation>
+    </message>
+    <message>
+      <source>Respect only visible triangles</source>
+      <translation type="unfinished">Respect only visible triangles</translation>
+    </message>
+    <message>
+      <source>Respect only triangles with normals facing screen</source>
+      <translation type="unfinished">Respect only triangles with normals facing screen</translation>
+    </message>
+    <message>
+      <source>Use a brush tool to select the area</source>
+      <translation type="unfinished">Use a brush tool to select the area</translation>
+    </message>
+    <message>
+      <source>Clears completely the selected area</source>
+      <translation type="unfinished">Clears completely the selected area</translation>
+    </message>
+  </context>
+  <context>
     <name>MeshGui::TaskRemoveComponents</name>
     <message>
       <source>Delete</source>
@@ -1026,6 +1098,34 @@ Please run the command to repair folds first</translation>
     <message>
       <source>Invert</source>
       <translation>Evir</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_TrimByPlane</name>
+    <message>
+      <source>Select plane</source>
+      <translation type="unfinished">Select plane</translation>
+    </message>
+    <message>
+      <source>Please select a plane at which you trim the mesh.</source>
+      <translation type="unfinished">Please select a plane at which you trim the mesh.</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_Union</name>
+    <message>
+      <source>OpenSCAD</source>
+      <translation type="unfinished">OpenSCAD</translation>
+    </message>
+    <message>
+      <source>Unknwon error occured while running OpenSCAD.</source>
+      <translation type="unfinished">Unknwon error occured while running OpenSCAD.</translation>
+    </message>
+    <message>
+      <source>OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</source>
+      <translation type="unfinished">OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</translation>
     </message>
   </context>
   <context>
@@ -1151,7 +1251,7 @@ Max=&lt;%4,%5,%6&gt;</translation>
     </message>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</source>
-      <translation>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
+      <translation type="obsolete">All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
     </message>
     <message>
       <source>Stanford Polygon (*.ply)</source>
@@ -1180,6 +1280,10 @@ Max=&lt;%4,%5,%6&gt;</translation>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.off *.ply)</source>
       <translation>All Mesh Files (*.stl *.ast *.bms *.obj *.off *.ply)</translation>
+    </message>
+    <message>
+      <source>X3D Extensible 3D(*.x3d)</source>
+      <translation type="unfinished">X3D Extensible 3D(*.x3d)</translation>
     </message>
   </context>
   <context>

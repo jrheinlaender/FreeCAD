@@ -5,6 +5,7 @@ else(MSVC)
 endif(MSVC)
 
 include_directories(
+    ${CMAKE_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/src
     ${Boost_INCLUDE_DIRS}
     ${OCC_INCLUDE_DIR}
@@ -101,13 +102,21 @@ SET(PartDesign_Scripts
     __init__.py
     Init.py
     TestPartDesignApp.py
+    InvoluteGearFeature.py
+    InvoluteGearFeature.ui
     Scripts/__init__.py
     Scripts/Gear.py
     Scripts/DistanceBolt.py
     Scripts/Epitrochoid.py
+    Scripts/FilletArc.py
     Scripts/RadialCopy.py
     Scripts/Parallelepiped.py
     Scripts/Spring.py
+    fcgear/__init__.py
+    fcgear/fcgear.py
+    fcgear/fcgeardialog.py
+    fcgear/involute.py
+    fcgear/svggear.py
 )
 
 add_library(PartDesign SHARED ${PartDesign_SRCS})
@@ -119,22 +128,8 @@ fc_target_copy_resource(PartDesign
     ${CMAKE_BINARY_DIR}/Mod/PartDesign
     ${PartDesign_Scripts})
 
-if(MSVC)
-    set_target_properties(PartDesign PROPERTIES SUFFIX ".pyd")
-    set_target_properties(PartDesign PROPERTIES DEBUG_OUTPUT_NAME "PartDesign_d")
-    set_target_properties(PartDesign PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/PartDesign)
-    set_target_properties(PartDesign PROPERTIES PREFIX "../")
-elseif(MINGW)
-    set_target_properties(PartDesign PROPERTIES SUFFIX ".pyd")
-    set_target_properties(PartDesign PROPERTIES DEBUG_OUTPUT_NAME "PartDesign_d")
-    set_target_properties(PartDesign PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/PartDesign)
-    set_target_properties(PartDesign PROPERTIES PREFIX "")
-else(MSVC)
-    set_target_properties(PartDesign PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Mod/PartDesign)
-    set_target_properties(PartDesign PROPERTIES PREFIX "")
-    set_target_properties(PartDesign PROPERTIES INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/Mod/PartDesign)
-endif(MSVC)
+SET_BIN_DIR(PartDesign _PartDesign /Mod/PartDesign)
+SET_PYTHON_PREFIX_SUFFIX(PartDesign)
 
-# The PartDesign module must go to where the __init__.py file is
-INSTALL(TARGETS PartDesign DESTINATION Mod/PartDesign)
+INSTALL(TARGETS PartDesign DESTINATION ${CMAKE_INSTALL_LIBDIR})
 

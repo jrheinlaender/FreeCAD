@@ -40,6 +40,7 @@
 #include <sstream>
 #include <algorithm>
 
+#include <App/DocumentObjectGroup.h>
 #include <Gui/Application.h>
 #include <Gui/Command.h>
 #include <Gui/Control.h>
@@ -69,7 +70,16 @@ void validateSketches(std::vector<App::DocumentObject*>& sketches, const bool su
 
     while (s != sketches.end()) {
         // Check whether this sketch is already being used by another feature
-        if ((*s)->getInList().size() != 0) {
+        std::vector<App::DocumentObject*> ref = (*s)->getInList();
+        std::vector<App::DocumentObject*>::iterator r = ref.begin();
+        while (r != ref.end()) {
+            if ((*r)->getTypeId().isDerivedFrom(App::DocumentObjectGroup::getClassTypeId())) {
+                r = ref.erase(r);
+                continue;
+            }
+            ++r;
+        }
+        if (!ref.empty()) {
             // TODO: Display some information message that this sketch was removed?
             s = sketches.erase(s);
             continue;
@@ -205,13 +215,20 @@ void CmdPartDesignPad::activated(int iMsg)
     doCommand(Doc,"App.activeDocument().addObject(\"PartDesign::Pad\",\"%s\")",FeatName.c_str());
     doCommand(Doc,"App.activeDocument().%s.Sketch = App.activeDocument().%s",FeatName.c_str(),sketch->getNameInDocument());
     doCommand(Doc,"App.activeDocument().%s.Length = 10.0",FeatName.c_str());
+    App::DocumentObjectGroup* grp = sketch->getGroup();
+    if (grp) {
+        doCommand(Doc,"App.activeDocument().%s.addObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),FeatName.c_str());
+        doCommand(Doc,"App.activeDocument().%s.removeObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),sketch->getNameInDocument());
+    }
     updateActive();
     if (isActiveObjectValid()) {
         doCommand(Gui,"Gui.activeDocument().hide(\"%s\")",sketch->getNameInDocument());
         if (support)
             doCommand(Gui,"Gui.activeDocument().hide(\"%s\")",support->getNameInDocument());
     }
-    doCommand(Gui,"Gui.activeDocument().setEdit('%s')",FeatName.c_str());
+    doCommand(Gui,"Gui.activeDocument().setEdit('%s',1)",FeatName.c_str());
 
     //commitCommand();
     adjustCameraPosition();
@@ -276,6 +293,13 @@ void CmdPartDesignPocket::activated(int iMsg)
     doCommand(Doc,"App.activeDocument().addObject(\"PartDesign::Pocket\",\"%s\")",FeatName.c_str());
     doCommand(Doc,"App.activeDocument().%s.Sketch = App.activeDocument().%s",FeatName.c_str(),sketch->getNameInDocument());
     doCommand(Doc,"App.activeDocument().%s.Length = 5.0",FeatName.c_str());
+    App::DocumentObjectGroup* grp = sketch->getGroup();
+    if (grp) {
+        doCommand(Doc,"App.activeDocument().%s.addObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),FeatName.c_str());
+        doCommand(Doc,"App.activeDocument().%s.removeObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),sketch->getNameInDocument());
+    }
     updateActive();
     if (isActiveObjectValid()) {
         doCommand(Gui,"Gui.activeDocument().hide(\"%s\")",sketch->getNameInDocument());
@@ -346,6 +370,13 @@ void CmdPartDesignRevolution::activated(int iMsg)
     PartDesign::Revolution* pcRevolution = static_cast<PartDesign::Revolution*>(getDocument()->getObject(FeatName.c_str()));
     if (pcRevolution && pcRevolution->suggestReversed())
         doCommand(Doc,"App.activeDocument().%s.Reversed = 1",FeatName.c_str());
+    App::DocumentObjectGroup* grp = sketch->getGroup();
+    if (grp) {
+        doCommand(Doc,"App.activeDocument().%s.addObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),FeatName.c_str());
+        doCommand(Doc,"App.activeDocument().%s.removeObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),sketch->getNameInDocument());
+    }
     updateActive();
     if (isActiveObjectValid()) {
         doCommand(Gui,"Gui.activeDocument().hide(\"%s\")",sketch->getNameInDocument());
@@ -419,6 +450,13 @@ void CmdPartDesignGroove::activated(int iMsg)
     PartDesign::Groove* pcGroove = static_cast<PartDesign::Groove*>(getDocument()->getObject(FeatName.c_str()));
     if (pcGroove && pcGroove->suggestReversed())
         doCommand(Doc,"App.activeDocument().%s.Reversed = 1",FeatName.c_str());
+    App::DocumentObjectGroup* grp = sketch->getGroup();
+    if (grp) {
+        doCommand(Doc,"App.activeDocument().%s.addObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),FeatName.c_str());
+        doCommand(Doc,"App.activeDocument().%s.removeObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),sketch->getNameInDocument());
+    }
     updateActive();
     if (isActiveObjectValid()) {
         doCommand(Gui,"Gui.activeDocument().hide(\"%s\")",sketch->getNameInDocument());
@@ -477,7 +515,7 @@ void CmdPartDesignFillet::activated(int iMsg)
     const Part::TopoShape& TopShape = base->Shape.getShape();
     if (TopShape._Shape.IsNull()){
         QMessageBox::warning(Gui::getMainWindow(), QObject::tr("Wrong selection"),
-            QObject::tr("Shape of selected Part is empty"));
+            QObject::tr("Shape of selected part is empty"));
         return;
     }
 
@@ -574,6 +612,11 @@ void CmdPartDesignFillet::activated(int iMsg)
     doCommand(Doc,"App.activeDocument().%s.Base = %s",FeatName.c_str(),SelString.c_str());
     doCommand(Gui,"Gui.activeDocument().hide(\"%s\")",selection[0].getFeatName());
     doCommand(Gui,"Gui.activeDocument().setEdit('%s')",FeatName.c_str());
+    App::DocumentObjectGroup* grp = base->getGroup();
+    if (grp) {
+        doCommand(Doc,"App.activeDocument().%s.addObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),FeatName.c_str());
+    }
 
     copyVisual(FeatName.c_str(), "ShapeColor", selection[0].getFeatName());
     copyVisual(FeatName.c_str(), "LineColor",  selection[0].getFeatName());
@@ -721,6 +764,11 @@ void CmdPartDesignChamfer::activated(int iMsg)
     doCommand(Doc,"App.activeDocument().%s.Base = %s",FeatName.c_str(),SelString.c_str());
     doCommand(Gui,"Gui.activeDocument().hide(\"%s\")",selection[0].getFeatName());
     doCommand(Gui,"Gui.activeDocument().setEdit('%s')",FeatName.c_str());
+    App::DocumentObjectGroup* grp = base->getGroup();
+    if (grp) {
+        doCommand(Doc,"App.activeDocument().%s.addObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),FeatName.c_str());
+    }
 
     copyVisual(FeatName.c_str(), "ShapeColor", selection[0].getFeatName());
     copyVisual(FeatName.c_str(), "LineColor",  selection[0].getFeatName());
@@ -832,6 +880,11 @@ void CmdPartDesignDraft::activated(int iMsg)
         doCommand(Gui,"Gui.activeDocument().hide(\"%s\")",selection[0].getFeatName());
     }
     doCommand(Gui,"Gui.activeDocument().setEdit('%s')",FeatName.c_str());
+    App::DocumentObjectGroup* grp = base->getGroup();
+    if (grp) {
+        doCommand(Doc,"App.activeDocument().%s.addObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),FeatName.c_str());
+    }
 
     copyVisual(FeatName.c_str(), "ShapeColor", selection[0].getFeatName());
     copyVisual(FeatName.c_str(), "LineColor",  selection[0].getFeatName());
@@ -879,7 +932,7 @@ void CmdPartDesignMirrored::activated(int iMsg)
                 return; // Cancelled or nothing selected
         } else {
             QMessageBox::warning(Gui::getMainWindow(), QObject::tr("No valid features in this document"),
-                QObject::tr("Please create a subtractive or additive feature first, please"));
+                QObject::tr("Please create a subtractive or additive feature first"));
             return;
         }
     }
@@ -985,6 +1038,13 @@ void CmdPartDesignLinearPattern::activated(int iMsg)
         doCommand(Gui,"Gui.activeDocument().%s.Visibility=False",it->c_str());
 
     doCommand(Gui,"Gui.activeDocument().setEdit('%s')",FeatName.c_str());
+    App::DocumentObjectGroup* grp = sketch->getGroup();
+    if (grp) {
+        doCommand(Doc,"App.activeDocument().%s.addObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),FeatName.c_str());
+        doCommand(Doc,"App.activeDocument().%s.removeObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),sketch->getNameInDocument());
+    }
 
     copyVisual(FeatName.c_str(), "ShapeColor", tempSelNames.front().c_str());
     copyVisual(FeatName.c_str(), "DisplayMode", tempSelNames.front().c_str());
@@ -1061,6 +1121,13 @@ void CmdPartDesignPolarPattern::activated(int iMsg)
         doCommand(Gui,"Gui.activeDocument().%s.Visibility=False",it->c_str());
 
     doCommand(Gui,"Gui.activeDocument().setEdit('%s')",FeatName.c_str());
+    App::DocumentObjectGroup* grp = sketch->getGroup();
+    if (grp) {
+        doCommand(Doc,"App.activeDocument().%s.addObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),FeatName.c_str());
+        doCommand(Doc,"App.activeDocument().%s.removeObject(App.activeDocument().%s)"
+                     ,grp->getNameInDocument(),sketch->getNameInDocument());
+    }
 
     copyVisual(FeatName.c_str(), "ShapeColor", tempSelNames.front().c_str());
     copyVisual(FeatName.c_str(), "DisplayMode", tempSelNames.front().c_str());

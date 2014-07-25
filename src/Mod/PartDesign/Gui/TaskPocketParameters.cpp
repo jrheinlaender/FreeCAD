@@ -33,6 +33,7 @@
 
 #include "ui_TaskPocketParameters.h"
 #include "TaskPocketParameters.h"
+#include <Base/UnitsApi.h>
 #include <App/Application.h>
 #include <App/Document.h>
 #include <Gui/Application.h>
@@ -61,12 +62,12 @@ TaskPocketParameters::TaskPocketParameters(ViewProviderPocket *PocketView,QWidge
     ui->setupUi(proxy);
     QMetaObject::connectSlotsByName(this);
 
-    connect(ui->doubleSpinBox, SIGNAL(valueChanged(double)),
+    connect(ui->pocketLength, SIGNAL(valueChanged(double)),
             this, SLOT(onLengthChanged(double)));
     connect(ui->checkBoxMidplane, SIGNAL(toggled(bool)),
             this, SLOT(onMidplaneChanged(bool)));
     connect(ui->checkBoxReversed, SIGNAL(toggled(bool)),
-	    this, SLOT(onReversedChanged(bool)));
+            this, SLOT(onReversedChanged(bool)));
     connect(ui->changeMode, SIGNAL(currentIndexChanged(int)),
             this, SLOT(onModeChanged(int)));
     connect(ui->buttonFace, SIGNAL(pressed()),
@@ -79,7 +80,7 @@ TaskPocketParameters::TaskPocketParameters(ViewProviderPocket *PocketView,QWidge
     this->groupLayout()->addWidget(proxy);
 
     // Temporarily prevent unnecessary feature recomputes
-    ui->doubleSpinBox->blockSignals(true);
+    ui->pocketLength->blockSignals(true);
     ui->checkBoxMidplane->blockSignals(true);
     ui->checkBoxReversed->blockSignals(true);
     ui->buttonFace->blockSignals(true);
@@ -102,9 +103,9 @@ TaskPocketParameters::TaskPocketParameters(ViewProviderPocket *PocketView,QWidge
     }
 
     // Fill data into dialog elements
-    ui->doubleSpinBox->setMinimum(0);
-    ui->doubleSpinBox->setMaximum(INT_MAX);
-    ui->doubleSpinBox->setValue(l);
+    ui->pocketLength->setMinimum(0);
+    ui->pocketLength->setMaximum(INT_MAX);
+    ui->pocketLength->setValue(l);
     ui->checkBoxMidplane->setChecked(midplane);
     ui->checkBoxReversed->setChecked(reversed);
     ui->lineFaceName->setText(faceId >= 0 ?
@@ -119,7 +120,7 @@ TaskPocketParameters::TaskPocketParameters(ViewProviderPocket *PocketView,QWidge
     ui->changeMode->setCurrentIndex(index);
     ui->checkBoxMidplane->setChecked(midplane);
 
-    ui->doubleSpinBox->blockSignals(false);
+    ui->pocketLength->blockSignals(false);
     ui->checkBoxMidplane->blockSignals(false);
     ui->checkBoxReversed->blockSignals(false);
     ui->buttonFace->blockSignals(false);
@@ -142,34 +143,34 @@ TaskPocketParameters::TaskPocketParameters(ViewProviderPocket *PocketView,QWidge
 void TaskPocketParameters::updateUI(int index)
 { 
     if (index == 0) { // Only this option requires a numeric value // Dimension
-        ui->doubleSpinBox->setEnabled(true);
-        ui->doubleSpinBox->selectAll();
-        QMetaObject::invokeMethod(ui->doubleSpinBox, "setFocus", Qt::QueuedConnection);
+        ui->pocketLength->setEnabled(true);
+        ui->pocketLength->selectAll();
+        QMetaObject::invokeMethod(ui->pocketLength, "setFocus", Qt::QueuedConnection);
         ui->checkBoxMidplane->setEnabled(true);
-	ui->checkBoxReversed->setEnabled(!ui->checkBoxMidplane->isChecked()); // Will flip direction of dimension
+        ui->checkBoxReversed->setEnabled(!ui->checkBoxMidplane->isChecked()); // Will flip direction of dimension
         ui->buttonFace->setEnabled(false);
         ui->lineFaceName->setEnabled(false);
         onButtonFace(false);
     } else if (index == 1) { // Through all
         ui->checkBoxMidplane->setEnabled(true);
-	ui->checkBoxReversed->setEnabled(!ui->checkBoxMidplane->isChecked()); // Will flip direction of through all
-        ui->doubleSpinBox->setEnabled(false);
+        ui->checkBoxReversed->setEnabled(!ui->checkBoxMidplane->isChecked()); // Will flip direction of through all
+        ui->pocketLength->setEnabled(false);
         ui->buttonFace->setEnabled(false);
         ui->lineFaceName->setEnabled(false);
         onButtonFace(false);
     } else if (index == 2) { // Neither value nor face required // To First
-        ui->doubleSpinBox->setEnabled(false);
+        ui->pocketLength->setEnabled(false);
         ui->checkBoxMidplane->setEnabled(false); // Can't have a midplane to a single face
-	ui->checkBoxReversed->setEnabled(false); // Will change the direction it seeks for its first face? 
+        ui->checkBoxReversed->setEnabled(false); // Will change the direction it seeks for its first face? 
 						 // Doesnt work so is currently disabled. Fix probably lies 
 						 // somwhere in IF block on line 125 of FeaturePocket.cpp
         ui->buttonFace->setEnabled(false);
         ui->lineFaceName->setEnabled(false);
         onButtonFace(false);
     } else if (index == 3) { // Only this option requires to select a face // Up to face
-        ui->doubleSpinBox->setEnabled(false);
+        ui->pocketLength->setEnabled(false);
         ui->checkBoxMidplane->setEnabled(false);
-	ui->checkBoxReversed->setEnabled(false); // No need for reverse since user-chosen face will dtermine direction
+        ui->checkBoxReversed->setEnabled(false); // No need for reverse since user-chosen face will dtermine direction
         ui->buttonFace->setEnabled(true);
         ui->lineFaceName->setEnabled(true);
         QMetaObject::invokeMethod(ui->lineFaceName, "setFocus", Qt::QueuedConnection);
@@ -260,7 +261,7 @@ void TaskPocketParameters::onModeChanged(int index)
             if (oldLength < Precision::Confusion())
                 oldLength = 5.0;
             pcPocket->Length.setValue(oldLength);
-            ui->doubleSpinBox->setValue(oldLength);
+            ui->pocketLength->setValue(oldLength);
             break;
         case 1:
             oldLength = pcPocket->Length.getValue();
@@ -276,7 +277,7 @@ void TaskPocketParameters::onModeChanged(int index)
             oldLength = pcPocket->Length.getValue();
             pcPocket->Type.setValue("UpToFace");
             pcPocket->Length.setValue(0.0);
-            ui->doubleSpinBox->setValue(0.0);
+            ui->pocketLength->setValue(0.0);
             break;
         default:
             pcPocket->Type.setValue("Length");
@@ -357,7 +358,7 @@ void TaskPocketParameters::onUpdateView(bool on)
 
 double TaskPocketParameters::getLength(void) const
 {
-    return ui->doubleSpinBox->value();
+    return ui->pocketLength->value().getValue();
 }
 
 int TaskPocketParameters::getMode(void) const
@@ -384,7 +385,7 @@ void TaskPocketParameters::changeEvent(QEvent *e)
 {
     TaskBox::changeEvent(e);
     if (e->type() == QEvent::LanguageChange) {
-        ui->doubleSpinBox->blockSignals(true);
+        ui->pocketLength->blockSignals(true);
         ui->lineFaceName->blockSignals(true);
         ui->changeMode->blockSignals(true);
         int index = ui->changeMode->currentIndex();
@@ -405,7 +406,7 @@ void TaskPocketParameters::changeEvent(QEvent *e)
         ui->lineFaceName->setText(ok ?
                                   tr("Face") + QString::number(faceId) :
                                   tr("No face selected"));
-        ui->doubleSpinBox->blockSignals(false);
+        ui->pocketLength->blockSignals(false);
         ui->lineFaceName->blockSignals(false);
         ui->changeMode->blockSignals(false);
     }
@@ -435,12 +436,16 @@ TaskDlgPocketParameters::~TaskDlgPocketParameters()
 
 void TaskDlgPocketParameters::open()
 {
-    
+    // a transaction is already open at creation time of the pocket
+    if (!Gui::Command::hasPendingCommand()) {
+        QString msg = tr("Edit pocket");
+        Gui::Command::openCommand((const char*)msg.toUtf8());
+    }
 }
 
 void TaskDlgPocketParameters::clicked(int)
 {
-    
+
 }
 
 bool TaskDlgPocketParameters::accept()
@@ -479,8 +484,8 @@ bool TaskDlgPocketParameters::reject()
 {
     // get the support and Sketch
     PartDesign::Pocket* pcPocket = static_cast<PartDesign::Pocket*>(PocketView->getObject()); 
-    Sketcher::SketchObject *pcSketch;
-    App::DocumentObject    *pcSupport;
+    Sketcher::SketchObject *pcSketch = 0;
+    App::DocumentObject    *pcSupport = 0;
     if (pcPocket->Sketch.getValue()) {
         pcSketch = static_cast<Sketcher::SketchObject*>(pcPocket->Sketch.getValue()); 
         pcSupport = pcSketch->Support.getValue();

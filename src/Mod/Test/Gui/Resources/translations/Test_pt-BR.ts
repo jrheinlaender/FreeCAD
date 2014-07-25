@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="pt-BR" sourcelanguage="en">
   <context>
     <name>TestGui::UnitTest</name>
     <message>
@@ -100,7 +100,7 @@
 FreeCAD UnitTest is part of FreeCAD and supports writing Unit Tests for own modules.</source>
       <translation>Copyright (c) Werner Mayer
 
-O teste de unidade do FreeCAD é parte do FreeCAD e suporta o desenvolvimento de testes de unidade para módulos próprios.</translation>
+O teste de unidade do FreeCAD é parte do FreeCAD e suporta o desenvolvimento de testes de unidade próprios para módulos.</translation>
     </message>
     <message>
       <source>Enter the name of a callable object which, when called, will return a TestCase.Click 'start', and the test thus produced will be run.

@@ -55,6 +55,8 @@ void AbstractMouseSelection::grabMouseModel( Gui::View3DInventorViewer* viewer )
 {
     _pcView3D = viewer;
     m_cPrevCursor = _pcView3D->getWidget()->cursor();
+    m_antiAliasing = (int)_pcView3D->getAntiAliasingMode();
+    _pcView3D->setAntiAliasingMode(View3DInventorViewer::None);
 
     // do initialization of your mousemodel
     initialize();
@@ -67,6 +69,7 @@ void AbstractMouseSelection::releaseMouseModel()
         terminate();
 
         _pcView3D->getWidget()->setCursor(m_cPrevCursor);
+        _pcView3D->setAntiAliasingMode(View3DInventorViewer::AntiAliasing(m_antiAliasing));
         _pcView3D = 0;
     }
 }
@@ -481,6 +484,7 @@ BrushSelection::BrushSelection()
 {
     m_iNodes     = 0;
     m_bWorking   = false;
+    m_bClose     = false;
 }
 
 void BrushSelection::initialize()
@@ -505,6 +509,11 @@ void BrushSelection::setColor(float r, float g, float b, float a)
 void BrushSelection::setLineWidth(float l)
 {
     this->l = l;
+}
+
+void BrushSelection::setClosed(bool on)
+{
+    this->m_bClose = on;
 }
 
 void BrushSelection::draw ()
@@ -532,6 +541,21 @@ void BrushSelection::draw ()
         p.begin(_pcView3D);
         p.setLineWidth(this->l);
         p.setColor(this->r, this->g, this->b, this->a);
+        if (m_bClose && !_cNodeVector.empty()) {
+            // We have to redraw the whole polyline when using XOR because otherwise the curve looks 'dirty'.
+            QPoint start = _cNodeVector.front();
+            for (std::vector<QPoint>::iterator it = _cNodeVector.begin()+1; it != _cNodeVector.end(); ++it) {
+                p.drawLine(start.x(),start.y(),it->x(), it->y());
+                start = *it;
+            }
+            start = _cNodeVector.front();
+            p.setLineStipple(2, 0x3F3F);
+            p.setLogicOp(GL_XOR);
+            p.drawLine(m_iXold, m_iYold, start.x(),start.y());
+            p.drawLine(m_iXnew, m_iYnew, start.x(),start.y());
+            p.resetLogicOp();
+            p.resetLineStipple();
+        }
         p.drawLine(m_iXnew, m_iYnew, m_iXold, m_iYold);
         p.end();
     }

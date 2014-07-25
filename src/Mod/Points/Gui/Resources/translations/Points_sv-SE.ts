@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="sv-SE" sourcelanguage="en">
   <context>
     <name>CmdPointsExport</name>
     <message>
@@ -9,10 +9,14 @@
       <translation>Punkter</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Export points...</source>
       <translation>Exportera punkter...</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <location line="+1"/>
       <source>Exports a point cloud</source>
       <translation>Exporterar ett punktmoln</translation>
     </message>
@@ -20,14 +24,19 @@
   <context>
     <name>CmdPointsImport</name>
     <message>
+      <location line="-47"/>
       <source>Points</source>
       <translation>Punkter</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Import points...</source>
       <translation>Importera punkter...</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <location line="+1"/>
       <source>Imports a point cloud</source>
       <translation>Importera ett punktmoln</translation>
     </message>
@@ -35,14 +44,19 @@
   <context>
     <name>CmdPointsPolyCut</name>
     <message>
+      <location line="+122"/>
       <source>Points</source>
       <translation>Punkter</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Cut point cloud</source>
       <translation>Klipp ut punktmoln</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <location line="+1"/>
       <source>Cuts a point cloud with a picked polygon</source>
       <translation>Klipper ut ett punktmoln med en vald polygon</translation>
     </message>
@@ -50,14 +64,19 @@
   <context>
     <name>CmdPointsTransform</name>
     <message>
+      <location line="-39"/>
       <source>Points</source>
       <translation>Punkter</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Transform Points</source>
       <translation>Omvandla punkter</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+1"/>
+      <location line="+1"/>
       <source>Test to transform a point cloud</source>
       <translation>Testa att omforma ett punktmoln</translation>
     </message>
@@ -70,102 +89,139 @@
       <translation>Importera ASCII punkter</translation>
     </message>
     <message>
+      <location line="+20"/>
       <source>Template:</source>
       <translation>mall:</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>Special lines</source>
       <translation>Special linjer</translation>
     </message>
     <message>
+      <location line="+42"/>
       <source>First line:</source>
       <translation>Första linjen:</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>Ignore</source>
       <translation>Ignorera</translation>
     </message>
     <message>
+      <location line="-21"/>
       <source>Cluster by lines starting with:</source>
       <translation>Linjekluster startar med:</translation>
     </message>
     <message>
+      <location line="-7"/>
       <source>Ignore lines starting with:</source>
       <translation>Ignorera linjer som startar med:</translation>
     </message>
     <message>
+      <location line="+54"/>
       <source>Point format</source>
       <translation>Punktformat</translation>
     </message>
     <message>
+      <location line="+78"/>
       <source>Number separator:</source>
       <translation>Nummerseparator:</translation>
     </message>
     <message>
+      <location line="+98"/>
       <source>Points format:</source>
       <translation>Punktformat:</translation>
     </message>
     <message>
+      <location line="-91"/>
+      <location line="+7"/>
+      <location line="+7"/>
       <source>Next block:</source>
       <translation>Nästa block:</translation>
     </message>
     <message>
+      <location line="+40"/>
       <source>,</source>
       <translation>,</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>;</source>
       <translation>;</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>\t</source>
       <translation>\t</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>\w</source>
       <translation>\w</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>X,Y,Z</source>
       <translation>X, Y, Z</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>X,Y</source>
       <translation>X, Y</translation>
     </message>
     <message>
+      <location line="-147"/>
+      <location line="+29"/>
+      <location line="+57"/>
       <source>none</source>
       <translation>inget</translation>
     </message>
     <message>
+      <location line="-81"/>
+      <location line="+29"/>
+      <location line="+57"/>
       <source>I,J,K (normal vector)</source>
       <translation>I,J,K (normalvektor)</translation>
     </message>
     <message>
+      <location line="-81"/>
+      <location line="+29"/>
+      <location line="+57"/>
       <source>I,K (normal vector 2D)</source>
       <translation>I,K (2D nomalvektor)</translation>
     </message>
     <message>
+      <location line="-81"/>
+      <location line="+29"/>
+      <location line="+57"/>
       <source>R,G,B (color)</source>
       <translation>R,G,B (färg)</translation>
     </message>
     <message>
+      <location line="-81"/>
+      <location line="+29"/>
+      <location line="+57"/>
       <source>I (Gray value)</source>
       <translation>I (Gråton)</translation>
     </message>
     <message>
+      <location line="+61"/>
       <source>Preview</source>
       <translation>Förhandsvisning</translation>
     </message>
     <message>
+      <location line="+34"/>
       <source>100</source>
       <translation>100</translation>
     </message>
     <message>
+      <location line="-238"/>
       <source>Number of points</source>
       <translation>Antal punkter</translation>
     </message>
     <message>
+      <location line="+231"/>
       <source>Number of previewed lines:</source>
       <translation>Antal förhandsgranskade rader:</translation>
     </message>
@@ -174,6 +230,7 @@
     <name>QObject</name>
     <message>
       <location filename="../../Command.cpp" line="-84"/>
+      <location line="+43"/>
       <source>Ascii Points (*.asc);;All Files (*.*)</source>
       <translation>Ascii Punkter (*.asc);;Alla Filer (*.*)</translation>
     </message>
@@ -186,6 +243,7 @@
       <translation>Punktverktyg</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>&amp;Points</source>
       <translation>&amp;Punkter</translation>
     </message>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="cs" sourcelanguage="en">
   <context>
     <name>CmdMeshAddFacet</name>
     <message>
@@ -24,7 +24,7 @@
     </message>
     <message>
       <source>Boundings info...</source>
-      <translation>Ohraničující informace...</translation>
+      <translation>Informace o hranicích...</translation>
     </message>
     <message>
       <source>Shows the boundings of the selected mesh</source>
@@ -117,33 +117,33 @@
     <name>CmdMeshExMakeMesh</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make a Box</source>
-      <translation>Make a Box</translation>
+      <translation type="obsolete">Make a Box</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeTool</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make a Tool</source>
-      <translation>Make a Tool</translation>
+      <translation type="obsolete">Make a Tool</translation>
     </message>
   </context>
   <context>
     <name>CmdMeshExMakeUnion</name>
     <message>
       <source>Mesh</source>
-      <translation>Mesh</translation>
+      <translation type="obsolete">Mesh</translation>
     </message>
     <message>
       <source>Make Union</source>
-      <translation>Make Union</translation>
+      <translation type="obsolete">Make Union</translation>
     </message>
   </context>
   <context>
@@ -219,6 +219,21 @@
     <message>
       <source>Create mesh from the selected geometry</source>
       <translation>Vytvořit síť z vybrané geometrie</translation>
+    </message>
+  </context>
+  <context>
+    <name>CmdMeshFromPartShape</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Mesh</translation>
+    </message>
+    <message>
+      <source>Create mesh from shape...</source>
+      <translation type="unfinished">Vytvoř síť z útvaru...</translation>
+    </message>
+    <message>
+      <source>Tessellate shape</source>
+      <translation type="unfinished">Plátování útvaru</translation>
     </message>
   </context>
   <context>
@@ -428,6 +443,21 @@
     </message>
   </context>
   <context>
+    <name>CmdMeshTrimByPlane</name>
+    <message>
+      <source>Mesh</source>
+      <translation type="unfinished">Mesh</translation>
+    </message>
+    <message>
+      <source>Trim mesh with a plane</source>
+      <translation type="unfinished">Trim mesh with a plane</translation>
+    </message>
+    <message>
+      <source>Trims a mesh with a plane</source>
+      <translation type="unfinished">Trims a mesh with a plane</translation>
+    </message>
+  </context>
+  <context>
     <name>CmdMeshUnion</name>
     <message>
       <source>Mesh</source>
@@ -450,7 +480,7 @@
     </message>
     <message>
       <source>Curvature plot</source>
-      <translation>Curvature plot</translation>
+      <translation>Křivkový graf</translation>
     </message>
   </context>
   <context>
@@ -472,19 +502,19 @@
     <name>MeshGui::DlgEvaluateMesh</name>
     <message>
       <source>&amp;Help</source>
-      <translation>Pomoc</translation>
+      <translation type="obsolete">Nápověda</translation>
     </message>
     <message>
       <source>F1</source>
-      <translation>F1</translation>
+      <translation type="obsolete">F1</translation>
     </message>
     <message>
       <source>&amp;Close</source>
-      <translation>&amp;Zavřít</translation>
+      <translation type="obsolete">&amp;Zavřít</translation>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt+C</translation>
+      <translation type="obsolete">Alt+C</translation>
     </message>
     <message>
       <source>Mesh information</source>
@@ -556,7 +586,7 @@
     </message>
     <message>
       <source>Evaluate &amp; Repair Mesh</source>
-      <translation>Evaluate &amp; Repair Mesh</translation>
+      <translation>Vyhodnotit &amp; Opravit síť</translation>
     </message>
     <message>
       <source>Folds on surface</source>
@@ -599,11 +629,11 @@
     </message>
     <message>
       <source>No flipped normals</source>
-      <translation>No flipped normals</translation>
+      <translation>Žádné převrácené normály</translation>
     </message>
     <message>
       <source>%1 flipped normals</source>
-      <translation>%1 flipped normals</translation>
+      <translation>%1 převrácených normál</translation>
     </message>
     <message>
       <source>No non-manifolds</source>
@@ -627,11 +657,11 @@
     </message>
     <message>
       <source>No duplicated faces</source>
-      <translation>No duplicated faces</translation>
+      <translation>Žádné duplicitní plochy</translation>
     </message>
     <message>
       <source>%1 duplicated faces</source>
-      <translation>%1 duplicated faces</translation>
+      <translation>%1 duplikovaných ploch</translation>
     </message>
     <message>
       <source>No duplicated points</source>
@@ -659,7 +689,7 @@
     </message>
     <message>
       <source>No self-intersections</source>
-      <translation>No self-intersections</translation>
+      <translation>Nesebeprotínající</translation>
     </message>
     <message>
       <source>Self-intersections</source>
@@ -667,11 +697,11 @@
     </message>
     <message>
       <source>Mesh repair</source>
-      <translation>Mesh repair</translation>
+      <translation>Oprava sítě</translation>
     </message>
     <message>
       <source>Flipped normals found</source>
-      <translation>Flipped normals found</translation>
+      <translation>Nalezeny převrácené normály</translation>
     </message>
     <message>
       <source>Check failed due to folds on the surface.
@@ -681,22 +711,22 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>No folds on surface</source>
-      <translation>No folds on surface</translation>
+      <translation>Žádné záhyby na ploše</translation>
     </message>
     <message>
       <source>%1 folds on surface</source>
-      <translation>%1 folds on surface</translation>
+      <translation>%1 záhybů na ploše</translation>
     </message>
     <message>
       <source>Folds</source>
-      <translation>Folds</translation>
+      <translation>Záhyb</translation>
     </message>
   </context>
   <context>
     <name>MeshGui::DlgRegularSolid</name>
     <message>
       <source>Regular Solid</source>
-      <translation>Regular Solid</translation>
+      <translation>Pravidelné těleso</translation>
     </message>
     <message>
       <source>&amp;Create</source>
@@ -716,7 +746,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Solid:</source>
-      <translation>Solid:</translation>
+      <translation>Těleso:</translation>
     </message>
     <message>
       <source>Cube</source>
@@ -794,11 +824,11 @@ Please run the command to repair folds first</translation>
     <name>MeshGui::DlgSettingsMeshView</name>
     <message>
       <source>Mesh view</source>
-      <translation>Mesh view</translation>
+      <translation>Náhled sítě</translation>
     </message>
     <message>
       <source>Two-side rendering</source>
-      <translation>Two-side rendering</translation>
+      <translation>Oboustranný render</translation>
     </message>
     <message>
       <source>Backface color</source>
@@ -814,7 +844,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Crease angle</source>
-      <translation>Crease angle</translation>
+      <translation>Vytvořit úhel</translation>
     </message>
     <message>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Flat shading/Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Defines the appearance of surfaces.&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;With flat shading the surface normals are not defined per vertex that leads to a unreal appearance for curved surfaces while using Phong shading leads to a smoother appearance. &lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;If this option is set Phong shading is used, if it is unset flat shading is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -824,13 +854,13 @@ Please run the command to repair folds first</translation>
       <source>Define normal per vertex</source>
       <translation>Define normal per vertex</translation>
     </message>
-    <message>
+    <message utf8="true">
       <source> °</source>
       <translation> °</translation>
     </message>
     <message>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Hint&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Defining the normals per vertex is also called &lt;span style=" font-style:italic;"&gt;Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;"&gt;&lt;span style=" font-style:normal;"&gt;while defining the normals per face is called &lt;/span&gt;Flat shading&lt;span style=" font-style:normal;"&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Hint&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Defining the normals per vertex is also called &lt;span style=" font-style:italic;"&gt;Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;"&gt;&lt;span style=" font-style:normal;"&gt;while defining the normals per face is called &lt;/span&gt;Flat shading&lt;span style=" font-style:normal;"&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style="white-space:pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style="font-weight:600;"&gt;Tip&lt;/span&gt;&lt;/p&gt;&lt;p style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;Definování normály na vrchol je takzvané &lt;span style="font-style:italic;"&gt;Phongovo stínování&lt;/span&gt;&lt;/p&gt;&lt;p style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;"&gt;&lt;span style="font-style:normal;"&gt;, zatímco definování normály na na plochu je takzvané &lt;/span&gt;Ploché stínování&lt;span style="font-style:normal;"&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Default appearance for new meshes</source>
@@ -842,19 +872,19 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Mesh transparency</source>
-      <translation>Mesh transparency</translation>
+      <translation>Průhlednost sítě</translation>
     </message>
     <message>
       <source>Default mesh color</source>
-      <translation>Default mesh color</translation>
+      <translation>Výchozí barva sítě</translation>
     </message>
     <message>
       <source>Show bounding-box for highlighted or selected meshes</source>
-      <translation>Show bounding-box for highlighted or selected meshes</translation>
+      <translation>Ukázat ohraničující box pro zvýrazněné nebo vybrané sítě</translation>
     </message>
     <message>
       <source>Line transparency</source>
-      <translation>Line transparency</translation>
+      <translation>Průhlednost čáry</translation>
     </message>
   </context>
   <context>
@@ -881,7 +911,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Iterations:</source>
-      <translation>Iterations:</translation>
+      <translation>Interakce:</translation>
     </message>
     <message>
       <source>Lambda:</source>
@@ -890,6 +920,10 @@ Please run the command to repair folds first</translation>
     <message>
       <source>Mu:</source>
       <translation>Mu:</translation>
+    </message>
+    <message>
+      <source>Only selection</source>
+      <translation type="unfinished">Only selection</translation>
     </message>
   </context>
   <context>
@@ -900,7 +934,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Flip normal</source>
-      <translation>Flip normal</translation>
+      <translation>Převrátit normály</translation>
     </message>
     <message>
       <source>Clear</source>
@@ -909,6 +943,13 @@ Please run the command to repair folds first</translation>
     <message>
       <source>Finish</source>
       <translation>Dokončit</translation>
+    </message>
+  </context>
+  <context>
+    <name>MeshGui::MeshFillHole</name>
+    <message>
+      <source>Finish</source>
+      <translation type="unfinished">Dokončit</translation>
     </message>
   </context>
   <context>
@@ -923,7 +964,7 @@ Please run the command to repair folds first</translation>
     </message>
     <message>
       <source>Select whole component</source>
-      <translation>Select whole component</translation>
+      <translation>Vybrat celý díl</translation>
     </message>
     <message>
       <source>Pick triangle</source>
@@ -1018,6 +1059,37 @@ Please run the command to repair folds first</translation>
     </message>
   </context>
   <context>
+    <name>MeshGui::Selection</name>
+    <message>
+      <source>Selection</source>
+      <translation type="unfinished">Výběr</translation>
+    </message>
+    <message>
+      <source>Add</source>
+      <translation type="unfinished">Přidat</translation>
+    </message>
+    <message>
+      <source>Clear</source>
+      <translation type="unfinished">Vyčistit</translation>
+    </message>
+    <message>
+      <source>Respect only visible triangles</source>
+      <translation type="unfinished">Respektovat pouze viditelné trojúhelníky</translation>
+    </message>
+    <message>
+      <source>Respect only triangles with normals facing screen</source>
+      <translation type="unfinished">Respektovat pouze trojúhelníky s normály ploch z obrazovky</translation>
+    </message>
+    <message>
+      <source>Use a brush tool to select the area</source>
+      <translation type="unfinished">Use a brush tool to select the area</translation>
+    </message>
+    <message>
+      <source>Clears completely the selected area</source>
+      <translation type="unfinished">Clears completely the selected area</translation>
+    </message>
+  </context>
+  <context>
     <name>MeshGui::TaskRemoveComponents</name>
     <message>
       <source>Delete</source>
@@ -1029,10 +1101,38 @@ Please run the command to repair folds first</translation>
     </message>
   </context>
   <context>
+    <name>Mesh_TrimByPlane</name>
+    <message>
+      <source>Select plane</source>
+      <translation type="unfinished">Select plane</translation>
+    </message>
+    <message>
+      <source>Please select a plane at which you trim the mesh.</source>
+      <translation type="unfinished">Please select a plane at which you trim the mesh.</translation>
+    </message>
+  </context>
+  <context>
+    <name>Mesh_Union</name>
+    <message>
+      <source>OpenSCAD</source>
+      <translation type="unfinished">OpenSCAD</translation>
+    </message>
+    <message>
+      <source>Unknwon error occured while running OpenSCAD.</source>
+      <translation type="unfinished">Unknwon error occured while running OpenSCAD.</translation>
+    </message>
+    <message>
+      <source>OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</source>
+      <translation type="unfinished">OpenSCAD cannot be found on your system.
+Please visit http://www.openscad.org/index.html to install it.</translation>
+    </message>
+  </context>
+  <context>
     <name>QDockWidget</name>
     <message>
       <source>Evaluate &amp; Repair Mesh</source>
-      <translation>Evaluate &amp; Repair Mesh</translation>
+      <translation>Vyhodnotit &amp; Opravit síť</translation>
     </message>
   </context>
   <context>
@@ -1151,7 +1251,7 @@ Max = &lt;%4,%5,%6&gt;</translation>
     </message>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</source>
-      <translation>All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
+      <translation type="obsolete">All Mesh Files (*.stl *.ast *.bms *.obj *.ply)</translation>
     </message>
     <message>
       <source>Stanford Polygon (*.ply)</source>
@@ -1180,6 +1280,10 @@ Max = &lt;%4,%5,%6&gt;</translation>
     <message>
       <source>All Mesh Files (*.stl *.ast *.bms *.obj *.off *.ply)</source>
       <translation>Všechny soubory sítí (*stl *.ast *.bms *.obj *.off *.ply)</translation>
+    </message>
+    <message>
+      <source>X3D Extensible 3D(*.x3d)</source>
+      <translation type="unfinished">X3D Extensible 3D(*.x3d)</translation>
     </message>
   </context>
   <context>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="ru" sourcelanguage="en">
   <context>
     <name>CmdRobotAddToolShape</name>
     <message>
@@ -9,10 +9,12 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Add tool</source>
       <translation>Добавить инструмент</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Add a tool shape to the robot</source>
       <translation>Добавить правило для робота</translation>
     </message>
@@ -25,10 +27,12 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Place robot...</source>
       <translation>Место робота ...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Place a robot (experimental!)</source>
       <translation>Место робота (временно!)</translation>
     </message>
@@ -41,10 +45,12 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create trajectory</source>
       <translation>Создание траектории</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create a new empty trajectory </source>
       <translation>Создайте новую траекторию</translation>
     </message>
@@ -52,14 +58,17 @@
   <context>
     <name>CmdRobotEdge2Trac</name>
     <message>
+      <location line="+257"/>
       <source>Robot</source>
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Edge to Trajectory...</source>
       <translation>Край траектории...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Generate a Trajectory from a set of edges</source>
       <translation>Создать траекторию из ребер</translation>
     </message>
@@ -72,10 +81,12 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Kuka compact subroutine...</source>
       <translation>Сжатая подпрограмма Kuka...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Export the trajectory as a compact KRL subroutine.</source>
       <translation>Экспорт траектории в сжатую KRL-подпрограмму.</translation>
     </message>
@@ -83,14 +94,17 @@
   <context>
     <name>CmdRobotExportKukaFull</name>
     <message>
+      <location line="+63"/>
       <source>Robot</source>
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Kuka full subroutine...</source>
       <translation>Полная подпрограмма Kuka...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Export the trajectory as a full KRL subroutine.</source>
       <translation>Экспортировать траекторию как полноправную KRL-подпрограмму.</translation>
     </message>
@@ -103,10 +117,12 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Kuka IR125</source>
       <translation>Kuka IR125</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert a Kuka IR125 into the document.</source>
       <translation>Внести IR125 Кuka в документ.</translation>
     </message>
@@ -114,14 +130,17 @@
   <context>
     <name>CmdRobotInsertKukaIR16</name>
     <message>
+      <location line="-83"/>
       <source>Robot</source>
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Kuka IR16</source>
       <translation>Kuka IR16</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert a Kuka IR16 into the document.</source>
       <translation>Внести IR16 Кuka в документ.</translation>
     </message>
@@ -129,14 +148,17 @@
   <context>
     <name>CmdRobotInsertKukaIR210</name>
     <message>
+      <location line="+39"/>
       <source>Robot</source>
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Kuka IR210</source>
       <translation>Kuka IR210</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert a Kuka IR210 into the document.</source>
       <translation>Внести IR500 Кuka в документ.</translation>
     </message>
@@ -144,14 +166,17 @@
   <context>
     <name>CmdRobotInsertKukaIR500</name>
     <message>
+      <location line="-85"/>
       <source>Robot</source>
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Kuka IR500</source>
       <translation>Kuka IR500</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert a Kuka IR500 into the document.</source>
       <translation>Внести IR500 Кuka в документ.</translation>
     </message>
@@ -164,10 +189,12 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert in trajectory</source>
       <translation>Вставьте в траекторию</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert robot Tool location into trajectory</source>
       <translation>Вставьте местоположение робота на траектории</translation>
     </message>
@@ -175,14 +202,17 @@
   <context>
     <name>CmdRobotInsertWaypointPreselect</name>
     <message>
+      <location line="+55"/>
       <source>Robot</source>
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert in trajectory</source>
       <translation>Вставьте в траекторию</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert preselection position into trajectory (W)</source>
       <translation>Вставте предварительную позицию на траектории (W)</translation>
     </message>
@@ -195,6 +225,8 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+1"/>
       <source>Move to home</source>
       <translation>Перейти на главную</translation>
     </message>
@@ -207,10 +239,12 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Set default orientation</source>
       <translation>Установить ориентацию по умолчанию</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>set the default orientation for subsequent commands for waypoint creation</source>
       <translation>Задайте ориентацию по умолчанию для последующих команд для создания точки</translation>
     </message>
@@ -218,14 +252,17 @@
   <context>
     <name>CmdRobotSetDefaultValues</name>
     <message>
+      <location line="+37"/>
       <source>Robot</source>
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Set default values</source>
       <translation>Установка значений по умолчанию</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>set the default values for speed, acceleration and continuity for subsequent commands of waypoint creation</source>
       <translation>Установка значения по умолчанию для скорости, ускорения и целостности для последующих команд создания точки</translation>
     </message>
@@ -238,6 +275,8 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
+      <location line="+1"/>
       <source>Set the home position</source>
       <translation>Установить в исходное положение</translation>
     </message>
@@ -245,14 +284,17 @@
   <context>
     <name>CmdRobotSimulate</name>
     <message>
+      <location line="+142"/>
       <source>Robot</source>
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Simulate a trajectory</source>
       <translation>Моделирование траектории</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Run a simulation on a trajectory</source>
       <translation>Смоделировать на траектории</translation>
     </message>
@@ -265,10 +307,12 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Trajectory compound...</source>
       <translation>Траектория соединения ...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Group and connect some trajectories to one</source>
       <translation>Группировать и подключить траекторий в одну</translation>
     </message>
@@ -276,14 +320,17 @@
   <context>
     <name>CmdRobotTrajectoryDressUp</name>
     <message>
+      <location line="-49"/>
       <source>Robot</source>
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Dress up trajectory...</source>
       <translation>Dress up траекторию...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Create a dress up object which overide som aspects of a trajectory</source>
       <translation>Создать dress up объект, который overide som аспекты траектории</translation>
     </message>
@@ -296,10 +343,12 @@
       <translation>Инструменты для траектории</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Robot tools</source>
       <translation>Робот инструменты</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert Robot</source>
       <translation>Вставьте Робот</translation>
     </message>
@@ -308,31 +357,53 @@
     <name>QObject</name>
     <message>
       <location filename="../../Command.cpp" line="-126"/>
+      <location line="+49"/>
+      <location line="+100"/>
+      <location line="+29"/>
+      <location filename="../../CommandExport.cpp" line="-52"/>
+      <location line="+65"/>
+      <location filename="../../CommandInsertRobot.cpp" line="+181"/>
+      <location filename="../../CommandTrajectory.cpp" line="-276"/>
+      <location line="+56"/>
+      <location line="+17"/>
+      <location line="+229"/>
       <source>Wrong selection</source>
       <translation>Неверный выбор</translation>
     </message>
     <message>
+      <location line="-28"/>
+      <location line="+29"/>
+      <location filename="../../CommandExport.cpp" line="-64"/>
+      <location line="+65"/>
+      <location filename="../../CommandTrajectory.cpp" line="-301"/>
       <source>Select one Robot and one Trajectory object.</source>
       <translation>Выберите устройство и траекторию движения.</translation>
     </message>
     <message>
+      <location line="-24"/>
       <source>Trajectory not valid</source>
       <translation>Траектория не действительна</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>You need at least two way points in a trajectory to simulate.</source>
       <translation>Вам нужно хотя бы две точки, чтобы смоделировать траекторию.</translation>
     </message>
     <message>
       <location filename="../../CommandExport.cpp" line="-43"/>
+      <location line="+65"/>
       <source>KRL file(*.src)</source>
       <translation>KRL файл (*. src)</translation>
     </message>
     <message>
+      <location line="-64"/>
+      <location line="+65"/>
       <source>All Files (*.*)</source>
       <translation>Все файлы (*.*)</translation>
     </message>
     <message>
+      <location line="-64"/>
+      <location line="+65"/>
       <source>Export program</source>
       <translation>Экспортная программа</translation>
     </message>
@@ -347,6 +418,7 @@
       <translation>Не выбрано</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>You have to hover above a geometry (Preselection) with the mouse to use this command. See documentation for details.</source>
       <translation>Чтобы использовать данную команду, наведите курсор на выбранную фигуру. См. документацию.</translation>
     </message>
@@ -356,39 +428,48 @@
       <translation>Выберите домашнюю позицию одного из роботов</translation>
     </message>
     <message>
+      <location line="+49"/>
       <source>Select one Robot</source>
       <translation>Выберите одного робота</translation>
     </message>
     <message>
       <location filename="../../CommandTrajectory.cpp" line="-24"/>
+      <location line="+17"/>
       <source>Select one Trajectory object.</source>
       <translation>Выделите один объект с траекторией.</translation>
     </message>
     <message>
+      <location line="+84"/>
       <source>set default speed</source>
       <translation>установить скорость по умолчанию</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>speed: (e.g. 1 m/s or 3 cm/s)</source>
       <translation>скорость: (3 см/с или 1 м/с)</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>set default continuity</source>
       <translation>установить целостность по умолчанию</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>continuous ?</source>
       <translation>продолжительность ?</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>set default acceleration</source>
       <translation>Установка ускорение по умолчанию</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>acceleration: (e.g. 1 m/s^2 or 3 cm/s^2)</source>
       <translation>ускорение: (например, 1 м/с ^ 2 или 3 см/с ^ 2)</translation>
     </message>
     <message>
+      <location line="+127"/>
       <source>Select the Trajectory which you want to dress up.</source>
       <translation>Выберите траекторию, которую вы хотите оформить.</translation>
     </message>
@@ -398,6 +479,7 @@
       <translation>Нет установленных файлов робота</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Please visit %1 and copy the files to %2</source>
       <translation>Пожалуйста, посетите %1 и скопируйте файлы в %2</translation>
     </message>
@@ -410,50 +492,62 @@
       <translation>Симуляция</translation>
     </message>
     <message>
+      <location line="+38"/>
       <source>|&lt;</source>
       <translation>|&lt;</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>&lt;</source>
       <translation>&lt;</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>||</source>
       <translation>||</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>|&gt;</source>
       <translation>|&gt;</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>&gt;</source>
       <translation>&gt;</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>&gt;|</source>
       <translation>&gt;|</translation>
     </message>
     <message>
+      <location line="+24"/>
       <source>%</source>
       <translation>%</translation>
     </message>
     <message>
+      <location line="+35"/>
       <source>Type</source>
       <translation>Тип</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Name</source>
       <translation>Название</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>C</source>
       <translation>C</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>V</source>
       <translation>V</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>A</source>
       <translation>A</translation>
     </message>
@@ -474,38 +568,47 @@
       <translation>Форма</translation>
     </message>
     <message>
+      <location line="+8"/>
       <source>A1</source>
       <translation>А1</translation>
     </message>
     <message>
+      <location line="+47"/>
       <source>A2</source>
       <translation>А2</translation>
     </message>
     <message>
+      <location line="+47"/>
       <source>A3</source>
       <translation>А3</translation>
     </message>
     <message>
+      <location line="+47"/>
       <source>A4</source>
       <translation>А4</translation>
     </message>
     <message>
+      <location line="+47"/>
       <source>A5</source>
       <translation>А5</translation>
     </message>
     <message>
+      <location line="+47"/>
       <source>A6</source>
       <translation>A6</translation>
     </message>
     <message>
+      <location line="+57"/>
       <source>TCP: (200.23,300.23,400.23,234,343,343)</source>
       <translation>TCP: (200.23,300.23,400.23,234,343,343)</translation>
     </message>
     <message>
+      <location line="+17"/>
       <source>Tool: (0,0,400,0,0,0)</source>
       <translation>Инструмент: (0,0,400,0,0,0)</translation>
     </message>
     <message>
+      <location line="+16"/>
       <source>...</source>
       <translation>...</translation>
     </message>
@@ -539,74 +642,92 @@
       <translation>Форма</translation>
     </message>
     <message>
+      <location line="+38"/>
       <source>|&lt;</source>
       <translation>|&lt;</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>&lt;</source>
       <translation>&lt;</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>||</source>
       <translation>||</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>|&gt;</source>
       <translation>|&gt;</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>&gt;</source>
       <translation>&gt;</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>&gt;|</source>
       <translation>&gt;|</translation>
     </message>
     <message>
+      <location line="+24"/>
       <source>%</source>
       <translation>%</translation>
     </message>
     <message>
+      <location line="+17"/>
       <source>10 ms</source>
       <translation>10 мс</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>50 ms</source>
       <translation>50 мс</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>100 ms</source>
       <translation>100 мс</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>500 ms</source>
       <translation>500 мс</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>1 s</source>
       <translation>1 с</translation>
     </message>
     <message>
+      <location line="+18"/>
       <source>Pos: (200.23, 300.23, 400.23, 234, 343 ,343)</source>
       <translation>Поз: (200.23, 300.23, 400.23, 234, 343, 343)</translation>
     </message>
     <message>
+      <location line="+26"/>
       <source>Type</source>
       <translation>Тип</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Name</source>
       <translation>Название</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>C</source>
       <translation>C</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>V</source>
       <translation>V</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>A</source>
       <translation>A</translation>
     </message>
@@ -632,35 +753,40 @@
       <translation>Форма</translation>
     </message>
     <message>
+      <location line="+15"/>
       <source>Hide / Show</source>
       <translation>Скрыть / Показать</translation>
     </message>
     <message>
+      <location line="+18"/>
       <source>Edges: 0</source>
       <translation>Краев: 0</translation>
     </message>
     <message>
+      <location line="+14"/>
       <source>Cluster: 0</source>
       <translation>Кластеров: 0</translation>
     </message>
     <message>
+      <location line="+11"/>
       <source>Sizing Value:</source>
       <translation>Калибровка значений:</translation>
     </message>
     <message>
+      <location line="+31"/>
       <source>Use orientation of edge</source>
       <translation>Используйте ориентацию края</translation>
     </message>
     <message>
       <source>TaskEdge2TracParameter</source>
-      <translation>TaskEdge2TracParameter</translation>
+      <translation type="obsolete">TaskEdge2TracParameter</translation>
     </message>
   </context>
   <context>
     <name>TaskRobot6Axis</name>
     <message>
       <source>TaskRobot6Axis</source>
-      <translation>задание положения осей</translation>
+      <translation type="obsolete">задание положения осей</translation>
     </message>
   </context>
   <context>
@@ -671,96 +797,118 @@
       <translation>Форма</translation>
     </message>
     <message>
+      <location line="+23"/>
       <source>X+</source>
       <translation>X +</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>Y+</source>
       <translation>Y +</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>Z+</source>
       <translation>Z +</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>A+</source>
       <translation>A +</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>B+</source>
       <translation>B +</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>C+</source>
       <translation>C +</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>X-</source>
       <translation>X-</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>Y-</source>
       <translation>Y-</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>Z-</source>
       <translation>Z-</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>A-</source>
       <translation>A-</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>B-</source>
       <translation>B-</translation>
     </message>
     <message>
+      <location line="+19"/>
       <source>C-</source>
       <translation>C-</translation>
     </message>
     <message>
+      <location line="+12"/>
       <source>Tool 0</source>
       <translation>Инструмент 0</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Tool</source>
       <translation>Инструмент</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Base 0</source>
       <translation>База 0</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Base</source>
       <translation>Основание</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>World</source>
       <translation>окружение</translation>
     </message>
-    <message>
+    <message utf8="true">
+      <location line="+9"/>
       <source>50mm / 5°</source>
       <translation>50 мм/5 °</translation>
     </message>
-    <message>
+    <message utf8="true">
+      <location line="+5"/>
       <source>20mm / 2°</source>
       <translation>20mm / 2 °</translation>
     </message>
-    <message>
+    <message utf8="true">
+      <location line="+5"/>
       <source>10mm / 1°</source>
       <translation>10 мм / 1 °</translation>
     </message>
-    <message>
+    <message utf8="true">
+      <location line="+5"/>
       <source>5mm / 0.5°</source>
       <translation>5 мм / 0,5 °</translation>
     </message>
-    <message>
+    <message utf8="true">
+      <location line="+5"/>
       <source>1mm / 0.1°</source>
       <translation>1 мм / 0,1 °</translation>
     </message>
     <message>
       <source>TaskRobotControl</source>
-      <translation>задание автоматического управления</translation>
+      <translation type="obsolete">задание автоматического управления</translation>
     </message>
   </context>
   <context>
@@ -771,19 +919,20 @@
       <translation>Форма</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>clear</source>
       <translation>очистить</translation>
     </message>
     <message>
       <source>TaskRobotMessages</source>
-      <translation>создание автоматического сообщения</translation>
+      <translation type="obsolete">создание автоматического сообщения</translation>
     </message>
   </context>
   <context>
     <name>TaskTrajectory</name>
     <message>
       <source>Trajectory</source>
-      <translation>Траектории</translation>
+      <translation type="obsolete">Траектории</translation>
     </message>
   </context>
   <context>
@@ -794,64 +943,79 @@
       <translation>Форма</translation>
     </message>
     <message>
+      <location line="+6"/>
       <source>Speed &amp; Acceleration:</source>
       <translation>Скорость и ускорение:</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>Speed:</source>
       <translation>Скорость:</translation>
     </message>
     <message>
+      <location line="+26"/>
+      <location line="+37"/>
       <source>Use</source>
       <translation>Используйте</translation>
     </message>
     <message>
+      <location line="-26"/>
       <source>Accel:</source>
       <translation>Accel:</translation>
     </message>
     <message>
+      <location line="+36"/>
       <source>Don't change Cont</source>
       <translation>Не изменять продолжение</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Continues</source>
       <translation>Продолжается</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Discontinues</source>
       <translation>Прекращает</translation>
     </message>
     <message>
+      <location line="+15"/>
       <source>Position and Orientation:</source>
       <translation>Позиция и ориентация:</translation>
     </message>
     <message>
+      <location line="+9"/>
       <source>(0,0,0),(0,0,0)</source>
       <translation>(0,0,0),(0,0,0)</translation>
     </message>
     <message>
+      <location line="+13"/>
       <source>...</source>
       <translation>...</translation>
     </message>
     <message>
+      <location line="+10"/>
       <source>Don't change Position &amp; Orientation</source>
       <translation>Не менять положение и ориентацию</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Use Orientation</source>
       <translation>Использовать ориентацию</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Add Position</source>
       <translation>Добавить позицию</translation>
     </message>
     <message>
+      <location line="+5"/>
       <source>Add Orientation</source>
       <translation>Добавить ориентацию</translation>
     </message>
     <message>
       <source>Dress Up Parameter</source>
-      <translation>Dress Up Параметр</translation>
+      <translation type="obsolete">Dress Up Параметр</translation>
     </message>
   </context>
   <context>
@@ -862,14 +1026,17 @@
       <translation>Робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Insert Robots</source>
       <translation>Вставить роботов</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>&amp;Robot</source>
       <translation>И робот</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Export trajectory</source>
       <translation>Экспорт траектории</translation>
     </message>

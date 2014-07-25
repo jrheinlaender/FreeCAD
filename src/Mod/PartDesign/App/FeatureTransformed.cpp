@@ -40,6 +40,8 @@
 #include "FeatureAdditive.h"
 #include "FeatureSubtractive.h"
 #include "FeatureMirrored.h"
+#include "FeatureLinearPattern.h"
+#include "FeaturePolarPattern.h"
 
 #include <Base/Console.h>
 #include <Base/Exception.h>
@@ -78,10 +80,27 @@ App::DocumentObject* Transformed::getSupportObject() const
 App::DocumentObject* Transformed::getSketchObject() const
 {
     std::vector<DocumentObject*> originals = Originals.getValues();
-    if (!originals.empty() && originals.front()->getTypeId().isDerivedFrom(PartDesign::SketchBased::getClassTypeId()))
+    if (!originals.empty() && originals.front()->getTypeId().isDerivedFrom(PartDesign::SketchBased::getClassTypeId())) {
         return (static_cast<PartDesign::SketchBased*>(originals.front()))->getVerifiedSketch();
-    else
-        return NULL;
+    }
+    else if (this->getTypeId().isDerivedFrom(LinearPattern::getClassTypeId())) {
+        // if Originals is empty then try the linear pattern's Direction property
+        const LinearPattern* pattern = static_cast<const LinearPattern*>(this);
+        return pattern->Direction.getValue();
+    }
+    else if (this->getTypeId().isDerivedFrom(PolarPattern::getClassTypeId())) {
+        // if Originals is empty then try the polar pattern's Axis property
+        const PolarPattern* pattern = static_cast<const PolarPattern*>(this);
+        return pattern->Axis.getValue();
+    }
+    else if (this->getTypeId().isDerivedFrom(Mirrored::getClassTypeId())) {
+        // if Originals is empty then try the mirror pattern's MirrorPlane property
+        const Mirrored* pattern = static_cast<const Mirrored*>(this);
+        return pattern->MirrorPlane.getValue();
+    }
+    else {
+        return 0;
+    }
 }
 
 short Transformed::mustExecute() const
@@ -177,7 +196,9 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
 
             // Check for intersection with support
             if (!Part::checkIntersection(support, mkTrf.Shape(), false, true)) {
+#ifdef FC_DEBUG // do not write this in release mode because a message appears already in the task view
                 Base::Console().Warning("Transformed shape does not intersect support %s: Removed\n", (*o)->getNameInDocument());
+#endif
                 nointersect_trsfms.insert(t);
             } else {
                 v_transformations.push_back(t);

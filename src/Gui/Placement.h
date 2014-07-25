@@ -65,12 +65,16 @@ private Q_SLOTS:
     void on_resetButton_clicked();
 
 private:
+    bool onApply();
     void setPlacementData(const Base::Placement&);
     Base::Placement getPlacementData() const;
+    QString getPlacementString() const;
     void directionActivated(int);
-    void applyPlacement(const Base::Placement& p, bool incremental, bool data);
+    void applyPlacement(const Base::Placement& p, bool incremental);
+    void applyPlacement(const QString& p, bool incremental);
     void revertTransformation();
     void slotActiveDocument(const Gui::Document&);
+    bool hasValidInputs() const;
 
 Q_SIGNALS:
     void placementChanged(const QVariant &, bool, bool);

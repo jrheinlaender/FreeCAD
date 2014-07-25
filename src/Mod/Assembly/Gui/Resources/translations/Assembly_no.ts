@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="no" sourcelanguage="en">
   <context>
     <name>AssemblyGui::Workbench</name>
     <message>
@@ -17,10 +17,12 @@
       <translation>Montering</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Constraint Axle...</source>
       <translation>Aksellås...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>set a axle constraint between two objects</source>
       <translation>sett en aksellås mellom to objekter</translation>
     </message>
@@ -29,7 +31,7 @@
     <name>Workbench</name>
     <message>
       <source>Assembly</source>
-      <translation>Montering</translation>
+      <translation type="obsolete">Montering</translation>
     </message>
   </context>
 </TS>

@@ -34,10 +34,9 @@ __title__="FreeCAD Arch Floor"
 __author__ = "Yorik van Havre"
 __url__ = "http://www.freecadweb.org"
 
-def makeFloor(objectslist=None,join=True,name=translate("Arch","Floor")):
-    '''makeFloor(objectslist,[joinmode]): creates a floor including the
-    objects from the given list. If joinmode is False, components will
-    not be joined.'''
+def makeFloor(objectslist=None,baseobj=None,name=translate("Arch","Floor")):
+    '''makeFloor(objectslist): creates a floor including the
+    objects from the given list.'''
     obj = FreeCAD.ActiveDocument.addObject("App::DocumentObjectGroupPython",name)
     _Floor(obj)
     if FreeCAD.GuiUp:
@@ -53,6 +52,9 @@ class _CommandFloor:
                 'MenuText': QtCore.QT_TRANSLATE_NOOP("Arch_Floor","Floor"),
                 'Accel': "F, L",
                 'ToolTip': QtCore.QT_TRANSLATE_NOOP("Arch_Floor","Creates a floor object including selected objects")}
+
+    def IsActive(self):
+        return not FreeCAD.ActiveDocument is None
         
     def Activated(self):
         sel = FreeCADGui.Selection.getSelection()
@@ -82,10 +84,8 @@ class _CommandFloor:
 class _Floor:
     "The Floor object"
     def __init__(self,obj):
-        obj.addProperty("App::PropertyLength","Height","Arch",
-                        translate("Arch","The height of this floor"))
-        obj.addProperty("App::PropertyPlacement","Placement","Arch",
-                        translate("Arch","The placement of this group"))
+        obj.addProperty("App::PropertyLength","Height","Arch",translate("Arch","The height of this floor"))
+        obj.addProperty("App::PropertyPlacement","Placement","Arch",translate("Arch","The placement of this group"))
         self.Type = "Floor"
         obj.Proxy = self
         self.Object = obj
@@ -112,10 +112,11 @@ class _Floor:
                             o.Placement.move(delta)
                     self.OldPlacement = pl
         # adjust childrens heights
-        for o in obj.Group:
-            if Draft.getType(o) in ["Wall","Structure"]:
-                if not o.Height:
-                    o.Proxy.execute(o)
+        if obj.Height.Value:
+            for o in obj.Group:
+                if Draft.getType(o) in ["Wall","Structure"]:
+                    if not o.Height.Value:
+                        o.Proxy.execute(o)
         
     def addObject(self,child):
         if hasattr(self,"Object"):

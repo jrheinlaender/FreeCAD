@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS>
+<TS version="2.0" language="pt-BR" sourcelanguage="en">
   <context>
     <name>CmdCompleteConstraintAxle</name>
     <message>
@@ -9,10 +9,12 @@
       <translation>Completo</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Constraint Axle...</source>
       <translation>Restrição de eixo...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>set a axle constraint between two objects</source>
       <translation>definir uma restrição de eixo entre dois objetos</translation>
     </message>
@@ -25,6 +27,7 @@
       <translation>Teste automático...</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Runs a self-test to check if the application works properly</source>
       <translation>Executa um teste automático para verificar se o aplicativo funciona corretamente</translation>
     </message>
@@ -32,38 +35,46 @@
   <context>
     <name>Workbench</name>
     <message>
+      <location line="-9"/>
       <source>Dr&amp;awing</source>
-      <translation>Desenhando</translation>
+      <translation>Desenho</translation>
     </message>
     <message>
+      <location line="-1"/>
       <source>S&amp;ketch</source>
-      <translation>Rascunho</translation>
+      <translation>Esboço</translation>
     </message>
     <message>
+      <location line="+2"/>
       <source>&amp;Raytracing</source>
       <translation>&amp;Raytracing</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>&amp;Drafting</source>
-      <translation>&amp;Drafting</translation>
+      <translation>&amp;Traço</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Sketch based</source>
-      <translation>Sketch</translation>
+      <translation>Baseado em esboço</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Primitives</source>
-      <translation>Primitivos</translation>
+      <translation>Primitivas</translation>
     </message>
     <message>
       <source>Parametric</source>
-      <translation>Paramétrico</translation>
+      <translation type="obsolete">Paramétrico</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Object appearence</source>
       <translation>Aparência do objeto</translation>
     </message>
     <message>
+      <location line="+1"/>
       <source>Wire Tools</source>
       <translation>Ferramentas de arame</translation>
     </message>

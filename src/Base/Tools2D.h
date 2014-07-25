@@ -61,6 +61,7 @@ public:
   inline bool      operator== (const Vector2D &rclVct) const;
   inline Vector2D  operator+ (const Vector2D &rclVct) const;
   inline Vector2D  operator- (const Vector2D &rclVct) const;
+  inline Vector2D  operator/ (double c) const;
 
   inline void Set (double fPX, double fPY);
   inline void Scale (double fS);
@@ -123,6 +124,7 @@ public:
   // misc
   inline bool Contains (const Vector2D &rclV) const;
   bool Intersect (const Line2D& rclLine, Vector2D &rclV) const;
+  bool Intersect (const Vector2D &rclV, double eps) const;
   bool IntersectAndContain (const Line2D& rclLine, Vector2D &rclV) const;
   Vector2D FromPos (double fDistance) const;
 };
@@ -152,7 +154,8 @@ public:
   // misc
   BoundBox2D CalcBoundBox (void) const;
   bool Contains (const Vector2D &rclV) const;
-  void  Intersect (const Polygon2D &rclPolygon, std::list<Polygon2D> &rclResultPolygonList) const;
+  void Intersect (const Polygon2D &rclPolygon, std::list<Polygon2D> &rclResultPolygonList) const;
+  bool Intersect (const Vector2D &rclV, double eps) const;
 
 private:
   std::vector<Vector2D> _aclVct;
@@ -219,6 +222,11 @@ inline Vector2D Vector2D::operator- (const Vector2D &rclVct) const
 inline double Vector2D::operator* (const Vector2D &rclVct) const
 {
   return (fX * rclVct.fX) + (fY * rclVct.fY);
+}
+
+inline Vector2D Vector2D::operator/ (double c) const
+{
+  return Vector2D(fX / c, fY / c);
 }
 
 inline void Vector2D::Scale (double fS)
